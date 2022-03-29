@@ -1,0 +1,3 @@
+Device,IP/Hostname,Port,Username,Password
+CentOs,198.18.134.49,RDP / SSH,cisco,C1sc012345
+CSR1K,198.18.134.11,SSH,cisco,cisco
