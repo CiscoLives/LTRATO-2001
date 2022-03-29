@@ -1,0 +1,19 @@
+name: PR Checks for Documentation
+
+on:
+  pull_request:
+    branches:    
+      - main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    # Standard drop-in approach that should work for most people.
+    - uses: ammaraskar/sphinx-action@master
+      with:
+        build-command: "make html"
+        docs-folder: "docs/"
