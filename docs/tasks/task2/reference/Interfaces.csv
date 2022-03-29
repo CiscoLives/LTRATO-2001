@@ -1,3 +1,0 @@
-Name,Description,Enabled
-GigabitEthernet1,,true
-GigabitEthernet2,This is GigabitEthernet 2,false
