@@ -1,6 +1,5 @@
 lab:
-  description: The lab topology for HOLPRG-2004 "Automated Testing for Your Network"(Cisco
-    Live 2021)
+  description: The lab topology for LTRATO-2001 "Automated Testing for Your Network" (Cisco Live 2022)
   notes: |-
     ## Import Progress
     - processing node /asav-1 (asav)
@@ -13,8 +12,8 @@ lab:
     - link Ethernet1/3.nx-osv-1 -> GigabitEthernet0/0.asav-1
     - link Ethernet1/4.nx-osv-1 -> GigabitEthernet0/1.asav-1
   timestamp: 1616426060.0922468
-  title: HOLPRG-2004
-  version: 0.0.4
+  title: LTRATO-2001
+  version: 0.0.1
 nodes:
   - id: n0
     label: asav-1
@@ -55,7 +54,7 @@ nodes:
        management-only
        nameif mgmt
        security-level 100
-       ip address 198.18.1.202 255.255.255.0
+       ip address 10.5.118.90 255.255.255.0
       !
       ftp mode passive
       same-security-traffic permit inter-interface
@@ -85,7 +84,7 @@ nodes:
        network 10.0.0.9 255.255.255.255 area 0
        log-adj-changes
       !
-      route mgmt 0.0.0.0 0.0.0.0 198.18.1.1 1
+      route mgmt 0.0.0.0 0.0.0.0 10.5.118.1 1
       timeout xlate 3:00:00
       timeout pat-xlate 0:00:30
       timeout conn 1:00:00 half-closed 0:10:00 udp 0:02:00 sctp 0:02:00 icmp 0:00:02
@@ -367,7 +366,7 @@ nodes:
       interface GigabitEthernet1
        description OOB Management
        vrf forwarding Mgmt-intf
-       ip address 198.18.1.201 255.255.255.0
+       ip address 10.5.118.91 255.255.255.0
        negotiation auto
        cdp enable
        no mop enabled
@@ -405,7 +404,7 @@ nodes:
       ip http server
       ip http authentication local
       ip http secure-server
-      ip route vrf Mgmt-intf 0.0.0.0 0.0.0.0 198.18.1.1
+      ip route vrf Mgmt-intf 0.0.0.0 0.0.0.0 10.5.118.1
       !
       ip ssh server algorithm authentication password
       !
@@ -498,7 +497,7 @@ nodes:
 
       vrf context inside
       vrf context management
-        ip route 0.0.0.0/0 198.18.1.1
+        ip route 0.0.0.0/0 10.5.118.1
       hardware forwarding unicast trace
 
 
@@ -786,7 +785,7 @@ nodes:
       interface mgmt0
         description OOB Management
         vrf member management
-        ip address 198.18.1.203/24
+        ip address 10.5.118.92/24
 
       interface loopback0
         description Loopback
