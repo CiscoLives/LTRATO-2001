@@ -43,14 +43,13 @@
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#learning-objetives">Learning Objetives</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../labaccess/index.html">Lab Access</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../labaccess/index.html#ip-addressing-and-access-information">IP Addressing and Access Information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../labaccess/index.html#connecting-to-the-lab">Connecting to the Lab</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../labaccess/index.html#connect-to-anyconnect-optional">Connect to AnyConnect (Optional)</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="../labaccess/index.html#component-details">Component Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../labaccess/index.html#get-started">Get Started</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tasks/index.html">Tasks</a><ul>
@@ -128,24 +127,42 @@
   <div class="section" id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>This document is intended for use by attendees of the Cisco Live 2022 who are taking Network Programability Hands-on Lab (LTRATO-2001).</p>
-<p>Upon completion of this lab, you will be able to:</p>
-<ul class="simple">
-<li><p>Understand and install elements or components needed to develop a self service portal</p></li>
-<li><p>Write and run scripts to create a self service portal</p></li>
-<li><p>Use RESTCONF to manage network devices</p></li>
-<li><p>Use Django framework to develop a friendly Web UI</p></li>
-<li><p>Learn how a web application can inteface with devices to configure a service</p></li>
-</ul>
 <div class="section" id="prerequisites">
 <h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Understand APIs concepts</p></li>
 <li><p>Basic programability experience</p></li>
-<li><p>Basic Linux commands</p></li>
+<li><p>Basic NX-OS, ASA and CRS commands</p></li>
 <li><p>Basic GitHub experience</p></li>
-<li><p>Basic Docker experience</p></li>
 <li><p>Have Cisco AnyConnect® installed</p></li>
 </ul>
+</div>
+<div class="section" id="learning-objetives">
+<h2>Learning Objetives<a class="headerlink" href="#learning-objetives" title="Permalink to this headline">¶</a></h2>
+<p>During this lab, you will get hands-on experience with pyATS which is a vendor-agnostic suite of libraries for Python. You will learn how to build your automated tests, using those frameworks.
+pyATS opens a wide variety of opportunities and soon you will see it’s not hard to start using them.
+During this lab, we will show you real-world examples that you can use to start implementing the automation of tests in your network.</p>
+<p>Upon successful completion of this lab, you will be able to:</p>
+<ol class="arabic simple">
+<li><p>Create a testbed file.</p></li>
+<li><p>Understand the main capabilities of pyATS suites.</p></li>
+<li><p>Start writing automated tests for your network.</p></li>
+</ol>
+<p>Throughout this lab you will work with and learn the following features and concepts:</p>
+<ol class="arabic simple">
+<li><p>pyATS testbed file</p></li>
+<li><p>pyATS shell</p></li>
+<li><p>Device.connect() and Device.execute() methods</p></li>
+<li><p>pyATS test script structure</p></li>
+<li><p>pyATS testcases</p></li>
+<li><p>Logging in pyATS</p></li>
+<li><p>pyATS Parse</p></li>
+<li><p>pyATS Learn</p></li>
+<li><p>find_links method to find all the links between devices.</p></li>
+<li><p>pyATS Run</p></li>
+<li><p>pyATS job file</p></li>
+<li><p>pyATS Log Viewer</p></li>
+<li><p>XPRESSO (pyATS Web Dashboard)</p></li>
+</ol>
 <p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 </div>

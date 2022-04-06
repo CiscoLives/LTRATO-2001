@@ -43,14 +43,13 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#learning-objetives">Learning Objetives</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Lab Access</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#ip-addressing-and-access-information">IP Addressing and Access Information</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#connecting-to-the-lab">Connecting to the Lab</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#connect-to-anyconnect-optional">Connect to AnyConnect (Optional)</a></li>
-</ul>
-</li>
+<li class="toctree-l2"><a class="reference internal" href="#component-details">Component Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#get-started">Get Started</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tasks/index.html">Tasks</a><ul>
@@ -127,9 +126,13 @@
              
   <div class="section" id="lab-access">
 <h1>Lab Access<a class="headerlink" href="#lab-access" title="Permalink to this headline">¶</a></h1>
-<p>In this lab, you will have access to one (1) Linux VM. The Linux VM is configured to provide access to Docker and execute the scripts needed during the Lab.</p>
+<p>This lab includes a CML server on which simulation of the lab network will be running.
+All lab tasks will be done from the Jumphost (a Windows 10 machine with WSL installed).</p>
 <p>The lab topology is shown as below:</p>
-<a class="reference internal image-reference" href="../_images/lab-diagram.svg"><img alt="../_images/lab-diagram.svg" class="align-center" src="../_images/lab-diagram.svg" width="25%" /></a>
+<a class="reference internal image-reference" href="../_images/lab-diagram-01.svg"><img alt="../_images/lab-diagram-01.svg" class="align-center" src="../_images/lab-diagram-01.svg" width="50%" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="section" id="ip-addressing-and-access-information">
 <h2>IP Addressing and Access Information<a class="headerlink" href="#ip-addressing-and-access-information" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default">
@@ -141,43 +144,166 @@
 <col style="width: 20%" />
 </colgroup>
 <thead>
-<tr class="row-odd"><th class="head"><p>Device</p></th>
-<th class="head"><p>IP/Hostname</p></th>
-<th class="head"><p>Port</p></th>
+<tr class="row-odd"><th class="head"><p>Hostname</p></th>
+<th class="head"><p>IP Address</p></th>
+<th class="head"><p>Port/Protocol</p></th>
 <th class="head"><p>Username</p></th>
 <th class="head"><p>Password</p></th>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>CentOs</p></td>
-<td><p>198.18.134.49</p></td>
-<td><p>RDP / SSH</p></td>
-<td><p>cisco</p></td>
-<td><p>C1sc012345</p></td>
+<tr class="row-even"><td><p>Jumphost</p></td>
+<td><p>198.18.133.252</p></td>
+<td><p>RDP</p></td>
+<td><p>administrator</p></td>
+<td><p>C1sco12345</p></td>
 </tr>
-<tr class="row-odd"><td><p>CSR1K</p></td>
-<td><p>198.18.134.11</p></td>
+<tr class="row-odd"><td><p>asav-1</p></td>
+<td><p>198.18.1.202</p></td>
 <td><p>SSH</p></td>
 <td><p>cisco</p></td>
 <td><p>cisco</p></td>
 </tr>
+<tr class="row-even"><td><p>csr1000v-1</p></td>
+<td><p>198.18.1.201</p></td>
+<td><p>SSH</p></td>
+<td><p>cisco</p></td>
+<td><p>cisco</p></td>
+</tr>
+<tr class="row-odd"><td><p>nx-osv-1</p></td>
+<td><p>198.18.1.203</p></td>
+<td><p>SSH</p></td>
+<td><p>cisco</p></td>
+<td><p>cisco</p></td>
+</tr>
+<tr class="row-even"><td><p>xpresso</p></td>
+<td><p>198.18.134.50</p></td>
+<td><p>SSH</p></td>
+<td><p>cisco</p></td>
+<td><p>C1sco12345</p></td>
+</tr>
 </tbody>
 </table>
 </div>
-<div class="section" id="connecting-to-the-lab">
-<h2>Connecting to the Lab<a class="headerlink" href="#connecting-to-the-lab" title="Permalink to this headline">¶</a></h2>
-<p>Start your session by opening the following <a class="reference external" href="https://dcloud.cisco.com/expo/b3gi3rj4fngbp2k39h3o55mlm">link</a></p>
-<div class="section" id="connect-to-anyconnect-optional">
-<h3>Connect to AnyConnect (Optional)<a class="headerlink" href="#connect-to-anyconnect-optional" title="Permalink to this headline">¶</a></h3>
-<p>Use the <code class="docutils literal notranslate"><span class="pre">Cisco</span> <span class="pre">AnyConnect</span> <span class="pre">Secure</span> <span class="pre">Mobility</span> <span class="pre">Client</span></code> to connect through a VPN, information will be provided after registering via above link in the <span class="guilabel">Details</span> tab.</p>
-<a class="reference internal image-reference" href="../_images/expo-anyconnect.png"><img alt="../_images/expo-anyconnect.png" class="align-center" src="../_images/expo-anyconnect.png" style="width: 75%;" /></a>
-<p>With the VPN connected, launch your preferred RDP Client to connect to the server specified in the next step.</p>
-<p>If you cannot use a VPN, you can launch the Remote link from the <span class="guilabel">Network</span> tab.</p>
-<a class="reference internal image-reference" href="../_images/expo-remote-desktop.png"><img alt="../_images/expo-remote-desktop.png" class="align-center" src="../_images/expo-remote-desktop.png" style="width: 75%;" /></a>
-<p>Once inside the remote desktop connection, you can acccess network devices, Docker, GitHub repo and documentation.
-In addition you can create your enviroment to start to build your self service portal.</p>
-<p><em>Section author: Ali Eftekhari &lt;<a class="reference external" href="mailto:aleftekh&#37;&#52;&#48;cisco&#46;com">aleftekh<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Ovesnel Mas Lara &lt;<a class="reference external" href="mailto:omaslara&#37;&#52;&#48;cisco&#46;com">omaslara<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
+<div class="section" id="component-details">
+<h2>Component Details<a class="headerlink" href="#component-details" title="Permalink to this headline">¶</a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Hostname</p></th>
+<th class="head"><p>Product</p></th>
+<th class="head"><p>Operating System</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Jumphost</p></td>
+<td><blockquote>
+<div><p>Microsoft Windows 10
+WSL 1 with Ubuntu 18.04</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>Microsoft Windows 10</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>asav-1</p></td>
+<td><blockquote>
+<div><p>Cisco Adaptive Security Virtual
+Appliance</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>ASA OS 9.14(1)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>csr1000v-1</p></td>
+<td><blockquote>
+<div><p>Cisco Cloud Services Router 1000v</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>IOS-XE 17.3.1a</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-odd"><td><p>nx-osv-1</p></td>
+<td><blockquote>
+<div><p>Cisco Nexus 9000v Switch</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>NS-OS 9.2(4)</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>xpresso</p></td>
+<td><blockquote>
+<div><p>XPRESSO
+(pyATS Web Dashboard)</p>
+</div></blockquote>
+</td>
+<td><blockquote>
+<div><p>CentOS Linux release 7.9.2009</p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
 </div>
+<div class="section" id="get-started">
+<h2>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic">
+<li><p>Go to <a class="reference external" href="https://dcloud.cisco.com">dCloud</a> and login with your Cisco (CCO) credentials.</p></li>
+<li><p>Paste Event URL into your browser and click Enter, you will be forwarded into your session page.</p></li>
+<li><p>On the session page click <span class="guilabel">Info</span> tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to get access to your lab, using Cisco AnyConnect client.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/session-details.png"><img alt="../_images/session-details.png" class="align-center" src="../_images/session-details.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Cisco AnyConnect client and Host address from previous step.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/anyconnect-01.png"><img alt="../_images/anyconnect-01.png" class="align-center" src="../_images/anyconnect-01.png" style="width: 45%;" /></a>
+</div></blockquote>
+</li>
+<li><p>When login banner will appear, enter Username/Password from previous step.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/anyconnect-02.png"><img alt="../_images/anyconnect-02.png" class="align-center" src="../_images/anyconnect-02.png" style="width: 45%;" /></a>
+</div></blockquote>
+</li>
+<li><p>For best performance, connect to the workstation with Cisco AnyConnect VPN <a class="reference external" href="https://dcloud-cms.cisco.com/help/install_anyconnect_pc_mac">Show Me How</a> and the local RDP client on your laptop <a class="reference external" href="https://dcloud-cms.cisco.com/help/local_rdp_mac_windows">Show Me How</a> and use the information from the table above to connect to workstation</p></li>
+<li><p>Once inside the remote desktop connection, open Google Chrome browser, startup page <a class="reference external" href="https://cml-controller.cml.lab/login">https://cml-controller.cml.lab/login</a> would be opened (web interface of Cisco Modeling Labs server).</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">Login</span></code> button:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cml-01.png"><img alt="../_images/cml-01.png" class="align-center" src="../_images/cml-01.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>On the opened page ensure the lab LTRATO-2001 is in <code class="docutils literal notranslate"><span class="pre">ON</span></code> state:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cml-02.png"><img alt="../_images/cml-02.png" class="align-center" src="../_images/cml-02.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Click on the topology and on the opened page ensure status for all devices are <code class="docutils literal notranslate"><span class="pre">green</span></code>:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/cml-03.png"><img alt="../_images/cml-03.png" class="align-center" src="../_images/cml-03.png" style="width: 75%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the status of any device is not green 10 minutes after CML topology has been started, refer to the lab’s proctor for assistance.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>On the remote desktop, double-click the <code class="docutils literal notranslate"><span class="pre">PuTTY</span></code> shortcut icon on the desktop and verify connectivity by launching the <strong>asav-1</strong>, <strong>csr100v-1</strong>, and <strong>nx-osv-1</strong> devices from the remote desktop and logging in. Username/password for all three devices: <code class="docutils literal notranslate"><span class="pre">cisco/cisco</span></code>.</p></li>
+<li><p>If all devices are reachable and you can log in, close the PuTTY sessions and proceed with <strong>Task 1</strong>.</p></li>
+</ol>
+<p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 </div>
 
