@@ -17,7 +17,7 @@ Learning Objetives
 ==================
 
 During this lab, you will get hands-on experience with pyATS which is a vendor-agnostic suite of libraries for Python. You will learn how to build your automated tests, using those frameworks.
-pyATS opens a wide variety of opportunities and soon you will see it’s not hard to start using them.
+pyATS opens a wide variety of opportunities and soon you will see it's not hard to start using them.
 During this lab, we will show you real-world examples that you can use to start implementing the automation of tests in your network. 
 
 Upon successful completion of this lab, you will be able to:
@@ -42,21 +42,6 @@ Throughout this lab you will work with and learn the following features and conc
 11.	pyATS job file
 12.	pyATS Log Viewer
 13.	XPRESSO (pyATS Web Dashboard)
-
-
-Scenario
-========
-
-**Imagine the following situation is happening:**
-
-Josh was awakened by an early call today. Something broke again after his night work.
-Josh realized that it couldn't go on like this, and the thought came to him that if he could learn to automatically test his network before and after work, his life would become happier.
-He would feel calmer, more cheerful and he would have had time for a cup of coffee.
-This lab guide fell into his hands and began to study it. Let's start with Josh!
-
-.. image:: images/intro-image-01.png
-    :width: 75%
-    :align: center
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>

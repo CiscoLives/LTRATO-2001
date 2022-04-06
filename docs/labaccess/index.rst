@@ -8,7 +8,7 @@ All lab tasks will be done from the Jumphost (a Windows 10 machine with WSL inst
 The lab topology is shown as below:
 
 .. image:: images/lab-diagram-01.svg
-    :width: 75%
+    :width: 50%
     :align: center
 
 |
@@ -81,8 +81,7 @@ Get Started
 
 #. On the remote desktop, double-click the ``PuTTY`` shortcut icon on the desktop and verify connectivity by launching the **asav-1**, **csr100v-1**, and **nx-osv-1** devices from the remote desktop and logging in. Username/password for all three devices: ``cisco/cisco``.
 
-.. tip::
-    If all devices are reachable and you can log in, close the PuTTY sessions and proceed with **Scenario 1**.
+#. If all devices are reachable and you can log in, close the PuTTY sessions and proceed with **Task 1**.
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>
