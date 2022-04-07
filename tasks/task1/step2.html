@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step 2: TBD &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>Step 2: Verify pyATS Testbed File &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
@@ -20,8 +20,8 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Step 3: TBD" href="step3.html" />
-    <link rel="prev" title="Step 1: TBD" href="step1.html" /> <link href="../../_static/style.css" rel="stylesheet" type="text/css"> 
+    <link rel="next" title="Step 3: pyATS Capabilities using the pyATS Shell" href="step3.html" />
+    <link rel="prev" title="Step 1: Explore Lab Structure" href="step1.html" /> <link href="../../_static/style.css" rel="stylesheet" type="text/css"> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -53,13 +53,10 @@
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tasks</a><ul class="current">
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 1: Setup Development Environment</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="step1.html">Step 1: TBD</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 2: TBD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step3.html">Step 3: TBD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step4.html">Step 4: TBD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step5.html">Step 5: TBD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step6.html">Step 6: TBD</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 1: Exploring and Verification</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="step1.html">Step 1: Explore Lab Structure</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 2: Verify pyATS Testbed File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="step3.html">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: TBD</a><ul>
@@ -115,8 +112,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Tasks</a> &raquo;</li>
-          <li><a href="index.html">Task 1: Setup Development Environment</a> &raquo;</li>
-      <li>Step 2: TBD</li>
+          <li><a href="index.html">Task 1: Exploring and Verification</a> &raquo;</li>
+      <li>Step 2: Verify pyATS Testbed File</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/CiscoLive2021/HOLPRG-2002/blob/master/docs/tasks/task1/step2.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -126,9 +123,128 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="step-2-tbd">
-<h1>Step 2: TBD<a class="headerlink" href="#step-2-tbd" title="Permalink to this headline">¶</a></h1>
-<p>For this session we recommend xxx</p>
+  <div class="section" id="step-2-verify-pyats-testbed-file">
+<h1>Step 2: Verify pyATS Testbed File<a class="headerlink" href="#step-2-verify-pyats-testbed-file" title="Permalink to this headline">¶</a></h1>
+<p><strong>Value Proposition:</strong> In this task we will explore pyATS testbed file used in the lab.</p>
+<p>For pyATS to be able to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol and connections between network devices.</p>
+<p>This information is stored in pyATS testbed file (in YAML format).</p>
+<p>Could this information be gathered automatically and pyATS testbed file prepared for us?</p>
+<p>Sure, since the lab is running in Cisco Modeling Labs (CML), <a class="reference external" href="https://github.com/CiscoDevNet/virlutils">cmlutils</a>  tool could be used to prepare pyATS testbed file from CML topology.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Testbed file was already prepared and you don’t need to call cmlutils now. But if you are curious how you can prepare pyATS testbed file from CML topology, then needed commands are:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /var/lib/virlutils/venv/bin/activate
+
+cml ls <span class="o">(</span>get id from ID column<span class="o">)</span>
+cml use --id XXX
+
+cml generate pyats
+
+<span class="nb">source</span> ~/pyats/bin/activate
+</pre></div>
+</div>
+</div>
+<p>The Testbed YAML file for pyATS has been pre-created for this lab and is named pyats_testbed.yaml.</p>
+<ol class="arabic">
+<li><p>Change to the directory that contains the lab files:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/labpyats
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Open the pre-created <code class="docutils literal notranslate"><span class="pre">pyats_testbed.yaml</span></code> file in the Nano editor by entering the following command:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><ol class="arabic simple" start="3">
+<li><p>The output of the command should contain the following:</p></li>
+</ol>
+<blockquote>
+<div><div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">testbed</span><span class="p">:</span>
+
+  <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">labpyats</span> <span class="c1"># name of topology simulation</span>
+
+  <span class="nt">credentials</span><span class="p">:</span> <span class="c1">#  credentials for CLI access (stored as environment variables)</span>
+    <span class="nt">default</span><span class="p">:</span> <span class="c1">#  username/password used by default</span>
+      <span class="nt">username</span><span class="p">:</span> <span class="s">&quot;%ENV{PYATS_USERNAME}&quot;</span>
+      <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;%ENV{PYATS_PASSWORD}&quot;</span>
+    <span class="nt">enable</span><span class="p">:</span> <span class="c1">#  enable password (if required)</span>
+      <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;%ENV{PYATS_AUTH_PASS}&quot;</span>
+    <span class="nt">line</span><span class="p">:</span> <span class="c1">#  line (VTY/console) password (if required)</span>
+      <span class="nt">password</span><span class="p">:</span> <span class="s">&quot;%ENV{PYATS_AUTH_PASS}&quot;</span>
+
+<span class="nt">devices</span><span class="p">:</span> <span class="c1">#  All necessary information to connect to devices is in this block</span>
+<span class="nt">asav-1</span><span class="p">:</span>
+    <span class="nt">alias</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asav-1</span>
+    <span class="nt">os</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asa</span>
+    <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ASAv</span>
+    <span class="nt">platform</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ASAv</span>
+
+    <span class="nt">connections</span><span class="p">:</span>
+      <span class="nt">console</span><span class="p">:</span>
+        <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ssh</span> 
+        <span class="nt">ip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">198.18.1.202</span>
+        <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">22</span> <span class="c1">#  connection to a device would be done via SSH port </span>
+<span class="l l-Scalar l-Scalar-Plain">&lt;…&gt;</span>
+
+<span class="nt">topology</span><span class="p">:</span> <span class="c1">#  All information about links between devices is in this block</span>
+  <span class="nt">asav-1</span><span class="p">:</span>
+    <span class="nt">interfaces</span><span class="p">:</span>
+      <span class="nt">GigabitEthernet0/0</span><span class="p">:</span>
+        <span class="nt">ipv4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.0.0.5/30</span>
+        <span class="nt">link</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asav-1-to-nx-osv-1</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ethernet</span>
+      <span class="nt">GigabitEthernet0/1</span><span class="p">:</span>
+        <span class="nt">ipv4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.0.0.9/30</span>
+        <span class="nt">link</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asav-1-to-nx-osv-1#1</span>
+        <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ethernet</span>
+      <span class="l l-Scalar l-Scalar-Plain">&lt;…&gt;</span>
+</pre></div>
+</div>
+<p>Now we have all the required information to start our tests with pyATS.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that username and passwords to access devices are not stored in the YAML file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>credentials:
+default:
+username: <span class="s2">&quot;%ENV{PYATS_USERNAME}&quot;</span>
+password: <span class="s2">&quot;%ENV{PYATS_PASSWORD}&quot;</span>
+enable:
+password: <span class="s2">&quot;%ENV{PYATS_AUTH_PASS}&quot;</span>
+line:
+password: <span class="s2">&quot;%ENV{PYATS_AUTH_PASS}&quot;</span>
+</pre></div>
+</div>
+<p>We recommend that you store credentials separately and at least as environmental variables.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Exit Nano without saving, pressing:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + X
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>In the lab environment, variables for PYATS with credentials to access all devices are preconfigured. Check these environment variables from a Bash shell:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYATS_USERNAME</span> <span class="nv">$PYATS_PASSWORD</span> <span class="nv">$PYATS_AUTH_PASS</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>The output of the command should contain the following:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cisco cisco cisco
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
 <p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 
@@ -136,8 +252,8 @@
            </div>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
-        <a href="step1.html" class="btn btn-neutral float-left" title="Step 1: TBD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="step3.html" class="btn btn-neutral float-right" title="Step 3: TBD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="step1.html" class="btn btn-neutral float-left" title="Step 1: Explore Lab Structure" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="step3.html" class="btn btn-neutral float-right" title="Step 3: pyATS Capabilities using the pyATS Shell" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

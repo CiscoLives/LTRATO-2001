@@ -1,7 +1,6 @@
-#####################################
-Task 1: Setup Development Environment
-#####################################
-
+##################################
+Task 1: Exploring and Verification
+##################################
 
 
 .. toctree::
@@ -9,6 +8,3 @@ Task 1: Setup Development Environment
    step1
    step2
    step3
-   step4
-   step5
-   step6
