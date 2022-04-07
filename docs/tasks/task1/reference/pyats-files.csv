@@ -1,0 +1,10 @@
+Filename,Description,Task#
+pyats_testbed.yaml,Testbed file for pyATS (in YAML),
+"task10_runtestsjob.py ",pyATS job file to run tests from Task 10,Task 10
+Task4_labpyats.py,The task for collection of show commands,Task 4
+Task5_labpyats.py,The initial task for pyATS exploration,Task 5
+task61_labpyats.py,Test to verify log messages (asav-1 only),Task 6
+task62_labpyats.py,Test to verify log messages (all devices),Task 6
+task7_labpyats.py,Test to verify service contracts coverage,Task 7
+task8_labpyats.py,Test to verify routing information,Task 8
+task9_labpyats.py,Test to verify reachability between devices (ping),Task 9

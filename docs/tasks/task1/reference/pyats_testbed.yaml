@@ -1,0 +1,39 @@
+testbed:
+
+  name: labpyats # name of topology simulation
+
+  credentials: #  credentials for CLI access (stored as environment variables)
+    default: #  username/password used by default
+      username: "%ENV{PYATS_USERNAME}"
+      password: "%ENV{PYATS_PASSWORD}"
+    enable: #  enable password (if required)
+      password: "%ENV{PYATS_AUTH_PASS}"
+    line: #  line (VTY/console) password (if required)
+      password: "%ENV{PYATS_AUTH_PASS}"
+
+devices: #  All necessary information to connect to devices is in this block
+asav-1:
+    alias: asav-1
+    os: asa
+    type: ASAv
+    platform: ASAv
+
+    connections:
+      console:
+        protocol: ssh 
+        ip: 198.18.1.202
+        port: 22 #  connection to a device would be done via SSH port 
+<…>
+
+topology: #  All information about links between devices is in this block
+  asav-1:
+    interfaces:
+      GigabitEthernet0/0:
+        ipv4: 10.0.0.5/30
+        link: asav-1-to-nx-osv-1
+        type: ethernet
+      GigabitEthernet0/1:
+        ipv4: 10.0.0.9/30
+        link: asav-1-to-nx-osv-1#1
+        type: ethernet
+      <…>
