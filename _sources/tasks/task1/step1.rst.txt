@@ -25,7 +25,7 @@ Step 1: Explore Lab Structure
 
         cd ~/labpyats
 
-#. Check the lab’s structure (before running the command shown below, ensure that you have changed to the correct directory: **~/labpyats**).
+#. Check the lab's structure (before running the command shown below, ensure that you have changed to the correct directory: **~/labpyats**).
 
     .. code-block:: bash
 

@@ -1,5 +1,5 @@
-Step 2: TBD
-###########
+Step 2: Writting Test Script
+############################
 
 xxxx
 
