@@ -8,6 +8,3 @@ Task 2: Writting Initial Scripts
 
    step1
    step2
-   step3
-   step4
-   step5

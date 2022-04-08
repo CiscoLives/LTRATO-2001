@@ -20,7 +20,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Step 3: TBD" href="step3.html" />
+    <link rel="next" title="Task 3: Verification" href="../task3/index.html" />
     <link rel="prev" title="Step 1: Collect Show Commands" href="step1.html" /> <link href="../../_static/style.css" rel="stylesheet" type="text/css"> 
 </head>
 
@@ -62,13 +62,10 @@
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 2: Writting Initial Scripts</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="step1.html">Step 1: Collect Show Commands</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Step 2: Writting Test Script</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step3.html">Step 3: TBD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step4.html">Step 4: TBD</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step5.html">Step 5: TBD</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: TBD</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../task3/step1.html">Step 1: TBD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../task3/step1.html">Step 1: Verify Log Messages</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../task3/step2.html">Step 2: TBD</a></li>
 </ul>
 </li>
@@ -125,7 +122,121 @@
              
   <div class="section" id="step-2-writting-test-script">
 <h1>Step 2: Writting Test Script<a class="headerlink" href="#step-2-writting-test-script" title="Permalink to this headline">¶</a></h1>
-<p>xxxx</p>
+<p><strong>Value Proposition:</strong> Now let’s write our first test script on Python using the pyATS library. Our test script will connect to all the devices in the testbed and print the results of the connection. If the connections to all the devices are successful, then the test will pass, else it will fail. Using this simple test script, we will learn the structure of the pyATS test script file.</p>
+<p>The pyATS test script is a file with the Python code which uses the pyATS library.
+The structure of the pyATS test script is modular and straightforward.
+Each test script is written in a Python file and split into three major sections (Python classes) – see the illustration below for a graphical representation:</p>
+<ul class="simple">
+<li><p><strong>Common Setup:</strong> The first section in the test script, run at the beginning. It performs all the “common” setups required for the script.</p></li>
+<li><p><strong>Testcase(s):</strong> A self-contained individual unit of testing. Each testcase is independent of the other testcases.</p></li>
+<li><p><strong>Common Cleanup:</strong> The last section in the test script, performs all the “common” cleanups at the end of execution.</p></li>
+</ul>
+<p>Each of these sections is further broken down into smaller subsections (Python methods of the class).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Both Common Setup and Common Cleanup could be only one in a script, whereas there might be multiple test cases in one test script.</p>
+</div>
+<a class="reference internal image-reference" href="../../_images/test-script-structure.png"><img alt="../../_images/test-script-structure.png" class="align-center" src="../../_images/test-script-structure.png" style="width: 75%;" /></a>
+<ol class="arabic">
+<li><p>Let’s verify our first test script. Open the file <strong>task5_labpyats.py</strong> and observe its structure:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task5_labpyats.py
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Pay special attention to the following part of the code. Whereas it’s not related to only this task, it will help you understand the logging capabilities of pyATS that would be used in other tasks in this lab:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import of pyATS logging banner</span>
+<span class="kn">from</span> <span class="nn">pyats.log.utils</span> <span class="kn">import</span> <span class="n">banner</span>
+
+<span class="o">&lt;..&gt;</span>
+
+<span class="c1"># This section sets up logging (ensure the log.level is the same or higher than</span>
+<span class="c1"># level of log.info where banner is used)</span>
+
+<span class="k">global</span> <span class="n">log</span>
+<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="o">&lt;..&gt;</span>
+
+<span class="c1"># Use pyATS logging banner to format the output</span>
+<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connect to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>When the pyATS logging banner is used, the following format of message would be shown in the output of the test.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Connect</span> <span class="n">to</span> <span class="n">device</span> <span class="s1">&#39;cisco_ios_xr_asr9k_01&#39;</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/pyats-logger-banner.png"><img alt="../../_images/pyats-logger-banner.png" class="align-center" src="../../_images/pyats-logger-banner.png" style="width: 600px;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The pyATS logging banner itself does not perform logging, and instead only performs style formatting of its input messages. Hence, the <strong>log.info(banner(“logging message”))</strong> construction is used in the code for logging.
+Since the banner is logged with INFO logging level, it’s required to set logging level up to INFO (default is WARNING):
+<strong>log.setLevel(logging.INFO)</strong></p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Let’s look at the main contents of this example. Python class <strong>common_setup</strong> which is inherited from <strong>aetest.CommonSetup</strong> represents the major section “Common Setup” (see the following illustration).  The Python class <strong>common_setup</strong> is where initializations and preparations before the actual script’s testcases should be performed. For this reason, code in class <strong>common_setup</strong> is always run first, before all the testcases. Refer to the description of the code of this Python class shown below:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">common_setup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
+<span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
+<span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyats_testbed</span><span class="p">):</span>
+    <span class="c1"># Pass testbed file into class method</span>
+    <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="c1"># Load all devices from testbed file and try to connect to them</span>
+    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connect to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="n">device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># Pass list of devices to testcases</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The following code is used to load testbed file from filename specified as command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies name of object that would represent testbed file in code):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+<span class="c1"># Load testbed file which is passed as command-line argument</span>
+<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--testbed&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;pyats_testbed&#39;</span><span class="p">,</span>
+                    <span class="nb">type</span><span class="o">=</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">)</span>
+
+<span class="n">args</span><span class="p">,</span> <span class="n">unknown</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
+
+<span class="n">aetest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Exit Nano without saving, pressing:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + X
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Let’s run our first test script. This test script will try to connect to all the devices in the testbed and print the results of these attempts:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task5_labpyats.py --testbed pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Upon finishing the test script, pyATS generates a report of Success/Failed testcases, the <strong>common_setup</strong> section is also treated as the testcase with subsection <strong>establish_connections</strong>. Since all the devices are reachable, the testcases should finish successfully (PASSED). Refer to the following illustration.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/step7-output.png"><img alt="../../_images/step7-output.png" class="align-center" src="../../_images/step7-output.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+</ol>
 <p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 
@@ -134,7 +245,7 @@
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="step1.html" class="btn btn-neutral float-left" title="Step 1: Collect Show Commands" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="step3.html" class="btn btn-neutral float-right" title="Step 3: TBD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="../task3/index.html" class="btn btn-neutral float-right" title="Task 3: Verification" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
