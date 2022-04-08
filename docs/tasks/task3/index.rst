@@ -1,6 +1,6 @@
-###########
-Task 3: TBD
-###########
+####################
+Task 3: Verification
+####################
 
 .. Next Table of Content is an example, please change the names according to your needs 
 
