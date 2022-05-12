@@ -123,6 +123,204 @@
              
   <div class="section" id="step-3-verify-the-routing-information-using-parsers-and-pyats-learn">
 <h1>Step 3: Verify the Routing Information using Parsers and pyATS Learn<a class="headerlink" href="#step-3-verify-the-routing-information-using-parsers-and-pyats-learn" title="Permalink to this headline">¶</a></h1>
+<p><strong>Value Proposition:</strong> In this test case, we have the list of critical routes (usually this is a device’s loopback interface) and we must check that these loopbacks are installed in the routing information base (RIB) of all the devices in the testbed.</p>
+<p>High-level logic of the test will be as follows:</p>
+<ul class="simple">
+<li><p>Connect to each device in the testbed.</p></li>
+<li><p>Learn routing information from RIB of the devices.</p></li>
+<li><p>Verify whether all the critical routes are presented in the device’s RIB.</p></li>
+</ul>
+<ol class="arabic">
+<li><p>Let’s connect to the pyATS shell and check our idea.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Input the following code into pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;csr1000v-1&#39;</span><span class="p">]</span>
+<span class="n">asa</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;asav-1&#39;</span><span class="p">]</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="p">]</span>
+<span class="n">csr</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">asa</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>pyATS uses the <strong>learn</strong> method to collect the set of show commands output for a feature configured on the device, to get its snapshot and store it into a structured format (Python dictionary).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr_routes</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
+<span class="n">nx_routes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can observe the structure of the parsed outputs. We are starting with the parsed output for <strong>csr1000v-1</strong>.</p>
+</div></blockquote>
+</li>
+<li><p>Input the following code into pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">csr_routes</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Observe the output in pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
+<span class="hll">    &quot;vrf&quot;: {&quot;default&quot;: {&quot;address_family&quot;: {&quot;ipv4&quot;: {&quot;routes&quot;: {
+</span>                        &quot;10.0.0.12/30&quot;: {
+                            &quot;active&quot;: True,
+                            &quot;next_hop&quot;: {
+                                &quot;outgoing_interface&quot;: {
+                                    &quot;GigabitEthernet2&quot;: {
+                                        &quot;outgoing_interface&quot;: &quot;GigabitEthernet2&quot;
+                                    }
+                                }
+                            },
+                            &quot;route&quot;: &quot;10.0.0.12/30&quot;,
+                            &quot;source_protocol&quot;: &quot;connected&quot;,
+                            &quot;source_protocol_codes&quot;: &quot;C&quot;
+                        },
+<span class="hll">                        &quot;10.0.0.13/32&quot;: {
+</span>                            &quot;active&quot;: True,
+                            &quot;next_hop&quot;: {
+                                &quot;outgoing_interface&quot;: {
+                                    &quot;GigabitEthernet2&quot;: {
+                                        &quot;outgoing_interface&quot;: &quot;GigabitEthernet2&quot;
+                                    }
+                                }
+                            },
+                            &quot;route&quot;: &quot;10.0.0.13/32&quot;,
+                            &quot;source_protocol&quot;: &quot;local&quot;,
+                            &quot;source_protocol_codes&quot;: &quot;L&quot;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+&lt;...&gt;
+</pre></div>
+</div>
+<p>Now we understand that RIB routes for <strong>csr1000v-1</strong> are stored under the following path:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">csr_routes</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">][</span><span class="s1">&#39;address_family&#39;</span><span class="p">][</span><span class="s1">&#39;ipv4&#39;</span><span class="p">][</span><span class="s1">&#39;routes&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>For <strong>nx-osv-1</strong>, RIB routes are stored under the same path as for <strong>csr1000v-1</strong>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span> <span class="p">(</span><span class="n">nx_routes</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">][</span><span class="s1">&#39;address_family&#39;</span><span class="p">][</span><span class="s1">&#39;ipv4&#39;</span><span class="p">][</span><span class="s1">&#39;routes&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Exit the pyATS shell using the <strong>exit</strong> command.</p></li>
+<li><p>Open the file task8_labpyats.py in Nano editor.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task8_labpyats.py
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Review the content of <strong>routes</strong> testcase, note that we use the path to routes in RIB from the previous step to get the routing information. First we’ll get a snapshot of the <strong>routing</strong> feature.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
+    <span class="k">def</span> <span class="nf">routes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Verify that all device have golden_routes installed in RIB</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;iosxe&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;nxos&#39;</span><span class="p">):</span>
+
+<span class="hll">            <span class="n">output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
+</span>            <span class="n">rib</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="n">replace</span> <span class="n">me</span><span class="o">&gt;&gt;</span>  <span class="c1"># noqa: E999</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" start="8">
+<li><p>Then we compare the loopback routes stored in <strong>golden_routes list</strong>, with the content of rib. If the loopback route is not found, then we force the test case to fail.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">golden_routes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;192.168.0.3/32&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.0.1/32&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">for</span> <span class="n">route</span> <span class="ow">in</span> <span class="n">golden_routes</span><span class="p">:</span>
+</span>    <span class="k">if</span> <span class="n">route</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rib</span><span class="p">:</span>
+<span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{route}</span><span class="s1"> is not found&#39;</span><span class="p">)</span>
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Golden routes are /32 networks of loopback interfaces on <strong>csr1000v-1</strong> and <strong>nx-osv-1</strong>.</p>
+</div>
+<p>Loopback0 on <strong>csr1000v-1</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>csr1000v-1#sh ip int br
+Interface              IP-Address      OK? Method Status                Protocol
+GigabitEthernet1       <span class="m">198</span>.18.1.201    YES TFTP   up                    up
+GigabitEthernet2       <span class="m">10</span>.0.0.13       YES TFTP   up                    up
+GigabitEthernet3       <span class="m">10</span>.0.0.17       YES TFTP   up                    up
+<span class="hll">Loopback0              <span class="m">192</span>.168.0.3     YES TFTP   up                    up
+</span></pre></div>
+</div>
+<p>Loopback0 on <strong>NX-OS</strong>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nx-osv-1# sh ip interface brief vrf all
+
+IP Interface Status <span class="k">for</span> VRF <span class="s2">&quot;default&quot;</span><span class="o">(</span><span class="m">1</span><span class="o">)</span>
+Interface            IP Address      Interface Status
+<span class="hll">Lo0                  <span class="m">192</span>.168.0.1     protocol-up/link-up/admin-up
+</span>Eth1/1               <span class="m">10</span>.0.0.14       protocol-up/link-up/admin-up
+Eth1/2               <span class="m">10</span>.0.0.18       protocol-up/link-up/admin-up
+Eth1/3               <span class="m">10</span>.0.0.6        protocol-up/link-up/admin-up
+
+IP Interface Status <span class="k">for</span> VRF <span class="s2">&quot;management&quot;</span><span class="o">(</span><span class="m">2</span><span class="o">)</span>
+Interface            IP Address      Interface Status
+mgmt0                <span class="m">198</span>.18.1.203    protocol-up/link-up/admin-up
+
+IP Interface Status <span class="k">for</span> VRF <span class="s2">&quot;inside&quot;</span><span class="o">(</span><span class="m">3</span><span class="o">)</span>
+Interface            IP Address      Interface Status
+Lo100                <span class="m">192</span>.168.100.1   protocol-up/link-up/admin-up
+Eth1/4               <span class="m">10</span>.0.0.10       protocol-up/link-up/admin-up
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Complete this test case by replacing the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;replace</span> <span class="pre">me&gt;&gt;</span></code> statement with a rib variable. To accomplish this, you must paste the path to the rib routes, which was explored in the previous step:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">][</span><span class="s1">&#39;address_family&#39;</span><span class="p">][</span><span class="s1">&#39;ipv4&#39;</span><span class="p">][</span><span class="s1">&#39;routes&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before inserting the rib variable:</span>
+<span class="n">rib</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="n">replace</span> <span class="n">me</span><span class="o">&gt;&gt;</span>  <span class="c1"># noqa: E999</span>
+
+<span class="c1"># After inserting the rib variable:</span>
+<span class="n">rib</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">][</span><span class="s1">&#39;address_family&#39;</span><span class="p">][</span><span class="s1">&#39;ipv4&#39;</span><span class="p">][</span><span class="s1">&#39;routes&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>When you finish, save changes to file <strong>task8_labpyats.py</strong>. By pressing</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + O
+File Name to Write: task8_labpyats.py
+Hit <span class="o">[</span>Enter<span class="o">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Execute the test script and check the results section:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task8_labpyats.py --testbed pyats_testbed.yaml
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/task8_labpyats.png"><img alt="../../_images/task8_labpyats.png" class="align-center" src="../../_images/task8_labpyats.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 
