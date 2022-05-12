@@ -188,7 +188,7 @@ High-level logic of the test will be as follows:
 
         try:
         result = nx.ping(dest_ip)
-        <…>
+        # <…>
         else:
             m = re.search(r"(?P<rate>\d+)\.\d+% packet loss", result)
             loss_rate = m.group('rate')
