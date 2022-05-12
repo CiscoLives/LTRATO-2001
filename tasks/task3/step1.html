@@ -122,6 +122,262 @@
              
   <div class="section" id="step-1-verify-log-messages">
 <h1>Step 1: Verify Log Messages<a class="headerlink" href="#step-1-verify-log-messages" title="Permalink to this headline">¶</a></h1>
+<p><strong>Value Proposition:</strong> In this test case, we will verify that the logging messages with ERROR or WARN are not present on the devices in the testbed.</p>
+<p>The high-level logic of the test case will be as follows:</p>
+<ul class="simple">
+<li><p>Connect to each device in the testbed.</p></li>
+<li><p>Collect the output of <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">logging</span> <span class="pre">|</span> <span class="pre">i</span> <span class="pre">ERROR|WARN</span></code>.</p></li>
+<li><p>If the output contains more than 0 strings, then ERROR messages were found and the test should fail for this device. Otherwise, the test should succeed.</p></li>
+</ul>
+<ol class="arabic">
+<li><p>Before creating our testcase, connect to ASA. Launch <strong>PuTTY</strong> and connect to <strong>asav-1</strong>.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>User Access Verification
+
+<span class="hll">Password: cisco
+</span>asav-1&gt; <span class="nb">enable</span>
+<span class="hll">Password: cisco
+</span>asav-1#
+asav-1# clear logging buffer
+asav-1#
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Let’s open the pyATS shell and check it out.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Input the following code into pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="nv">csr</span> <span class="o">=</span> testbed.devices<span class="o">[</span><span class="s1">&#39;csr1000v-1&#39;</span><span class="o">]</span>
+<span class="nv">asa</span> <span class="o">=</span> testbed.devices<span class="o">[</span><span class="s1">&#39;asav-1&#39;</span><span class="o">]</span>
+csr.connect<span class="o">()</span>
+asa.connect<span class="o">()</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Let’s verify whether there are any errors or warning messages in the logs:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="nv">out1</span> <span class="o">=</span> csr.execute<span class="o">(</span><span class="s1">&#39;show logging | i ERROR|WARN&#39;</span><span class="o">)</span>
+<span class="nv">out2</span> <span class="o">=</span> asa.execute<span class="o">(</span><span class="s1">&#39;show logging | i ERROR|WARN&#39;</span><span class="o">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The output for ASA should be empty.
+If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
+<ol class="arabic simple">
+<li><dl class="simple">
+<dt>Connect to CSR:</dt><dd><ul class="simple">
+<li><p>Launch PuTTY and connect to <strong>csr1000v-1</strong>. Username: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>, password: <code class="docutils literal notranslate"><span class="pre">cisco</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Generate a test ERROR message:</dt><dd><ul class="simple">
+<li><p>csr1000v-1# <strong>send log ‘Test ERROR message for pyATS’</strong></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Repeat step 3 above for CSR in the pyATS shell:</dt><dd><ul class="simple">
+<li><p><strong>out1 = csr.execute(‘show logging | i ERROR|WARN’)</strong></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div></blockquote>
+</li>
+<li><p>To check whether there is an empty or non-empty output, we will use the Python <strong>len()</strong> built-in function, which returns the length of the given string. If the collected output is empty, then <strong>len()</strong> of the output will be 0, otherwise, the result will be greater than 0.</p>
+<blockquote>
+<div><p>Input into pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: len<span class="o">(</span>out2<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The resulting length is 0, means output from ASA is empty:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="m">0</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Input into pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: len<span class="o">(</span>out1<span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The resulting length is greater than 0, which means the output from CSR is not empty:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="m">664</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div></blockquote>
+</li>
+<li><p>Exit pyATS shell using the <strong>exit</strong> command.</p></li>
+<li><p>Open the file task61_labpyats.py in Nano editor:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task61_labpyats.py
+</pre></div>
+</div>
+<p>This file reuses the establish_connections(self, testbed) method from task5_labpyats.py (used in previous scenarios), which make connections to all devices in the testbed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Pay special attention to the following code:</p>
+</div>
+<p>The method self.parent.parameters.update(dev=device_list), located at the end of the establish_connections(self,testbed) method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
+<span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyats_testbed</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Establishes connections to all devices in testbed</span>
+<span class="sd">    :param testbed:</span>
+<span class="sd">    :return:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;Connect to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish &quot;</span>
+                        <span class="sa">f</span><span class="s2">&quot;connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+        <span class="n">device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="c1"># Pass list of devices to testcases</span>
+<span class="hll">    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<p>Where <strong>self.parent.parameters</strong> is an attribute of class <strong>aetest</strong>, and <strong>aetest</strong> is the class from which all the testcase classes and <strong>MyCommonSetup</strong> class are inherited from:</p>
+<p>class MyCommonSetup(aetest.CommonSetup):
+&lt;…&gt;</p>
+<p>class VerifyLogging(aetest.Testcase):
+&lt;…&gt;</p>
+<p>Using <strong>self.parent.parameters</strong> attribute arguments can be passed between different classes.
+As an example, in the class <strong>MyCommonSetup</strong>, we store all the devices from the variable <strong>device_list</strong> in the parameter <strong>parameters[‘dev’]</strong>.
+self.parent.parameters.update(dev=device_list)
+Then we can access all the devices in class VerifyLogging, using the method <strong>self.parent.parameters[‘dev’]</strong>.</p>
+</div></blockquote>
+</li>
+<li><p>Pay special attention to the code in class <strong>VerifyLogging</strong>, which is used to implement the approach that has been tested using the pyATS shell: if length of output is greater than zero, it means that output contains ERROR or WARN message. Testcase should be marked as Failed in this case.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <strong>device.connect(log_stdout=False)</strong> is used in this example (see <strong>def establish_connections</strong>).</p></li>
+<li><p>This code (log_stdout=False) - disables all logging to a screen for the whole connection session. To make the execution of the command on a device visible <strong>(show logging | i ERROR|WARN)</strong> in the output of the test, the following code is used: <strong>any_device.log_user(enable=True)</strong></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="k">class</span> <span class="nc">VerifyLogging</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">Testcase</span><span class="p">):</span>
+</span>    <span class="o">&lt;..&gt;</span>
+    <span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
+    <span class="k">def</span> <span class="nf">error_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">any_device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;dev&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">any_device</span><span class="o">.</span><span class="n">log_user</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">any_device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | i ERROR|WARN&#39;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="s1">&#39;Found ERROR in log, review logs first&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">pass</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Note that the Setup section of the test case is not used, therefore <strong>pass</strong> is written in this function. We will use the Setup section of the test case later when we execute the <strong>show logging | i ERROR|WARN</strong> command on multiple devices.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">setup</span>
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="hll">    <span class="k">pass</span>
+</span></pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Exit Nano without saving, pressing:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl+X
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Execute the test script <strong>task61_labpyats.py</strong> and check the results section.</p>
+<blockquote>
+<div><p>The Testcase <strong>error_log</strong> will run only for one device. Scroll above the results section and you will see to which device is related to this output.</p>
+<a class="reference internal image-reference" href="../../_images/error-log.png"><img alt="../../_images/error-log.png" class="align-center" src="../../_images/error-log.png" style="width: 75%;" /></a>
+<p>We have learned how to run a testcase for only one device, now we need to get familiar with the <strong>aetest.loop</strong> method, which will let us repeat an elementary test case (written for one device) for every device in the testbed.</p>
+</div></blockquote>
+</li>
+<li><p>Open the file task62_labpyats.py once again.</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task62_labpyats.py
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this task we will learn dynamic loops, which will create loops based on information that is only available during a script run.</p>
+<p>This approach is helpful if we don’t want to hardcode device names inside our testcase, but want to dynamically load devices from testbed file and run testcases across them.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Pay special attention to the code in <strong>error_logs</strong> method. It receives <strong>device</strong> object as an argument on input and collects the command from this <strong>device</strong>.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
+<span class="hll"><span class="k">def</span> <span class="nf">error_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
+</span><span class="hll">    <span class="n">output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | i ERROR|WARN&#39;</span><span class="p">)</span>
+</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="s1">&#39;Found ERROR in log, review logs first&#39;</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">pass</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Next, check the <strong>setup(self)</strong> method of class <strong>VerifyLogging</strong>. Method <strong>setup(self)</strong> is used to load all the devices from the testbed and to run the <strong>error_logs</strong> method for each device.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">setup</span>
+<span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="n">devices</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;dev&#39;</span><span class="p">]</span>
+<span class="hll">    <span class="n">aetest</span><span class="o">.</span><span class="n">loop</span><span class="o">.</span><span class="n">mark</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">error_logs</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">devices</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>aetest.loop.mark()</strong> instructs method <strong>self.error_logs</strong> to take an argument for input variable ‘device’, one-by-one from the devices list and run a testcase for each device separately.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Exit Nano without saving, pressing:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl+X
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Execute the test script; testcase <strong>error_logs</strong> will run for all the devices in the testbed:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task62_labpyats.py --testbed pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Check the <strong>VerifyLogging</strong> results section. The test for <strong>asav-1</strong> should pass, whereas for <strong>csr1000v-1</strong> and <strong>nx-osv-1</strong> should fail, because these devices have error messages in the logs.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/error-log-results.png"><img alt="../../_images/error-log-results.png" class="align-center" src="../../_images/error-log-results.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+</ol>
 <p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 
