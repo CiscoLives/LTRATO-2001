@@ -111,7 +111,7 @@ High-level logic of the test will be as follows:
     - **#Link csr1000v-1-to-nx-osv-1#1:** represents interfaces of all devices connected to the second link between csr1000v-1 and nx-osv-1.
 
     |
-    
+
     .. image:: images/links-output.png
         :width: 75%
         :align: center
@@ -122,11 +122,98 @@ High-level logic of the test will be as follows:
 
         nano task9_labpyats.py
 
+#. Review the content of the **PingTestcase** test case, look at the **def setup(self)** function. Code in this function follows the logic used in the previous step:
 
+    - Get all the links between **nx-osv-1** and **csr1000v-1** (nx.find_links(csr).
+    - Get interfaces for each link (**for iface in links.interfaces**) and append its IPv4 address (**iface.ipv4.ip**) into list **dest_ips**, to use them further in ping commands.
 
+    To exclude management IP addressing space, there is a check whether an IP address on a link is from a management address space (if dest_ip not in mgmt_net). If an IP address is from a management IP address, it's not appended to the list dest_ips.
 
+    .. note::
+        Note that the IP address in the **link_iface.ipv4.ip** object is of the IPv4Address type so we can check whether it overlaps with IPv4Network without any conversion of type (hence **if dest_ip not in mgmt_net** is used).
 
+    The code of the **setup(self)** function is shown below:
 
+    .. code-block:: python
 
+        # Management network IP range
+        mgmt_net = IPv4Network('198.18.1.0/24')
+
+    .. code-block:: python
+        :emphasize-lines: 11, 14
+
+        # Find links between NX-OS device and CSR1000v
+        links = nx.find_links(csr)
+
+        for link in links:
+            # process each link between devices
+
+            for link_iface in link.interfaces:
+                # process each interface (side) of the
+                # link and extract IP address from it
+
+                dest_ip = link_iface.ipv4.ip
+
+                # Check that destination IP is not from management IP range
+                if dest_ip not in mgmt_net:
+                    log.info(f'{link_iface.name}:{link_iface.ipv4.ip}')
+                    dest_ips.append(link_iface.ipv4.ip)
+                else:
+                    log.info(f'Skipping link_iface {link_iface.name} '
+                             f'from management subnet')
+
+    A **ping** command for each IPv4 address of both ends of the links between **nx-osv-1** and **csr1000v-1** is executed in the function **def ping(self, dest_ip)**.
+
+    .. note::
+        The following information is important to understand the code:
+
+        1.  In this task we are not passing Device objects into @aetest.test from @aetest.setup using aetest.loop.mark as it has been done in previous tasks: **aetest.loop.mark(self.error_logs, device=devices)**
+
+        2.  In this task we are passing dest_ip one-by-one from the dest_ips list: **aetest.loop.mark(self.ping, dest_ip=dest_ips)**
+
+        3.  To get a Device object we call the self.parent.parameters attribute: **nx = self.parent.parameters['testbed'].devices['nx-osv-1']**
+
+    The string returned by a ping operation is shown below. The field that must be extracted is ``0.00%``.:
+
+    .. code-block:: bash
+
+        5 packets transmitted, 5 packets received, 0.00% packet loss
+
+    To check this field, we use a regular expression, it extracts packet loss from the ping command's output. If the loss rate is less than 20% (to accommodate the potential first ping drop due to ARP resolution) then the test case should pass successfully:
+
+    .. code-block:: python
+        :emphasize-lines: 1, 4, 7, 10-11
+
+        nx = self.parent.parameters['testbed'].devices['nx-osv-1']
+
+        try:
+        result = nx.ping(dest_ip)
+        <…>
+        else:
+            m = re.search(r"(?P<rate>\d+)\.\d+% packet loss", result)
+            loss_rate = m.group('rate')
+
+            if int(loss_rate) < 20:
+                self.passed(f'Ping loss rate {loss_rate}%')
+            else:
+                self.failed('Ping loss rate {loss_rate}%')
+
+#. Exit Nano without saving, pressing:
+
+    .. code-block:: bash
+
+        Ctrl+X
+
+#. Execute the created test script and check the results section; all pings should succeed:
+
+    .. code-block:: bash
+
+        python task9_labpyats.py --testbed pyats_testbed.yaml
+
+    .. image:: images/passed-test-output.png
+        :width: 75%
+        :align: center
+
+|
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>
