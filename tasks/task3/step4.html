@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Step 4: Run PING to Verify Reachability &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script src="../../_static/jquery.js"></script>
+        <script src="../../_static/underscore.js"></script>
+        <script src="../../_static/doctools.js"></script>
+        <script src="../../_static/language_data.js"></script>
+        <script src="../../_static/clipboard.min.js"></script>
+        <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Task 4: TBD" href="../task4/index.html" />
+    <link rel="prev" title="Step 3: Verify the Routing Information using Parsers and pyATS Learn" href="step3.html" /> <link href="../../_static/style.css" rel="stylesheet" type="text/css"> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> LTRATO-2001<img src="../../_static/CL-2022.png" class="logo" alt="Logo"/>
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption"><span class="caption-text">Table of Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../introduction/index.html">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#learning-objetives">Learning Objetives</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../labaccess/index.html">Lab Access</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../labaccess/index.html#ip-addressing-and-access-information">IP Addressing and Access Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../labaccess/index.html#component-details">Component Details</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../labaccess/index.html#get-started">Get Started</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tasks</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../task1/index.html">Task 1: Exploring and Verification</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../task1/step1.html">Step 1: Explore Lab Structure</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task1/step2.html">Step 2: Verify pyATS Testbed File</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task1/step3.html">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 3: Verification</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="step1.html">Step 1: Verify Log Messages</a></li>
+<li class="toctree-l3"><a class="reference internal" href="step2.html">Step 2: Verify the Service Contracts Coverage</a></li>
+<li class="toctree-l3"><a class="reference internal" href="step3.html">Step 3: Verify the Routing Information using Parsers and pyATS Learn</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 4: Run PING to Verify Reachability</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../task4/index.html">Task 4: TBD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../task4/step1.html">Step 1: TBD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task4/step2.html">Step 2: TBD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task4/step3.html">Step 3: TBD</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../task5/index.html">Task 5: TBD</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../task5/step1.html">Step 1: TBD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task5/step2.html">Step 2: TBD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task5/step3.html">Step 3: TBD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task5/step4.html">Step 4: TBD</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../conclusions.html">Conclusions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../appendix.html">Appendix: Installing Pre-Requisites</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../appendix.html#install-docker">Install Docker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendix.html#install-git">Install Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendix.html#install-anx">Install anx</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../appendix.html#install-postman">Install Postman</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">LTRATO-2001</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="../index.html">Tasks</a> &raquo;</li>
+          <li><a href="index.html">Task 3: Verification</a> &raquo;</li>
+      <li>Step 4: Run PING to Verify Reachability</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/CiscoLive2021/HOLPRG-2002/blob/master/docs/tasks/task3/step4.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <div class="section" id="step-4-run-ping-to-verify-reachability">
+<h1>Step 4: Run PING to Verify Reachability<a class="headerlink" href="#step-4-run-ping-to-verify-reachability" title="Permalink to this headline">¶</a></h1>
+<p><strong>Value Proposition:</strong> In this testcase we must test reachability between devices (<strong>nx-osv-1</strong> and <strong>csr1000v-1</strong>), using the ping command.</p>
+<p>High-level logic of the test will be as follows:</p>
+<ul class="simple">
+<li><p>Connect to each device in the testbed.</p></li>
+<li><p>Find links between nx-osv-1 and csr1000v-1.</p></li>
+<li><p>Collect IP addresses from both ends of these links.</p></li>
+<li><p>Run the ping commands from nx-osv-1 for IP addresses, discovered in the previous step.</p></li>
+</ul>
+<ol class="arabic">
+<li><p>Let’s connect to pyATS shell and check our idea:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Input the following code into pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;csr1000v-1&#39;</span><span class="p">]</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>pyATS has a <strong>find_links(device_name)</strong> method to find all the links between two devices in the topology. Let’s find the links between <strong>csr1000v-1</strong> and <strong>nx-osv-1</strong>.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nx</span><span class="o">.</span><span class="n">find_links</span><span class="p">(</span><span class="n">csr</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Observe the output:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>&lt;Link object <span class="s1">&#39;csr1000v-1-to-nx-osv-1&#39;</span> at 0x7f445194b050&gt;,
+&lt;Link object <span class="s1">&#39;csr1000v-1-to-nx-osv-1#1&#39;</span> at 0x7f445194b150&gt;,
+&lt;Link object <span class="s1">&#39;flat&#39;</span> at 0x7f445194b410&gt;<span class="o">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Exit the pyATS shell using the exit command.</p>
+<blockquote>
+<div><p>Before studying the code and running the next script, let’s dive into the details on how information about a topology is stored in a testbed object (see the illustration that follows for a graphical representation of the explanation).</p>
+<p>Things to know about the structure of the testbed object (created from the testbed YAML file specified: testbed.yaml):</p>
+<ul class="simple">
+<li><p>The pyATS <strong>Testbed</strong> object contains the Python dictionary <strong>devices</strong>.</p></li>
+<li><p>Elements of the <strong>devices</strong> dictionary are the <strong>Device</strong> objects.</p></li>
+<li><p>Each object in the <strong>devices</strong> dictionary stores dictionary <strong>interfaces</strong> (contains <strong>interface</strong> objects).</p></li>
+<li><p>Each <strong>interface</strong> object stores the link object.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/testbed_object_structure.png"><img alt="../../_images/testbed_object_structure.png" class="align-center" src="../../_images/testbed_object_structure.png" style="width: 75%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<ul class="simple">
+<li><p>The <strong>Testbed</strong> object is the top container object, containing all the testbed devices and all the subsequent information that is generic to the    testbed.</p></li>
+<li><p><strong>Device</strong> objects represent physical and/or virtual hardware in a testbed topology.</p></li>
+<li><p><strong>Interface</strong> objects represent a physical/virtual interface that connects to a link of some sort (for example, Ethernet, ATM, Loopback, and so on).</p></li>
+<li><p><strong>Link</strong> objects represent the connection (wire) between two or more interfaces within a testbed topology.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/links-representation.png"><img alt="../../_images/links-representation.png" class="align-center" src="../../_images/links-representation.png" style="width: 75%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>Let’s check the structure depicted above using our topology. We will find all the links connected between <strong>nx-osv-1</strong> and <strong>csr1000v-1</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We can get the value of an attribute for each object. For example, we can get a link to which an interface object belongs by calling a <strong>link</strong> attribute. We can also reference interfaces which belong to this link, by calling the <strong>interfaces</strong> attribute in step 6 (see code below).</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Paste the following snippet to pyATS console:</p>
+<blockquote>
+<div><ul>
+<li><p>Place the following iPython command in the beginning of code:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%cpaste
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Copy and paste the code into the pyATS console:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;csr1000v-1&#39;</span><span class="p">]</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="p">]</span>
+<span class="n">links</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">find_links</span><span class="p">(</span><span class="n">csr</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;#</span><span class="si">{link}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="hll"><span class="k">for</span> <span class="n">link_iface</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
+</span>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;##</span><span class="si">{link_iface}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;###link_iface.ipv4 = </span><span class="si">{link_iface.ipv4}</span><span class="s1">, {type(link_iface.ipv4)}&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;###link_iface.ipv4.ip = </span><span class="si">{link_iface.ipv4.ip}</span><span class="s1">, {type(link_iface.ipv4.ip)}&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>End the code with <code class="docutils literal notranslate"><span class="pre">--</span></code>.</p></li>
+</ul>
+<p>Refer to the command output:</p>
+<ul class="simple">
+<li><p><strong>#Link csr1000v-1-to-nx-osv-1:</strong> represents interfaces of all devices connected to the first link between csr1000v-1 and nx-osv-1.</p></li>
+<li><p><strong>#Link flat:</strong> represents interfaces of all devices (asav-1, csr1000v-1, nx-osv-1) connected to a management network.</p></li>
+<li><p><strong>#Link csr1000v-1-to-nx-osv-1#1:</strong> represents interfaces of all devices connected to the second link between csr1000v-1 and nx-osv-1.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/links-output.png"><img alt="../../_images/links-output.png" class="align-center" src="../../_images/links-output.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Open the file task9_labpyats.py in Nano editor:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task9_labpyats.py
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Review the content of the <strong>PingTestcase</strong> test case, look at the <strong>def setup(self)</strong> function. Code in this function follows the logic used in the previous step:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Get all the links between <strong>nx-osv-1</strong> and <strong>csr1000v-1</strong> (nx.find_links(csr).</p></li>
+<li><p>Get interfaces for each link (<strong>for iface in links.interfaces</strong>) and append its IPv4 address (<strong>iface.ipv4.ip</strong>) into list <strong>dest_ips</strong>, to use them further in ping commands.</p></li>
+</ul>
+<p>To exclude management IP addressing space, there is a check whether an IP address on a link is from a management address space (if dest_ip not in mgmt_net). If an IP address is from a management IP address, it’s not appended to the list dest_ips.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that the IP address in the <strong>link_iface.ipv4.ip</strong> object is of the IPv4Address type so we can check whether it overlaps with IPv4Network without any conversion of type (hence <strong>if dest_ip not in mgmt_net</strong> is used).</p>
+</div>
+<p>The code of the <strong>setup(self)</strong> function is shown below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Management network IP range</span>
+<span class="n">mgmt_net</span> <span class="o">=</span> <span class="n">IPv4Network</span><span class="p">(</span><span class="s1">&#39;198.18.1.0/24&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find links between NX-OS device and CSR1000v</span>
+<span class="n">links</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">find_links</span><span class="p">(</span><span class="n">csr</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
+    <span class="c1"># process each link between devices</span>
+
+    <span class="k">for</span> <span class="n">link_iface</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
+        <span class="c1"># process each interface (side) of the</span>
+        <span class="c1"># link and extract IP address from it</span>
+
+<span class="hll">        <span class="n">dest_ip</span> <span class="o">=</span> <span class="n">link_iface</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">ip</span>
+</span>
+        <span class="c1"># Check that destination IP is not from management IP range</span>
+<span class="hll">        <span class="k">if</span> <span class="n">dest_ip</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">mgmt_net</span><span class="p">:</span>
+</span>            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{link_iface.name}</span><span class="s1">:</span><span class="si">{link_iface.ipv4.ip}</span><span class="s1">&#39;</span><span class="p">)</span>
+            <span class="n">dest_ips</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">link_iface</span><span class="o">.</span><span class="n">ipv4</span><span class="o">.</span><span class="n">ip</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Skipping link_iface </span><span class="si">{link_iface.name}</span><span class="s1"> &#39;</span>
+                     <span class="sa">f</span><span class="s1">&#39;from management subnet&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <strong>ping</strong> command for each IPv4 address of both ends of the links between <strong>nx-osv-1</strong> and <strong>csr1000v-1</strong> is executed in the function <strong>def ping(self, dest_ip)</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The following information is important to understand the code:</p>
+<ol class="arabic simple">
+<li><p>In this task we are not passing Device objects into &#64;aetest.test from &#64;aetest.setup using aetest.loop.mark as it has been done in previous tasks: <strong>aetest.loop.mark(self.error_logs, device=devices)</strong></p></li>
+<li><p>In this task we are passing dest_ip one-by-one from the dest_ips list: <strong>aetest.loop.mark(self.ping, dest_ip=dest_ips)</strong></p></li>
+<li><p>To get a Device object we call the self.parent.parameters attribute: <strong>nx = self.parent.parameters[‘testbed’].devices[‘nx-osv-1’]</strong></p></li>
+</ol>
+</div>
+<p>The string returned by a ping operation is shown below. The field that must be extracted is <code class="docutils literal notranslate"><span class="pre">0.00%</span></code>.:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">5</span> packets transmitted, <span class="m">5</span> packets received, <span class="m">0</span>.00% packet loss
+</pre></div>
+</div>
+<p>To check this field, we use a regular expression, it extracts packet loss from the ping command’s output. If the loss rate is less than 20% (to accommodate the potential first ping drop due to ARP resolution) then the test case should pass successfully:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">nx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;testbed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="p">]</span>
+</span>
+<span class="k">try</span><span class="p">:</span>
+<span class="hll"><span class="n">result</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">ping</span><span class="p">(</span><span class="n">dest_ip</span><span class="p">)</span>
+</span><span class="c1"># &lt;…&gt;</span>
+<span class="k">else</span><span class="p">:</span>
+<span class="hll">    <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;rate&gt;\d+)\.\d+% packet loss&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
+</span>    <span class="n">loss_rate</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">)</span>
+
+<span class="hll">    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">loss_rate</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+</span><span class="hll">        <span class="bp">self</span><span class="o">.</span><span class="n">passed</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ping loss rate </span><span class="si">{loss_rate}</span><span class="s1">%&#39;</span><span class="p">)</span>
+</span>    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="s1">&#39;Ping loss rate </span><span class="si">{loss_rate}</span><span class="s1">%&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Exit Nano without saving, pressing:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl+X
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Execute the created test script and check the results section; all pings should succeed:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task9_labpyats.py --testbed pyats_testbed.yaml
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/passed-test-output.png"><img alt="../../_images/passed-test-output.png" class="align-center" src="../../_images/passed-test-output.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+</ol>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
+</div>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="step3.html" class="btn btn-neutral float-left" title="Step 3: Verify the Routing Information using Parsers and pyATS Learn" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../task4/index.html" class="btn btn-neutral float-right" title="Task 4: TBD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright Cisco Systems, Inc. 2020.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
