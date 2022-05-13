@@ -71,8 +71,8 @@
 <li class="toctree-l3"><a class="reference internal" href="step4.html">Step 4: Run PING to Verify Reachability</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../task4/index.html">Task 4: TBD</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../task4/step1.html">Step 1: TBD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../task4/index.html">Task 4: Results</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../task4/step1.html">Step 1: Show the Results of Tests in a Browser</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../task4/step2.html">Step 2: TBD</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../task4/step3.html">Step 3: TBD</a></li>
 </ul>
@@ -167,40 +167,40 @@
 </li>
 <li><p>Observe the output in pyATS shell:</p>
 <blockquote>
-<div><div class="highlight-json notranslate"><div class="highlight"><pre><span></span>{
-<span class="hll">    &quot;vrf&quot;: {&quot;default&quot;: {&quot;address_family&quot;: {&quot;ipv4&quot;: {&quot;routes&quot;: {
-</span>                        &quot;10.0.0.12/30&quot;: {
-                            &quot;active&quot;: True,
-                            &quot;next_hop&quot;: {
-                                &quot;outgoing_interface&quot;: {
-                                    &quot;GigabitEthernet2&quot;: {
-                                        &quot;outgoing_interface&quot;: &quot;GigabitEthernet2&quot;
-                                    }
-                                }
-                            },
-                            &quot;route&quot;: &quot;10.0.0.12/30&quot;,
-                            &quot;source_protocol&quot;: &quot;connected&quot;,
-                            &quot;source_protocol_codes&quot;: &quot;C&quot;
-                        },
-<span class="hll">                        &quot;10.0.0.13/32&quot;: {
-</span>                            &quot;active&quot;: True,
-                            &quot;next_hop&quot;: {
-                                &quot;outgoing_interface&quot;: {
-                                    &quot;GigabitEthernet2&quot;: {
-                                        &quot;outgoing_interface&quot;: &quot;GigabitEthernet2&quot;
-                                    }
-                                }
-                            },
-                            &quot;route&quot;: &quot;10.0.0.13/32&quot;,
-                            &quot;source_protocol&quot;: &quot;local&quot;,
-                            &quot;source_protocol_codes&quot;: &quot;L&quot;
-                        }
-                    }
-                }
-            }
-        }
-    }
-}
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
+<span class="hll">    <span class="s2">&quot;vrf&quot;</span>: <span class="o">{</span><span class="s2">&quot;default&quot;</span>: <span class="o">{</span><span class="s2">&quot;address_family&quot;</span>: <span class="o">{</span><span class="s2">&quot;ipv4&quot;</span>: <span class="o">{</span><span class="s2">&quot;routes&quot;</span>: <span class="o">{</span>
+</span>                        <span class="s2">&quot;10.0.0.12/30&quot;</span>: <span class="o">{</span>
+                            <span class="s2">&quot;active&quot;</span>: True,
+                            <span class="s2">&quot;next_hop&quot;</span>: <span class="o">{</span>
+                                <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="o">{</span>
+                                    <span class="s2">&quot;GigabitEthernet2&quot;</span>: <span class="o">{</span>
+                                        <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="s2">&quot;GigabitEthernet2&quot;</span>
+                                    <span class="o">}</span>
+                                <span class="o">}</span>
+                            <span class="o">}</span>,
+                            <span class="s2">&quot;route&quot;</span>: <span class="s2">&quot;10.0.0.12/30&quot;</span>,
+                            <span class="s2">&quot;source_protocol&quot;</span>: <span class="s2">&quot;connected&quot;</span>,
+                            <span class="s2">&quot;source_protocol_codes&quot;</span>: <span class="s2">&quot;C&quot;</span>
+                        <span class="o">}</span>,
+<span class="hll">                        <span class="s2">&quot;10.0.0.13/32&quot;</span>: <span class="o">{</span>
+</span>                            <span class="s2">&quot;active&quot;</span>: True,
+                            <span class="s2">&quot;next_hop&quot;</span>: <span class="o">{</span>
+                                <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="o">{</span>
+                                    <span class="s2">&quot;GigabitEthernet2&quot;</span>: <span class="o">{</span>
+                                        <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="s2">&quot;GigabitEthernet2&quot;</span>
+                                    <span class="o">}</span>
+                                <span class="o">}</span>
+                            <span class="o">}</span>,
+                            <span class="s2">&quot;route&quot;</span>: <span class="s2">&quot;10.0.0.13/32&quot;</span>,
+                            <span class="s2">&quot;source_protocol&quot;</span>: <span class="s2">&quot;local&quot;</span>,
+                            <span class="s2">&quot;source_protocol_codes&quot;</span>: <span class="s2">&quot;L&quot;</span>
+                        <span class="o">}</span>
+                    <span class="o">}</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
 &lt;...&gt;
 </pre></div>
 </div>

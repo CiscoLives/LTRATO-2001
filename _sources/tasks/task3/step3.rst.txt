@@ -44,7 +44,7 @@ High-level logic of the test will be as follows:
 
 #. Observe the output in pyATS shell:
 
-    .. code-block:: json
+    .. code-block:: bash
         :emphasize-lines: 2, 16
 
         {
