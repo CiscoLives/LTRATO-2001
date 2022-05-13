@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Appendix: Installing Pre-Requisites &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <title>Appendix: A &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
@@ -78,11 +78,8 @@
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="conclusions.html">Conclusions</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix: Installing Pre-Requisites</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#install-docker">Install Docker</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-git">Install Git</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-anx">Install anx</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#install-postman">Install Postman</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Appendix: A</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#links">Links</a></li>
 </ul>
 </li>
 </ul>
@@ -101,7 +98,7 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
-      <li>Appendix: Installing Pre-Requisites</li>
+      <li>Appendix: A</li>
       <li class="wy-breadcrumbs-aside">
               <a href="https://github.com/CiscoLive2021/HOLPRG-2002/blob/master/docs/appendix.rst" class="fa fa-github"> Edit on GitHub</a>
       </li>
@@ -111,86 +108,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="appendix-installing-pre-requisites">
-<h1>Appendix: Installing Pre-Requisites<a class="headerlink" href="#appendix-installing-pre-requisites" title="Permalink to this headline">¶</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The requirements are already installed in your POD, you <code class="docutils literal notranslate"><span class="pre">DON'T</span></code> need to install it.</p>
-</div>
-<div class="section" id="install-docker">
-<h2>Install Docker<a class="headerlink" href="#install-docker" title="Permalink to this headline">¶</a></h2>
-<p>As part of requirements Docker is needed, you can install it using the following commands:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-
-sudo yum check-update
-curl -fsSL https://get.docker.com/ <span class="p">|</span> sh
-sudo systemctl start docker
-sudo systemctl <span class="nb">enable</span> docker
-sudo usermod -aG docker <span class="k">$(</span>whoami<span class="k">)</span>
-</pre></div>
-</div>
-<p>Install docker desktop</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo curl -L <span class="s2">&quot;https://github.com/docker/compose/releases/download/1.28.5/docker-compose-</span><span class="k">$(</span>uname -s<span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname -m<span class="k">)</span><span class="s2">&quot;</span> -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-</pre></div>
-</div>
-</div>
-<div class="section" id="install-git">
-<h2>Install Git<a class="headerlink" href="#install-git" title="Permalink to this headline">¶</a></h2>
-<p>Install Git using the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo yum install git
-</pre></div>
-</div>
-</div>
-<div class="section" id="install-anx">
-<h2>Install anx<a class="headerlink" href="#install-anx" title="Permalink to this headline">¶</a></h2>
-<p>Install ANX using the following command:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>docker run --name netconf-exlorer -d -p <span class="m">9269</span>:8080 userlerueda/anx
-</pre></div>
-</div>
-</div>
-<div class="section" id="install-postman">
-<h2>Install Postman<a class="headerlink" href="#install-postman" title="Permalink to this headline">¶</a></h2>
-<p>Install Postman using the following scripts:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="ch">#!/bin/bash</span>
-
-<span class="nb">cd</span> /tmp <span class="o">||</span> <span class="nb">exit</span>
-<span class="nb">echo</span> <span class="s2">&quot;Downloading Postman ...&quot;</span>
-wget -q https://dl.pstmn.io/download/latest/linux?arch<span class="o">=</span><span class="m">64</span> -O postman.tar.gz
-tar -xzf postman.tar.gz
-rm postman.tar.gz
-
-<span class="nb">echo</span> <span class="s2">&quot;Installing to opt...&quot;</span>
-<span class="k">if</span> <span class="o">[</span> -d <span class="s2">&quot;/opt/Postman&quot;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-    sudo rm -rf /opt/Postman
-<span class="k">fi</span>
-sudo mv Postman /opt/Postman
-
-<span class="nb">echo</span> <span class="s2">&quot;Creating symbolic link...&quot;</span>
-<span class="k">if</span> <span class="o">[</span> -L <span class="s2">&quot;/usr/bin/postman&quot;</span> <span class="o">]</span><span class="p">;</span><span class="k">then</span>
-    sudo rm -f /usr/bin/postman
-<span class="k">fi</span>
-sudo ln -s /opt/Postman/Postman /usr/bin/postman
-
-<span class="nb">echo</span> <span class="s2">&quot;Installation completed successfully.&quot;</span>
-<span class="nb">echo</span> <span class="s2">&quot;You can use Postman!&quot;</span>
-</pre></div>
-</div>
-<p>Add potsman icon to desktop:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat &gt; ~/Desktop/postman.desktop <span class="s">&lt;&lt;EOL</span>
-<span class="s">[Desktop Entry]</span>
-<span class="s">Encoding=UTF-8</span>
-<span class="s">Name=Postman</span>
-<span class="s">Exec=postman</span>
-<span class="s">Icon=/opt/Postman/resources/app/assets/icon.png</span>
-<span class="s">Terminal=false</span>
-<span class="s">Type=Application</span>
-<span class="s">Categories=Development;</span>
-<span class="s">EOL</span>
-</pre></div>
-</div>
-<p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Ovesnel Mas Lara &lt;<a class="reference external" href="mailto:omaslara&#37;&#52;&#48;cisco&#46;com">omaslara<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
+  <div class="section" id="appendix-a">
+<h1>Appendix: A<a class="headerlink" href="#appendix-a" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="links">
+<h2>Links<a class="headerlink" href="#links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/CiscoLive2022/LTRATO-2001">GitHub repository</a></p></li>
+<li><p><a class="reference external" href="https://developer.cisco.com/pyats/">pyATS Page</a></p></li>
+</ul>
+<p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 </div>
 
