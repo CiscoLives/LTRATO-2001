@@ -68,7 +68,7 @@ html_logo = "images/CL-2022.png"
 html_static_path = ["_static"]
 
 html_context = {
-    "display_github": True,
+    "display_github": False,
     "github_user": "CiscoLive2021",
     "github_repo": "HOLPRG-2002",
     "github_version": "master/docs/",
