@@ -40,13 +40,13 @@ The following pyATS methods would be used in this task:
 
     .. code-block:: bash
 
-        In [1]: testbed.devices
+        testbed.devices
 
 #. The output of the command should contain the following:
 
     .. code-block:: bash
 
-        Out[1]: TopologyDict({'asav-1': <Device asav-1 at 0x7f5342e17210>, 'csr1000v-1': <Device csr1000v-1 at 0x7f5342deced0>, 'nx-osv-1': <Device nx-osv-1 at 0x7f5341998890>})
+        TopologyDict({'asav-1': <Device asav-1 at 0x7f5342e17210>, 'csr1000v-1': <Device csr1000v-1 at 0x7f5342deced0>, 'nx-osv-1': <Device nx-osv-1 at 0x7f5341998890>})
 
 #. Create variables (Python objects) to call devices easily (**nx - 'nx-osv-1'** device, **asa -'asav-1'** device):
 
