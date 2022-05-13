@@ -7,10 +7,9 @@ This document is intended for use by attendees of the Cisco Live 2022 who are ta
 Prerequisites
 =============
 
-- Basic programability experience
-- Basic NX-OS, ASA and CRS commands
-- Basic GitHub experience
-- Have Cisco AnyConnect® installed 
+- Basic Python understanding.
+- Basic understanding of how to view and make changes to configuration on Cisco devices through CLI.
+- Have Cisco AnyConnect® installed.
 
 
 Learning Objetives
@@ -22,9 +21,9 @@ During this lab, we will show you real-world examples that you can use to start 
 
 Upon successful completion of this lab, you will be able to:
 
-#. Create a testbed file.
-#. Understand the main capabilities of pyATS suites.
-#. Start writing automated tests for your network.
+#. Create a pyATS testbed file.
+#. Understand the main capabilities and components of the pyATS suite.
+#. Write scripts that can automate testing for specific network topology.
 
 
 Throughout this lab you will work with and learn the following features and concepts:
