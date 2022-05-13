@@ -9,4 +9,3 @@ Follow the next steps to apply portal customizations such as CSS, Icons, Buttons
 
    step1
    step2
-   step3
