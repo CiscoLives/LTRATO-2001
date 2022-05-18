@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step 2: Writting Test Script &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+  <title>Step 2: Writing Test Script &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 2: Writting Initial Scripts</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -101,7 +101,7 @@
       <li><a href="../../index.html" class="icon icon-home"></a> &raquo;</li>
           <li><a href="../index.html">Tasks</a> &raquo;</li>
           <li><a href="index.html">Task 2: Writting Initial Scripts</a> &raquo;</li>
-      <li>Step 2: Writting Test Script</li>
+      <li>Step 2: Writing Test Script</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/tasks/task2/step2.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -111,21 +111,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="step-2-writting-test-script">
-<h1>Step 2: Writting Test Script<a class="headerlink" href="#step-2-writting-test-script" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> Now let’s write our first test script on Python using the pyATS library. Our test script will connect to all the devices in the testbed and print the results of the connection. If the connections to all the devices are successful, then the test will pass, else it will fail. Using this simple test script, we will learn the structure of the pyATS test script file.</p>
-<p>The pyATS test script is a file with the Python code which uses the pyATS library.
+  <div class="section" id="step-2-writing-test-script">
+<h1>Step 2: Writing Test Script<a class="headerlink" href="#step-2-writing-test-script" title="Permalink to this headline">¶</a></h1>
+<p><strong>Value Proposition:</strong> Now we will write our first test script on Python using the pyATS library. Our test script will connect to all the devices in the testbed and print the results of the connection. If the connections to all the devices are successful, then the test will pass; else, it will fail. Using this simple test script, we will learn the structure of the pyATS test script file.</p>
+<p>The pyATS test script is a file in Python code which uses the pyATS library.
 The structure of the pyATS test script is modular and straightforward.
 Each test script is written in a Python file and split into three major sections (Python classes) – see the illustration below for a graphical representation:</p>
 <ul class="simple">
-<li><p><strong>Common Setup:</strong> The first section in the test script, run at the beginning. It performs all the “common” setups required for the script.</p></li>
+<li><p><strong>Common Setup:</strong> The first section of the test script, runnned at the beginning. It performs all the “common” setups required for the script.</p></li>
 <li><p><strong>Testcase(s):</strong> A self-contained individual unit of testing. Each testcase is independent of the other testcases.</p></li>
-<li><p><strong>Common Cleanup:</strong> The last section in the test script, performs all the “common” cleanups at the end of execution.</p></li>
+<li><p><strong>Common Cleanup:</strong> The last section in the test script. It performs all the “common” cleanups at the end of execution.</p></li>
 </ul>
 <p>Each of these sections is further broken down into smaller subsections (Python methods of the class).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Both Common Setup and Common Cleanup could be only one in a script, whereas there might be multiple test cases in one test script.</p>
+<p>There can be only one Common Setup and only one Common in a script, whereas there might be multiple test cases in one test script.</p>
 </div>
 <a class="reference internal image-reference" href="../../_images/test-script-structure.png"><img alt="../../_images/test-script-structure.png" class="align-center" src="../../_images/test-script-structure.png" style="width: 75%;" /></a>
 <ol class="arabic">
@@ -136,7 +136,7 @@ Each test script is written in a Python file and split into three major sections
 </div>
 </div></blockquote>
 </li>
-<li><p>Pay special attention to the following part of the code. Whereas it’s not related to only this task, it will help you understand the logging capabilities of pyATS that would be used in other tasks in this lab:</p>
+<li><p>Pay special attention to the following part of the code. Whereas it’s not only related to this task, it will help you understand the logging capabilities of pyATS that will be used in other tasks during this lab:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import of pyATS logging banner</span>
 <span class="kn">from</span> <span class="nn">pyats.log.utils</span> <span class="kn">import</span> <span class="n">banner</span>
@@ -168,13 +168,13 @@ Each test script is written in a Python file and split into three major sections
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The pyATS logging banner itself does not perform logging, and instead only performs style formatting of its input messages. Hence, the <strong>log.info(banner(“logging message”))</strong> construction is used in the code for logging.
+<p>The pyATS logging banner itself does not perform logging, and instead it only performs style formatting of its input messages. Hence, the <strong>log.info(banner(“logging message”))</strong> construction is used in the code for logging.
 Since the banner is logged with INFO logging level, it’s required to set logging level up to INFO (default is WARNING):
 <strong>log.setLevel(logging.INFO)</strong></p>
 </div>
 </div></blockquote>
 </li>
-<li><p>Let’s look at the main contents of this example. Python class <strong>common_setup</strong> which is inherited from <strong>aetest.CommonSetup</strong> represents the major section “Common Setup” (see the following illustration).  The Python class <strong>common_setup</strong> is where initializations and preparations before the actual script’s testcases should be performed. For this reason, code in class <strong>common_setup</strong> is always run first, before all the testcases. Refer to the description of the code of this Python class shown below:</p>
+<li><p>Let’s look at the main contents of this example. Python class <strong>common_setup</strong> which is inherited from <strong>aetest.CommonSetup</strong> represents the major section “Common Setup” (see the following illustration).  The Python class <strong>common_setup</strong> is where initializations and preparations before the actual script’s testcases should be performed. For this reason, code in class <strong>common_setup</strong> is always runnned first, before all the testcases. Refer to the description of the code of this Python class shown below:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">common_setup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
 <span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
@@ -194,7 +194,7 @@ Since the banner is logged with INFO logging level, it’s required to set loggi
     <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The following code is used to load testbed file from filename specified as command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies name of object that would represent testbed file in code):</p>
+<p>The following code is used to load a testbed file from filename specified as command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies name of object that would represent the testbed file in code):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="c1"># Load testbed file which is passed as command-line argument</span>
@@ -222,7 +222,7 @@ Since the banner is logged with INFO logging level, it’s required to set loggi
 </div>
 </div></blockquote>
 </li>
-<li><p>Upon finishing the test script, pyATS generates a report of Success/Failed testcases, the <strong>common_setup</strong> section is also treated as the testcase with subsection <strong>establish_connections</strong>. Since all the devices are reachable, the testcases should finish successfully (PASSED). Refer to the following illustration.</p>
+<li><p>Upon finishing the test script, pyATS generates a report of Success/Failed testcases. The <strong>common_setup</strong> section is also treated as the testcase with subsection <strong>establish_connections</strong>. Since all the devices are reachable, the testcases should be successfull (PASSED). Refer to the following illustration.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/step7-output.png"><img alt="../../_images/step7-output.png" class="align-center" src="../../_images/step7-output.png" style="width: 75%;" /></a>
 </div></blockquote>

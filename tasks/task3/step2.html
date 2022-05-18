@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 3: Verification</a><ul class="current">
@@ -113,11 +113,11 @@
              
   <div class="section" id="step-2-verify-the-service-contracts-coverage">
 <h1>Step 2: Verify the Service Contracts Coverage<a class="headerlink" href="#step-2-verify-the-service-contracts-coverage" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this test case, we have the list of devices’ serial numbers, covered by the service contracts, and we must verify that all the devices in the testbed are covered by the service contracts. This ensures you will be able to open a TAC case if something goes wrong when the network is in production.</p>
+<p><strong>Value Proposition:</strong> In this test case, we have the list of the devices’ serial numbers, covered by the service contracts, and we must verify that all the devices in the testbed are covered by the service contracts. This ensures you will be able to open a TAC case if something goes wrong when the network is in production.</p>
 <p>High-level logic of the test will be as follows:
 - Connect to each device in the testbed.
 - Parse the output of show inventory to find the device’s serial number (SN).
-- Verify whether SN is in the list, covered by the service contracts.</p>
+- Verify whether the SN is in the list, covered by the service contracts.</p>
 <ol class="arabic">
 <li><p>Let’s use the pyATS shell to check our idea.</p>
 <blockquote>
@@ -138,7 +138,7 @@ nx.connect<span class="o">()</span>
 </div>
 </div></blockquote>
 </li>
-<li><p>pyATS uses the <strong>parse</strong> method to collect the output of different show commands and parses it into a structured format (Python dictionary). Let’s collect the output of ‘show inventory’ commands and parse it, using the <strong>parse</strong> method.</p>
+<li><p>pyATS uses the <strong>parse</strong> method to collect the output of different show commands and parses it into a structured format (Python dictionary). Let’s collect the output of ‘show inventory’ commands and parse it using the <strong>parse</strong> method.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="nv">out1</span> <span class="o">=</span> csr.parse<span class="o">(</span><span class="s1">&#39;show inventory&#39;</span><span class="o">)</span>
 <span class="nv">out2</span> <span class="o">=</span> asa.parse<span class="o">(</span><span class="s1">&#39;show inventory&#39;</span><span class="o">)</span>
@@ -256,7 +256,7 @@ nx.connect<span class="o">()</span>
 </div>
 </div></blockquote>
 </li>
-<li><p>Review the content of the <strong>Inventory</strong> test case, note that we use the data structure learned from pyATS shell in the previous step, to extract a serial number from the output of <strong>show inventory</strong>:</p>
+<li><p>Review the content of the <strong>Inventory</strong> test case. Note that we use the data structure learned from pyATS shell in the previous step to extract a serial number from the output of <strong>show inventory</strong>:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
 <span class="k">def</span> <span class="nf">inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">device</span><span class="p">):</span>
@@ -274,7 +274,7 @@ nx.connect<span class="o">()</span>
 <span class="hll">    <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">out2</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;serial_number&#39;</span><span class="p">]</span>
 </span></pre></div>
 </div>
-<p>Serial number shown below is provided for example and would be different on equipment in a lab.</p>
+<p>The serial number shown below is provided as an example. It would be different on the equipment in a lab.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">elif</span> <span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;asa&#39;</span><span class="p">:</span>
     <span class="n">out3</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
 <span class="hll">    <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">out3</span><span class="p">[</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;sn&#39;</span><span class="p">]</span>
@@ -299,7 +299,7 @@ nx.connect<span class="o">()</span>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>All the tests have failed, since we have serial numbers from a different network in our contract SNs list at the beginning of <strong>task7_labpyats.py</strong> file.</p>
+<p>All the tests have failed since we have serial numbers from a different network in our contract SNs list at the beginning of <strong>task7_labpyats.py</strong> file.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">contract_sn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;9AQHSSAS8AU&#39;</span><span class="p">,</span> <span class="s1">&#39;9Q3YV06WJ71&#39;</span><span class="p">,</span> <span class="s1">&#39;9IFUH4GPSGL&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -313,7 +313,7 @@ nx.connect<span class="o">()</span>
 </div></blockquote>
 </li>
 <li><p>Replace the serial numbers in the list <strong>contract_sn</strong> with SNs from our testbed’s equipment.</p></li>
-<li><p>When you finish, save changes to file task7_labpyats.py. By pressing:</p>
+<li><p>When you finish, save changes to file task7_labpyats.py by pressing:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + O
 File Name to Write: task7_labpyats.py
@@ -322,7 +322,7 @@ Hit <span class="o">[</span>Enter<span class="o">]</span>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Correct SNs from testbed can obtained also from previous script’s output:</p>
+<p>Correct SNs from testbed can be obtained also from previous script’s output:</p>
 <p>2020-01-23T13:20:24: %AETEST-ERROR:Failed reason: 9AQHSSAS8AU is not covered by contract</p>
 <p>&lt;…&gt;</p>
 <p>2020-01-23T13:20:25: %AETEST-ERROR:Failed reason: 9Q3YV06WJ71 is not covered by contract</p>
@@ -331,7 +331,7 @@ Hit <span class="o">[</span>Enter<span class="o">]</span>
 </div>
 </div></blockquote>
 </li>
-<li><p>Еxecute the changed test script once again:</p>
+<li><p>Еxecute the modified test script once again:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task7_labpyats.py --testbed pyats_testbed.yaml
 </pre></div>

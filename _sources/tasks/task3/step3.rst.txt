@@ -3,7 +3,7 @@ Step 3: Verify the Routing Information using Parsers and pyATS Learn
 
 **Value Proposition:** In this test case, we have the list of critical routes (usually this is a device’s loopback interface) and we must check that these loopbacks are installed in the routing information base (RIB) of all the devices in the testbed.
 
-High-level logic of the test will be as follows:
+The high-level logic of the test will be as follows:
 
 - Connect to each device in the testbed.
 - Learn routing information from RIB of the devices.
@@ -26,7 +26,7 @@ High-level logic of the test will be as follows:
         asa.connect()
         nx.connect()
 
-    pyATS uses the **learn** method to collect the set of show commands output for a feature configured on the device, to get its snapshot and store it into a structured format (Python dictionary).
+    pyATS uses the **learn** method to collect the set of show commands output for a feature configured on the device, in order to get its snapshot and store it into a structured format (Python dictionary).
 
     .. code-block:: python
 
@@ -103,7 +103,7 @@ High-level logic of the test will be as follows:
 
         nano task8_labpyats.py
 
-#. Review the content of **routes** testcase, note that we use the path to routes in RIB from the previous step to get the routing information. First we'll get a snapshot of the **routing** feature.
+#. Review the content of **routes** testcase. Note that we use the path to routes in RIB from the previous step to get the routing information. First, we'll get a snapshot of the **routing** feature.
 
     .. code-block:: python
         :emphasize-lines: 9
@@ -119,7 +119,7 @@ High-level logic of the test will be as follows:
                     output = device.learn('routing')
                     rib = <<replace me>>  # noqa: E999
 
-8. Then we compare the loopback routes stored in **golden_routes list**, with the content of rib. If the loopback route is not found, then we force the test case to fail.
+8. Then we compare the loopback routes stored in **golden_routes list** with the content of rib. If the loopback route is not found, then we force the test case to fail.
 
     .. code-block:: python
 
@@ -186,7 +186,7 @@ High-level logic of the test will be as follows:
         # After inserting the rib variable:
         rib = output.info['vrf']['default']['address_family']['ipv4']['routes']
 
-#. When you finish, save changes to file **task8_labpyats.py**. By pressing
+#. When you finish, save changes to file **task8_labpyats.py** by pressing
 
     .. code-block:: bash
 

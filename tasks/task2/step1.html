@@ -20,7 +20,7 @@
     <script src="../../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="Step 2: Writting Test Script" href="step2.html" />
+    <link rel="next" title="Step 2: Writing Test Script" href="step2.html" />
     <link rel="prev" title="Task 2: Writting Initial Scripts" href="index.html" /> <link href="../../_static/style.css" rel="stylesheet" type="text/css"> 
 </head>
 
@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 2: Writting Initial Scripts</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -113,7 +113,7 @@
              
   <div class="section" id="step-1-collect-show-commands">
 <h1>Step 1: Collect Show Commands<a class="headerlink" href="#step-1-collect-show-commands" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this task, we will use the knowledge we have gained from the previous task to write a script that collects <strong>show inventory</strong> command from each device in the testbed. The output of this command will be saved in the file, created by the script collected_task4. These outputs can be used later if you want to compare the future state of the network with the current one. Since it’s required to collect outputs from all the devices in the testbed, in this task we will work with the <strong>testbed.devices</strong> object, and iterate over all the devices contained in this object to collect an output of the required commands from each device.</p>
+<p><strong>Value Proposition:</strong> In this task, we will use the knowledge we have gained from the previous task to write a script that collects <strong>show inventory</strong> command from each device in the testbed. The output of this command will be saved in the file created by the script collected_task4. These outputs can be used later if you want to compare the future state of the network with the current one. Since it’s required to collect outputs from all the devices in the testbed, in this task we will work with the <strong>testbed.devices</strong> object, and iterate over all the devices contained in this object to collect an output of the required commands from each device.</p>
 <ol class="arabic">
 <li><p>Let’s connect to pyATS and check parts of the code before running the final script. In the beginning, we will check the structure of <strong>testbed.devices</strong> object.</p>
 <blockquote>
@@ -134,7 +134,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>In this task we will apply standard dictionary method: <strong>items()</strong> to get <strong>keys</strong> (device names) and <strong>values</strong> (respective device objects). For iteration, the for loop will be used:</p>
+<li><p>In this task we will apply standard dictionary method: <strong>items()</strong> to get <strong>keys</strong> (device names) and <strong>values</strong> (respective device objects). To iterate, the for loop will be used:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># device_name - stores hostname of a device</span>
 <span class="c1"># device - stores device object</span>
@@ -193,8 +193,8 @@
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of command execution.
-To handle this situation, it’s required to add the following code to reconnect to a device in case a broken connection to a device has been detected:</p>
+<p>If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the commmand.
+To handle this situation, it’s required to add the following code to reconnect to a device in case that a broken connection to a device is detected:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">unicon.core.errors</span> <span class="kn">import</span> <span class="n">EOF</span><span class="p">,</span> <span class="n">SubCommandFailure</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
@@ -208,7 +208,7 @@ To handle this situation, it’s required to add the following code to reconnect
 </div>
 </div></blockquote>
 </li>
-<li><p>Exit the pyATS shell by using the <strong>exit</strong> command. Now we are ready to go through the final version of the script gathering commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).</p></li>
+<li><p>Exit the pyATS shell by using the <strong>exit</strong> command. Now we are ready to go through the final version of the script by gathering commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).</p></li>
 <li><p>Open the prepared script task4_labpyats.py in Nano editor.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task4_labpyats.py
@@ -251,15 +251,15 @@ To handle this situation, it’s required to add the following code to reconnect
 <p class="admonition-title">Note</p>
 <p>To simplify the script, the name of the testbed is hard-coded into the main():
 <strong>testbed_filename = ‘/home/cisco/labpyats/pyats_testbed.yaml’</strong>
-In further scripts, the name of a testbed file will be input as a parameter of the script.</p>
+In further scripts, the name of a testbed file will be inputed as a parameter of the script.</p>
 </div>
 <a class="reference internal image-reference" href="../../_images/code-structure.png"><img alt="../../_images/code-structure.png" class="align-center" src="../../_images/code-structure.png" style="width: 75%;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p><strong>log_stdout=False</strong> option in <strong>device.connect</strong> call:
 <strong>device.connect(log_stdout=False)</strong>
-It will disable all logging to a screen for the whole connection session to this device (until disconnection takes place or until log_stdout is set to <strong>True</strong>).
-For the script collecting many commands, it would be preferred to prune the output of the commands to the console using this method.</p>
+This will disable all logging into a screen to this device for the whole connection session (until disconnection takes place or until log_stdout is set to <strong>True</strong>).
+For the script to collect many commands, it would be preferred to prune the output of the commands to the console using this method.</p>
 </div>
 </div></blockquote>
 </li>
@@ -277,7 +277,7 @@ For the script collecting many commands, it would be preferred to prune the outp
 </div>
 </div></blockquote>
 </li>
-<li><p>Check that there is a new file created: collected_task4. Check the time when it was created.</p>
+<li><p>Check that there is a new file created: collected_task4. Check the time in which it was created.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l ~/labpyats <span class="p">|</span> grep collected_task4
 </pre></div>
@@ -304,7 +304,7 @@ For the script collecting many commands, it would be preferred to prune the outp
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="index.html" class="btn btn-neutral float-left" title="Task 2: Writting Initial Scripts" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="step2.html" class="btn btn-neutral float-right" title="Step 2: Writting Test Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="step2.html" class="btn btn-neutral float-right" title="Step 2: Writing Test Script" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>

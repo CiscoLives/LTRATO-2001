@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -113,10 +113,10 @@
              
   <div class="section" id="step-1-explore-lab-structure">
 <h1>Step 1: Explore Lab Structure<a class="headerlink" href="#step-1-explore-lab-structure" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> Understand the tools used in the lab and the lab’s structure.</p>
+<p><strong>Value Proposition:</strong> Understand the lab structure and the tools used in it.</p>
 <ol class="arabic">
-<li><p>On the remote desktop, double-click the <code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code> shortcut on the desktop.</p></li>
-<li><p>Ubuntu will run on our RDP Jumphost on top of Windows 10. The bash Linux shell appears.</p>
+<li><p>On the remote desktop, double-click the <code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code> shortcut.</p></li>
+<li><p>Ubuntu will run on our RDP Jumphost on top of Windows 10. The bash Linux shell will appear.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/ubuntu-terminal.png"><img alt="../../_images/ubuntu-terminal.png" class="align-center" src="../../_images/ubuntu-terminal.png" style="width: 75%;" /></a>
 <div class="line-block">
@@ -125,11 +125,11 @@
 <p>Throughout the lab, you will be working from a virtual environment. The virtual environment provides the following major advantages over running Python scripts globally:</p>
 <blockquote>
 <div><ul class="simple">
-<li><p><strong>Project Isolation:</strong> Avoids installing Python packages globally which could break system tools or other projects.</p></li>
+<li><p><strong>Project Isolation:</strong> Avoids installing Python packages globally, which could break system tools or other projects.</p></li>
 <li><p><strong>Dependency Management:</strong> Makes the project self-contained and reproducible by capturing all package dependencies in a requirements file.</p></li>
 </ul>
 </div></blockquote>
-<p>Cisco recommends that you run pyATS scripts from the virtual environment. The keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.</p>
+<p>Cisco recommends you run pyATS scripts from the virtual environment. The keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.</p>
 </div></blockquote>
 </li>
 <li><p>Change to the directory that contains the lab files:</p>
@@ -139,7 +139,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>Check the lab’s structure (before running the command shown below, ensure that you have changed to the correct directory: <strong>~/labpyats</strong>).</p>
+<li><p>Check the lab structure (before running the command shown below, ensure that you have changed to the correct directory: <strong>~/labpyats</strong>).</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l
 </pre></div>

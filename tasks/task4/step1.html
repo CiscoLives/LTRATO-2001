@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -114,11 +114,11 @@
   <div class="section" id="step-1-show-the-results-of-tests-in-a-browser">
 <h1>Step 1: Show the Results of Tests in a Browser<a class="headerlink" href="#step-1-show-the-results-of-tests-in-a-browser" title="Permalink to this headline">¶</a></h1>
 <p><strong>Value Proposition:</strong> In this last task, we will see how to show the results of the tests in a more user-friendly way in a browser. For this, the pyats run job command will be used in a Bash shell.</p>
-<p>When a test is run using <strong>pyats run job</strong> it adds the following advantages:</p>
+<p>When a test is runnned using <strong>pyats run job</strong> it adds the following advantages:</p>
 <ul class="simple">
 <li><p>Logs of test runs are saved into the archive</p></li>
-<li><p>Graphical representation of test results in a browser</p></li>
-<li><p>Ability to run tests in different Python scripts</p></li>
+<li><p>Makes a graphical representation of test results in a browser</p></li>
+<li><p>Has the ability to run tests in different Python scripts</p></li>
 </ul>
 <p>To use <strong>pyats run job</strong>, a special file “job file” (written in Python) should be created.</p>
 <p>A job file looks as shown below:</p>
@@ -146,7 +146,7 @@
 <a class="reference internal image-reference" href="../../_images/run-job-process.svg"><img alt="../../_images/run-job-process.svg" class="align-center" src="../../_images/run-job-process.svg" width="65%" /></a>
 <p>Let’s use <strong>pyats job run</strong> to execute tests from Task 9. PyATS job file <strong>task10_runtestsjob.py</strong> has been pre-configured for this.</p>
 <ol class="arabic">
-<li><p>Open <strong>runtestsjob.py</strong> file in Nano and check it (the structure is in accordance with the one shown above).</p>
+<li><p>Open <strong>runtestsjob.py</strong> file in Nano and check it (the structure must be in accordance with the one shown above).</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task10_runtestsjob.py
 </pre></div>
@@ -167,7 +167,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>After completion of the job, check the results:</p>
+<li><p>After the completition of the job, check the results:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats logs view
 </pre></div>
@@ -178,7 +178,7 @@
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Don’t close Linux shell, otherwise, it will stop the local pyATS web server.</p>
+<p>Don’t close the Linux shell; otherwise, it will stop the local pyATS web server.</p>
 </div>
 <p>Click the upper line in a list to open results of the last job run:</p>
 <a class="reference internal image-reference" href="../../_images/viewer-list-of-jobs-run.png"><img alt="../../_images/viewer-list-of-jobs-run.png" class="align-center" src="../../_images/viewer-list-of-jobs-run.png" style="width: 75%;" /></a>
@@ -188,7 +188,7 @@
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Pay special attention to the result of each test, which is shown along with start time and run time of each test.</p>
+<p>Pay special attention to the result of each test, which is shown along with start time and run time of each one.</p>
 </div>
 <a class="reference internal image-reference" href="../../_images/pyats-log-viewer-results-page.png"><img alt="../../_images/pyats-log-viewer-results-page.png" class="align-center" src="../../_images/pyats-log-viewer-results-page.png" style="width: 75%;" /></a>
 <div class="line-block">
@@ -196,8 +196,8 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>Click on the test <strong>ping[dest_ip=10.0.0.17]</strong> (see “1” on next figure), a detailed log from the execution of this test will be shown on the right side of the window (see “2”).</p></li>
-<li><p>Click on the <strong>PASSED</strong> button for the test <strong>ping[dest_ip=10.0.0.17]</strong> (see “3” on next figure), ensure test passed message is shown (see “4”).</p>
+<li><p>Click on the test <strong>ping[dest_ip=10.0.0.17]</strong> (see “1” on next figure). A detailed log from the execution of this test will be shown on the right side of the window (see “2”).</p></li>
+<li><p>Click on the <strong>PASSED</strong> button for the test <strong>ping[dest_ip=10.0.0.17]</strong> (see “3” on next figure). Ensure that the test passed message is shown (see “4”).</p>
 <blockquote>
 <div><div class="line-block">
 <div class="line"><br /></div>
@@ -206,7 +206,7 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>You can open detailed results of the last job, without opening the list of previous jobs, using the following command in shell:</p>
+<p>You can open detailed results of the last job without opening the list of previous jobs, using the following command in shell:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats logs view -latest
 </pre></div>
 </div>
@@ -222,10 +222,10 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats logs view -latest
 </pre></div>
 </div>
-<p>Ensure detailed results of the tests comprising the last run job would be shown right away.</p>
+<p>Ensure detailed results of the tests comprising the last run job are shown right away.</p>
 </div></blockquote>
 </li>
-<li><p>Open Linux shell again, stop running pyATS web server:</p>
+<li><p>Open Linux shell again, and stop running pyATS web server:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + C
 </pre></div>
@@ -235,8 +235,8 @@
 </ol>
 <div class="admonition tip">
 <p class="admonition-title">Tip</p>
-<p>pyATS run is a very handy tool and it’s recommended that you use it to run your pyATS tests.</p>
-<p>You might also check the official documentation for the details at this <a class="reference external" href="https://pubhub.devnetcloud.com/media/pyats/docs/cli/pyats_run.html#pyats-run-job">site</a>.</p>
+<p>pyATS run is a very handy tool and it is recommended that you use it to run your pyATS tests.</p>
+<p>You might also check the official documentation for the details in this <a class="reference external" href="https://pubhub.devnetcloud.com/media/pyats/docs/cli/pyats_run.html#pyats-run-job">site</a>.</p>
 </div>
 <p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>

@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 3: Verification</a><ul class="current">
@@ -113,7 +113,7 @@
              
   <div class="section" id="step-4-run-ping-to-verify-reachability">
 <h1>Step 4: Run PING to Verify Reachability<a class="headerlink" href="#step-4-run-ping-to-verify-reachability" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this testcase we must test reachability between devices (<strong>nx-osv-1</strong> and <strong>csr1000v-1</strong>), using the ping command.</p>
+<p><strong>Value Proposition:</strong> In this testcase we must test reachability between devices (<strong>nx-osv-1</strong> and <strong>csr1000v-1</strong>) using the ping command.</p>
 <p>High-level logic of the test will be as follows:</p>
 <ul class="simple">
 <li><p>Connect to each device in the testbed.</p></li>
@@ -171,7 +171,7 @@
 <div class="line"><br /></div>
 </div>
 <ul class="simple">
-<li><p>The <strong>Testbed</strong> object is the top container object, containing all the testbed devices and all the subsequent information that is generic to the    testbed.</p></li>
+<li><p>The <strong>Testbed</strong> object is the top container object, and it contains all the testbed devices and all the subsequent information that is generic to the testbed.</p></li>
 <li><p><strong>Device</strong> objects represent physical and/or virtual hardware in a testbed topology.</p></li>
 <li><p><strong>Interface</strong> objects represent a physical/virtual interface that connects to a link of some sort (for example, Ethernet, ATM, Loopback, and so on).</p></li>
 <li><p><strong>Link</strong> objects represent the connection (wire) between two or more interfaces within a testbed topology.</p></li>
@@ -183,10 +183,10 @@
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Let’s check the structure depicted above using our topology. We will find all the links connected between <strong>nx-osv-1</strong> and <strong>csr1000v-1</strong>.</p>
+<p>Let’s check the structure depicted above using our topology. We will find all the connected links between <strong>nx-osv-1</strong> and <strong>csr1000v-1</strong>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>We can get the value of an attribute for each object. For example, we can get a link to which an interface object belongs by calling a <strong>link</strong> attribute. We can also reference interfaces which belong to this link, by calling the <strong>interfaces</strong> attribute in step 6 (see code below).</p>
+<p>We can get the value of an attribute for each object. For example, we can get a link that belongs to an interface object by calling a <strong>link</strong> attribute. We can also reference interfaces which belong to this link, by calling the <strong>interfaces</strong> attribute in step 6 (see code below).</p>
 </div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
 </pre></div>
@@ -196,7 +196,7 @@
 <li><p>Paste the following snippet to pyATS console:</p>
 <blockquote>
 <div><ul>
-<li><p>Place the following iPython command in the beginning of code:</p>
+<li><p>Place the following iPython command at the beginning of code:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>%cpaste
 </pre></div>
@@ -240,16 +240,16 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>Review the content of the <strong>PingTestcase</strong> test case, look at the <strong>def setup(self)</strong> function. Code in this function follows the logic used in the previous step:</p>
+<li><p>Review the content of the <strong>PingTestcase</strong> test case, and look at the <strong>def setup(self)</strong> function. The code in this function follows the logic used in the previous step:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Get all the links between <strong>nx-osv-1</strong> and <strong>csr1000v-1</strong> (nx.find_links(csr).</p></li>
-<li><p>Get interfaces for each link (<strong>for iface in links.interfaces</strong>) and append its IPv4 address (<strong>iface.ipv4.ip</strong>) into list <strong>dest_ips</strong>, to use them further in ping commands.</p></li>
+<li><p>Get interfaces for each link (<strong>for iface in links.interfaces</strong>), and append its IPv4 address (<strong>iface.ipv4.ip</strong>) into the list <strong>dest_ips</strong>, to use them further in ping commands.</p></li>
 </ul>
-<p>To exclude management IP addressing space, there is a check whether an IP address on a link is from a management address space (if dest_ip not in mgmt_net). If an IP address is from a management IP address, it’s not appended to the list dest_ips.</p>
+<p>To exclude management IP addressing space, there is a way to check whether an IP address on a link is from a management address space (if dest_ip not in mgmt_net). If an IP address is from a management IP address, it’s not appended to the list dest_ips.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Note that the IP address in the <strong>link_iface.ipv4.ip</strong> object is of the IPv4Address type so we can check whether it overlaps with IPv4Network without any conversion of type (hence <strong>if dest_ip not in mgmt_net</strong> is used).</p>
+<p>Note that the IP address in the <strong>link_iface.ipv4.ip</strong> object is of the IPv4Address type, so we can check whether it overlaps with IPv4Network without any conversion of type (hence <strong>if dest_ip not in mgmt_net</strong> is used).</p>
 </div>
 <p>The code of the <strong>setup(self)</strong> function is shown below:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Management network IP range</span>
@@ -291,7 +291,7 @@
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">5</span> packets transmitted, <span class="m">5</span> packets received, <span class="m">0</span>.00% packet loss
 </pre></div>
 </div>
-<p>To check this field, we use a regular expression, it extracts packet loss from the ping command’s output. If the loss rate is less than 20% (to accommodate the potential first ping drop due to ARP resolution) then the test case should pass successfully:</p>
+<p>To check this field, we use a regular expression, which extracts the packet loss from the ping command’s output. If the loss rate is less than 20%, then the test case should pass successfully:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="n">nx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s1">&#39;testbed&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="p">]</span>
 </span>
 <span class="k">try</span><span class="p">:</span>

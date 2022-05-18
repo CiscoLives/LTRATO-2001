@@ -1,18 +1,18 @@
 Step 2: Verify pyATS Testbed File
 #################################
 
-**Value Proposition:** In this task we will explore pyATS testbed file used in the lab.
+**Value Proposition:** Explore pyATS testbed file used in the lab.
 
 For pyATS to be able to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol and connections between network devices.
 
-This information is stored in pyATS testbed file (in YAML format).
+This information is stored in the pyATS testbed file (in YAML format).
 
-Could this information be gathered automatically and pyATS testbed file prepared for us?
+Can this information be gathered automatically, and can pyATS testbed file be prepared for us?
 
-Sure, since the lab is running in Cisco Modeling Labs (CML), `cmlutils <https://github.com/CiscoDevNet/virlutils>`__  tool could be used to prepare pyATS testbed file from CML topology.
+Sure. Since the lab is running in Cisco Modeling Labs (CML) `cmlutils <https://github.com/CiscoDevNet/virlutils>`__ , tool can be used to prepare pyATS testbed file from CML topology.
 
 .. note ::
-    Testbed file was already prepared and you don't need to call cmlutils now. But if you are curious how you can prepare pyATS testbed file from CML topology, then needed commands are:
+    Testbed file was already prepared and you do not need to call cmlutils now. However, if you are curious about how can you prepare pyATS testbed file from CML topology, then the needed commands are:
 
     .. code-block:: bash
 
@@ -25,7 +25,7 @@ Sure, since the lab is running in Cisco Modeling Labs (CML), `cmlutils <https://
 
         source ~/pyats/bin/activate
 
-The Testbed YAML file for pyATS has been pre-created for this lab and is named pyats_testbed.yaml.
+The testbed YAML file for pyATS has been pre-created for this lab, and it is named pyats_testbed.yaml.
 
 #. Change to the directory that contains the lab files:
 
@@ -61,7 +61,7 @@ The Testbed YAML file for pyATS has been pre-created for this lab and is named p
             line:
             password: "%ENV{PYATS_AUTH_PASS}"
 
-        We recommend that you store credentials separately and at least as environmental variables.
+        We recommend you store credentials separately, at least as environmental variables.
 
 
 #. Exit Nano without saving, pressing:

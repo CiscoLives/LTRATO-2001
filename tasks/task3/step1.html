@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 3: Verification</a><ul class="current">
@@ -118,7 +118,7 @@
 <ul class="simple">
 <li><p>Connect to each device in the testbed.</p></li>
 <li><p>Collect the output of <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">logging</span> <span class="pre">|</span> <span class="pre">i</span> <span class="pre">ERROR|WARN</span></code>.</p></li>
-<li><p>If the output contains more than 0 strings, then ERROR messages were found and the test should fail for this device. Otherwise, the test should succeed.</p></li>
+<li><p>If the output contains more than 0 strings, then ERROR messages were found, and the test should fail for this device. Otherwise, the test should succeed.</p></li>
 </ul>
 <ol class="arabic">
 <li><p>Before creating our testcase, connect to ASA. Launch <strong>PuTTY</strong> and connect to <strong>asav-1</strong>.</p>
@@ -188,7 +188,7 @@ If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>To check whether there is an empty or non-empty output, we will use the Python <strong>len()</strong> built-in function, which returns the length of the given string. If the collected output is empty, then <strong>len()</strong> of the output will be 0, otherwise, the result will be greater than 0.</p>
+<li><p>To check whether there is an empty or non-empty output, we will use the Python <strong>len()</strong> built-in function, which returns the length of the given string. If the collected output is empty, then <strong>len()</strong> of the output will be 0; otherwise, the result will be greater than 0.</p>
 <blockquote>
 <div><p>Input into pyATS shell:</p>
 <blockquote>
@@ -196,7 +196,7 @@ If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
 </pre></div>
 </div>
 </div></blockquote>
-<p>The resulting length is 0, means output from ASA is empty:</p>
+<p>The resulting length is 0, which means that the output from ASA is empty:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="m">0</span>
 </pre></div>
@@ -222,7 +222,7 @@ If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task61_labpyats.py
 </pre></div>
 </div>
-<p>This file reuses the establish_connections(self, testbed) method from task5_labpyats.py (used in previous scenarios), which make connections to all devices in the testbed.</p>
+<p>This file reuses the establish_connections(self, testbed) method from task5_labpyats.py (used in previous scenarios), which makes connections with all the devices in the testbed.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Pay special attention to the following code:</p>
@@ -255,13 +255,13 @@ If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
 &lt;…&gt;</p>
 <p>class VerifyLogging(aetest.Testcase):
 &lt;…&gt;</p>
-<p>Using <strong>self.parent.parameters</strong> attribute arguments can be passed between different classes.
+<p>Using <strong>self.parent.parameters</strong>, the arguments of the attribute can be passed between different classes.
 As an example, in the class <strong>MyCommonSetup</strong>, we store all the devices from the variable <strong>device_list</strong> in the parameter <strong>parameters[‘dev’]</strong>.
 self.parent.parameters.update(dev=device_list)
-Then we can access all the devices in class VerifyLogging, using the method <strong>self.parent.parameters[‘dev’]</strong>.</p>
+Then we can access all the devices in the class VerifyLogging, using the method <strong>self.parent.parameters[‘dev’]</strong>.</p>
 </div></blockquote>
 </li>
-<li><p>Pay special attention to the code in class <strong>VerifyLogging</strong>, which is used to implement the approach that has been tested using the pyATS shell: if length of output is greater than zero, it means that output contains ERROR or WARN message. Testcase should be marked as Failed in this case.</p>
+<li><p>Pay special attention to the code in the class <strong>VerifyLogging</strong>, which is used to implement the approach that has been tested using the pyATS shell: if length of output is greater than zero, it means that output contains ERROR or WARN message. Testcase should be marked as Failed in this case.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>The <strong>device.connect(log_stdout=False)</strong> is used in this example (see <strong>def establish_connections</strong>).</p></li>
@@ -304,7 +304,7 @@ Then we can access all the devices in class VerifyLogging, using the method <str
 </li>
 <li><p>Execute the test script <strong>task61_labpyats.py</strong> and check the results section.</p>
 <blockquote>
-<div><p>The Testcase <strong>error_log</strong> will run only for one device. Scroll above the results section and you will see to which device is related to this output.</p>
+<div><p>The Testcase <strong>error_log</strong> will run only for one device. Scroll above the results section and you will see which device is related to this output.</p>
 <a class="reference internal image-reference" href="../../_images/error-log.png"><img alt="../../_images/error-log.png" class="align-center" src="../../_images/error-log.png" style="width: 75%;" /></a>
 <p>We have learned how to run a testcase for only one device, now we need to get familiar with the <strong>aetest.loop</strong> method, which will let us repeat an elementary test case (written for one device) for every device in the testbed.</p>
 </div></blockquote>
@@ -316,8 +316,8 @@ Then we can access all the devices in class VerifyLogging, using the method <str
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>In this task we will learn dynamic loops, which will create loops based on information that is only available during a script run.</p>
-<p>This approach is helpful if we don’t want to hardcode device names inside our testcase, but want to dynamically load devices from testbed file and run testcases across them.</p>
+<p>In this task we will learn dynamic loops, which creates loops based on information that is only available during a script run.</p>
+<p>This approach is helpful if we don’t want to hardcode device names inside our testcase, but we do want to dynamically load devices from testbed file and run testcases across them.</p>
 </div>
 </div></blockquote>
 </li>

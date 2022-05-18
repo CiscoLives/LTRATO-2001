@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -113,14 +113,14 @@
              
   <div class="section" id="step-2-verify-pyats-testbed-file">
 <h1>Step 2: Verify pyATS Testbed File<a class="headerlink" href="#step-2-verify-pyats-testbed-file" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this task we will explore pyATS testbed file used in the lab.</p>
+<p><strong>Value Proposition:</strong> Explore pyATS testbed file used in the lab.</p>
 <p>For pyATS to be able to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol and connections between network devices.</p>
-<p>This information is stored in pyATS testbed file (in YAML format).</p>
-<p>Could this information be gathered automatically and pyATS testbed file prepared for us?</p>
-<p>Sure, since the lab is running in Cisco Modeling Labs (CML), <a class="reference external" href="https://github.com/CiscoDevNet/virlutils">cmlutils</a>  tool could be used to prepare pyATS testbed file from CML topology.</p>
+<p>This information is stored in the pyATS testbed file (in YAML format).</p>
+<p>Can this information be gathered automatically, and can pyATS testbed file be prepared for us?</p>
+<p>Sure. Since the lab is running in Cisco Modeling Labs (CML) <a class="reference external" href="https://github.com/CiscoDevNet/virlutils">cmlutils</a> , tool can be used to prepare pyATS testbed file from CML topology.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Testbed file was already prepared and you don’t need to call cmlutils now. But if you are curious how you can prepare pyATS testbed file from CML topology, then needed commands are:</p>
+<p>Testbed file was already prepared and you do not need to call cmlutils now. However, if you are curious about how can you prepare pyATS testbed file from CML topology, then the needed commands are:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /var/lib/virlutils/venv/bin/activate
 
 cml ls <span class="o">(</span>get id from ID column<span class="o">)</span>
@@ -132,7 +132,7 @@ cml generate pyats
 </pre></div>
 </div>
 </div>
-<p>The Testbed YAML file for pyATS has been pre-created for this lab and is named pyats_testbed.yaml.</p>
+<p>The testbed YAML file for pyATS has been pre-created for this lab, and it is named pyats_testbed.yaml.</p>
 <ol class="arabic">
 <li><p>Change to the directory that contains the lab files:</p>
 <blockquote>
@@ -207,7 +207,7 @@ line:
 password: <span class="s2">&quot;%ENV{PYATS_AUTH_PASS}&quot;</span>
 </pre></div>
 </div>
-<p>We recommend that you store credentials separately and at least as environmental variables.</p>
+<p>We recommend you store credentials separately, at least as environmental variables.</p>
 </div>
 </div></blockquote>
 </li>

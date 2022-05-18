@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 3: Verification</a><ul class="current">
@@ -114,7 +114,7 @@
   <div class="section" id="step-3-verify-the-routing-information-using-parsers-and-pyats-learn">
 <h1>Step 3: Verify the Routing Information using Parsers and pyATS Learn<a class="headerlink" href="#step-3-verify-the-routing-information-using-parsers-and-pyats-learn" title="Permalink to this headline">¶</a></h1>
 <p><strong>Value Proposition:</strong> In this test case, we have the list of critical routes (usually this is a device’s loopback interface) and we must check that these loopbacks are installed in the routing information base (RIB) of all the devices in the testbed.</p>
-<p>High-level logic of the test will be as follows:</p>
+<p>The high-level logic of the test will be as follows:</p>
 <ul class="simple">
 <li><p>Connect to each device in the testbed.</p></li>
 <li><p>Learn routing information from RIB of the devices.</p></li>
@@ -138,7 +138,7 @@
 <span class="n">nx</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>pyATS uses the <strong>learn</strong> method to collect the set of show commands output for a feature configured on the device, to get its snapshot and store it into a structured format (Python dictionary).</p>
+<p>pyATS uses the <strong>learn</strong> method to collect the set of show commands output for a feature configured on the device, in order to get its snapshot and store it into a structured format (Python dictionary).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr_routes</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
 <span class="n">nx_routes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
 </pre></div>
@@ -211,7 +211,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>Review the content of <strong>routes</strong> testcase, note that we use the path to routes in RIB from the previous step to get the routing information. First we’ll get a snapshot of the <strong>routing</strong> feature.</p>
+<li><p>Review the content of <strong>routes</strong> testcase. Note that we use the path to routes in RIB from the previous step to get the routing information. First, we’ll get a snapshot of the <strong>routing</strong> feature.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
     <span class="k">def</span> <span class="nf">routes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
@@ -229,7 +229,7 @@
 </li>
 </ol>
 <ol class="arabic" start="8">
-<li><p>Then we compare the loopback routes stored in <strong>golden_routes list</strong>, with the content of rib. If the loopback route is not found, then we force the test case to fail.</p>
+<li><p>Then we compare the loopback routes stored in <strong>golden_routes list</strong> with the content of rib. If the loopback route is not found, then we force the test case to fail.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">golden_routes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;192.168.0.3/32&#39;</span><span class="p">,</span> <span class="s1">&#39;192.168.0.1/32&#39;</span><span class="p">]</span>
 </pre></div>
@@ -290,7 +290,7 @@ Eth1/4               <span class="m">10</span>.0.0.10       protocol-up/link-up/
 </div>
 </div></blockquote>
 </li>
-<li><p>When you finish, save changes to file <strong>task8_labpyats.py</strong>. By pressing</p>
+<li><p>When you finish, save changes to file <strong>task8_labpyats.py</strong> by pressing</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + O
 File Name to Write: task8_labpyats.py

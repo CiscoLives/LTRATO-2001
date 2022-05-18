@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -113,7 +113,7 @@
              
   <div class="section" id="step-3-pyats-capabilities-using-the-pyats-shell">
 <h1>Step 3: pyATS Capabilities using the pyATS Shell<a class="headerlink" href="#step-3-pyats-capabilities-using-the-pyats-shell" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> We believe it’s always faster to start learning about pyATS in an interactive format where you can try different pyATS functions. It allows you to run commands and see results immediately, instead of making small changes in Python code and re-running it after every minor change. pyATS has an interactive shell for developing tests. It’s run from Bash shell in the following way:</p>
+<p><strong>Value Proposition:</strong> We believe it is always faster to start learning about pyATS in an interactive format where you can try different pyATS functions. This allows you to run commands and see results immediately instead of making small changes in Python code and re-running it after every minor change. pyATS has an interactive shell for developing tests, and it is runnned from Bash shell in the following way:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file &lt;testbed_file_name&gt;
 </pre></div>
 </div>
@@ -128,7 +128,7 @@
 <li><p>pyATS diff</p></li>
 </ul>
 <ol class="arabic">
-<li><p>Enter the following command to run the pyATS shell command from the Bash shell and specify the YAML testbed file as the parameter. After about 10 seconds, the interactive shell opens. This is where you can input the Python code.</p>
+<li><p>Enter the following command to run the pyATS shell command from the Bash shell, and specify the YAML testbed file as the parameter. After 10 seconds approximately, the interactive shell will open. This is where you can input the Python code.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
 </pre></div>
@@ -178,7 +178,7 @@ Python <span class="m">3</span>.8.7 <span class="o">(</span>default, Mar <span c
 </div>
 </div></blockquote>
 </li>
-<li><p>Let’s prepare ourselves for our first test and collect <strong>show inventory</strong> command output from the devices.</p>
+<li><p>Let’s prepare ourselves for our first test and collect <strong>show inventory</strong> the command output from the devices.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nx_output</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
 <span class="n">asa_output</span> <span class="o">=</span> <span class="n">asa</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
@@ -189,7 +189,7 @@ Python <span class="m">3</span>.8.7 <span class="o">(</span>default, Mar <span c
 </ul>
 </div></blockquote>
 </li>
-<li><p>Verify the collected information in the output of each command. Pay attention to the output of both execute methods returned as plain text (string type in Python):</p>
+<li><p>Verify the collected information in the output of each command. Pay attention to the output of both executed methods returned as plain text (string type in Python):</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nx-osv-1#
 Out<span class="o">[</span><span class="m">6</span><span class="o">]</span>: <span class="s1">&#39;NAME: &quot;Chassis&quot;,  DESCR: &quot;Nexus9000 9000v Chassis&quot; \r\nPID: N9K-9000v,  VID: V02 ,  SN: 9OQ8QSK7JX1 \r\n\r\nNAME: &quot;Slot 1&quot;,  DESCR: &quot;Nexus 9000v Ethernet Module&quot; \r\nPID: N9K-9000v,  VID: V02 ,  SN: 9OQ8QSK7JX1 \r\n\r\nNAME: &quot;Fan 1&quot;,  DESCR: &quot;Nexus9000 9000v Chassis Fan Module&quot;  \r\nPID: N9K-9000v-FAN,  VID: V01 ,  SN: N/A \r\n\r\nNAME: &quot;Fan 2&quot;,  DESCR: &quot;Nexus9000 9000v Chassis Fan Module&quot; \r\nPID: N9K-9000v-FAN,  VID: V01 ,  SN: N/A \r\n\r\nNAME: &quot;Fan 3&quot;,  DESCR: &quot;Nexus9000 9000v Chassis Fan Module&quot; \r\nPID: N9K-9000v-FAN,  VID: V01 ,  SN: N/A&#39;</span>
@@ -199,17 +199,17 @@ Out<span class="o">[</span><span class="m">7</span><span class="o">]</span>: <sp
 </div>
 </div></blockquote>
 </li>
-<li><p>Collect structured data output using parse command.</p>
+<li><p>Collect the structured data output using parse command.</p>
 <blockquote>
 <div><ul>
-<li><p>Import <strong>pprint</strong> python module to represent collected output in pretty format.</p>
+<li><p>Import <strong>pprint</strong> python module to represent collected output in a better format.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Run <strong>parse</strong> command to convert device output into a Python dictionary, which stores the device data as a set of key-value pairs.</p>
+<li><p>Run <strong>parse</strong> command to convert the device output into a Python dictionary, which stores the device data as a set of key-value pairs.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nx_output</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
 </pre></div>
@@ -254,7 +254,7 @@ Out<span class="o">[</span><span class="m">7</span><span class="o">]</span>: <sp
 </div>
 </div></blockquote>
 </li>
-<li><p>Since information is collected in Python dictionary, we can call any value, using its key. Collect serial number of chassis using its key.</p>
+<li><p>Since information is collected in a Python dictionary, we can call any value using its corresponding key. Collect serial number of chassis using its key.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nx_serial</span> <span class="o">=</span> <span class="n">nx_output</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;serial_number&#39;</span><span class="p">]</span>
 <span class="n">pprint</span><span class="p">(</span><span class="n">nx_serial</span><span class="p">)</span>
@@ -275,7 +275,7 @@ Out<span class="o">[</span><span class="m">7</span><span class="o">]</span>: <sp
 </div>
 </div></blockquote>
 </li>
-<li><p>Print collected output to observe structure of Python dictionary.</p>
+<li><p>Print collected output to observe the structure of the Python dictionary.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="p">(</span><span class="n">ospf_state_before</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
 </pre></div>
@@ -292,11 +292,11 @@ Out<span class="o">[</span><span class="m">7</span><span class="o">]</span>: <sp
 </ul>
 </div></blockquote>
 </li>
-<li><p>Now impose failure in the topology, shutting down the interface <strong>Ethernet1/1</strong> on device <strong>nx-osv-1</strong>.</p>
+<li><p>Now impose a failure in the topology, shutting down the interface <strong>Ethernet1/1</strong> on the device <strong>nx-osv-1</strong>.</p>
 <blockquote>
 <div><ul>
 <li><p>Open Putty terminal using the shortcut on the desktop.</p></li>
-<li><p>Connect to <strong>nx-osv-1</strong> using password <strong>cisco</strong></p>
+<li><p>Connect to <strong>nx-osv-1</strong> using the password <strong>cisco</strong></p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/putty-01.png"><img alt="../../_images/putty-01.png" class="align-center" src="../../_images/putty-01.png" style="width: 35%;" /></a>
 </div></blockquote>
@@ -317,7 +317,7 @@ shutdown
 </div>
 </div></blockquote>
 </li>
-<li><p>Import PyATS <strong>Diff</strong> package and compare previous (working) and current state (failed) to understand what have changed and further troubleshoot the problem.</p>
+<li><p>Import the PyATS <strong>Diff</strong> package and compare previous (working) and current state (failed) to understand what has changed and then troubleshoot the problem.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">genie.utils.diff</span> <span class="kn">import</span> <span class="n">Diff</span>
 <span class="n">diff</span> <span class="o">=</span> <span class="n">Diff</span><span class="p">(</span><span class="n">ospf_state_before</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">ospf_state_after</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
@@ -327,7 +327,7 @@ shutdown
 </div>
 </div></blockquote>
 </li>
-<li><p>PyATS Diff can compare outputs of structured data collected by parse command.</p></li>
+<li><p>PyATS Diff can compare outputs of structured data collected by the parse command.</p></li>
 <li><p>Parse <strong>show interface</strong> to collect interfaces output into a Python dictionary.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">int_after</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show interface&#39;</span><span class="p">)</span>
@@ -357,17 +357,17 @@ no shutdown
 </ul>
 </div></blockquote>
 </li>
-<li><p>PyATS parse/learn and diff commands can be run right from Linux Shell, and you can start using PyATS without coding skills.</p>
+<li><p>PyATS parse/learn and diff commands can be runnned from a Linux Shell, and you can start using PyATS without coding skills.</p>
 <blockquote>
 <div><ul>
-<li><p>Observe PyATS capabilities from Linux Shell running pyATS parse command from Linux Shell:</p>
+<li><p>Observe PyATS capabilities from Linux Shell running pyATS parse command from a Linux Shell:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats parse <span class="s2">&quot;show interface&quot;</span> --devices nx-osv-1 --testbed-file pyats_testbed.yaml --output parse-work/
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Run pyATS learn command from Linux Shell for feature OSPF:</p>
+<li><p>Run pyATS learn command from Linux Shell for the OSPF feature:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats learn ospf --devices nx-osv-1 --testbed-file pyats_testbed.yaml --output working/
 </pre></div>
@@ -383,21 +383,21 @@ shutdown
 </div>
 </div></blockquote>
 </li>
-<li><p>Return to Linux Shell and collect outputs after failure running pyATS parse command from Linux Shell:</p>
+<li><p>Return to the Linux Shell, and collect outputs after failure by running pyATS parse command from the Linux Shell:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats parse <span class="s2">&quot;show interface&quot;</span> --devices nx-osv-1 --testbed-file pyats_testbed.yaml --output parse-failed/
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Run pyATS learn command from Linux Shell for feature OSPF:</p>
+<li><p>Run pyATS learn command from the Linux Shell for the OSPF feature:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats learn ospf --devices nx-osv-1 --testbed-file pyats_testbed.yaml --output failed/
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Run pyATS diff for parsed commands from Linux Shell:</p>
+<li><p>Run pyATS diff for parsed commands from the Linux Shell:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats diff parse-work parse-failed
 cat ./diff_nx-osv-1_show-interface_parsed.txt
@@ -405,7 +405,7 @@ cat ./diff_nx-osv-1_show-interface_parsed.txt
 </div>
 </div></blockquote>
 </li>
-<li><p>Run pyATS diff for learned states from Linux Shell:</p>
+<li><p>Run pyATS diff for the previously learned states from the Linux Shell:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats diff working failed
 cat ./diff_ospf_nxos_nx-osv-1_ops.txt

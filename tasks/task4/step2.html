@@ -61,7 +61,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writting Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writting Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -113,13 +113,13 @@
              
   <div class="section" id="step-2-run-tests-and-compare-results-from-xpresso-dashboard">
 <h1>Step 2: Run tests and compare results from XPRESSO dashboard<a class="headerlink" href="#step-2-run-tests-and-compare-results-from-xpresso-dashboard" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this last task, we will learn how to use XPRESSO dashboard to run test job and compare test results. To simplify the scenario basic configuration was already done in XPRESSO. Test Harness, Execution Engine, Testbed and Job are pre-configured.</p>
+<p><strong>Value Proposition:</strong> In this last task, we will learn how to use XPRESSO dashboard to run the test job and compare the test results. To simplify the scenario, basic configuration was already done in XPRESSO. Test Harness, Execution Engine, Testbed and Job are pre-configured.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via RDP session to CentOS VM running XPRESSO.</p>
 </div>
 <ol class="arabic">
-<li><p>Locate XPRESSO.rdp shortcut on the desktop of Workstation, double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.</p>
+<li><p>Locate XPRESSO.rdp shortcut on the desktop of Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Username: <code class="docutils literal notranslate"><span class="pre">xpresso</span></code></p></li>
@@ -135,7 +135,7 @@
 <a class="reference internal image-reference" href="../../_images/login-to-xpresso_rdp.png"><img alt="../../_images/login-to-xpresso_rdp.png" class="align-center" src="../../_images/login-to-xpresso_rdp.png" style="width: 20%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Inside RDP session open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see Requests page:</p>
+<li><p>Inside RDP session, open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see Requests page:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-dashboard-page.png"><img alt="../../_images/xpresso-dashboard-page.png" class="align-center" src="../../_images/xpresso-dashboard-page.png" style="width: 75%;" /></a>
 <p>If XPRESSO page is not opened automatically, open it directly on <a class="reference external" href="http://xpresso.dcloud-cisco.com">dCloud</a> manually and login with credentials:</p>
@@ -147,7 +147,7 @@
 </div></blockquote>
 </div></blockquote>
 </li>
-<li><p>From the menu icons on the left locate Jobs item and click on it:</p>
+<li><p>From the menu icons on the left, locate Jobs item and click on it:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-filter.png"><img alt="../../_images/xpresso-jobs-filter.png" class="align-left" src="../../_images/xpresso-jobs-filter.png" style="width: 15%;" /></a>
 <div class="line-block">
@@ -155,11 +155,11 @@
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 </div>
-<p>You will see pre-configured job <strong>Ping_from_ASA</strong> which executes <strong>task10_runtestsjob.py</strong>  script you’ve used in this Scenario:</p>
+<p>You will see the pre-configured job <strong>Ping_from_ASA</strong> which executes <strong>task10_runtestsjob.py</strong> script you’ve used in this Scenario:</p>
 <a class="reference internal image-reference" href="../../_images/xpresso-jobs-list.png"><img alt="../../_images/xpresso-jobs-list.png" class="align-center" src="../../_images/xpresso-jobs-list.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Hover mouse over the job row and you will see <strong>Execute</strong> icon on the right, click it:</p>
+<li><p>Hover the mouse over the job row and you will see <strong>Execute</strong> icon on the right. Click it:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-execute.png"><img alt="../../_images/xpresso-jobs-execute.png" class="align-left" src="../../_images/xpresso-jobs-execute.png" style="width: 15%;" /></a>
 <div class="line-block">
@@ -168,17 +168,17 @@
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 </div>
-<p>You will be presented with <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">are</span> <span class="pre">configuring</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">group</span> <span class="pre">job</span> <span class="pre">request</span></code> page where you can customize job run settings. Leave all settings by default and click Submit button. Once done, job will be submitted for execution.</p>
-<p>On the bottom of the job execution page, you will see request item which will go through the different stages: <strong>PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED or FAILED</strong>:</p>
+<p>You will be presented with a <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">are</span> <span class="pre">configuring</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">group</span> <span class="pre">job</span> <span class="pre">request</span></code> page where you can customize job run settings. Leave all settings by default and click Submit button. Once done, job will be submitted for execution.</p>
+<p>On the bottom of the job execution page, you will see the request item, which will go through the different stages: <strong>PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED or FAILED</strong>:</p>
 <a class="reference internal image-reference" href="../../_images/xpresso-jobs-request-status-1.png"><img alt="../../_images/xpresso-jobs-request-status-1.png" class="align-center" src="../../_images/xpresso-jobs-request-status-1.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Click on the Request Item while job is running, you will see how pyATS is executing every tests defined in the job file one by one in real-time:</p>
+<li><p>Click on the Request Item while job is running, and you will see how pyATS is executing every tests defined in the job file one by one in real-time:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-request-status-2.png"><img alt="../../_images/xpresso-jobs-request-status-2.png" class="align-center" src="../../_images/xpresso-jobs-request-status-2.png" style="width: 55%;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you click on Request item while job is going through <strong>PREPARING, QUEUING, QUEUED</strong> stages there would be no results visible as job is not running yet. Once job transitions to RUNNING stage, the page will be updated and you start getting test execution results</p>
+<p>If you click on Request item while job is going through <strong>PREPARING, QUEUING, QUEUED</strong> stages, there would be no visible results as job is not running yet. Once job transitions to RUNNING stage, the page will be updated and you will start getting test the execution results,</p>
 </div>
 </div></blockquote>
 </li>
@@ -211,19 +211,19 @@ shutdown
 <div><a class="reference internal image-reference" href="../../_images/xpresso-ping-from-asa.png"><img alt="../../_images/xpresso-ping-from-asa.png" class="align-center" src="../../_images/xpresso-ping-from-asa.png" style="width: 55%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Now let’s compare job results. On the top of the page click on <strong>Compare</strong> button and check last job run that was successful with status <strong>PASSED</strong>:</p>
+<li><p>Now let’s compare job results. On the top of the page click on the <strong>Compare</strong> button and check the last job run that was successful and  has the status <strong>PASSED</strong>:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-1.png"><img alt="../../_images/xpresso-jobs-compare-1.png" class="align-center" src="../../_images/xpresso-jobs-compare-1.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>You will see the summary of comparison for both job runs and a number of tests passed and failed:</p>
+<li><p>You will see the summary of comparison for both job runs and a number of passed and failed tests:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-2.png"><img alt="../../_images/xpresso-jobs-compare-2.png" class="align-center" src="../../_images/xpresso-jobs-compare-2.png" style="width: 75%;" /></a>
 <p>Followed by detailed test to test comparison:</p>
 <a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-3.png"><img alt="../../_images/xpresso-jobs-compare-3.png" class="align-center" src="../../_images/xpresso-jobs-compare-3.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Hover mouse over the failing test line <strong>ping[dest_ip=10.0.0.13]</strong> and click <strong>Testcase Diff</strong> icon on the right to see the test result in diff format:</p>
+<li><p>Hover the mouse over the failing test line <strong>ping[dest_ip=10.0.0.13]</strong>, and click <strong>Testcase Diff</strong> icon on the right to see the test result in diff format:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-4.png"><img alt="../../_images/xpresso-jobs-compare-4.png" class="align-center" src="../../_images/xpresso-jobs-compare-4.png" style="width: 75%;" /></a>
 <p>Section diff page will open and load diff plugin:</p>
@@ -244,7 +244,7 @@ shutdown
 </div>
 </div></blockquote>
 </li>
-<li><p>Select 2 requests - PASSED and FAILED and click Compare icon on the top right of the page. Compare icon will be visible only if you select exactly 2 items:</p>
+<li><p>Select 2 requests - PASSED and FAILED, and click the Compare icon on the top right of the page. Compare icon will be visible only if you select exactly 2 items:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-6.png"><img alt="../../_images/xpresso-jobs-compare-6.png" class="align-center" src="../../_images/xpresso-jobs-compare-6.png" style="width: 75%;" /></a>
 </div></blockquote>

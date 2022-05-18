@@ -1,10 +1,10 @@
 Step 1: Explore Lab Structure
 #############################
 
-**Value Proposition:** Understand the tools used in the lab and the lab's structure.
+**Value Proposition:** Understand the lab structure and the tools used in it.
 
-#. On the remote desktop, double-click the ``Ubuntu`` shortcut on the desktop.
-#. Ubuntu will run on our RDP Jumphost on top of Windows 10. The bash Linux shell appears.
+#. On the remote desktop, double-click the ``Ubuntu`` shortcut.
+#. Ubuntu will run on our RDP Jumphost on top of Windows 10. The bash Linux shell will appear.
 
     .. image:: images/ubuntu-terminal.png
         :width: 75%
@@ -14,10 +14,10 @@ Step 1: Explore Lab Structure
 
     Throughout the lab, you will be working from a virtual environment. The virtual environment provides the following major advantages over running Python scripts globally:
 
-        - **Project Isolation:** Avoids installing Python packages globally which could break system tools or other projects.
+        - **Project Isolation:** Avoids installing Python packages globally, which could break system tools or other projects.
         - **Dependency Management:** Makes the project self-contained and reproducible by capturing all package dependencies in a requirements file.
 
-    Cisco recommends that you run pyATS scripts from the virtual environment. The keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.
+    Cisco recommends you run pyATS scripts from the virtual environment. The keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.
 
 #. Change to the directory that contains the lab files:
 
@@ -25,7 +25,7 @@ Step 1: Explore Lab Structure
 
         cd ~/labpyats
 
-#. Check the lab's structure (before running the command shown below, ensure that you have changed to the correct directory: **~/labpyats**).
+#. Check the lab structure (before running the command shown below, ensure that you have changed to the correct directory: **~/labpyats**).
 
     .. code-block:: bash
 
