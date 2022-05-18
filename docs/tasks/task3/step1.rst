@@ -7,7 +7,7 @@ The high-level logic of the test case will be as follows:
 
 - Connect to each device in the testbed.
 - Collect the output of ``show logging | i ERROR|WARN``.
-- If the output contains more than 0 strings, then ERROR messages were found and the test should fail for this device. Otherwise, the test should succeed.
+- If the output contains more than 0 strings, then ERROR messages were found, and the test should fail for this device. Otherwise, the test should succeed.
 
 #. Before creating our testcase, connect to ASA. Launch **PuTTY** and connect to **asav-1**.
 
@@ -58,7 +58,7 @@ The high-level logic of the test case will be as follows:
         3. Repeat step 3 above for CSR in the pyATS shell:
             - **out1 = csr.execute('show logging | i ERROR|WARN')**
 
-#. To check whether there is an empty or non-empty output, we will use the Python **len()** built-in function, which returns the length of the given string. If the collected output is empty, then **len()** of the output will be 0, otherwise, the result will be greater than 0.
+#. To check whether there is an empty or non-empty output, we will use the Python **len()** built-in function, which returns the length of the given string. If the collected output is empty, then **len()** of the output will be 0; otherwise, the result will be greater than 0.
 
     Input into pyATS shell:
 
@@ -66,7 +66,7 @@ The high-level logic of the test case will be as follows:
 
             In [1]: len(out2)
 
-    The resulting length is 0, means output from ASA is empty:
+    The resulting length is 0, which means that the output from ASA is empty:
 
         .. code-block:: bash
 
@@ -92,7 +92,7 @@ The high-level logic of the test case will be as follows:
 
         nano task61_labpyats.py
 
-    This file reuses the establish_connections(self, testbed) method from task5_labpyats.py (used in previous scenarios), which make connections to all devices in the testbed.
+    This file reuses the establish_connections(self, testbed) method from task5_labpyats.py (used in previous scenarios), which makes connections with all the devices in the testbed.
 
     .. note::
         Pay special attention to the following code:
@@ -132,12 +132,12 @@ The high-level logic of the test case will be as follows:
     class VerifyLogging(aetest.Testcase):
     <…>
 
-    Using **self.parent.parameters** attribute arguments can be passed between different classes.
+    Using **self.parent.parameters**, the arguments of the attribute can be passed between different classes.
     As an example, in the class **MyCommonSetup**, we store all the devices from the variable **device_list** in the parameter **parameters['dev']**.
     self.parent.parameters.update(dev=device_list)
-    Then we can access all the devices in class VerifyLogging, using the method **self.parent.parameters['dev']**.
+    Then we can access all the devices in the class VerifyLogging, using the method **self.parent.parameters['dev']**.
 
-#. Pay special attention to the code in class **VerifyLogging**, which is used to implement the approach that has been tested using the pyATS shell: if length of output is greater than zero, it means that output contains ERROR or WARN message. Testcase should be marked as Failed in this case.
+#. Pay special attention to the code in the class **VerifyLogging**, which is used to implement the approach that has been tested using the pyATS shell: if length of output is greater than zero, it means that output contains ERROR or WARN message. Testcase should be marked as Failed in this case.
 
     - The **device.connect(log_stdout=False)** is used in this example (see **def establish_connections**).
     - This code (log_stdout=False) - disables all logging to a screen for the whole connection session. To make the execution of the command on a device visible **(show logging | i ERROR|WARN)** in the output of the test, the following code is used: **any_device.log_user(enable=True)**
@@ -177,7 +177,7 @@ The high-level logic of the test case will be as follows:
 
 #. Execute the test script **task61_labpyats.py** and check the results section.
 
-    The Testcase **error_log** will run only for one device. Scroll above the results section and you will see to which device is related to this output.
+    The Testcase **error_log** will run only for one device. Scroll above the results section and you will see which device is related to this output.
 
     .. image:: images/error-log.png
         :width: 75%
@@ -192,9 +192,9 @@ The high-level logic of the test case will be as follows:
         nano task62_labpyats.py
     
     .. note::
-        In this task we will learn dynamic loops, which will create loops based on information that is only available during a script run.
+        In this task we will learn dynamic loops, which creates loops based on information that is only available during a script run.
 
-        This approach is helpful if we don't want to hardcode device names inside our testcase, but want to dynamically load devices from testbed file and run testcases across them.
+        This approach is helpful if we don't want to hardcode device names inside our testcase, but we do want to dynamically load devices from testbed file and run testcases across them.
 
 #. Pay special attention to the code in **error_logs** method. It receives **device** object as an argument on input and collects the command from this **device**.
 

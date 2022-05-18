@@ -1,12 +1,12 @@
 Step 2: Run tests and compare results from XPRESSO dashboard
 ############################################################
 
-**Value Proposition:** In this last task, we will learn how to use XPRESSO dashboard to run test job and compare test results. To simplify the scenario basic configuration was already done in XPRESSO. Test Harness, Execution Engine, Testbed and Job are pre-configured.
+**Value Proposition:** In this last task, we will learn how to use XPRESSO dashboard to run the test job and compare the test results. To simplify the scenario, basic configuration was already done in XPRESSO. Test Harness, Execution Engine, Testbed and Job are pre-configured.
 
 .. note::
     Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via RDP session to CentOS VM running XPRESSO.
 
-#. Locate XPRESSO.rdp shortcut on the desktop of Workstation, double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.
+#. Locate XPRESSO.rdp shortcut on the desktop of Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.
 
     - Username: ``xpresso``
     - Password: ``C1sco12345``
@@ -20,7 +20,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :align: center
         :width: 20%
 
-#. Inside RDP session open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see Requests page:
+#. Inside RDP session, open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see Requests page:
 
     .. image:: images/xpresso-dashboard-page.png
         :align: center
@@ -31,7 +31,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         - Username: ``xpresso``
         - Password: ``C1sco12345``
 
-#. From the menu icons on the left locate Jobs item and click on it:
+#. From the menu icons on the left, locate Jobs item and click on it:
 
     .. image:: images/xpresso-jobs-filter.png
         :align: left
@@ -41,14 +41,14 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     |
     |
 
-    You will see pre-configured job **Ping_from_ASA** which executes **task10_runtestsjob.py**  script you've used in this Scenario:
+    You will see the pre-configured job **Ping_from_ASA** which executes **task10_runtestsjob.py** script you've used in this Scenario:
 
 
     .. image:: images/xpresso-jobs-list.png
         :align: center
         :width: 75%
 
-#. Hover mouse over the job row and you will see **Execute** icon on the right, click it:
+#. Hover the mouse over the job row and you will see **Execute** icon on the right. Click it:
 
     .. image:: images/xpresso-jobs-execute.png
         :align: left
@@ -59,22 +59,22 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     |
     |
 
-    You will be presented with ``You are configuring a new group job request`` page where you can customize job run settings. Leave all settings by default and click Submit button. Once done, job will be submitted for execution.
+    You will be presented with a ``You are configuring a new group job request`` page where you can customize job run settings. Leave all settings by default and click Submit button. Once done, job will be submitted for execution.
 
-    On the bottom of the job execution page, you will see request item which will go through the different stages: **PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED or FAILED**:
+    On the bottom of the job execution page, you will see the request item, which will go through the different stages: **PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED or FAILED**:
 
     .. image:: images/xpresso-jobs-request-status-1.png
         :align: center
         :width: 75%
 
-#. Click on the Request Item while job is running, you will see how pyATS is executing every tests defined in the job file one by one in real-time:
+#. Click on the Request Item while job is running, and you will see how pyATS is executing every tests defined in the job file one by one in real-time:
 
     .. image:: images/xpresso-jobs-request-status-2.png
         :align: center
         :width: 55%
 
     .. note::
-        If you click on Request item while job is going through **PREPARING, QUEUING, QUEUED** stages there would be no results visible as job is not running yet. Once job transitions to RUNNING stage, the page will be updated and you start getting test execution results
+        If you click on Request item while job is going through **PREPARING, QUEUING, QUEUED** stages, there would be no visible results as job is not running yet. Once job transitions to RUNNING stage, the page will be updated and you will start getting test the execution results,
 
 #. Once job execution is completed, you will see the results, can check raw console output, job history with timestamps, download archive with results or compare test execution with another job run:
 
@@ -107,13 +107,13 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :align: center
         :width: 55%
 
-#. Now let's compare job results. On the top of the page click on **Compare** button and check last job run that was successful with status **PASSED**:
+#. Now let's compare job results. On the top of the page click on the **Compare** button and check the last job run that was successful and  has the status **PASSED**:
 
     .. image:: images/xpresso-jobs-compare-1.png
         :align: center
         :width: 75%
 
-#. You will see the summary of comparison for both job runs and a number of tests passed and failed:
+#. You will see the summary of comparison for both job runs and a number of passed and failed tests:
 
     .. image:: images/xpresso-jobs-compare-2.png
         :align: center
@@ -125,7 +125,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :align: center
         :width: 75%
 
-#. Hover mouse over the failing test line **ping[dest_ip=10.0.0.13]** and click **Testcase Diff** icon on the right to see the test result in diff format:
+#. Hover the mouse over the failing test line **ping[dest_ip=10.0.0.13]**, and click **Testcase Diff** icon on the right to see the test result in diff format:
 
     .. image:: images/xpresso-jobs-compare-4.png
         :align: center
@@ -150,7 +150,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     |
     |
 
-#. Select 2 requests - PASSED and FAILED and click Compare icon on the top right of the page. Compare icon will be visible only if you select exactly 2 items:
+#. Select 2 requests - PASSED and FAILED, and click the Compare icon on the top right of the page. Compare icon will be visible only if you select exactly 2 items:
 
     .. image:: images/xpresso-jobs-compare-6.png
         :align: center

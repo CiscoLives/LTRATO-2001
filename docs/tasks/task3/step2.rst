@@ -1,12 +1,12 @@
 Step 2: Verify the Service Contracts Coverage
 #############################################
 
-**Value Proposition:** In this test case, we have the list of devices' serial numbers, covered by the service contracts, and we must verify that all the devices in the testbed are covered by the service contracts. This ensures you will be able to open a TAC case if something goes wrong when the network is in production.
+**Value Proposition:** In this test case, we have the list of the devices' serial numbers, covered by the service contracts, and we must verify that all the devices in the testbed are covered by the service contracts. This ensures you will be able to open a TAC case if something goes wrong when the network is in production.
 
 High-level logic of the test will be as follows:
 - Connect to each device in the testbed.
 - Parse the output of show inventory to find the device's serial number (SN).
-- Verify whether SN is in the list, covered by the service contracts.
+- Verify whether the SN is in the list, covered by the service contracts.
 
 #. Let's use the pyATS shell to check our idea.
 
@@ -25,7 +25,7 @@ High-level logic of the test will be as follows:
         asa.connect()
         nx.connect()
 
-#. pyATS uses the **parse** method to collect the output of different show commands and parses it into a structured format (Python dictionary). Let's collect the output of 'show inventory' commands and parse it, using the **parse** method.
+#. pyATS uses the **parse** method to collect the output of different show commands and parses it into a structured format (Python dictionary). Let's collect the output of 'show inventory' commands and parse it using the **parse** method.
 
     .. code-block:: bash
 
@@ -131,7 +131,7 @@ High-level logic of the test will be as follows:
 
         nano task7_labpyats.py
 
-#. Review the content of the **Inventory** test case, note that we use the data structure learned from pyATS shell in the previous step, to extract a serial number from the output of **show inventory**:
+#. Review the content of the **Inventory** test case. Note that we use the data structure learned from pyATS shell in the previous step to extract a serial number from the output of **show inventory**:
 
     .. code-block:: python
         :emphasize-lines: 5
@@ -152,7 +152,7 @@ High-level logic of the test will be as follows:
             out2 = device.parse('show inventory')
             chassis_sn = out2['name']['Chassis']['serial_number']
 
-    Serial number shown below is provided for example and would be different on equipment in a lab.
+    The serial number shown below is provided as an example. It would be different on the equipment in a lab.
 
     .. code-block:: python
         :emphasize-lines: 3
@@ -181,7 +181,7 @@ High-level logic of the test will be as follows:
 
     |
     
-    All the tests have failed, since we have serial numbers from a different network in our contract SNs list at the beginning of **task7_labpyats.py** file.
+    All the tests have failed since we have serial numbers from a different network in our contract SNs list at the beginning of **task7_labpyats.py** file.
 
     .. code-block:: python
 
@@ -195,7 +195,7 @@ High-level logic of the test will be as follows:
 
 #. Replace the serial numbers in the list **contract_sn** with SNs from our testbed's equipment.
 
-#. When you finish, save changes to file task7_labpyats.py. By pressing:
+#. When you finish, save changes to file task7_labpyats.py by pressing:
 
     .. code-block:: bash
 
@@ -204,7 +204,7 @@ High-level logic of the test will be as follows:
         Hit [Enter]
 
     .. note::
-        Correct SNs from testbed can obtained also from previous script's output:
+        Correct SNs from testbed can be obtained also from previous script's output:
 
         2020-01-23T13:20:24: %AETEST-ERROR:Failed reason: 9AQHSSAS8AU is not covered by contract
 
@@ -216,7 +216,7 @@ High-level logic of the test will be as follows:
         
         2020-01-23T13:20:26: %AETEST-ERROR:Failed reason: 9IFUH4GPSGL is not covered by contract
 
-#. Еxecute the changed test script once again:
+#. Еxecute the modified test script once again:
 
     .. code-block:: bash
 

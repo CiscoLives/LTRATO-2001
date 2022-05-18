@@ -1,7 +1,7 @@
 Step 1: Collect Show Commands 
 #############################
 
-**Value Proposition:** In this task, we will use the knowledge we have gained from the previous task to write a script that collects **show inventory** command from each device in the testbed. The output of this command will be saved in the file, created by the script collected_task4. These outputs can be used later if you want to compare the future state of the network with the current one. Since it's required to collect outputs from all the devices in the testbed, in this task we will work with the **testbed.devices** object, and iterate over all the devices contained in this object to collect an output of the required commands from each device.
+**Value Proposition:** In this task, we will use the knowledge we have gained from the previous task to write a script that collects **show inventory** command from each device in the testbed. The output of this command will be saved in the file created by the script collected_task4. These outputs can be used later if you want to compare the future state of the network with the current one. Since it's required to collect outputs from all the devices in the testbed, in this task we will work with the **testbed.devices** object, and iterate over all the devices contained in this object to collect an output of the required commands from each device.
 
 #. Let's connect to pyATS and check parts of the code before running the final script. In the beginning, we will check the structure of **testbed.devices** object.
 
@@ -20,7 +20,7 @@ Step 1: Collect Show Commands
 
         As you can see from the output in the previous step, 'Device <device_name>' objects are contained as dictionary values in the object of TopologyDict class. The device names are used as dictionary keys.
 
-#. In this task we will apply standard dictionary method: **items()** to get **keys** (device names) and **values** (respective device objects). For iteration, the for loop will be used:
+#. In this task we will apply standard dictionary method: **items()** to get **keys** (device names) and **values** (respective device objects). To iterate, the for loop will be used:
 
     .. code-block:: python
 
@@ -75,8 +75,8 @@ Step 1: Collect Show Commands
 
     .. note::
 
-        If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of command execution.
-        To handle this situation, it's required to add the following code to reconnect to a device in case a broken connection to a device has been detected:
+        If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the commmand.
+        To handle this situation, it's required to add the following code to reconnect to a device in case that a broken connection to a device is detected:
 
         .. code-block:: python
 
@@ -89,7 +89,7 @@ Step 1: Collect Show Commands
                     device.disconnect()
                     device.connect()
 
-#. Exit the pyATS shell by using the **exit** command. Now we are ready to go through the final version of the script gathering commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).
+#. Exit the pyATS shell by using the **exit** command. Now we are ready to go through the final version of the script by gathering commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).
 
 #. Open the prepared script task4_labpyats.py in Nano editor.
 
@@ -108,7 +108,7 @@ Step 1: Collect Show Commands
 
         To simplify the script, the name of the testbed is hard-coded into the main():
         **testbed_filename = '/home/cisco/labpyats/pyats_testbed.yaml'**
-        In further scripts, the name of a testbed file will be input as a parameter of the script.
+        In further scripts, the name of a testbed file will be inputed as a parameter of the script.
 
     .. image:: images/code-structure.png
         :width: 75%
@@ -118,8 +118,8 @@ Step 1: Collect Show Commands
 
         **log_stdout=False** option in **device.connect** call:
         **device.connect(log_stdout=False)**
-        It will disable all logging to a screen for the whole connection session to this device (until disconnection takes place or until log_stdout is set to **True**).
-        For the script collecting many commands, it would be preferred to prune the output of the commands to the console using this method.
+        This will disable all logging into a screen to this device for the whole connection session (until disconnection takes place or until log_stdout is set to **True**).
+        For the script to collect many commands, it would be preferred to prune the output of the commands to the console using this method.
 
 #. Exit Nano without saving, pressing:
     
@@ -133,7 +133,7 @@ Step 1: Collect Show Commands
     
             python task4_labpyats.py
 
-#. Check that there is a new file created: collected_task4. Check the time when it was created.
+#. Check that there is a new file created: collected_task4. Check the time in which it was created.
 
     .. code-block:: bash
 
