@@ -1,7 +1,7 @@
 Step 4: Run PING to Verify Reachability
 #######################################
 
-**Value Proposition:** In this testcase we must test reachability between devices (**nx-osv-1** and **csr1000v-1**), using the ping command.
+**Value Proposition:** In this testcase we must test reachability between devices (**nx-osv-1** and **csr1000v-1**) using the ping command.
 
 High-level logic of the test will be as follows:
 
@@ -56,7 +56,7 @@ High-level logic of the test will be as follows:
     
     |
 
-    - The **Testbed** object is the top container object, containing all the testbed devices and all the subsequent information that is generic to the    testbed.
+    - The **Testbed** object is the top container object, and it contains all the testbed devices and all the subsequent information that is generic to the testbed.
     - **Device** objects represent physical and/or virtual hardware in a testbed topology.
     - **Interface** objects represent a physical/virtual interface that connects to a link of some sort (for example, Ethernet, ATM, Loopback, and so on).
     - **Link** objects represent the connection (wire) between two or more interfaces within a testbed topology.
@@ -69,10 +69,10 @@ High-level logic of the test will be as follows:
     
     |
 
-    Let's check the structure depicted above using our topology. We will find all the links connected between **nx-osv-1** and **csr1000v-1**.
+    Let's check the structure depicted above using our topology. We will find all the connected links between **nx-osv-1** and **csr1000v-1**.
 
     .. note::
-        We can get the value of an attribute for each object. For example, we can get a link to which an interface object belongs by calling a **link** attribute. We can also reference interfaces which belong to this link, by calling the **interfaces** attribute in step 6 (see code below).
+        We can get the value of an attribute for each object. For example, we can get a link that belongs to an interface object by calling a **link** attribute. We can also reference interfaces which belong to this link, by calling the **interfaces** attribute in step 6 (see code below).
 
     .. code-block:: bash
 
@@ -80,7 +80,7 @@ High-level logic of the test will be as follows:
 
 #. Paste the following snippet to pyATS console:
 
-    - Place the following iPython command in the beginning of code:
+    - Place the following iPython command at the beginning of code:
 
         .. code-block:: bash
 
@@ -122,15 +122,15 @@ High-level logic of the test will be as follows:
 
         nano task9_labpyats.py
 
-#. Review the content of the **PingTestcase** test case, look at the **def setup(self)** function. Code in this function follows the logic used in the previous step:
+#. Review the content of the **PingTestcase** test case, and look at the **def setup(self)** function. The code in this function follows the logic used in the previous step:
 
     - Get all the links between **nx-osv-1** and **csr1000v-1** (nx.find_links(csr).
-    - Get interfaces for each link (**for iface in links.interfaces**) and append its IPv4 address (**iface.ipv4.ip**) into list **dest_ips**, to use them further in ping commands.
+    - Get interfaces for each link (**for iface in links.interfaces**), and append its IPv4 address (**iface.ipv4.ip**) into the list **dest_ips**, to use them further in ping commands.
 
-    To exclude management IP addressing space, there is a check whether an IP address on a link is from a management address space (if dest_ip not in mgmt_net). If an IP address is from a management IP address, it's not appended to the list dest_ips.
+    To exclude management IP addressing space, there is a way to check whether an IP address on a link is from a management address space (if dest_ip not in mgmt_net). If an IP address is from a management IP address, it's not appended to the list dest_ips.
 
     .. note::
-        Note that the IP address in the **link_iface.ipv4.ip** object is of the IPv4Address type so we can check whether it overlaps with IPv4Network without any conversion of type (hence **if dest_ip not in mgmt_net** is used).
+        Note that the IP address in the **link_iface.ipv4.ip** object is of the IPv4Address type, so we can check whether it overlaps with IPv4Network without any conversion of type (hence **if dest_ip not in mgmt_net** is used).
 
     The code of the **setup(self)** function is shown below:
 
@@ -179,7 +179,7 @@ High-level logic of the test will be as follows:
 
         5 packets transmitted, 5 packets received, 0.00% packet loss
 
-    To check this field, we use a regular expression, it extracts packet loss from the ping command's output. If the loss rate is less than 20% (to accommodate the potential first ping drop due to ARP resolution) then the test case should pass successfully:
+    To check this field, we use a regular expression, which extracts the packet loss from the ping command's output. If the loss rate is less than 20%, then the test case should pass successfully:
 
     .. code-block:: python
         :emphasize-lines: 1, 4, 7, 10-11
