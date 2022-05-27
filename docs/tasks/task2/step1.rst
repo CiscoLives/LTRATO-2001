@@ -137,7 +137,7 @@ Step 1: Collect Show Commands
 
     .. code-block:: bash
 
-        ls -l ~/labpyats | grep collected_task4
+        ls -l ~/LTRATO-2001 | grep collected_task4
     
     Sample output in Bash shell:
 
@@ -149,7 +149,7 @@ Step 1: Collect Show Commands
     
         .. code-block:: bash
     
-            cat ~/labpyats/collected_task4
+            cat ~/LTRATO-2001/collected_task4
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>

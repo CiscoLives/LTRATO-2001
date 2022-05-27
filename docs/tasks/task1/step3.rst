@@ -1,19 +1,22 @@
 Step 3: pyATS Capabilities using the pyATS Shell
 ################################################
 
-**Value Proposition:** We believe it is always faster to start learning about pyATS in an interactive format where you can try different pyATS functions. This allows you to run commands and see results immediately instead of making small changes in Python code and re-running it after every minor change. pyATS has an interactive shell for developing tests, and it is runnned from Bash shell in the following way:
+**Value Proposition:** We believe it is always faster to start learning about pyATS in an interactive format where you can try different pyATS functions.
+Learning in an interactive format allows you to run commands and see results immediately instead of making small changes in Python code and re-running it after every minor change.
+pyATS has an interactive shell for developing tests, and it is executed from a Bash shell in the following way:
 
 .. code-block:: bash
 
     pyats shell --testbed-file <testbed_file_name>
 
 
-We will call the pyATS interactive shell **pyATS shell** throughout this guide.
-
+.. note:: 
+    
+    The pyATS interactive shell will be called **pyATS shell** throughout this guide
 
 Let's begin with the pyATS shell, using it with ``pyats_testbed.yaml``, which we've seen in the previous task.
 
-The following pyATS methods would be used in this task:
+You will be using the following pyATS methods throughout this task:
 
 - pyATS connect
 - pyATS execute
@@ -21,13 +24,19 @@ The following pyATS methods would be used in this task:
 - pyATS learn
 - pyATS diff
 
-#. Enter the following command to run the pyATS shell command from the Bash shell, and specify the YAML testbed file as the parameter. After 10 seconds approximately, the interactive shell will open. This is where you can input the Python code.
+#. Enter the following command to run the pyATS shell command from the Bash shell and specify the YAML testbed file as the parameter. This shell is where you can run the Python code.
+
+    .. tip:: 
+        
+        The interactive shell might take some time to load (approximately 20 seconds)
 
     .. code-block:: bash
 
         pyats shell --testbed-file pyats_testbed.yaml
 
-#. The output of the command should contain the following (version of Python might be different):
+
+
+#. The output of the command should contain the following (the version of Python might differ):
 
     .. code-block:: bash
 
@@ -38,7 +47,7 @@ The following pyATS methods would be used in this task:
 
 #. Check the devices included in the lab's testbed.
 
-    .. code-block:: bash
+    .. code-block:: python
 
         testbed.devices
 
@@ -64,14 +73,14 @@ The following pyATS methods would be used in this task:
             nx.connect()
             asa.connect()
 
-    - Let's prepare ourselves for our first test and collect **show inventory** the command output from the devices.
+    - Let's prepare for our first test and collect the output of the **show inventory** command from the devices.
 
         .. code-block:: python
 
             nx_output = nx.parse('show inventory')
             asa_output = asa.parse('show inventory')
 
-#. Verify the collected information in the output of each command. Pay attention to the output of both executed methods returned as plain text (string type in Python):
+#. Verify the collected information for each command. Pay attention to the output of both executed methods returned as plain text (string type in Python):
 
     .. code-block:: bash
 
@@ -80,21 +89,21 @@ The following pyATS methods would be used in this task:
         asav-1#
         Out[7]: 'Name: "Chassis", DESCR: "ASAv Adaptive Security Virtual Appliance"\r\nPID: ASAv, VID: V01, SN: 9AWXBH2QJP7'
 
-#. Collect the structured data output using parse command.
+#. Convert the output to structured data using the **parse** command.
 
-    - Import **pprint** python module to represent collected output in a better format.
+    - Import **pprint** python module to view the collected output in a better format.
 
         .. code-block:: python
 
             from pprint import pprint
 
-    - Run **parse** command to convert the device output into a Python dictionary, which stores the device data as a set of key-value pairs.
+    - Run the **parse** command to convert the device output into a Python dictionary, storing the device data as a set of key-value pairs.
 
         .. code-block:: python
 
             nx_output = nx.parse('show inventory')
 
-    - Verify collected information using pprint command.
+    - Verify collected information using the pprint command.
 
         .. code-block:: python
 
@@ -130,16 +139,16 @@ The following pyATS methods would be used in this task:
                                 'slot': '1',
                                 'vid': 'V02'}}}
 
-    - Since information is collected in a Python dictionary, we can call any value using its corresponding key. Collect serial number of chassis using its key.
+    - Since the information is collected in a Python dictionary, we can call any value using its corresponding key. Lets collect the serial number of the chassis using its key.
 
         .. code-block:: python
 
             nx_serial = nx_output['name']['Chassis']['serial_number']
             pprint(nx_serial)
 
-#. Collect features state using **learn** command.
+#. Collect features state using the **learn** command.
 
-    - Run **learn** command to get the state of the feature (**ospf** in our case) into a Python dictionary, which stores the device data as a set of key-value pairs.
+    - Run the **learn** command to get the state of the feature (**ospf** in our case) into a Python dictionary, which stores the device data as a set of key-value pairs.
     
             .. code-block:: python
     
@@ -151,22 +160,22 @@ The following pyATS methods would be used in this task:
 
             pprint(ospf_state_before.info)
 
-    - Run **parse** command to collect interfaces output when network.
+    - Run the **parse** command to collect the output of **show interface** in the network.
 
         .. code-block:: python
 
             int_before = nx.parse('show interface')
     
-#. Now impose a failure in the topology, shutting down the interface **Ethernet1/1** on the device **nx-osv-1**.
+#. Let us now simulate a failure in the topology, shutting down the interface **Ethernet1/1** on the device **nx-osv-1**.
 
-    - Open Putty terminal using the shortcut on the desktop.
+    - Open the Putty terminal using the shortcut on the desktop.
     - Connect to **nx-osv-1** using the password **cisco**
 
         .. image:: images/putty-01.png
             :width: 35%
             :align: center
 
-    - Disable (input **shutdown** command) interface **Ethernet1/1** on **nx-osv-1**. Input the following commands in the console of nx-osv-1:
+    - Disable (using the **shutdown** command) interface **Ethernet1/1** on **nx-osv-1**. Issuing the following commands in the console of nx-osv-1:
 
         .. code-block:: bash
 
@@ -174,13 +183,13 @@ The following pyATS methods would be used in this task:
             interface Ethernet1/1
             shutdown
 
-    - In pyATS shell run **learn** command to get the state of the feature (**ospf** in our case) into a Python dictionary, which stores the device data as a set of key-value pairs.
+    - In the pyATS shell, run the **learn** command to get the state of the feature (**ospf** in our case) into a Python dictionary, which stores the device data as a set of key-value pairs.
     
         .. code-block:: python
 
             ospf_state_after = nx.learn('ospf')
 
-    - Import the PyATS **Diff** package and compare previous (working) and current state (failed) to understand what has changed and then troubleshoot the problem.
+    - Import the PyATS **Diff** package and compare the previous (working) and current state (failed) to understand what has changed and then troubleshoot the problem.
 
         .. code-block:: python
 
@@ -190,13 +199,13 @@ The following pyATS methods would be used in this task:
             print(diff)
 
     - PyATS Diff can compare outputs of structured data collected by the parse command.
-    - Parse **show interface** to collect interfaces output into a Python dictionary.
+    - Convert the **show interface** command into a Python dictionary using the parse method.
     
             .. code-block:: python
     
                 int_after = nx.parse('show interface')
 
-    - Compare before and after outputs, using PyATS Diff package.
+    - Compare the output before and after using the PyATS Diff package.
         
             .. code-block:: python
     
@@ -204,7 +213,7 @@ The following pyATS methods would be used in this task:
                 diff2.findDiff()
                 print(diff2)
   
-    - Enable (input **no shutdown** command) interface **Ethernet1/1** on **nx-osv-1**. Input the following commands in the console of nx-osv-1:
+    - Enable (using the **no shutdown** command) interface **Ethernet1/1** on **nx-osv-1**. Execute the following commands in the console of nx-osv-1:
     
             .. code-block:: bash
     
@@ -212,11 +221,11 @@ The following pyATS methods would be used in this task:
                 interface Ethernet1/1
                 no shutdown
 
-    - Exit the pyATS shell by using the exit command and proceed to the next step.
+    - Exit the pyATS shell using the exit command and proceed to the next step.
 
-#. PyATS parse/learn and diff commands can be runnned from a Linux Shell, and you can start using PyATS without coding skills.
+#. PyATS' parse, learn, and diff commands can also be executed directly on a Linux Shell.
 
-    - Observe PyATS capabilities from Linux Shell running pyATS parse command from a Linux Shell:
+    - Observe PyATS capabilities from Linux Shell running the pyATS parse command from a Linux Shell:
 
         .. code-block:: bash
 
@@ -228,7 +237,7 @@ The following pyATS methods would be used in this task:
 
             pyats learn ospf --devices nx-osv-1 --testbed-file pyats_testbed.yaml --output working/
     
-    - Disable (input **shutdown** command) interface **Ethernet1/1** on **nx-osv-1**.
+    - Disable (using the **shutdown** command) interface **Ethernet1/1** on **nx-osv-1**.
 
         .. code-block:: bash
 
@@ -236,33 +245,33 @@ The following pyATS methods would be used in this task:
             interface Ethernet1/1
             shutdown
 
-    - Return to the Linux Shell, and collect outputs after failure by running pyATS parse command from the Linux Shell:
+    - Return to the Linux Shell, and collect the output by running the pyATS parse command from the Linux Shell:
 
         .. code-block:: bash
 
             pyats parse "show interface" --devices nx-osv-1 --testbed-file pyats_testbed.yaml --output parse-failed/
 
-    - Run pyATS learn command from the Linux Shell for the OSPF feature:
+    - Run the pyATS learn command from the Linux Shell for the OSPF feature:
     
         .. code-block:: bash
 
             pyats learn ospf --devices nx-osv-1 --testbed-file pyats_testbed.yaml --output failed/
 
-    -  Run pyATS diff for parsed commands from the Linux Shell:
+    -  Run the pyATS diff command for the parsed commands from the Linux Shell:
 
         .. code-block:: bash
 
             pyats diff parse-work parse-failed
             cat ./diff_nx-osv-1_show-interface_parsed.txt
 
-    - Run pyATS diff for the previously learned states from the Linux Shell:
+    - Run the pyATS diff for the previously learned states from the Linux Shell:
 
         .. code-block:: bash
 
             pyats diff working failed
             cat ./diff_ospf_nxos_nx-osv-1_ops.txt
 
-    - Don't forget to enable (input **no shutdown** command) interface **Ethernet1/1** on **nx-osv-1**:
+    - Don't forget to enable (using the **no shutdown** command) interface **Ethernet1/1** on **nx-osv-1**:
 
         .. code-block:: bash
 

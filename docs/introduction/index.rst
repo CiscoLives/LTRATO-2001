@@ -2,7 +2,7 @@
 Introduction
 ############
 
-This document is intended for use by attendees of the Cisco Live 2022 who are taking Network Programability Hands-on Lab (LTRATO-2001).
+This document is intended for use by attendees of the Cisco Live 2022 who are taking Network Programmability Hands-on Lab (LTRATO-2001).
 
 Prerequisites
 =============
@@ -12,28 +12,29 @@ Prerequisites
 - Have Cisco AnyConnect® installed.
 
 
-Learning Objetives
-==================
+Learning Objectives
+===================
 
-During this lab, you will get hands-on experience with pyATS which is a vendor-agnostic suite of libraries for Python. You will learn how to build your automated tests, using those frameworks.
-pyATS opens a wide variety of opportunities and soon you will see it's not hard to start using them.
+During this lab, you will get hands-on experience with pyATS, a vendor-agnostic suite of libraries for Python.
+Then, you will learn how to build your automated tests using those frameworks.
+pyATS opens a wide variety of opportunities, and soon, you will see it is not hard to start using them.
 During this lab, we will show you real-world examples that you can use to start implementing the automation of tests in your network. 
 
-Upon successful completion of this lab, you will be able to:
+Upon completing this lab, you will be able to:
 
 #. Create a pyATS testbed file.
 #. Understand the main capabilities and components of the pyATS suite.
 #. Write scripts that can automate testing for specific network topology.
 
 
-Throughout this lab you will work with and learn the following features and concepts:
+Throughout this lab, you will work with and learn the following features and concepts:
 
 1.	pyATS testbed file
 2.	pyATS shell
 3.	Device.connect() and Device.execute() methods
 4.	pyATS test script structure
-5.	pyATS testcases
-6.	Logging in pyATS
+5.	pyATS test cases
+6.	Logging in to pyATS
 7.	pyATS Parse
 8.	pyATS Learn
 9.	find_links method to find all the links between devices.
