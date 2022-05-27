@@ -112,12 +112,15 @@
              
   <div class="section" id="step-2-writing-test-script">
 <h1>Step 2: Writing Test Script<a class="headerlink" href="#step-2-writing-test-script" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> Now we will write our first test script on Python using the pyATS library. Our test script will connect to all the devices in the testbed and print the results of the connection. If the connections to all the devices are successful, then the test will pass; else, it will fail. Using this simple test script, we will learn the structure of the pyATS test script file.</p>
-<p>The pyATS test script is a file in Python code which uses the pyATS library.
+<p><strong>Value Proposition:</strong> We will write our first test script on Python using the pyATS library.
+Our test script will connect to all the devices in the testbed and print the results of the connection.
+If the connections to all the devices are successful, the test will pass; otherwise, it will fail.
+Using this simple test script, we will learn the structure of the pyATS test script file.</p>
+<p>The pyATS test script is a file in Python code that uses the pyATS library.
 The structure of the pyATS test script is modular and straightforward.
 Each test script is written in a Python file and split into three major sections (Python classes) – see the illustration below for a graphical representation:</p>
 <ul class="simple">
-<li><p><strong>Common Setup:</strong> The first section of the test script, runnned at the beginning. It performs all the “common” setups required for the script.</p></li>
+<li><p><strong>Common Setup:</strong> The first section of the test script runnned at the beginning. It performs all the “common” setups required for the script.</p></li>
 <li><p><strong>Testcase(s):</strong> A self-contained individual unit of testing. Each testcase is independent of the other testcases.</p></li>
 <li><p><strong>Common Cleanup:</strong> The last section in the test script. It performs all the “common” cleanups at the end of execution.</p></li>
 </ul>
@@ -128,9 +131,9 @@ Each test script is written in a Python file and split into three major sections
 </div>
 <a class="reference internal image-reference" href="../../_images/test-script-structure.png"><img alt="../../_images/test-script-structure.png" class="align-center" src="../../_images/test-script-structure.png" style="width: 75%;" /></a>
 <ol class="arabic">
-<li><p>Let’s verify our first test script. Open the file <strong>task5_labpyats.py</strong> and observe its structure:</p>
+<li><p>Let’s verify our first test script. Open the file <strong>task2step2.py</strong> and observe its structure:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task5_labpyats.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task2step2.py
 </pre></div>
 </div>
 </div></blockquote>
@@ -140,15 +143,19 @@ Each test script is written in a Python file and split into three major sections
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import of pyATS logging banner</span>
 <span class="kn">from</span> <span class="nn">pyats.log.utils</span> <span class="kn">import</span> <span class="n">banner</span>
 
-<span class="o">&lt;..&gt;</span>
+<span class="c1">#</span>
+<span class="c1"># Output ommitted</span>
+<span class="c1">#</span>
 
 <span class="c1"># This section sets up logging (ensure the log.level is the same or higher than</span>
 <span class="c1"># level of log.info where banner is used)</span>
 
-<span class="k">global</span> <span class="n">log</span>
 <span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 <span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-<span class="o">&lt;..&gt;</span>
+
+<span class="c1">#</span>
+<span class="c1"># Output ommitted</span>
+<span class="c1">#</span>
 
 <span class="c1"># Use pyATS logging banner to format the output</span>
 <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connect to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
@@ -167,13 +174,14 @@ Each test script is written in a Python file and split into three major sections
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The pyATS logging banner itself does not perform logging, and instead it only performs style formatting of its input messages. Hence, the <strong>log.info(banner(“logging message”))</strong> construction is used in the code for logging.
-Since the banner is logged with INFO logging level, it’s required to set logging level up to INFO (default is WARNING):
+<p>The pyATS logging banner itself does not perform logging; it only formats input messages.
+Hence, the <strong>log.info(banner(“logging message”))</strong> construction is used in the code for logging.
+Since the banner is logged with INFO logging level, it’s required to set the logging level up to INFO (default is WARNING):
 <strong>log.setLevel(logging.INFO)</strong></p>
 </div>
 </div></blockquote>
 </li>
-<li><p>Let’s look at the main contents of this example. Python class <strong>common_setup</strong> which is inherited from <strong>aetest.CommonSetup</strong> represents the major section “Common Setup” (see the following illustration).  The Python class <strong>common_setup</strong> is where initializations and preparations before the actual script’s testcases should be performed. For this reason, code in class <strong>common_setup</strong> is always runnned first, before all the testcases. Refer to the description of the code of this Python class shown below:</p>
+<li><p>Let’s look at the main contents of this example. Python class <strong>common_setup</strong>, which iherits from <strong>aetest.CommonSetup</strong> represents the major section, “Common Setup” (see the following illustration).  The Python class <strong>common_setup</strong> is where initializations and preparations before the actual script’s testcases should be performed. For this reason, code in class <strong>common_setup</strong> is always runnned first, before all the testcases. Refer to the description of the code of this Python class shown below:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">common_setup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
 <span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
@@ -193,7 +201,7 @@ Since the banner is logged with INFO logging level, it’s required to set loggi
     <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The following code is used to load a testbed file from filename specified as command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies name of object that would represent the testbed file in code):</p>
+<p>The following code is used to load a testbed file from the filename specified in the command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies the name of the object that would represent the testbed file in code):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
 <span class="c1"># Load testbed file which is passed as command-line argument</span>
@@ -216,7 +224,7 @@ Since the banner is logged with INFO logging level, it’s required to set loggi
 </li>
 <li><p>Let’s run our first test script. This test script will try to connect to all the devices in the testbed and print the results of these attempts:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task5_labpyats.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task2step2.py --testbed pyats_testbed.yaml
 </pre></div>
 </div>
 </div></blockquote>

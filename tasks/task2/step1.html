@@ -112,12 +112,21 @@
              
   <div class="section" id="step-1-collect-show-commands">
 <h1>Step 1: Collect Show Commands<a class="headerlink" href="#step-1-collect-show-commands" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this task, we will use the knowledge we have gained from the previous task to write a script that collects <strong>show inventory</strong> command from each device in the testbed. The output of this command will be saved in the file created by the script collected_task4. These outputs can be used later if you want to compare the future state of the network with the current one. Since it’s required to collect outputs from all the devices in the testbed, in this task we will work with the <strong>testbed.devices</strong> object, and iterate over all the devices contained in this object to collect an output of the required commands from each device.</p>
+<p><strong>Value Proposition:</strong> In this task, we will use the knowledge we have gained from the previous task to write a script that collects the <strong>show inventory</strong> command from each device in the testbed.
+The output of this command will be saved in the file <em>task2step1.txt</em> created by the script <em>task2step1.py</em>.
+The output can be used later if you want to compare the future state of the network with the current one.
+Since it is required to collect outputs from all the devices in the testbed, in this task, we will work with the <strong>testbed.devices</strong> object and iterate over all the devices contained in this object to collect an output of the required commands from each device.</p>
 <ol class="arabic">
-<li><p>Let’s connect to pyATS and check parts of the code before running the final script. In the beginning, we will check the structure of <strong>testbed.devices</strong> object.</p>
+<li><p>Let’s connect to pyATS and check parts of the code before running the final script.</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pyats</span> <span class="n">shell</span> <span class="o">--</span><span class="n">testbed</span><span class="o">-</span><span class="n">file</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">yaml</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">)</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Now, let’s check the structure of the <strong>testbed.devices</strong> object.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -129,34 +138,39 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As you can see from the output in the previous step, ‘Device &lt;device_name&gt;’ objects are contained as dictionary values in the object of TopologyDict class. The device names are used as dictionary keys.</p>
+<p>As you can see from the output in the previous step, ‘Device &lt;device_name&gt;’ objects are contained as dictionary values in the object of TopologyDict class. Therefore, the device names are used as dictionary keys.</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>In this task we will apply standard dictionary method: <strong>items()</strong> to get <strong>keys</strong> (device names) and <strong>values</strong> (respective device objects). To iterate, the for loop will be used:</p>
+<li><p>In this task we will apply standard dictionary method: <strong>items()</strong> to get the <strong>keys</strong> (device names) and <strong>values</strong> (respective device objects). We will iterate over the objects using a Python for-loop.</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># device_name - stores hostname of a device</span>
+<div><div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As seen in the following code, Python uses indentation (the spaces at the beginning of a code line) to specify code blocks. The indentation is crucial because it determines the scope of the code.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">unicon.core.erros</span> <span class="kn">import</span> <span class="n">EOF</span><span class="p">,</span> <span class="n">SubCommandFailure</span>
+
+<span class="c1"># device_name - stores hostname of a device</span>
 <span class="c1"># device - stores device object</span>
 <span class="k">for</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-
+    <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1"># device.execute() method - will used to get the output of &quot;show inventory&quot; command</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;##########################</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="n">SubCommandFailure</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="p">,</span> <span class="n">EOF</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connection closed, try to reconnect&#39;</span><span class="p">)</span>
+            <span class="n">device</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
+            <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Python uses Indentation (the spaces at the beginning of a code line) to specify code blocks. The indentation is important because it determines the scope of the code.</p>
-</div>
-<a class="reference internal image-reference" href="../../_images/indentation-example.png"><img alt="../../_images/indentation-example.png" class="align-center" src="../../_images/indentation-example.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Paste the following snippet to pyATS console:</p>
+<li><p>Paste the following snippet to the pyATS console:</p>
 <blockquote>
 <div><ul>
-<li><p>Place the following iPython command in the beginning of code:</p>
+<li><p>Place the following iPython command at the beginning of the code:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">cpaste</span>
 </pre></div>
@@ -177,7 +191,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{out}</span><span class="s1">&#39;</span><span class="p">)</span>
     <span class="k">except</span> <span class="n">SubCommandFailure</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">__cause__</span><span class="p">,</span> <span class="n">EOF</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connection closed, try reconnect&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Connection closed, try to reconnect&#39;</span><span class="p">)</span>
             <span class="n">device</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span>
             <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
 </pre></div>
@@ -188,12 +202,12 @@
 </ul>
 </div></blockquote>
 </li>
-<li><p>Check the result of this code. Now each device should return the output of <strong>show inventory</strong> command.</p>
+<li><p>Check the result of this code. Now each device should return the output of the <strong>show inventory</strong> command.</p>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the commmand.
-To handle this situation, it’s required to add the following code to reconnect to a device in case that a broken connection to a device is detected:</p>
+<p>If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the command.
+To address this situation, we will add the following code to reconnect to a device:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">unicon.core.errors</span> <span class="kn">import</span> <span class="n">EOF</span><span class="p">,</span> <span class="n">SubCommandFailure</span>
 <span class="k">try</span><span class="p">:</span>
     <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
@@ -207,7 +221,7 @@ To handle this situation, it’s required to add the following code to reconnect
 </div>
 </div></blockquote>
 </li>
-<li><p>Exit the pyATS shell by using the <strong>exit</strong> command. Now we are ready to go through the final version of the script by gathering commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).</p></li>
+<li><p>Exit the pyATS shell by using the <strong>exit</strong> command. Now we are ready to go through the final version of the script by gathering the commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).</p></li>
 <li><p>Open the prepared script task4_labpyats.py in Nano editor.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task4_labpyats.py
@@ -215,7 +229,7 @@ To handle this situation, it’s required to add the following code to reconnect
 </div>
 </div></blockquote>
 </li>
-<li><p>Before diving into the details of the code, study the explanation of the code given below. The script <strong>task4_labpyats.py</strong> has the following Python functions:</p>
+<li><p>Before diving into the details of the code, study the explanation of the code given below. The script <strong>task2step1.py</strong> has the following Python functions:</p>
 <blockquote>
 <div><table class="docutils align-default">
 <colgroup>
@@ -228,37 +242,28 @@ To handle this situation, it’s required to add the following code to reconnect
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>def main()</p></td>
+<tr class="row-even"><td><p>main()</p></td>
 <td><p>The main function (see “1” on the illustration that follows). It calls the collect_device_commands function (see “2”).</p></td>
 </tr>
-<tr class="row-odd"><td><p>def collect_device_commands( command_to_gather, output_filename)</p></td>
+<tr class="row-odd"><td><p>collect_device_commands( command_to_gather, output_filename)</p></td>
 <td><p>pyATS job file to run tests from Task 10</p></td>
 </tr>
-<tr class="row-even"><td><p>Task4_labpyats.py</p></td>
-<td><p>The function that does most of the job. The main tasks this function performs include the following:</p>
-<p>1.	Iterates over devices - see “3” (in the way it has been done in the previous steps). For each device:</p>
-<p>2.	Connects to the device (see “4”).</p>
-<p>3.	Writes output of the commands for this device to a file – see “5”.</p>
-</td>
-</tr>
-<tr class="row-odd"><td><p>def write_commands_to_file(abs_filename, command_output)</p></td>
+<tr class="row-even"><td><p>write_commands_to_file(abs_filename, command_output)</p></td>
 <td><p>This is a supplementary function and it’s used to write the output of commands to a file (see “5”).</p></td>
 </tr>
 </tbody>
 </table>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>To simplify the script, the name of the testbed is hard-coded into the main():
-<strong>testbed_filename = ‘/home/cisco/labpyats/pyats_testbed.yaml’</strong>
-In further scripts, the name of a testbed file will be inputed as a parameter of the script.</p>
+<p>To simplify the script, the name of the testbed is hard-coded into the main() function:
+<strong>testbed_filename = ‘pyats_testbed.yaml’</strong>
+In subsequent scripts, the name of the testbed file will be provided as a parameter to the script.</p>
 </div>
 <a class="reference internal image-reference" href="../../_images/code-structure.png"><img alt="../../_images/code-structure.png" class="align-center" src="../../_images/code-structure.png" style="width: 75%;" /></a>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><strong>log_stdout=False</strong> option in <strong>device.connect</strong> call:
-<strong>device.connect(log_stdout=False)</strong>
-This will disable all logging into a screen to this device for the whole connection session (until disconnection takes place or until log_stdout is set to <strong>True</strong>).
-For the script to collect many commands, it would be preferred to prune the output of the commands to the console using this method.</p>
+<p>The <strong>log_stdout=False</strong> option in <strong>device.connect</strong> call will disable all logging into a screen to this device for the whole connection session (until disconnection takes place or until log_stdout is set to <strong>True</strong>).
+When multiple commands are being executed, it is preferred to avoid logging the output into the screen by using this method.</p>
 </div>
 </div></blockquote>
 </li>
@@ -276,20 +281,20 @@ For the script to collect many commands, it would be preferred to prune the outp
 </div>
 </div></blockquote>
 </li>
-<li><p>Check that there is a new file created: collected_task4. Check the time in which it was created.</p>
+<li><p>Check that there is a new file created: collected_task4. Then, check the time in which the file was created.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l ~/LTRATO-2001 <span class="p">|</span> grep collected_task4
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l ~/LTRATO-2001 <span class="p">|</span> grep task2step1.txt
 </pre></div>
 </div>
 <p>Sample output in Bash shell:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-rw-r--r-- <span class="m">1</span> cisco cisco  <span class="m">6</span>.9K Nov  <span class="m">5</span> <span class="m">17</span>:12 collected_task4
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>-rw-r--r-- <span class="m">1</span> cisco cisco  <span class="m">6</span>.9K Nov  <span class="m">5</span> <span class="m">17</span>:12 task2step1.txt
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Check content of collected_task4 file.</p>
+<li><p>Check the content of <strong>task2step1.txt</strong> file.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat ~/LTRATO-2001/collected_task4
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat ~/LTRATO-2001/task2step1.txt
 </pre></div>
 </div>
 </div></blockquote>
