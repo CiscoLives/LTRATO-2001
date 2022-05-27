@@ -3,27 +3,9 @@ Step 2: Verify pyATS Testbed File
 
 **Value Proposition:** Explore pyATS testbed file used in the lab.
 
-For pyATS to be able to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol and connections between network devices.
+For pyATS to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol, and connections between network devices.
 
-This information is stored in the pyATS testbed file (in YAML format).
-
-Can this information be gathered automatically, and can pyATS testbed file be prepared for us?
-
-Sure. Since the lab is running in Cisco Modeling Labs (CML) `cmlutils <https://github.com/CiscoDevNet/virlutils>`__ , tool can be used to prepare pyATS testbed file from CML topology.
-
-.. note ::
-    Testbed file was already prepared and you do not need to call cmlutils now. However, if you are curious about how can you prepare pyATS testbed file from CML topology, then the needed commands are:
-
-    .. code-block:: bash
-
-        source /var/lib/virlutils/venv/bin/activate
-
-        cml ls (get id from ID column)
-        cml use --id XXX
-
-        cml generate pyats
-
-        source ~/pyats/bin/activate
+This information is stored in the pyATS testbed file (`YAML format <https://pubhub.devnetcloud.com/media/pyats/docs/topology/schema.html>`_).
 
 The testbed YAML file for pyATS has been pre-created for this lab, and it is named pyats_testbed.yaml.
 
@@ -31,7 +13,7 @@ The testbed YAML file for pyATS has been pre-created for this lab, and it is nam
 
     .. code-block:: bash
 
-        cd ~/labpyats
+        cd ~/LTRATO-2001
 
 
 #. Open the pre-created ``pyats_testbed.yaml`` file in the Nano editor by entering the following command:
@@ -61,10 +43,10 @@ The testbed YAML file for pyATS has been pre-created for this lab, and it is nam
             line:
             password: "%ENV{PYATS_AUTH_PASS}"
 
-        We recommend you store credentials separately, at least as environmental variables.
+        We recommend you store credentials separately as environment variables.
 
 
-#. Exit Nano without saving, pressing:
+#. Exit Nano without saving by pressing:
 
     .. code-block:: bash
 
@@ -74,13 +56,17 @@ The testbed YAML file for pyATS has been pre-created for this lab, and it is nam
 
     .. code-block:: bash
     
-        echo $PYATS_USERNAME $PYATS_PASSWORD $PYATS_AUTH_PASS
+        echo $PYATS_USERNAME
+        echo $PYATS_PASSWORD
+        echo $PYATS_AUTH_PASS
 
 #. The output of the command should contain the following:
 
     .. code-block:: bash
 
-        cisco cisco cisco
+        cisco
+        cisco
+        cisco
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>

@@ -1,4 +1,10 @@
 {
-    "restructuredtext.confPath": "${workspaceFolder}/docs",
-    "python.pythonPath": ".venv/bin/python3"
+  "restructuredtext.confPath": "${workspaceFolder}/docs",
+  "python.pythonPath": ".venv/bin/python3",
+  "grammarly.selectors": [
+    {
+      "language": "restructuredtext",
+      "scheme": "file"
+    }
+  ]
 }
