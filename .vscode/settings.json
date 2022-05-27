@@ -6,5 +6,12 @@
       "language": "restructuredtext",
       "scheme": "file"
     }
-  ]
+  ],
+  "grammarly.config.suggestions.OxfordComma": true,
+  "grammarly.config.suggestions.ConjunctionAtStartOfSentence": true,
+  "grammarly.config.documentDomain": "general",
+  "grammarly.config.suggestions.PrepositionAtTheEndOfSentence": true,
+  "grammarly.config.suggestions.PassiveVoice": false,
+  "grammarly.config.suggestions.UnnecessaryEllipses": false,
+
 }

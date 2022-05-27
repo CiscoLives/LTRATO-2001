@@ -175,3 +175,4 @@ dmypy.json
 
 .idea
 parse-work/
+task*step*.txt
