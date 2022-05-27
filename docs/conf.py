@@ -29,10 +29,7 @@ author = "Luis Rueda and Jairo Leon"
 # ones.
 extensions = [
     "sphinx.ext.githubpages",
-    "sphinxcontrib.plantuml",
     "sphinx.ext.todo",
-    "sphinx.ext.graphviz",
-    "sphinx.ext.autodoc",
     "sphinx_copybutton",
 ]
 
