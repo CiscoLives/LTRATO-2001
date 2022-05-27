@@ -1,12 +1,4 @@
 Function,Description
-def main(),The main function (see “1” on the illustration that follows). It calls the collect_device_commands function (see “2”).
-"def collect_device_commands( command_to_gather, output_filename) ",pyATS job file to run tests from Task 10
-Task4_labpyats.py,"The function that does most of the job. The main tasks this function performs include the following:
-
-1.	Iterates over devices - see “3” (in the way it has been done in the previous steps). For each device:
-
-2.	Connects to the device (see “4”). 
-
-3.	Writes output of the commands for this device to a file – see “5”.
-"
-"def write_commands_to_file(abs_filename, command_output)",This is a supplementary function and it’s used to write the output of commands to a file (see “5”).
+main(),The main function (see “1” on the illustration that follows). It calls the collect_device_commands function (see “2”).
+"collect_device_commands( command_to_gather, output_filename) ",pyATS job file to run tests from Task 10
+"write_commands_to_file(abs_filename, command_output)",This is a supplementary function and it’s used to write the output of commands to a file (see “5”).

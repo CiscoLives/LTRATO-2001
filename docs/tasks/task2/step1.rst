@@ -1,13 +1,21 @@
 Step 1: Collect Show Commands 
 #############################
 
-**Value Proposition:** In this task, we will use the knowledge we have gained from the previous task to write a script that collects **show inventory** command from each device in the testbed. The output of this command will be saved in the file created by the script collected_task4. These outputs can be used later if you want to compare the future state of the network with the current one. Since it's required to collect outputs from all the devices in the testbed, in this task we will work with the **testbed.devices** object, and iterate over all the devices contained in this object to collect an output of the required commands from each device.
+**Value Proposition:** In this task, we will use the knowledge we have gained from the previous task to write a script that collects the **show inventory** command from each device in the testbed. 
+The output of this command will be saved in the file *task2step1.txt* created by the script *task2step1.py*.
+The output can be used later if you want to compare the future state of the network with the current one.
+Since it is required to collect outputs from all the devices in the testbed, in this task, we will work with the **testbed.devices** object and iterate over all the devices contained in this object to collect an output of the required commands from each device.
 
-#. Let's connect to pyATS and check parts of the code before running the final script. In the beginning, we will check the structure of **testbed.devices** object.
+#. Let's connect to pyATS and check parts of the code before running the final script.
+
+    .. code-block:: bash
+
+        pyats shell --testbed-file pyats_testbed.yaml
+
+#. Now, let's check the structure of the **testbed.devices** object.
 
     .. code-block:: python
 
-        pyats shell --testbed-file pyats_testbed.yaml
         print(testbed.devices)
 
 #. Check the output
@@ -18,32 +26,35 @@ Step 1: Collect Show Commands
 
     .. note::
 
-        As you can see from the output in the previous step, 'Device <device_name>' objects are contained as dictionary values in the object of TopologyDict class. The device names are used as dictionary keys.
+        As you can see from the output in the previous step, 'Device <device_name>' objects are contained as dictionary values in the object of TopologyDict class. Therefore, the device names are used as dictionary keys.
 
-#. In this task we will apply standard dictionary method: **items()** to get **keys** (device names) and **values** (respective device objects). To iterate, the for loop will be used:
+#. In this task we will apply standard dictionary method: **items()** to get the **keys** (device names) and **values** (respective device objects). We will iterate over the objects using a Python for-loop.
+
+    .. note::
+        As seen in the following code, Python uses indentation (the spaces at the beginning of a code line) to specify code blocks. The indentation is crucial because it determines the scope of the code.
 
     .. code-block:: python
+
+        from unicon.core.erros import EOF, SubCommandFailure
 
         # device_name - stores hostname of a device
         # device - stores device object
         for device_name, device in testbed.devices.items():
-            device.connect()
-        
+            device.connect(log_stdout=False)
             # device.execute() method - will used to get the output of "show inventory" command
             try:
                 device.execute('show inventory')
                 print('##########################\n')
+            except SubCommandFailure as e:
+                if isinstance(e.__cause__, EOF):
+                    print('Connection closed, try to reconnect')
+                    device.disconnect()
+                    device.connect()
 
-    .. note::
-        Python uses Indentation (the spaces at the beginning of a code line) to specify code blocks. The indentation is important because it determines the scope of the code.
 
-    .. image:: images/indentation-example.png
-        :width: 75%
-        :align: center
+#. Paste the following snippet to the pyATS console:
 
-#. Paste the following snippet to pyATS console:
-
-    - Place the following iPython command in the beginning of code:
+    - Place the following iPython command at the beginning of the code:
 
         .. code-block:: python
 
@@ -65,18 +76,18 @@ Step 1: Collect Show Commands
                     print(f'{out}')
                 except SubCommandFailure as e:
                     if isinstance(e.__cause__, EOF):
-                        print('Connection closed, try reconnect')
+                        print('Connection closed, try to reconnect')
                         device.disconnect()
                         device.connect()
 
     - End the code with ``--``
 
-#. Check the result of this code. Now each device should return the output of **show inventory** command.
+#. Check the result of this code. Now each device should return the output of the **show inventory** command.
 
     .. note::
 
-        If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the commmand.
-        To handle this situation, it's required to add the following code to reconnect to a device in case that a broken connection to a device is detected:
+        If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the command.
+        To address this situation, we will add the following code to reconnect to a device:
 
         .. code-block:: python
 
@@ -89,7 +100,7 @@ Step 1: Collect Show Commands
                     device.disconnect()
                     device.connect()
 
-#. Exit the pyATS shell by using the **exit** command. Now we are ready to go through the final version of the script by gathering commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).
+#. Exit the pyATS shell by using the **exit** command. Now we are ready to go through the final version of the script by gathering the commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).
 
 #. Open the prepared script task4_labpyats.py in Nano editor.
 
@@ -97,7 +108,7 @@ Step 1: Collect Show Commands
 
         nano task4_labpyats.py
 
-#. Before diving into the details of the code, study the explanation of the code given below. The script **task4_labpyats.py** has the following Python functions:
+#. Before diving into the details of the code, study the explanation of the code given below. The script **task2step1.py** has the following Python functions:
 
     .. csv-table::
         :file: ./reference/main-fuctions.csv
@@ -106,9 +117,9 @@ Step 1: Collect Show Commands
 
     .. note::
 
-        To simplify the script, the name of the testbed is hard-coded into the main():
-        **testbed_filename = '/home/cisco/labpyats/pyats_testbed.yaml'**
-        In further scripts, the name of a testbed file will be inputed as a parameter of the script.
+        To simplify the script, the name of the testbed is hard-coded into the main() function:
+        **testbed_filename = 'pyats_testbed.yaml'**
+        In subsequent scripts, the name of the testbed file will be provided as a parameter to the script.
 
     .. image:: images/code-structure.png
         :width: 75%
@@ -116,10 +127,8 @@ Step 1: Collect Show Commands
 
     .. note::
 
-        **log_stdout=False** option in **device.connect** call:
-        **device.connect(log_stdout=False)**
-        This will disable all logging into a screen to this device for the whole connection session (until disconnection takes place or until log_stdout is set to **True**).
-        For the script to collect many commands, it would be preferred to prune the output of the commands to the console using this method.
+        The **log_stdout=False** option in **device.connect** call will disable all logging into a screen to this device for the whole connection session (until disconnection takes place or until log_stdout is set to **True**).
+        When multiple commands are being executed, it is preferred to avoid logging the output into the screen by using this method.
 
 #. Exit Nano without saving, pressing:
     
@@ -133,23 +142,23 @@ Step 1: Collect Show Commands
     
             python task4_labpyats.py
 
-#. Check that there is a new file created: collected_task4. Check the time in which it was created.
+#. Check that there is a new file created: collected_task4. Then, check the time in which the file was created.
 
     .. code-block:: bash
 
-        ls -l ~/LTRATO-2001 | grep collected_task4
+        ls -l ~/LTRATO-2001 | grep task2step1.txt
     
     Sample output in Bash shell:
 
     .. code-block:: bash
 
-        -rw-r--r-- 1 cisco cisco  6.9K Nov  5 17:12 collected_task4
+        -rw-r--r-- 1 cisco cisco  6.9K Nov  5 17:12 task2step1.txt
 
-#. Check content of collected_task4 file.
+#. Check the content of **task2step1.txt** file.
     
         .. code-block:: bash
     
-            cat ~/LTRATO-2001/collected_task4
+            cat ~/LTRATO-2001/task2step1.txt
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>
