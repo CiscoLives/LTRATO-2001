@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Step 1: Explore Lab Structure &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
@@ -43,7 +42,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#learning-objetives">Learning Objetives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#learning-objectives">Learning Objectives</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../labaccess/index.html">Lab Access</a><ul>
@@ -116,38 +115,46 @@
 <p><strong>Value Proposition:</strong> Understand the lab structure and the tools used in it.</p>
 <ol class="arabic">
 <li><p>On the remote desktop, double-click the <code class="docutils literal notranslate"><span class="pre">Ubuntu</span></code> shortcut.</p></li>
-<li><p>Ubuntu will run on our RDP Jumphost on top of Windows 10. The bash Linux shell will appear.</p>
+<li><p>Ubuntu will run on our RDP Jumphost on top of Windows 10. In addition, the bash Linux shell will appear.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/ubuntu-terminal.png"><img alt="../../_images/ubuntu-terminal.png" class="align-center" src="../../_images/ubuntu-terminal.png" style="width: 75%;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>Throughout the lab, you will be working from a virtual environment. The virtual environment provides the following major advantages over running Python scripts globally:</p>
+<p>Throughout the lab, you will be working from a virtual environment.
+The virtual environment provides the following significant advantages over running Python scripts globally:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><strong>Project Isolation:</strong> Avoids installing Python packages globally, which could break system tools or other projects.</p></li>
 <li><p><strong>Dependency Management:</strong> Makes the project self-contained and reproducible by capturing all package dependencies in a requirements file.</p></li>
 </ul>
 </div></blockquote>
-<p>Cisco recommends you run pyATS scripts from the virtual environment. The keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.</p>
+<p>Cisco recommends you run pyATS scripts from the virtual environment.
+Therefore, the keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.</p>
 </div></blockquote>
 </li>
 <li><p>Change to the directory that contains the lab files:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/labpyats
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/LTRATO-2001
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Check the lab structure (before running the command shown below, ensure that you have changed to the correct directory: <strong>~/labpyats</strong>).</p>
+<li><p>Check the lab structure (before running the command shown below, ensure that you have changed to the correct directory: <strong>~/LTRATO-2001</strong>).</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l
 </pre></div>
 </div>
 <p>Check the list of files and refer to the description of each file depicted in the table below.</p>
+<div class="admonition-todo admonition" id="id1">
+<p class="admonition-title">Todo</p>
+<ul class="simple">
+<li><p>Update at the end of the review for the lab</p></li>
+</ul>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The following files are in the labpyats directory and will be used throughout the lab.</p>
+<p>The following files are in the LTRATO-2001 directory and will be used throughout the lab.</p>
 </div>
 <table class="docutils align-default">
 <colgroup>

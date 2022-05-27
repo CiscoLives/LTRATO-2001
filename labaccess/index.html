@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Lab Access &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
@@ -43,7 +42,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#learning-objetives">Learning Objetives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../introduction/index.html#learning-objectives">Learning Objectives</a></li>
 </ul>
 </li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Lab Access</a><ul>
@@ -112,7 +111,7 @@
   <div class="section" id="lab-access">
 <h1>Lab Access<a class="headerlink" href="#lab-access" title="Permalink to this headline">¶</a></h1>
 <p>This lab includes a CML server on which simulation of the lab network will be running.
-All lab tasks will be done from the Jumphost (a Windows 10 machine with WSL installed).</p>
+All lab tasks are intended to be executed from the Jumphost (a Windows 10 machine with WSL installed).</p>
 <p>The lab topology is shown as below:</p>
 <a class="reference internal image-reference" href="../_images/lab-diagram-01.svg"><img alt="../_images/lab-diagram-01.svg" class="align-center" src="../_images/lab-diagram-01.svg" width="50%" /></a>
 <div class="line-block">
@@ -244,36 +243,36 @@ Appliance</p>
 <div class="section" id="get-started">
 <h2>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p>Go to <a class="reference external" href="https://dcloud.cisco.com">dCloud</a> and login with your Cisco (CCO) credentials.</p></li>
-<li><p>Paste Event URL into your browser and click Enter, you will be forwarded into your session page.</p></li>
-<li><p>On the session page click <span class="guilabel">Info</span> tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to get access to your lab, using Cisco AnyConnect client.</p>
+<li><p>Go to <a class="reference external" href="https://dcloud.cisco.com">dCloud</a> and log in with your Cisco (CCO) credentials.</p></li>
+<li><p>Paste the Event URL into your browser and click Enter. You will be redirected to your session page.</p></li>
+<li><p>On the session page, click <span class="guilabel">Info</span> tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to access your lab using the Cisco AnyConnect client.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/session-details.png"><img alt="../_images/session-details.png" class="align-center" src="../_images/session-details.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Cisco AnyConnect client and Host address from previous step.</p>
+<li><p>Cisco AnyConnect client and Host address from the previous step.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/anyconnect-01.png"><img alt="../_images/anyconnect-01.png" class="align-center" src="../_images/anyconnect-01.png" style="width: 45%;" /></a>
 </div></blockquote>
 </li>
-<li><p>When login banner will appear, enter Username/Password from previous step.</p>
+<li><p>Enter the Username/Password from the previous step when the login banner appears.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/anyconnect-02.png"><img alt="../_images/anyconnect-02.png" class="align-center" src="../_images/anyconnect-02.png" style="width: 45%;" /></a>
 </div></blockquote>
 </li>
-<li><p>For best performance, connect to the workstation with Cisco AnyConnect VPN <a class="reference external" href="https://dcloud-cms.cisco.com/help/install_anyconnect_pc_mac">Show Me How</a> and the local RDP client on your laptop <a class="reference external" href="https://dcloud-cms.cisco.com/help/local_rdp_mac_windows">Show Me How</a> and use the information from the table above to connect to workstation</p></li>
-<li><p>Once inside the remote desktop connection, open Google Chrome browser, startup page <a class="reference external" href="https://cml-controller.cml.lab/login">https://cml-controller.cml.lab/login</a> would be opened (web interface of Cisco Modeling Labs server).</p></li>
+<li><p>For best performance, connect to the workstation with Cisco AnyConnect VPN <a class="reference external" href="https://dcloud-cms.cisco.com/help/install_anyconnect_pc_mac">Show Me How</a> and the local RDP client on your laptop <a class="reference external" href="https://dcloud-cms.cisco.com/help/local_rdp_mac_windows">Show Me How</a> and use the information from the table above to connect to the workstation</p></li>
+<li><p>Once inside the remote desktop connection, open the Google Chrome browser, startup page <a class="reference external" href="https://cml-controller.cml.lab/login">https://cml-controller.cml.lab/login</a> will be opened (web interface of Cisco Modeling Labs server).</p></li>
 <li><p>Press <code class="docutils literal notranslate"><span class="pre">Login</span></code> button:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/cml-01.png"><img alt="../_images/cml-01.png" class="align-center" src="../_images/cml-01.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>On the opened page ensure the lab LTRATO-2001 is in <code class="docutils literal notranslate"><span class="pre">ON</span></code> state:</p>
+<li><p>On the opened page, ensure the lab LTRATO-2001 is in the <code class="docutils literal notranslate"><span class="pre">ON</span></code> state:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/cml-02.png"><img alt="../_images/cml-02.png" class="align-center" src="../_images/cml-02.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Click on the topology and on the opened page ensure status for all devices are <code class="docutils literal notranslate"><span class="pre">green</span></code>:</p>
+<li><p>Click on the topology, and on the opened page, ensure the status for all devices is <code class="docutils literal notranslate"><span class="pre">green</span></code>:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/cml-03.png"><img alt="../_images/cml-03.png" class="align-center" src="../_images/cml-03.png" style="width: 75%;" /></a>
 <div class="line-block">
@@ -281,7 +280,7 @@ Appliance</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If the status of any device is not green 10 minutes after CML topology has been started, refer to the lab’s proctor for assistance.</p>
+<p>If the status of any device is not green 10 minutes after the CML topology has been started, refer to the lab’s proctor for assistance.</p>
 </div>
 </div></blockquote>
 </li>

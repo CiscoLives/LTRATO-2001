@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Step 2: Verify pyATS Testbed File &mdash; LTRATO-2001  documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
     <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
       <link rel="stylesheet" href="../../_static/copybutton.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="../../_static/js/html5shiv.min.js"></script>
@@ -43,7 +42,7 @@
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="../../introduction/index.html">Introduction</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#prerequisites">Prerequisites</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#learning-objetives">Learning Objetives</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../introduction/index.html#learning-objectives">Learning Objectives</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../labaccess/index.html">Lab Access</a><ul>
@@ -114,29 +113,13 @@
   <div class="section" id="step-2-verify-pyats-testbed-file">
 <h1>Step 2: Verify pyATS Testbed File<a class="headerlink" href="#step-2-verify-pyats-testbed-file" title="Permalink to this headline">¶</a></h1>
 <p><strong>Value Proposition:</strong> Explore pyATS testbed file used in the lab.</p>
-<p>For pyATS to be able to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol and connections between network devices.</p>
-<p>This information is stored in the pyATS testbed file (in YAML format).</p>
-<p>Can this information be gathered automatically, and can pyATS testbed file be prepared for us?</p>
-<p>Sure. Since the lab is running in Cisco Modeling Labs (CML) <a class="reference external" href="https://github.com/CiscoDevNet/virlutils">cmlutils</a> , tool can be used to prepare pyATS testbed file from CML topology.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Testbed file was already prepared and you do not need to call cmlutils now. However, if you are curious about how can you prepare pyATS testbed file from CML topology, then the needed commands are:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span> /var/lib/virlutils/venv/bin/activate
-
-cml ls <span class="o">(</span>get id from ID column<span class="o">)</span>
-cml use --id XXX
-
-cml generate pyats
-
-<span class="nb">source</span> ~/pyats/bin/activate
-</pre></div>
-</div>
-</div>
+<p>For pyATS to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol, and connections between network devices.</p>
+<p>This information is stored in the pyATS testbed file (<a class="reference external" href="https://pubhub.devnetcloud.com/media/pyats/docs/topology/schema.html">YAML format</a>).</p>
 <p>The testbed YAML file for pyATS has been pre-created for this lab, and it is named pyats_testbed.yaml.</p>
 <ol class="arabic">
 <li><p>Change to the directory that contains the lab files:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/labpyats
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/LTRATO-2001
 </pre></div>
 </div>
 </div></blockquote>
@@ -177,7 +160,10 @@ cml generate pyats
         <span class="nt">protocol</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ssh</span> 
         <span class="nt">ip</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">198.18.1.202</span>
         <span class="nt">port</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">22</span> <span class="c1">#  connection to a device would be done via SSH port </span>
-<span class="l l-Scalar l-Scalar-Plain">&lt;…&gt;</span>
+
+<span class="c1"># ...</span>
+<span class="c1"># Output ommitted</span>
+<span class="c1"># ...</span>
 
 <span class="nt">topology</span><span class="p">:</span> <span class="c1">#  All information about links between devices is in this block</span>
   <span class="nt">asav-1</span><span class="p">:</span>
@@ -190,7 +176,10 @@ cml generate pyats
         <span class="nt">ipv4</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">10.0.0.9/30</span>
         <span class="nt">link</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">asav-1-to-nx-osv-1#1</span>
         <span class="nt">type</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ethernet</span>
-      <span class="l l-Scalar l-Scalar-Plain">&lt;…&gt;</span>
+
+      <span class="c1"># ...</span>
+      <span class="c1"># Output ommitted</span>
+      <span class="c1"># ...</span>
 </pre></div>
 </div>
 <p>Now we have all the required information to start our tests with pyATS.</p>
@@ -207,11 +196,11 @@ line:
 password: <span class="s2">&quot;%ENV{PYATS_AUTH_PASS}&quot;</span>
 </pre></div>
 </div>
-<p>We recommend you store credentials separately, at least as environmental variables.</p>
+<p>We recommend you store credentials separately as environment variables.</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>Exit Nano without saving, pressing:</p>
+<li><p>Exit Nano without saving by pressing:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + X
 </pre></div>
@@ -220,14 +209,18 @@ password: <span class="s2">&quot;%ENV{PYATS_AUTH_PASS}&quot;</span>
 </li>
 <li><p>In the lab environment, variables for PYATS with credentials to access all devices are preconfigured. Check these environment variables from a Bash shell:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYATS_USERNAME</span> <span class="nv">$PYATS_PASSWORD</span> <span class="nv">$PYATS_AUTH_PASS</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">echo</span> <span class="nv">$PYATS_USERNAME</span>
+<span class="nb">echo</span> <span class="nv">$PYATS_PASSWORD</span>
+<span class="nb">echo</span> <span class="nv">$PYATS_AUTH_PASS</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>The output of the command should contain the following:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cisco cisco cisco
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cisco
+cisco
+cisco
 </pre></div>
 </div>
 </div></blockquote>
