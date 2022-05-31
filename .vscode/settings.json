@@ -1,6 +1,5 @@
 {
   "restructuredtext.confPath": "${workspaceFolder}/docs",
-  "python.pythonPath": ".venv/bin/python3",
   "grammarly.selectors": [
     {
       "language": "restructuredtext",
@@ -9,9 +8,9 @@
   ],
   "grammarly.config.suggestions.OxfordComma": true,
   "grammarly.config.suggestions.ConjunctionAtStartOfSentence": true,
-  "grammarly.config.documentDomain": "general",
   "grammarly.config.suggestions.PrepositionAtTheEndOfSentence": true,
   "grammarly.config.suggestions.PassiveVoice": false,
   "grammarly.config.suggestions.UnnecessaryEllipses": false,
+  "grammarly.config.documentDomain": "general",
 
 }
