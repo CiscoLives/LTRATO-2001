@@ -169,11 +169,7 @@ The high-level logic of the test case will be as follows:
                 def setup(self):
                     pass
 
-#. Exit Nano without saving, pressing:
-
-    .. code-block:: bash
-
-        Ctrl+X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. Execute the test script **task3step1a.py** and check the results section.
 
@@ -229,11 +225,7 @@ The high-level logic of the test case will be as follows:
     .. note::
         **aetest.loop.mark()** instructs method **self.error_logs** to take an argument for input variable 'device', one-by-one from the devices list and run a testcase for each device separately.
 
-#. Exit Nano without saving, pressing:
-
-    .. code-block:: bash
-            
-            Ctrl + X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. Execute the test script. The test case **error_logs** will run for all the devices in the testbed:
 

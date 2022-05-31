@@ -179,11 +179,7 @@ The high-level logic of the tests will be the following:
             asa_output = device.parse('show inventory')
             chassis_sn = asa_output['Chassis']['sn']
 
-#. Exit Nano without saving, pressing:
-
-    .. code-block:: bash
-
-        Ctrl + X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. Execute the test script and check the **Detailed Results** section.
 

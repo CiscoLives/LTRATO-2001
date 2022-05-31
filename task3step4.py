@@ -17,12 +17,11 @@ import argparse
 from pyats.topology import loader
 
 # Get your logger for your script
-global log
-log = logging.getLogger(__name__)
-log.level = logging.INFO
+LOGGER = logging.getLogger(__name__)
+LOGGER.level = logging.INFO
 
 # Management network IP range
-mgmt_net = IPv4Network('198.18.1.0/24')
+mgmt_net = IPv4Network("198.18.1.0/24")
 
 
 class MyCommonSetup(aetest.CommonSetup):
@@ -38,20 +37,18 @@ class MyCommonSetup(aetest.CommonSetup):
         :param testbed:
         :return:
         """
-        pyats_testbed = self.parent.parameters.get('pyats_testbed')
-        self.parent.parameters['testbed'] = pyats_testbed
+        pyats_testbed = self.parent.parameters.get("pyats_testbed")
+        self.parent.parameters["testbed"] = pyats_testbed
         for device in pyats_testbed.devices.values():
-            log.info(banner(
-                f"Connect to device '{device.name}'"))
+            LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
             try:
                 device.connect(log_stdout=False)
             except errors.ConnectionError:
-                self.failed(f"Failed to establish "
-                            f"connection to '{device.name}'")
+                self.failed(f"Failed to establish a connection to '{device.name}'")
 
 
 class PingTestcase(aetest.Testcase):
-    """"
+    """ "
     PingTestcase - find links between NX-OS device and CSR1000v
     Extract IP addresses from both ends of each link
     Run ping command for each extracted IP address from NX-OS and CSR1000v
@@ -67,8 +64,8 @@ class PingTestcase(aetest.Testcase):
         # list to store all IPs from topology
         dest_ips = []
 
-        nx = self.parent.parameters['testbed'].devices['nx-osv-1']
-        csr = self.parent.parameters['testbed'].devices['csr1000v-1']
+        nx = self.parent.parameters["testbed"].devices["nx-osv-1"]
+        csr = self.parent.parameters["testbed"].devices["csr1000v-1"]
 
         # Find links between NX-OS device and CSR1000v
         links = nx.find_links(csr)
@@ -84,13 +81,15 @@ class PingTestcase(aetest.Testcase):
 
                 # Check that destination IP is not from management IP range
                 if dest_ip not in mgmt_net:
-                    log.info(f'{link_iface.name}:{link_iface.ipv4.ip}')
+                    LOGGER.info(f"{link_iface.name}:{link_iface.ipv4.ip}")
                     dest_ips.append(link_iface.ipv4.ip)
                 else:
-                    log.info(f'Skipping link_iface {link_iface.name} '
-                             f'from management subnet')
+                    LOGGER.info(
+                        f"Skipping link_iface {link_iface.name} "
+                        f"from management subnet"
+                    )
 
-        log.info(f'Collected following IP addresses: {dest_ips}')
+        LOGGER.info(f"Collected following IP addresses: {dest_ips}")
 
         # run ping test case for each collected dest_ips
 
@@ -114,26 +113,30 @@ class PingTestcase(aetest.Testcase):
 
         """
 
-        nx = self.parent.parameters['testbed'].devices['nx-osv-1']
+        nx = self.parent.parameters["testbed"].devices["nx-osv-1"]
 
         try:
             result = nx.ping(dest_ip)
         except Exception as e:
-            self.failed(f'Ping from {nx.name}->{dest_ip} failed: {e}')
+            self.failed(f"Ping from {nx.name}->{dest_ip} failed: {e}")
         else:
             m = re.search(r"(?P<rate>\d+)\.\d+% packet loss", result)
-            loss_rate = m.group('rate')
+            loss_rate = m.group("rate")
 
             if int(loss_rate) < 20:
-                self.passed(f'Ping loss rate {loss_rate}%')
+                self.passed(f"Ping loss rate {loss_rate}%")
             else:
-                self.failed(f'Ping loss rate {loss_rate}%')
+                self.failed(f"Ping loss rate {loss_rate}%")
 
 
-if __name__ == '__main__':  # pragma: no cover
+if __name__ == "__main__":  # pragma: no cover
     parser = argparse.ArgumentParser()
-    parser.add_argument('--testbed', dest='pyats_testbed',
-                        type=loader.load)
+    parser.add_argument(
+        "--testbed",
+        dest="pyats_testbed",
+        type=loader.load,
+        default="pyats_testbed.yaml",
+    )
 
     args, unknown = parser.parse_known_args()
 
