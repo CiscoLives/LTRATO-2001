@@ -3,7 +3,7 @@ Step 1: Show the Results of Tests in a Browser
 
 **Value Proposition:** In this last task, we will see how to show the results of the tests in a more user-friendly way in a browser. For this, the pyats run job command will be used in a Bash shell.
 
-When a test is runnned using **pyats run job** it adds the following advantages:
+When a test is executed using the **pyats run job** it adds the following advantages:
 
 - Logs of test runs are saved into the archive
 - Makes a graphical representation of test results in a browser
@@ -11,10 +11,10 @@ When a test is runnned using **pyats run job** it adds the following advantages:
 
 To use **pyats run job**, a special file “job file” (written in Python) should be created.
 
-A job file looks as shown below:
+A job file looks like the following example:
 
-**<test_name1>** - specifies the path in the system to the Python file with the first list of tests (for example **task8_labpyats.py**).
-**<test_name2>** - specifies the path to the Python file with the second list of tests (for example **task9_labpyats.py**).
+**<test_name1>** - specifies the path in the system to the Python file with the first list of tests (for example **task3step3.py**).
+**<test_name2>** - specifies the path to the Python file with the second list of tests (for example **task3step4.py**).
 
 
 The method **run** from the imported library **ats.easypy** instructs the system to run tests in sequence.
@@ -40,19 +40,19 @@ To call **pyats run job**, use the following command in a Bash shell:
 
     pyats run job <job-file> --testbed <testbed-file>
 
-Schematically, the process of **pyats run job** can be shown as follows:
+Schematically, the process of a **pyats run job** can be shown as follows:
 
 .. image:: images/run-job-process.svg
     :width: 65%
     :align: center
 
-Let's use **pyats job run** to execute tests from Task 9. PyATS job file **task10_runtestsjob.py** has been pre-configured for this.
+Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job file **task4step1.py** has been pre-configured for this.
 
 #. Open **runtestsjob.py** file in Nano and check it (the structure must be in accordance with the one shown above).
 
     .. code-block:: bash
 
-        nano task10_runtestsjob.py
+        nano task4step1.py
 
 #. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
@@ -60,15 +60,15 @@ Let's use **pyats job run** to execute tests from Task 9. PyATS job file **task1
 
     .. code-block:: bash
 
-        pyats run job task10_runtestsjob.py  --testbed pyats_testbed.yaml
+        pyats run job task4step1.py  --testbed pyats_testbed.yaml
 
-#. After the completition of the job, check the results:
+#. After the completion of the job, check the results:
 
     .. code-block:: bash
 
         pyats logs view
 
-#. Google Chrome would be opened to show the last jobs run. Minimize Linux shell window.
+#. Google Chrome will be launched to show the last jobs run. Minimize the Linux shell window.
 
     .. note::
 
@@ -104,7 +104,7 @@ Let's use **pyats job run** to execute tests from Task 9. PyATS job file **task1
     
     |
 
-    You can open detailed results of the last job without opening the list of previous jobs, using the following command in shell:
+    You can open detailed results of the last job without opening the list of previous jobs, using the following command in the shell:
 
     .. code-block:: bash
 
@@ -112,11 +112,7 @@ Let's use **pyats job run** to execute tests from Task 9. PyATS job file **task1
 
     To test this option, follow the next steps.
 
-#. Maximize Linux shell, minimized in step 5. Stop running pyATS web server:
-
-    .. code-block:: bash
-
-        Ctrl + C
+#. Maximize the Linux shell, minimized in step 5. Stop the running pyATS web server by pressing :guilabel:`Ctrl + C`
     
     Open the web page with the detailed results of the last job:
 
@@ -126,16 +122,12 @@ Let's use **pyats job run** to execute tests from Task 9. PyATS job file **task1
 
     Ensure detailed results of the tests comprising the last run job are shown right away.
 
-#. Open Linux shell again, and stop running pyATS web server:
-
-    .. code-block:: bash
-
-        Ctrl + C
+#. Open the Linux shell again, and stop the running pyATS web server by pressing :guilabel:`Ctrl + C`
     
 .. tip::
 
     pyATS run is a very handy tool and it is recommended that you use it to run your pyATS tests.
 
-    You might also check the official documentation for the details in this `site <https://pubhub.devnetcloud.com/media/pyats/docs/cli/pyats_run.html#pyats-run-job>`_.
+    You might also check the official documentation for the details found on this `site <https://pubhub.devnetcloud.com/media/pyats/docs/cli/pyats_run.html#pyats-run-job>`_.
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>
