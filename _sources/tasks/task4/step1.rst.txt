@@ -54,11 +54,7 @@ Let's use **pyats job run** to execute tests from Task 9. PyATS job file **task1
 
         nano task10_runtestsjob.py
 
-#. Exit Nano without saving, pressing:
-
-    .. code-block:: bash
-
-        Ctrl+X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. Execute the pyATS job file with the **pyats run job** command:
 

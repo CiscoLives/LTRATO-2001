@@ -112,12 +112,12 @@
              
   <div class="section" id="step-3-verify-the-routing-information-using-parsers-and-pyats-learn">
 <h1>Step 3: Verify the Routing Information using Parsers and pyATS Learn<a class="headerlink" href="#step-3-verify-the-routing-information-using-parsers-and-pyats-learn" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this test case, we have the list of critical routes (usually this is a device’s loopback interface) and we must check that these loopbacks are installed in the routing information base (RIB) of all the devices in the testbed.</p>
-<p>The high-level logic of the test will be as follows:</p>
+<p><strong>Value Proposition:</strong> In this test case, we have the list of critical routes (this is usually a device’s loopback interface) and we must check that these loopbacks are installed in the routing information base (RIB) of all the devices in the testbed.</p>
+<p>The high-level logic of the tests will be the following:</p>
 <ul class="simple">
 <li><p>Connect to each device in the testbed.</p></li>
-<li><p>Learn routing information from RIB of the devices.</p></li>
-<li><p>Verify whether all the critical routes are presented in the device’s RIB.</p></li>
+<li><p>Learn the routing information from the device’s RIB.</p></li>
+<li><p>Verify that all critical routes are present in the device’s RIB.</p></li>
 </ul>
 <ol class="arabic">
 <li><p>Let’s connect to the pyATS shell and check our idea.</p>
@@ -127,25 +127,25 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>Input the following code into pyATS shell:</p>
+<li><p>Paste the following code into the pyATS shell:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;csr1000v-1&#39;</span><span class="p">]</span>
 <span class="n">asa</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;asav-1&#39;</span><span class="p">]</span>
 <span class="n">nx</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="p">]</span>
-<span class="n">csr</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="n">asa</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
-<span class="n">nx</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="n">csr</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">asa</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>pyATS uses the <strong>learn</strong> method to collect the set of show commands output for a feature configured on the device, in order to get its snapshot and store it into a structured format (Python dictionary).</p>
+<p>pyATS uses the <strong>learn</strong> method to collect the set of show commands output for a feature configured on the device, get its snapshot, and store it in a structured format (Python dictionary).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr_routes</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
 <span class="n">nx_routes</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now we can observe the structure of the parsed outputs. We are starting with the parsed output for <strong>csr1000v-1</strong>.</p>
+<p>Now we can observe the structure of the parsed outputs. We will start with the parsed output for the <strong>csr1000v-1</strong>.</p>
 </div></blockquote>
 </li>
-<li><p>Input the following code into pyATS shell:</p>
+<li><p>Paste the following code into the pyATS shell:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
 <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">csr_routes</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
@@ -155,44 +155,36 @@
 </li>
 <li><p>Observe the output in pyATS shell:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">{</span>
-<span class="hll">    <span class="s2">&quot;vrf&quot;</span>: <span class="o">{</span><span class="s2">&quot;default&quot;</span>: <span class="o">{</span><span class="s2">&quot;address_family&quot;</span>: <span class="o">{</span><span class="s2">&quot;ipv4&quot;</span>: <span class="o">{</span><span class="s2">&quot;routes&quot;</span>: <span class="o">{</span>
-</span>                        <span class="s2">&quot;10.0.0.12/30&quot;</span>: <span class="o">{</span>
-                            <span class="s2">&quot;active&quot;</span>: True,
-                            <span class="s2">&quot;next_hop&quot;</span>: <span class="o">{</span>
-                                <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="o">{</span>
-                                    <span class="s2">&quot;GigabitEthernet2&quot;</span>: <span class="o">{</span>
-                                        <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="s2">&quot;GigabitEthernet2&quot;</span>
-                                    <span class="o">}</span>
-                                <span class="o">}</span>
-                            <span class="o">}</span>,
-                            <span class="s2">&quot;route&quot;</span>: <span class="s2">&quot;10.0.0.12/30&quot;</span>,
-                            <span class="s2">&quot;source_protocol&quot;</span>: <span class="s2">&quot;connected&quot;</span>,
-                            <span class="s2">&quot;source_protocol_codes&quot;</span>: <span class="s2">&quot;C&quot;</span>
-                        <span class="o">}</span>,
-<span class="hll">                        <span class="s2">&quot;10.0.0.13/32&quot;</span>: <span class="o">{</span>
-</span>                            <span class="s2">&quot;active&quot;</span>: True,
-                            <span class="s2">&quot;next_hop&quot;</span>: <span class="o">{</span>
-                                <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="o">{</span>
-                                    <span class="s2">&quot;GigabitEthernet2&quot;</span>: <span class="o">{</span>
-                                        <span class="s2">&quot;outgoing_interface&quot;</span>: <span class="s2">&quot;GigabitEthernet2&quot;</span>
-                                    <span class="o">}</span>
-                                <span class="o">}</span>
-                            <span class="o">}</span>,
-                            <span class="s2">&quot;route&quot;</span>: <span class="s2">&quot;10.0.0.13/32&quot;</span>,
-                            <span class="s2">&quot;source_protocol&quot;</span>: <span class="s2">&quot;local&quot;</span>,
-                            <span class="s2">&quot;source_protocol_codes&quot;</span>: <span class="s2">&quot;L&quot;</span>
-                        <span class="o">}</span>
-                    <span class="o">}</span>
-                <span class="o">}</span>
-            <span class="o">}</span>
-        <span class="o">}</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-&lt;...&gt;
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">3</span><span class="o">]</span>: import pprint
+    ...: pprint.pprint<span class="o">(</span>csr_routes.info<span class="o">)</span>
+<span class="o">{</span><span class="s1">&#39;vrf&#39;</span>: <span class="o">{</span><span class="s1">&#39;Mgmt-intf&#39;</span>: <span class="o">{</span><span class="s1">&#39;address_family&#39;</span>: <span class="o">{</span><span class="s1">&#39;ipv4&#39;</span>: <span class="o">{</span><span class="s1">&#39;routes&#39;</span>: <span class="o">{</span><span class="s1">&#39;0.0.0.0/0&#39;</span>: <span class="o">{</span><span class="s1">&#39;active&#39;</span>: True,
+                                                                    <span class="s1">&#39;metric&#39;</span>: <span class="m">0</span>,
+                                                                    <span class="s1">&#39;next_hop&#39;</span>: <span class="o">{</span><span class="s1">&#39;next_hop_list&#39;</span>: <span class="o">{</span><span class="m">1</span>: <span class="o">{</span><span class="s1">&#39;index&#39;</span>: <span class="m">1</span>,
+                                                                                                       <span class="s1">&#39;next_hop&#39;</span>: <span class="s1">&#39;198.18.1.1&#39;</span><span class="o">}}}</span>,
+                                                                    <span class="s1">&#39;route&#39;</span>: <span class="s1">&#39;0.0.0.0/0&#39;</span>,
+                                                                    <span class="s1">&#39;route_preference&#39;</span>: <span class="m">1</span>,
+                                                                    <span class="s1">&#39;source_protocol&#39;</span>: <span class="s1">&#39;static&#39;</span>,
+                                                                    <span class="s1">&#39;source_protocol_codes&#39;</span>: <span class="s1">&#39;S*&#39;</span><span class="o">}</span>,
+                                                      <span class="s1">&#39;198.18.1.201/32&#39;</span>: <span class="o">{</span><span class="s1">&#39;active&#39;</span>: True,
+                                                                          <span class="s1">&#39;next_hop&#39;</span>: <span class="o">{</span><span class="s1">&#39;outgoing_interface&#39;</span>: <span class="o">{</span><span class="s1">&#39;GigabitEthernet1&#39;</span>: <span class="o">{</span><span class="s1">&#39;outgoing_interface&#39;</span>: <span class="s1">&#39;GigabitEthernet1&#39;</span><span class="o">}}}</span>,
+                                                                          <span class="s1">&#39;route&#39;</span>: <span class="s1">&#39;198.18.1.201/32&#39;</span>,
+                                                                          <span class="s1">&#39;source_protocol&#39;</span>: <span class="s1">&#39;local&#39;</span>,
+                                                                          <span class="s1">&#39;source_protocol_codes&#39;</span>: <span class="s1">&#39;L&#39;</span><span class="o">}}}}}</span>,
+ <span class="s1">&#39;default&#39;</span>: <span class="o">{</span><span class="s1">&#39;address_family&#39;</span>: <span class="o">{</span><span class="s1">&#39;ipv4&#39;</span>: <span class="o">{</span><span class="s1">&#39;routes&#39;</span>: <span class="o">{</span><span class="s1">&#39;10.0.0.12/30&#39;</span>: <span class="o">{</span><span class="s1">&#39;active&#39;</span>: True,
+<span class="hll">                                                                     <span class="s1">&#39;next_hop&#39;</span>: <span class="o">{</span><span class="s1">&#39;outgoing_interface&#39;</span>: <span class="o">{</span><span class="s1">&#39;GigabitEthernet2&#39;</span>: <span class="o">{</span><span class="s1">&#39;outgoing_interface&#39;</span>: <span class="s1">&#39;GigabitEthernet2&#39;</span><span class="o">}}}</span>,
+</span><span class="hll">                                                                     <span class="s1">&#39;route&#39;</span>: <span class="s1">&#39;10.0.0.12/30&#39;</span>,
+</span>                                                                     <span class="s1">&#39;source_protocol&#39;</span>: <span class="s1">&#39;connected&#39;</span>,
+                                                                     <span class="s1">&#39;source_protocol_codes&#39;</span>: <span class="s1">&#39;C&#39;</span><span class="o">}</span>,
+                                                    <span class="s1">&#39;10.0.0.13/32&#39;</span>: <span class="o">{</span><span class="s1">&#39;active&#39;</span>: True,
+                                                                     <span class="s1">&#39;next_hop&#39;</span>: <span class="o">{</span><span class="s1">&#39;outgoing_interface&#39;</span>: <span class="o">{</span><span class="s1">&#39;GigabitEthernet2&#39;</span>: <span class="o">{</span><span class="s1">&#39;outgoing_interface&#39;</span>: <span class="s1">&#39;GigabitEthernet2&#39;</span><span class="o">}}}</span>,
+                                                                     <span class="s1">&#39;route&#39;</span>: <span class="s1">&#39;10.0.0.13/32&#39;</span>,
+                                                                     <span class="s1">&#39;source_protocol&#39;</span>: <span class="s1">&#39;local&#39;</span>,
+                                                                     <span class="s1">&#39;source_protocol_codes&#39;</span>: <span class="s1">&#39;L&#39;</span><span class="o">}</span>,
+
+<span class="c1"># ...</span>
 </pre></div>
 </div>
-<p>Now we understand that RIB routes for <strong>csr1000v-1</strong> are stored under the following path:</p>
+<p>Now we understand that the routes for <strong>csr1000v-1</strong> are stored under the following path:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">csr_routes</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">][</span><span class="s1">&#39;address_family&#39;</span><span class="p">][</span><span class="s1">&#39;ipv4&#39;</span><span class="p">][</span><span class="s1">&#39;routes&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -203,19 +195,19 @@
 </div></blockquote>
 </li>
 <li><p>Exit the pyATS shell using the <strong>exit</strong> command.</p></li>
-<li><p>Open the file task8_labpyats.py in Nano editor.</p>
+<li><p>Open the file task3step3.py in Nano editor.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task8_labpyats.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task3step3.py
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Review the content of <strong>routes</strong> testcase. Note that we use the path to routes in RIB from the previous step to get the routing information. First, we’ll get a snapshot of the <strong>routing</strong> feature.</p>
+<li><p>Review the content of the <strong>routes</strong> test case. Note that we use the path to routes from the previous step to get the routing information. First, we’ll get a snapshot of the <strong>routing</strong> feature.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
     <span class="k">def</span> <span class="nf">routes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Verify that all device have golden_routes installed in RIB</span>
+<span class="sd">        Verify that all devices have golden_routes installed in the RIB</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="k">if</span> <span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;iosxe&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;nxos&#39;</span><span class="p">):</span>
@@ -275,7 +267,7 @@ Eth1/4               <span class="m">10</span>.0.0.10       protocol-up/link-up/
 </div>
 </div></blockquote>
 </li>
-<li><p>Complete this test case by replacing the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;replace</span> <span class="pre">me&gt;&gt;</span></code> statement with a rib variable. To accomplish this, you must paste the path to the rib routes, which was explored in the previous step:</p>
+<li><p>Complete this test case by replacing the <code class="docutils literal notranslate"><span class="pre">&lt;&lt;replace</span> <span class="pre">me&gt;&gt;</span></code> statement with a rib variable. To accomplish this, you must paste the path to the rib routes, which you figured out during the previous step:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">][</span><span class="s1">&#39;address_family&#39;</span><span class="p">][</span><span class="s1">&#39;ipv4&#39;</span><span class="p">][</span><span class="s1">&#39;routes&#39;</span><span class="p">]</span>
 </pre></div>
@@ -289,10 +281,10 @@ Eth1/4               <span class="m">10</span>.0.0.10       protocol-up/link-up/
 </div>
 </div></blockquote>
 </li>
-<li><p>When you finish, save changes to file <strong>task8_labpyats.py</strong> by pressing</p>
+<li><p>When you finish, save changes to file <strong>task3step3.py</strong> by pressing</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + O
-File Name to Write: task8_labpyats.py
+File Name to Write: task3step3.py
 Hit <span class="o">[</span>Enter<span class="o">]</span>
 </pre></div>
 </div>
@@ -300,7 +292,7 @@ Hit <span class="o">[</span>Enter<span class="o">]</span>
 </li>
 <li><p>Execute the test script and check the results section:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task8_labpyats.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step3.py --testbed pyats_testbed.yaml
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="../../_images/task8_labpyats.png"><img alt="../../_images/task8_labpyats.png" class="align-center" src="../../_images/task8_labpyats.png" style="width: 75%;" /></a>

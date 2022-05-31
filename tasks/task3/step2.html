@@ -113,35 +113,37 @@
   <div class="section" id="step-2-verify-the-service-contracts-coverage">
 <h1>Step 2: Verify the Service Contracts Coverage<a class="headerlink" href="#step-2-verify-the-service-contracts-coverage" title="Permalink to this headline">¶</a></h1>
 <p><strong>Value Proposition:</strong> In this test case, we have the list of the devices’ serial numbers, covered by the service contracts, and we must verify that all the devices in the testbed are covered by the service contracts. This ensures you will be able to open a TAC case if something goes wrong when the network is in production.</p>
-<p>High-level logic of the test will be as follows:
-- Connect to each device in the testbed.
-- Parse the output of show inventory to find the device’s serial number (SN).
-- Verify whether the SN is in the list, covered by the service contracts.</p>
+<p>The high-level logic of the tests will be the following:</p>
+<ul class="simple">
+<li><p>Connect to each device in the testbed.</p></li>
+<li><p>Parse the output of the <strong>show inventory</strong> command to find the device’s serial number (SN).</p></li>
+<li><p>Verify whether the SN is in the list, covered by the service contracts.</p></li>
+</ul>
 <ol class="arabic">
-<li><p>Let’s use the pyATS shell to check our idea.</p>
+<li><p>Let’s use the pyATS shell to test our idea.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Input the following code into pyATS shell:</p>
+<li><p>Copy the following code into the pyATS shell:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="nv">csr</span> <span class="o">=</span> testbed.devices<span class="o">[</span><span class="s1">&#39;csr1000v-1&#39;</span><span class="o">]</span>
-<span class="nv">asa</span> <span class="o">=</span> testbed.devices<span class="o">[</span><span class="s1">&#39;asav-1&#39;</span><span class="o">]</span>
-<span class="nv">nx</span> <span class="o">=</span> testbed.devices<span class="o">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="o">]</span>
-csr.connect<span class="o">()</span>
-asa.connect<span class="o">()</span>
-nx.connect<span class="o">()</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;csr1000v-1&#39;</span><span class="p">]</span>
+<span class="n">asa</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;asav-1&#39;</span><span class="p">]</span>
+<span class="n">nx</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s1">&#39;nx-osv-1&#39;</span><span class="p">]</span>
+<span class="n">csr</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">asa</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">nx</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>pyATS uses the <strong>parse</strong> method to collect the output of different show commands and parses it into a structured format (Python dictionary). Let’s collect the output of ‘show inventory’ commands and parse it using the <strong>parse</strong> method.</p>
+<li><p>pyATS uses the <strong>parse</strong> method to collect the output of different show commands and parses it into a structured format (Python dictionary). Let’s collect the output of the <strong>show inventory</strong> commands and parse it using the <strong>parse</strong> method.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="nv">out1</span> <span class="o">=</span> csr.parse<span class="o">(</span><span class="s1">&#39;show inventory&#39;</span><span class="o">)</span>
-<span class="nv">out2</span> <span class="o">=</span> asa.parse<span class="o">(</span><span class="s1">&#39;show inventory&#39;</span><span class="o">)</span>
-<span class="nv">out3</span> <span class="o">=</span> nx.parse<span class="o">(</span><span class="s1">&#39;show inventory&#39;</span><span class="o">)</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr_output</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
+<span class="n">asa_output</span> <span class="o">=</span> <span class="n">asa</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
+<span class="n">nx_output</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -150,66 +152,82 @@ nx.connect<span class="o">()</span>
 <blockquote>
 <div><div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Python library <strong>pprint</strong> will be imported in this task. This is used to break the output (Python dictionary) onto multiple lines, which is easier to check, instead of having it all on one line.</p>
+<p>The Python library <strong>pprint</strong> will be used in this task. This is used to break the output (Python dictionary) into multiple lines, which is easier to check, instead of having it all on one line.</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
-<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">out1</span><span class="p">)</span>
+<span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">csr_output</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Observe the output:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="hll">Out <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="o">{</span><span class="s1">&#39;main&#39;</span>: <span class="o">{</span><span class="s1">&#39;chassis&#39;</span>: <span class="o">{</span><span class="s1">&#39;CSR1000V&#39;</span>: <span class="o">{</span><span class="s1">&#39;descr&#39;</span>: <span class="s1">&#39;Cisco CSR1000V Chassis&#39;</span>,
-</span>                           <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Chassis&#39;</span>,
-                           <span class="s1">&#39;pid&#39;</span>: <span class="s1">&#39;CSR1000V&#39;</span>,
-<span class="hll">                           <span class="s1">&#39;sn&#39;</span>: <span class="s1">&#39;9KZZ4X737UP&#39;</span>,
-</span>                           <span class="s1">&#39;vid&#39;</span>: <span class="s1">&#39;V00&#39;</span><span class="o">}}}</span>,
-</pre></div>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">3</span><span class="o">]</span>: import pprint
+    ...: pprint.pprint<span class="o">(</span>csr_output<span class="o">)</span>
+<span class="hll"><span class="o">{</span><span class="s1">&#39;main&#39;</span>: <span class="o">{</span><span class="s1">&#39;chassis&#39;</span>: <span class="o">{</span><span class="s1">&#39;CSR1000V&#39;</span>: <span class="o">{</span><span class="s1">&#39;descr&#39;</span>: <span class="s1">&#39;Cisco CSR1000V Chassis&#39;</span>,
+</span><span class="hll">                                <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;Chassis&#39;</span>,
+</span><span class="hll">                                <span class="s1">&#39;pid&#39;</span>: <span class="s1">&#39;CSR1000V&#39;</span>,
+</span><span class="hll">                                <span class="s1">&#39;sn&#39;</span>: <span class="s1">&#39;93DU60U0JDU&#39;</span>,
+</span><span class="hll">                                <span class="s1">&#39;vid&#39;</span>: <span class="s1">&#39;V00&#39;</span><span class="o">}}}</span>,
+</span><span class="hll"><span class="s1">&#39;slot&#39;</span>: <span class="o">{</span><span class="s1">&#39;F0&#39;</span>: <span class="o">{</span><span class="s1">&#39;other&#39;</span>: <span class="o">{</span><span class="s1">&#39;CSR1000V&#39;</span>: <span class="o">{</span><span class="s1">&#39;descr&#39;</span>: <span class="s1">&#39;Cisco CSR1000V Embedded &#39;</span>
+</span><span class="hll">                                                <span class="s1">&#39;Services Processor&#39;</span>,
+</span><span class="hll">                                        <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;module F0&#39;</span>,
+</span><span class="hll">                                        <span class="s1">&#39;pid&#39;</span>: <span class="s1">&#39;CSR1000V&#39;</span>,
+</span><span class="hll">                                        <span class="s1">&#39;sn&#39;</span>: <span class="s1">&#39;&#39;</span>,
+</span><span class="hll">                                        <span class="s1">&#39;vid&#39;</span>: <span class="s1">&#39;&#39;</span><span class="o">}}}</span>,
+</span><span class="hll">        <span class="s1">&#39;R0&#39;</span>: <span class="o">{</span><span class="s1">&#39;rp&#39;</span>: <span class="o">{</span><span class="s1">&#39;CSR1000V&#39;</span>: <span class="o">{</span><span class="s1">&#39;descr&#39;</span>: <span class="s1">&#39;Cisco CSR1000V Route Processor&#39;</span>,
+</span><span class="hll">                                    <span class="s1">&#39;name&#39;</span>: <span class="s1">&#39;module R0&#39;</span>,
+</span><span class="hll">                                    <span class="s1">&#39;pid&#39;</span>: <span class="s1">&#39;CSR1000V&#39;</span>,
+</span><span class="hll">                                    <span class="s1">&#39;sn&#39;</span>: <span class="s1">&#39;JAB1303001C&#39;</span>,
+</span><span class="hll">                                    <span class="s1">&#39;vid&#39;</span>: <span class="s1">&#39;V00&#39;</span><span class="o">}}}}}</span>
+</span></pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Get the serial number of <strong>csr1000v-1</strong></p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: out1<span class="o">[</span><span class="s1">&#39;main&#39;</span><span class="o">][</span><span class="s1">&#39;chassis&#39;</span><span class="o">][</span><span class="s1">&#39;CSR1000V&#39;</span><span class="o">][</span><span class="s1">&#39;sn&#39;</span><span class="o">]</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr_output</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">][</span><span class="s1">&#39;chassis&#39;</span><span class="p">][</span><span class="s1">&#39;CSR1000V&#39;</span><span class="p">][</span><span class="s1">&#39;sn&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>The result of the code should contain a serial number collected in the previous step.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Out <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="s1">&#39;9KZZ4X737UP&#39;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">4</span><span class="o">]</span>: csr_output<span class="o">[</span><span class="s1">&#39;main&#39;</span><span class="o">][</span><span class="s1">&#39;chassis&#39;</span><span class="o">][</span><span class="s1">&#39;CSR1000V&#39;</span><span class="o">][</span><span class="s1">&#39;sn&#39;</span><span class="o">]</span>
+Out <span class="o">[</span><span class="m">4</span><span class="o">]</span>: <span class="s1">&#39;9KZZ4X737UP&#39;</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Obtain the parsed output for <strong>asav-1</strong></p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: pprint.pprint<span class="o">(</span>out2<span class="o">)</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">asa_output</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Observe the output:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Out <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="o">{</span><span class="s1">&#39;Chassis&#39;</span>: <span class="o">{</span><span class="s1">&#39;description&#39;</span>: <span class="s1">&#39;ASAv Adaptive Security Virtual Appliance&#39;</span>,
-     <span class="s1">&#39;pid&#39;</span>: <span class="s1">&#39;ASAv&#39;</span>,
-     <span class="s1">&#39;sn&#39;</span>: <span class="s1">&#39;9ABUANH9G5F&#39;</span>,
-     <span class="s1">&#39;vid&#39;</span>: <span class="s1">&#39;V01&#39;</span><span class="o">}}</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">5</span><span class="o">]</span>: pprint.pprint<span class="o">(</span>asa_output<span class="o">)</span>
+<span class="o">{</span><span class="s1">&#39;Chassis&#39;</span>: <span class="o">{</span><span class="s1">&#39;description&#39;</span>: <span class="s1">&#39;ASAv Adaptive Security Virtual Appliance&#39;</span>,
+            <span class="s1">&#39;pid&#39;</span>: <span class="s1">&#39;ASAv&#39;</span>,
+            <span class="s1">&#39;sn&#39;</span>: <span class="s1">&#39;9AFQR3ND0EG&#39;</span>,
+            <span class="s1">&#39;vid&#39;</span>: <span class="s1">&#39;V01&#39;</span><span class="o">}}</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Get the serial number of <strong>asav-1</strong></p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: out2<span class="o">[</span><span class="s1">&#39;Chassis&#39;</span><span class="o">][</span><span class="s1">&#39;sn&#39;</span><span class="o">]</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">asa_output</span><span class="p">[</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;sn&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>The result of the code should contain a serial number collected in the previous step.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Out <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="s1">&#39;9ABUANH9G5F&#39;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">6</span><span class="o">]</span>: asa_output<span class="o">[</span><span class="s1">&#39;Chassis&#39;</span><span class="o">][</span><span class="s1">&#39;sn&#39;</span><span class="o">]</span>
+Out<span class="o">[</span><span class="m">6</span><span class="o">]</span>: <span class="s1">&#39;9AFQR3ND0EG&#39;</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -234,105 +252,106 @@ nx.connect<span class="o">()</span>
 </li>
 <li><p>Get the serial number of <strong>nx-osv-1</strong></p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: out3<span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">][</span><span class="s1">&#39;Chassis&#39;</span><span class="o">][</span><span class="s1">&#39;serial_number&#39;</span><span class="o">]</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nx_output</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;serial_number&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>The result of the code should contain a serial number collected in the previous step.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Out <span class="o">[</span><span class="m">1</span><span class="o">]</span>: <span class="s1">&#39;9712TV4C2JF&#39;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">7</span><span class="o">]</span>: nx_output<span class="o">[</span><span class="s1">&#39;name&#39;</span><span class="o">][</span><span class="s1">&#39;Chassis&#39;</span><span class="o">][</span><span class="s1">&#39;serial_number&#39;</span><span class="o">]</span>
+Out<span class="o">[</span><span class="m">7</span><span class="o">]</span>: <span class="s1">&#39;9EIFZPG7ZAM&#39;</span>
 </pre></div>
 </div>
 <p>Now we have all the needed information to write the next test script.</p>
 </div></blockquote>
 </li>
 <li><p>Exit the pyATS shell using the <strong>exit</strong> command.</p></li>
-<li><p>Open the file task7_labpyats.py in Nano editor:</p>
+<li><p>Open the file task3step2.py in Nano editor:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task7_labpyats.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task3step2.py
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Review the content of the <strong>Inventory</strong> test case. Note that we use the data structure learned from pyATS shell in the previous step to extract a serial number from the output of <strong>show inventory</strong>:</p>
+<li><p>Review the content of the <strong>Inventory</strong> test case. Note that we use the data structure learned from the pyATS shell in the previous step to extract a serial number from the output of the <strong>show inventory</strong> command:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
 <span class="k">def</span> <span class="nf">inventory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">device</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;iosxe&#39;</span><span class="p">:</span>
-        <span class="n">out1</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
-<span class="hll">        <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">out1</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">][</span><span class="s1">&#39;chassis&#39;</span><span class="p">][</span><span class="s1">&#39;CSR1000V&#39;</span><span class="p">][</span><span class="s1">&#39;sn&#39;</span><span class="p">]</span>
+        <span class="n">csr_output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
+<span class="hll">        <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">csr_output</span><span class="p">[</span><span class="s1">&#39;main&#39;</span><span class="p">][</span><span class="s1">&#39;chassis&#39;</span><span class="p">][</span><span class="s1">&#39;CSR1000V&#39;</span><span class="p">][</span><span class="s1">&#39;sn&#39;</span><span class="p">]</span>
 </span></pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The path to fetch the serial number from the structures has been explored in the previous step with pyATS shell. Variables out2 and out3 are used:</p>
+<p>The path to fetch the serial number from the structures has been explored in the previous step with the pyATS shell. Variables out2 and out3 are used:</p>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">elif</span> <span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;nxos&#39;</span><span class="p">:</span>
-    <span class="n">out2</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
-<span class="hll">    <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">out2</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;serial_number&#39;</span><span class="p">]</span>
+    <span class="n">nx_output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
+<span class="hll">    <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">nx_output</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">][</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;serial_number&#39;</span><span class="p">]</span>
 </span></pre></div>
 </div>
 <p>The serial number shown below is provided as an example. It would be different on the equipment in a lab.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">elif</span> <span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;asa&#39;</span><span class="p">:</span>
-    <span class="n">out3</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
-<span class="hll">    <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">out3</span><span class="p">[</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;sn&#39;</span><span class="p">]</span>
+    <span class="n">asa_output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
+<span class="hll">    <span class="n">chassis_sn</span> <span class="o">=</span> <span class="n">asa_output</span><span class="p">[</span><span class="s1">&#39;Chassis&#39;</span><span class="p">][</span><span class="s1">&#39;sn&#39;</span><span class="p">]</span>
 </span></pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Exit Nano without saving, pressing:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl+X
-</pre></div>
-</div>
-</div></blockquote>
-</li>
+<li><p>Exit Nano without saving by pressing <span class="guilabel">Ctrl + X</span></p></li>
 <li><p>Execute the test script and check the <strong>Detailed Results</strong> section.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task7_labpyats.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step2.py --testbed pyats_testbed.yaml
 </pre></div>
 </div>
-<p>What are the results of these testcases? All fails? Do you have a clue as to why? Continue for the correct answer.</p>
+<p>What are the results of these testcases? All FAILED? Do you have a clue as to why? Continue reading to understand why.</p>
 <a class="reference internal image-reference" href="../../_images/task7_labpyats_1.png"><img alt="../../_images/task7_labpyats_1.png" class="align-center" src="../../_images/task7_labpyats_1.png" style="width: 75%;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
-<p>All the tests have failed since we have serial numbers from a different network in our contract SNs list at the beginning of <strong>task7_labpyats.py</strong> file.</p>
+<p>All the tests have failed because we have serial numbers from a different network in our contract SNs list at the beginning of <strong>task3step2.py</strong> file.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">contract_sn</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;9AQHSSAS8AU&#39;</span><span class="p">,</span> <span class="s1">&#39;9Q3YV06WJ71&#39;</span><span class="p">,</span> <span class="s1">&#39;9IFUH4GPSGL&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Open the file task7_labpyats.py in Nano editor.</p>
+<li><p>Open the file task3step2.py in Nano editor.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task7_labpyats.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task3step2.py
 </pre></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Replace the serial numbers in the list <strong>contract_sn</strong> with SNs from our testbed’s equipment.</p></li>
-<li><p>When you finish, save changes to file task7_labpyats.py by pressing:</p>
+<li><p>When you finish, save changes to file task3step2.py by pressing:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Ctrl + O
-File Name to Write: task7_labpyats.py
+File Name to Write: task3step2.py
 Hit <span class="o">[</span>Enter<span class="o">]</span>
 </pre></div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Correct SNs from testbed can be obtained also from previous script’s output:</p>
-<p>2020-01-23T13:20:24: %AETEST-ERROR:Failed reason: 9AQHSSAS8AU is not covered by contract</p>
-<p>&lt;…&gt;</p>
-<p>2020-01-23T13:20:25: %AETEST-ERROR:Failed reason: 9Q3YV06WJ71 is not covered by contract</p>
-<p>&lt;…&gt;</p>
-<p>2020-01-23T13:20:26: %AETEST-ERROR:Failed reason: 9IFUH4GPSGL is not covered by contract</p>
+<p>The correct SNs from testbed can be obtained also from the previous script’s output:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="m">2020</span>-01-23T13:20:24: %AETEST-ERROR:Failed reason: 9AQHSSAS8AU is not covered by contract
+
+<span class="c1"># ...</span>
+
+<span class="m">2020</span>-01-23T13:20:25: %AETEST-ERROR:Failed reason: 9Q3YV06WJ71 is not covered by contract
+
+<span class="c1"># ...</span>
+
+<span class="m">2020</span>-01-23T13:20:26: %AETEST-ERROR:Failed reason: 9IFUH4GPSGL is not covered by contract
+</pre></div>
+</div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Еxecute the modified test script once again:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task7_labpyats.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step2.py --testbed pyats_testbed.yaml
 </pre></div>
 </div>
 <p>Now all the testcases should succeed:</p>

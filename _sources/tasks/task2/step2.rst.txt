@@ -97,11 +97,7 @@ Each of these sections is further broken down into smaller subsections (Python m
 
             aetest.main(**vars(args))
 
-#. Exit Nano without saving, pressing:
-    
-        .. code-block:: bash
-    
-            Ctrl + X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. Let's run our first test script. This test script will try to connect to all the devices in the testbed and print the results of these attempts:
 
