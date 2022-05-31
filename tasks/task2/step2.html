@@ -140,35 +140,22 @@ Each test script is written in a Python file and split into three major sections
 </li>
 <li><p>Pay special attention to the following part of the code. Whereas it’s not only related to this task, it will help you understand the logging capabilities of pyATS that will be used in other tasks during this lab:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import of pyATS logging banner</span>
-<span class="kn">from</span> <span class="nn">pyats.log.utils</span> <span class="kn">import</span> <span class="n">banner</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># To get a logger for the script</span>
+<span class="kn">import</span> <span class="nn">logging</span>
 
-<span class="c1">#</span>
-<span class="c1"># Output ommitted</span>
-<span class="c1">#</span>
-
-<span class="c1"># This section sets up logging (ensure the log.level is the same or higher than</span>
-<span class="c1"># level of log.info where banner is used)</span>
-
-<span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
-<span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-
-<span class="c1">#</span>
-<span class="c1"># Output ommitted</span>
-<span class="c1">#</span>
-
-<span class="c1"># Use pyATS logging banner to format the output</span>
-<span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connect to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
+<span class="c1"># Get your logger for your script</span>
+<span class="n">LOGGER</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+<span class="n">LOGGER</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>When the pyATS logging banner is used, the following format of message would be shown in the output of the test.</p>
+<li><p>When the pyATS banner is used, the following message will be displayed in the test output.</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Connect</span> <span class="n">to</span> <span class="n">device</span> <span class="s1">&#39;cisco_ios_xr_asr9k_01&#39;</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Connecting to device <span class="s1">&#39;csr1000v-1&#39;</span>...
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/pyats-logger-banner.png"><img alt="../../_images/pyats-logger-banner.png" class="align-center" src="../../_images/pyats-logger-banner.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="../../_images/pyats-logger-banner.png"><img alt="../../_images/pyats-logger-banner.png" class="align-center" src="../../_images/pyats-logger-banner.png" style="width: 75%;" /></a>
 <div class="line-block">
 <div class="line"><br /></div>
 </div>
@@ -181,36 +168,39 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 </div>
 </div></blockquote>
 </li>
-<li><p>Let’s look at the main contents of this example. Python class <strong>common_setup</strong>, which iherits from <strong>aetest.CommonSetup</strong> represents the major section, “Common Setup” (see the following illustration).  The Python class <strong>common_setup</strong> is where initializations and preparations before the actual script’s testcases should be performed. For this reason, code in class <strong>common_setup</strong> is always runnned first, before all the testcases. Refer to the description of the code of this Python class shown below:</p>
+<li><p>Let’s look at the main contents of this example. Python class <strong>common_setup</strong>, which inherits from <strong>aetest.CommonSetup</strong> represents the major section, “Common Setup” (see the following illustration).  The Python class <strong>common_setup</strong> is where initializations happen. This initialization is required before executing any tests. For this reason, the code in class <strong>common_setup</strong> is always executed first. The following snippet of code is taken from the task2step2.py file:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">common_setup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
+<span class="sd">&quot;&quot;&quot;Common Setup section&quot;&quot;&quot;</span>
+
 <span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
 <span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyats_testbed</span><span class="p">):</span>
-    <span class="c1"># Pass testbed file into class method</span>
     <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="c1"># Load all devices from testbed file and try to connect to them</span>
     <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connect to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">))</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;...&quot;</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish &quot;</span>
-                        <span class="sa">f</span><span class="s2">&quot;connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish a connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
         <span class="n">device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
     <span class="c1"># Pass list of devices to testcases</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The following code is used to load a testbed file from the filename specified in the command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies the name of the object that would represent the testbed file in code):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-<span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
-<span class="c1"># Load testbed file which is passed as command-line argument</span>
-<span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;--testbed&#39;</span><span class="p">,</span> <span class="n">dest</span><span class="o">=</span><span class="s1">&#39;pyats_testbed&#39;</span><span class="p">,</span>
-                    <span class="nb">type</span><span class="o">=</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">&quot;--testbed&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;pyats_testbed&quot;</span><span class="p">,</span>
+        <span class="nb">type</span><span class="o">=</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">,</span>
+        <span class="n">default</span><span class="o">=</span><span class="s2">&quot;pyats_testbed.yaml&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
 
-<span class="n">args</span><span class="p">,</span> <span class="n">unknown</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
+    <span class="n">args</span><span class="p">,</span> <span class="n">unknown</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse_known_args</span><span class="p">()</span>
 
-<span class="n">aetest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
+    <span class="n">aetest</span><span class="o">.</span><span class="n">main</span><span class="p">(</span><span class="o">**</span><span class="nb">vars</span><span class="p">(</span><span class="n">args</span><span class="p">))</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -229,7 +219,7 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 </div>
 </div></blockquote>
 </li>
-<li><p>Upon finishing the test script, pyATS generates a report of Success/Failed testcases. The <strong>common_setup</strong> section is also treated as the testcase with subsection <strong>establish_connections</strong>. Since all the devices are reachable, the testcases should be successfull (PASSED). Refer to the following illustration.</p>
+<li><p>Upon finishing the test script, pyATS generates a report of Success/Failed testcases. The <strong>common_setup</strong> section is also treated as the testcase with subsection <strong>establish_connections</strong>. Since all the devices are reachable, the testcases should be successful (PASSED). Refer to the following diagram.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/step7-output.png"><img alt="../../_images/step7-output.png" class="align-center" src="../../_images/step7-output.png" style="width: 75%;" /></a>
 </div></blockquote>
