@@ -140,7 +140,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
     
         .. code-block:: bash
     
-            python task4_labpyats.py
+            python task2step1.py
 
 #. Check that there is a new file created: collected_task4. Then, check the time in which the file was created.
 

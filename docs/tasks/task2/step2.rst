@@ -33,34 +33,21 @@ Each of these sections is further broken down into smaller subsections (Python m
 
     .. code-block:: python
 
-        # Import of pyATS logging banner
-        from pyats.log.utils import banner 
+        # To get a logger for the script
+        import logging
 
-        # 
-        # Output ommitted
-        #
+        # Get your logger for your script
+        LOGGER = logging.getLogger(__name__)
+        LOGGER.setLevel(logging.INFO)
 
-        # This section sets up logging (ensure the log.level is the same or higher than 
-        # level of log.info where banner is used)
+#. When the pyATS banner is used, the following message will be displayed in the test output.
 
-        log = logging.getLogger(__name__)
-        log.setLevel(logging.INFO)
+    .. code-block:: bash
 
-        # 
-        # Output ommitted
-        #
-
-        # Use pyATS logging banner to format the output
-        log.info(banner(f"Connect to device '{device.name}'"))
-
-#. When the pyATS logging banner is used, the following format of message would be shown in the output of the test.
-
-    .. code-block:: python
-
-        Connect to device 'cisco_ios_xr_asr9k_01'
+        Connecting to device 'csr1000v-1'...
 
     .. image:: images/pyats-logger-banner.png
-        :width: 600px
+        :width: 75%
         :align: center
 
     |
@@ -72,23 +59,23 @@ Each of these sections is further broken down into smaller subsections (Python m
         Since the banner is logged with INFO logging level, it's required to set the logging level up to INFO (default is WARNING):
         **log.setLevel(logging.INFO)**
 
-#. Let's look at the main contents of this example. Python class **common_setup**, which iherits from **aetest.CommonSetup** represents the major section, “Common Setup” (see the following illustration).  The Python class **common_setup** is where initializations and preparations before the actual script's testcases should be performed. For this reason, code in class **common_setup** is always runnned first, before all the testcases. Refer to the description of the code of this Python class shown below:
+#. Let's look at the main contents of this example. Python class **common_setup**, which inherits from **aetest.CommonSetup** represents the major section, “Common Setup” (see the following illustration).  The Python class **common_setup** is where initializations happen. This initialization is required before executing any tests. For this reason, the code in class **common_setup** is always executed first. The following snippet of code is taken from the task2step2.py file:
 
     .. code-block:: python
 
         class common_setup(aetest.CommonSetup):
+        """Common Setup section"""
+
         @aetest.subsection
         def establish_connections(self, pyats_testbed):
-            # Pass testbed file into class method
             device_list = []
             # Load all devices from testbed file and try to connect to them
             for device in pyats_testbed.devices.values():
-                log.info(banner(f"Connect to device '{device.name}'"))
+                LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
                 try:
                     device.connect(log_stdout=False)
                 except errors.ConnectionError:
-                    self.failed(f"Failed to establish "
-                                f"connection to '{device.name}'")
+                    self.failed(f"Failed to establish a connection to '{device.name}'")
                 device_list.append(device)
             # Pass list of devices to testcases
             self.parent.parameters.update(dev=device_list)
@@ -97,15 +84,18 @@ Each of these sections is further broken down into smaller subsections (Python m
 
     .. code-block:: python
 
-        if __name__ == '__main__':
-        parser = argparse.ArgumentParser()
-        # Load testbed file which is passed as command-line argument
-        parser.add_argument('--testbed', dest='pyats_testbed',
-                            type=loader.load)
+        if __name__ == "__main__":
+            parser = argparse.ArgumentParser()
+            parser.add_argument(
+                "--testbed",
+                dest="pyats_testbed",
+                type=loader.load,
+                default="pyats_testbed.yaml",
+            )
 
-        args, unknown = parser.parse_known_args()
+            args, unknown = parser.parse_known_args()
 
-        aetest.main(**vars(args))
+            aetest.main(**vars(args))
 
 #. Exit Nano without saving, pressing:
     
@@ -119,7 +109,7 @@ Each of these sections is further broken down into smaller subsections (Python m
 
         python task2step2.py --testbed pyats_testbed.yaml
 
-#. Upon finishing the test script, pyATS generates a report of Success/Failed testcases. The **common_setup** section is also treated as the testcase with subsection **establish_connections**. Since all the devices are reachable, the testcases should be successfull (PASSED). Refer to the following illustration.
+#. Upon finishing the test script, pyATS generates a report of Success/Failed testcases. The **common_setup** section is also treated as the testcase with subsection **establish_connections**. Since all the devices are reachable, the testcases should be successful (PASSED). Refer to the following diagram.
 
     .. image:: images/step7-output.png
         :width: 75%
