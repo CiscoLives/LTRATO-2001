@@ -1,13 +1,13 @@
 Step 3: Verify the Routing Information using Parsers and pyATS Learn
 ####################################################################
 
-**Value Proposition:** In this test case, we have the list of critical routes (usually this is a device’s loopback interface) and we must check that these loopbacks are installed in the routing information base (RIB) of all the devices in the testbed.
+**Value Proposition:** In this test case, we have the list of critical routes (this is usually a device's loopback interface) and we must check that these loopbacks are installed in the routing information base (RIB) of all the devices in the testbed.
 
-The high-level logic of the test will be as follows:
+The high-level logic of the tests will be the following:
 
 - Connect to each device in the testbed.
-- Learn routing information from RIB of the devices.
-- Verify whether all the critical routes are presented in the device's RIB.
+- Learn the routing information from the device's RIB.
+- Verify that all critical routes are present in the device's RIB.
 
 #. Let's connect to the pyATS shell and check our idea.
 
@@ -15,27 +15,27 @@ The high-level logic of the test will be as follows:
 
         pyats shell --testbed-file pyats_testbed.yaml
 
-#. Input the following code into pyATS shell:
+#. Paste the following code into the pyATS shell:
 
     .. code-block:: python
 
         csr = testbed.devices['csr1000v-1']
         asa = testbed.devices['asav-1']
         nx = testbed.devices['nx-osv-1']
-        csr.connect()
-        asa.connect()
-        nx.connect()
+        csr.connect(log_stdout=False)
+        asa.connect(log_stdout=False)
+        nx.connect(log_stdout=False)
 
-    pyATS uses the **learn** method to collect the set of show commands output for a feature configured on the device, in order to get its snapshot and store it into a structured format (Python dictionary).
+    pyATS uses the **learn** method to collect the set of show commands output for a feature configured on the device, get its snapshot, and store it in a structured format (Python dictionary).
 
     .. code-block:: python
 
         csr_routes = csr.learn('routing')
         nx_routes = nx.learn('routing')
 
-    Now we can observe the structure of the parsed outputs. We are starting with the parsed output for **csr1000v-1**.
+    Now we can observe the structure of the parsed outputs. We will start with the parsed output for the **csr1000v-1**.
 
-#. Input the following code into pyATS shell:
+#. Paste the following code into the pyATS shell:
 
     .. code-block:: python
 
@@ -45,45 +45,37 @@ The high-level logic of the test will be as follows:
 #. Observe the output in pyATS shell:
 
     .. code-block:: bash
-        :emphasize-lines: 2, 16
+        :emphasize-lines: 17, 18
 
-        {
-            "vrf": {"default": {"address_family": {"ipv4": {"routes": {
-                                "10.0.0.12/30": {
-                                    "active": True,
-                                    "next_hop": {
-                                        "outgoing_interface": {
-                                            "GigabitEthernet2": {
-                                                "outgoing_interface": "GigabitEthernet2"
-                                            }
-                                        }
-                                    },
-                                    "route": "10.0.0.12/30",
-                                    "source_protocol": "connected",
-                                    "source_protocol_codes": "C"
-                                },
-                                "10.0.0.13/32": {
-                                    "active": True,
-                                    "next_hop": {
-                                        "outgoing_interface": {
-                                            "GigabitEthernet2": {
-                                                "outgoing_interface": "GigabitEthernet2"
-                                            }
-                                        }
-                                    },
-                                    "route": "10.0.0.13/32",
-                                    "source_protocol": "local",
-                                    "source_protocol_codes": "L"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        <...>
+        In [3]: import pprint
+            ...: pprint.pprint(csr_routes.info)
+        {'vrf': {'Mgmt-intf': {'address_family': {'ipv4': {'routes': {'0.0.0.0/0': {'active': True,
+                                                                            'metric': 0,
+                                                                            'next_hop': {'next_hop_list': {1: {'index': 1,
+                                                                                                               'next_hop': '198.18.1.1'}}},
+                                                                            'route': '0.0.0.0/0',
+                                                                            'route_preference': 1,
+                                                                            'source_protocol': 'static',
+                                                                            'source_protocol_codes': 'S*'},
+                                                              '198.18.1.201/32': {'active': True,
+                                                                                  'next_hop': {'outgoing_interface': {'GigabitEthernet1': {'outgoing_interface': 'GigabitEthernet1'}}},
+                                                                                  'route': '198.18.1.201/32',
+                                                                                  'source_protocol': 'local',
+                                                                                  'source_protocol_codes': 'L'}}}}},
+         'default': {'address_family': {'ipv4': {'routes': {'10.0.0.12/30': {'active': True,
+                                                                             'next_hop': {'outgoing_interface': {'GigabitEthernet2': {'outgoing_interface': 'GigabitEthernet2'}}},
+                                                                             'route': '10.0.0.12/30',
+                                                                             'source_protocol': 'connected',
+                                                                             'source_protocol_codes': 'C'},
+                                                            '10.0.0.13/32': {'active': True,
+                                                                             'next_hop': {'outgoing_interface': {'GigabitEthernet2': {'outgoing_interface': 'GigabitEthernet2'}}},
+                                                                             'route': '10.0.0.13/32',
+                                                                             'source_protocol': 'local',
+                                                                             'source_protocol_codes': 'L'},
+
+        # ...
     
-    Now we understand that RIB routes for **csr1000v-1** are stored under the following path:
+    Now we understand that the routes for **csr1000v-1** are stored under the following path:
 
     .. code-block:: python
 
@@ -97,13 +89,13 @@ The high-level logic of the test will be as follows:
 
 #. Exit the pyATS shell using the **exit** command.
 
-#. Open the file task8_labpyats.py in Nano editor.
+#. Open the file task3step3.py in Nano editor.
 
     .. code-block:: bash
 
-        nano task8_labpyats.py
+        nano task3step3.py
 
-#. Review the content of **routes** testcase. Note that we use the path to routes in RIB from the previous step to get the routing information. First, we'll get a snapshot of the **routing** feature.
+#. Review the content of the **routes** test case. Note that we use the path to routes from the previous step to get the routing information. First, we'll get a snapshot of the **routing** feature.
 
     .. code-block:: python
         :emphasize-lines: 9
@@ -111,7 +103,7 @@ The high-level logic of the test will be as follows:
             @aetest.test
             def routes(self, device):
                 """
-                Verify that all device have golden_routes installed in RIB
+                Verify that all devices have golden_routes installed in the RIB
                 """
 
                 if (device.os == 'iosxe') or (device.os == 'nxos'):
@@ -172,7 +164,7 @@ The high-level logic of the test will be as follows:
         Lo100                192.168.100.1   protocol-up/link-up/admin-up
         Eth1/4               10.0.0.10       protocol-up/link-up/admin-up
 
-#. Complete this test case by replacing the ``<<replace me>>`` statement with a rib variable. To accomplish this, you must paste the path to the rib routes, which was explored in the previous step:
+#. Complete this test case by replacing the ``<<replace me>>`` statement with a rib variable. To accomplish this, you must paste the path to the rib routes, which you figured out during the previous step:
 
     .. code-block:: python
 
@@ -186,19 +178,19 @@ The high-level logic of the test will be as follows:
         # After inserting the rib variable:
         rib = output.info['vrf']['default']['address_family']['ipv4']['routes']
 
-#. When you finish, save changes to file **task8_labpyats.py** by pressing
+#. When you finish, save changes to file **task3step3.py** by pressing
 
     .. code-block:: bash
 
         Ctrl + O
-        File Name to Write: task8_labpyats.py
+        File Name to Write: task3step3.py
         Hit [Enter]
 
 #. Execute the test script and check the results section:
 
     .. code-block:: bash
 
-        python task8_labpyats.py --testbed pyats_testbed.yaml
+        python task3step3.py --testbed pyats_testbed.yaml
 
     .. image:: images/task8_labpyats.png
         :width: 75%

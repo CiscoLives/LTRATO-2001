@@ -13,14 +13,13 @@ import argparse
 from pyats.topology import loader
 
 # Get your logger for your script
-global log
-log = logging.getLogger(__name__)
-log.level = logging.ERROR
+LOGGER = logging.getLogger(__name__)
+LOGGER.level = logging.INFO
 
 
 class MyCommonSetup(aetest.CommonSetup):
     """
-    CommonSetup class to prepare for testcases
+    CommonSetup class to prepare for test cases
     Establishes connections to all devices in testbed
     """
 
@@ -34,15 +33,13 @@ class MyCommonSetup(aetest.CommonSetup):
 
         device_list = []
         for device in pyats_testbed.devices.values():
-            log.info(banner(
-                f"Connect to device '{device.name}'"))
+            LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
             try:
                 device.connect(log_stdout=False)
             except errors.ConnectionError:
-                self.failed(f"Failed to establish "
-                            f"connection to '{device.name}'")
+                self.failed(f"Failed to establish a connection to '{device.name}'")
             device_list.append(device)
-        # Pass list of devices to testcases
+        # Pass list of devices to test cases
         self.parent.parameters.update(dev=device_list)
 
 
@@ -54,24 +51,27 @@ class VerifyLogging(aetest.Testcase):
 
     @aetest.setup
     def setup(self):
-        pass
+        devices = self.parent.parameters["dev"]
+        aetest.loop.mark(self.error_logs, device=devices)
 
     @aetest.test
-    def error_logs(self):
-        any_device = self.parent.parameters['dev'][0]
-        any_device.log_user(enable=True)
-        output = any_device.execute('show logging | i ERROR|WARN')
+    def error_logs(self, device):
+        output = device.execute("show logging | include ERROR|WARN")
 
         if len(output) > 0:
-            self.failed('Found ERROR in log, review logs first')
+            self.failed("Found ERROR in log, review logs first")
         else:
             pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--testbed', dest='pyats_testbed',
-                        type=loader.load)
+    parser.add_argument(
+        "--testbed",
+        dest="pyats_testbed",
+        type=loader.load,
+        default="pyats_testbed.yaml",
+    )
 
     args, unknown = parser.parse_known_args()
 

@@ -1,29 +1,29 @@
 Step 4: Run PING to Verify Reachability
 #######################################
 
-**Value Proposition:** In this testcase we must test reachability between devices (**nx-osv-1** and **csr1000v-1**) using the ping command.
+**Value Proposition:** In this test case we must test reachability between devices (**nx-osv-1** and **csr1000v-1**) using the ping command.
 
-High-level logic of the test will be as follows:
+The high-level logic of the tests will be the following:
 
 - Connect to each device in the testbed.
-- Find links between nx-osv-1 and csr1000v-1.
-- Collect IP addresses from both ends of these links.
+- Find the links between nx-osv-1 and csr1000v-1.
+- Collect the IP addresses from both ends of these links.
 - Run the ping commands from nx-osv-1 for IP addresses, discovered in the previous step.
 
-#. Let's connect to pyATS shell and check our idea:
+#. Let's connect to the pyATS shell and check our idea:
 
     .. code-block:: bash
 
         pyats shell --testbed-file pyats_testbed.yaml
 
-#. Input the following code into pyATS shell:
+#. Input the following code into the pyATS shell:
 
     .. code-block:: python
 
         csr = testbed.devices['csr1000v-1']
         nx = testbed.devices['nx-osv-1']
 
-#. pyATS has a **find_links(device_name)** method to find all the links between two devices in the topology. Let’s find the links between **csr1000v-1** and **nx-osv-1**.
+#. pyATS has a **find_links(device_name)** method to find all the links between two devices in the topology. Let's find the links between **csr1000v-1** and **nx-osv-1**.
 
     .. code-block:: python
 
@@ -33,19 +33,21 @@ High-level logic of the test will be as follows:
 
     .. code-block:: bash
 
-        {<Link object 'csr1000v-1-to-nx-osv-1' at 0x7f445194b050>,
-        <Link object 'csr1000v-1-to-nx-osv-1#1' at 0x7f445194b150>,
-        <Link object 'flat' at 0x7f445194b410>}
+        In [2]: nx.find_links(csr)
+        Out[2]: 
+        {<Link object 'csr1000v-1-to-nx-osv-1' at 0x110a114c0>,
+        <Link object 'csr1000v-1-to-nx-osv-1#1' at 0x110a11520>,
+        <Link object 'flat' at 0x110a114f0>}
 
 #. Exit the pyATS shell using the exit command.
 
-    Before studying the code and running the next script, let's dive into the details on how information about a topology is stored in a testbed object (see the illustration that follows for a graphical representation of the explanation).
+    Before studying the code and running the next script, let's dive into the details of how information about a topology is stored in a testbed object (see the illustration that follows for a graphical representation of the explanation).
 
     Things to know about the structure of the testbed object (created from the testbed YAML file specified: testbed.yaml):
 
     - The pyATS **Testbed** object contains the Python dictionary **devices**.
     - Elements of the **devices** dictionary are the **Device** objects.
-    - Each object in the **devices** dictionary stores dictionary **interfaces** (contains **interface** objects).
+    - Each object in the **devices** dictionary stores a dictionary with a key called **interfaces** (contains **interface** objects).
     - Each **interface** object stores the link object.
 
     |
@@ -96,15 +98,16 @@ High-level logic of the test will be as follows:
             links = nx.find_links(csr)
             
             for link in links:
-            print(f'#{link}')
-            for link_iface in link.interfaces:
-                print(f'##{link_iface}')
-                print(f'###link_iface.ipv4 = {link_iface.ipv4}, {type(link_iface.ipv4)}')
-                print(f'###link_iface.ipv4.ip = {link_iface.ipv4.ip}, {type(link_iface.ipv4.ip)}')
+                print(f'#{link}')
+
+                for link_iface in link.interfaces:
+                    print(f'##{link_iface}')
+                    print(f'###link_iface.ipv4 = {link_iface.ipv4}, {type(link_iface.ipv4)}')
+                    print(f'###link_iface.ipv4.ip = {link_iface.ipv4.ip}, {type(link_iface.ipv4.ip)}')
 
     - End the code with ``--``.
 
-    Refer to the command output:
+        Refer to the command output:
 
     - **#Link csr1000v-1-to-nx-osv-1:** represents interfaces of all devices connected to the first link between csr1000v-1 and nx-osv-1.
     - **#Link flat:** represents interfaces of all devices (asav-1, csr1000v-1, nx-osv-1) connected to a management network.
@@ -116,11 +119,11 @@ High-level logic of the test will be as follows:
         :width: 75%
         :align: center
 
-#. Open the file task9_labpyats.py in Nano editor:
+#. Open the file task3step4.py in Nano editor:
 
     .. code-block:: bash
 
-        nano task9_labpyats.py
+        nano task3step4.py
 
 #. Review the content of the **PingTestcase** test case, and look at the **def setup(self)** function. The code in this function follows the logic used in the previous step:
 
@@ -156,11 +159,10 @@ High-level logic of the test will be as follows:
 
                 # Check that destination IP is not from management IP range
                 if dest_ip not in mgmt_net:
-                    log.info(f'{link_iface.name}:{link_iface.ipv4.ip}')
+                    LOGGER.info(f'{link_iface.name}:{link_iface.ipv4.ip}')
                     dest_ips.append(link_iface.ipv4.ip)
                 else:
-                    log.info(f'Skipping link_iface {link_iface.name} '
-                             f'from management subnet')
+                    LOGGER.info(f'Skipping link_iface {link_iface.name} from management subnet')
 
     A **ping** command for each IPv4 address of both ends of the links between **nx-osv-1** and **csr1000v-1** is executed in the function **def ping(self, dest_ip)**.
 
@@ -188,7 +190,9 @@ High-level logic of the test will be as follows:
 
         try:
         result = nx.ping(dest_ip)
-        # <…>
+
+        # ...
+
         else:
             m = re.search(r"(?P<rate>\d+)\.\d+% packet loss", result)
             loss_rate = m.group('rate')
@@ -196,19 +200,15 @@ High-level logic of the test will be as follows:
             if int(loss_rate) < 20:
                 self.passed(f'Ping loss rate {loss_rate}%')
             else:
-                self.failed('Ping loss rate {loss_rate}%')
+                self.failed(f'Ping loss rate {loss_rate}%')
 
-#. Exit Nano without saving, pressing:
-
-    .. code-block:: bash
-
-        Ctrl+X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. Execute the created test script and check the results section; all pings should succeed:
 
     .. code-block:: bash
 
-        python task9_labpyats.py --testbed pyats_testbed.yaml
+        python task3step4.py --testbed pyats_testbed.yaml
 
     .. image:: images/passed-test-output.png
         :width: 75%

@@ -130,11 +130,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
         The **log_stdout=False** option in **device.connect** call will disable all logging into a screen to this device for the whole connection session (until disconnection takes place or until log_stdout is set to **True**).
         When multiple commands are being executed, it is preferred to avoid logging the output into the screen by using this method.
 
-#. Exit Nano without saving, pressing:
-    
-        .. code-block:: bash
-    
-            Ctrl + X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
     
 #. Now run the script:
     

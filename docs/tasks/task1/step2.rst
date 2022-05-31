@@ -46,11 +46,7 @@ The testbed YAML file for pyATS has been pre-created for this lab, and it is nam
         We recommend you store credentials separately as environment variables.
 
 
-#. Exit Nano without saving by pressing:
-
-    .. code-block:: bash
-
-        Ctrl + X
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. In the lab environment, variables for PYATS with credentials to access all devices are preconfigured. Check these environment variables from a Bash shell:
 
