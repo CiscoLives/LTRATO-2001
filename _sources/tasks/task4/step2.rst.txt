@@ -1,7 +1,7 @@
 Step 2: Run tests and compare results from XPRESSO dashboard
 ############################################################
 
-**Value Proposition:** In this last task, we will learn how to use XPRESSO dashboard to run the test job and compare the test results. To simplify the scenario, basic configuration was already done in XPRESSO. Test Harness, Execution Engine, Testbed and Job are pre-configured.
+**Value Proposition:** In the last task, we will learn how to use XPRESSO dashboard to run the test job and compare the test results. To simplify the scenario, the basic configuration was already done in XPRESSO. Test Harness, Execution Engine, Testbed, and Job are pre-configured.
 
 .. note::
     Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via RDP session to CentOS VM running XPRESSO.
