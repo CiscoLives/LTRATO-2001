@@ -22,7 +22,7 @@ golden_routes = ['192.168.0.3/32', '192.168.0.1/32']
 
 class MyCommonSetup(aetest.CommonSetup):
     """
-    CommonSetup class to prepare for testcases
+    CommonSetup class to prepare for test cases
     Establishes connections to all devices in testbed
     """
 
@@ -44,13 +44,13 @@ class MyCommonSetup(aetest.CommonSetup):
                 self.failed(f"Failed to establish "
                             f"connection to '{device.name}'")
             device_list.append(device)
-        # Pass list of devices to testcases
+        # Pass list of devices to test cases
         self.parent.parameters.update(dev=device_list)
 
 
 class Routing(aetest.Testcase):
     """
-    Routing Testcase - extract routing information from devices
+    Routing test case - extract routing information from devices
     Verify that all device have golden_routes installed in RIB
     """
 
@@ -58,7 +58,7 @@ class Routing(aetest.Testcase):
     def setup(self):
         """
         Get list of all devices in testbed and
-        run routes testcase for each device
+        run routes test case for each device
         :return:
         """
 

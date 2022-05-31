@@ -22,9 +22,9 @@ The high-level logic of the test will be as follows:
         csr = testbed.devices['csr1000v-1']
         asa = testbed.devices['asav-1']
         nx = testbed.devices['nx-osv-1']
-        csr.connect()
-        asa.connect()
-        nx.connect()
+        csr.connect(log_stdout=False)
+        asa.connect(log_stdout=False)
+        nx.connect(log_stdout=False)
 
     pyATS uses the **learn** method to collect the set of show commands output for a feature configured on the device, in order to get its snapshot and store it into a structured format (Python dictionary).
 

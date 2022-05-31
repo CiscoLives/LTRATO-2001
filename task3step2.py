@@ -13,17 +13,16 @@ import argparse
 from pyats.topology import loader
 
 # Get your logger for your script
-global log
-log = logging.getLogger(__name__)
-log.level = logging.INFO
+LOGGER = logging.getLogger(__name__)
+LOGGER.level = logging.INFO
 
 # SNs that has to be changed to the actual:
-contract_sn = ['9AQHSSAS8AU', '9Q3YV06WJ71', '9IFUH4GPSGL']
+contract_sn = ["9AQHSSAS8AU", "9Q3YV06WJ71", "9IFUH4GPSGL"]
 
 
 class MyCommonSetup(aetest.CommonSetup):
     """
-    CommonSetup class to prepare for testcases
+    CommonSetup class to prepare for test cases
     Establishes connections to all devices in testbed
     """
 
@@ -37,20 +36,19 @@ class MyCommonSetup(aetest.CommonSetup):
 
         device_list = []
         for device in pyats_testbed.devices.values():
-            log.info(banner(f"Connect to device '{device.name}'"))
+            LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
             try:
                 device.connect(log_stdout=False)
             except errors.ConnectionError:
-                self.failed(f"Failed to establish "
-                            f"connection to '{device.name}'")
+                self.failed(f"Failed to establish a connection to '{device.name}'")
             device_list.append(device)
-        # Pass list of devices to testcases
+        # Pass list of devices to test cases
         self.parent.parameters.update(dev=device_list)
 
 
 class Inventory(aetest.Testcase):
     """
-    Inventory Testcase - extract Serial numbers information from devices
+    Inventory test case - extract Serial numbers information from devices
     Verify that all SNs are covered by service contract (exist in contract_sn)
     """
 
@@ -58,11 +56,11 @@ class Inventory(aetest.Testcase):
     def setup(self):
         """
         Get list of all devices in testbed and
-        run inventory testcase for each device
+        run inventory test case for each device
         :return:
         """
 
-        devices = self.parent.parameters['dev']
+        devices = self.parent.parameters["dev"]
         aetest.loop.mark(self.inventory, device=devices)
 
     @aetest.test
@@ -73,41 +71,45 @@ class Inventory(aetest.Testcase):
         :return:
         """
 
-        if device.os == 'iosxe':
+        if device.os == "iosxe":
 
-            out1 = device.parse('show inventory')
-            chassis_sn = out1['main']['chassis']['CSR1000V']['sn']
+            csr_output = device.parse("show inventory")
+            chassis_sn = csr_output["main"]["chassis"]["CSR1000V"]["sn"]
 
             if chassis_sn not in contract_sn:
-                self.failed(f'{chassis_sn} is not covered by contract')
+                self.failed(f"{chassis_sn} is not covered by contract")
             else:
                 pass
 
-        elif device.os == 'nxos':
+        elif device.os == "nxos":
 
-            out2 = device.parse('show inventory')
-            chassis_sn = out2['name']['Chassis']['serial_number']
+            nx_output = device.parse("show inventory")
+            chassis_sn = nx_output["name"]["Chassis"]["serial_number"]
 
             if chassis_sn not in contract_sn:
-                self.failed(f'{chassis_sn} is not covered by contract')
+                self.failed(f"{chassis_sn} is not covered by contract")
             else:
                 pass
 
-        elif device.os == 'asa':
+        elif device.os == "asa":
 
-            out3 = device.parse('show inventory')
-            chassis_sn = out3['Chassis']['sn']
+            asa_output = device.parse("show inventory")
+            chassis_sn = asa_output["Chassis"]["sn"]
 
             if chassis_sn not in contract_sn:
-                self.failed(f'{chassis_sn} is not covered by contract')
+                self.failed(f"{chassis_sn} is not covered by contract")
             else:
                 pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('--testbed', dest='pyats_testbed',
-                        type=loader.load)
+    parser.add_argument(
+        "--testbed",
+        dest="pyats_testbed",
+        type=loader.load,
+        default="pyats_testbed.yaml",
+    )
 
     args, unknown = parser.parse_known_args()
 

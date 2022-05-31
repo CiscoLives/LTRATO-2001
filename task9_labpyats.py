@@ -4,7 +4,7 @@
 import logging
 import re
 
-# To filter management networks from ping testcases
+# To filter management networks from ping test cases
 from ipaddress import IPv4Network
 
 from pyats import aetest
@@ -27,7 +27,7 @@ mgmt_net = IPv4Network('198.18.1.0/24')
 
 class MyCommonSetup(aetest.CommonSetup):
     """
-    CommonSetup class to prepare for testcases
+    CommonSetup class to prepare for test cases
     Establishes connections to all devices in testbed
     """
 
@@ -92,7 +92,7 @@ class PingTestcase(aetest.Testcase):
 
         log.info(f'Collected following IP addresses: {dest_ips}')
 
-        # run ping testcase for each collected dest_ips
+        # run ping test case for each collected dest_ips
 
         aetest.loop.mark(self.ping, dest_ip=dest_ips)
 

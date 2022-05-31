@@ -32,7 +32,7 @@ class common_setup(aetest.CommonSetup):
             except errors.ConnectionError:
                 self.failed(f"Failed to establish a connection to '{device.name}'")
             device_list.append(device)
-        # Pass list of devices to testcases
+        # Pass list of devices to test cases
         self.parent.parameters.update(dev=device_list)
 
 
