@@ -212,8 +212,8 @@ Out<span class="o">[</span><span class="m">2</span><span class="o">]</span>:
 
 <span class="k">for</span> <span class="n">link</span> <span class="ow">in</span> <span class="n">links</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;#</span><span class="si">{link}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="hll">
-</span>    <span class="k">for</span> <span class="n">link_iface</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
+
+    <span class="k">for</span> <span class="n">link_iface</span> <span class="ow">in</span> <span class="n">link</span><span class="o">.</span><span class="n">interfaces</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;##</span><span class="si">{link_iface}</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;###link_iface.ipv4 = </span><span class="si">{link_iface.ipv4}</span><span class="s1">, {type(link_iface.ipv4)}&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;###link_iface.ipv4.ip = </span><span class="si">{link_iface.ipv4.ip}</span><span class="s1">, {type(link_iface.ipv4.ip)}&#39;</span><span class="p">)</span>
@@ -300,12 +300,12 @@ Out<span class="o">[</span><span class="m">2</span><span class="o">]</span>:
 <span class="hll"><span class="n">result</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">ping</span><span class="p">(</span><span class="n">dest_ip</span><span class="p">)</span>
 </span>
 <span class="c1"># ...</span>
-<span class="hll">
-</span><span class="k">else</span><span class="p">:</span>
+
+<span class="k">else</span><span class="p">:</span>
     <span class="n">m</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;(?P&lt;rate&gt;\d+)\.\d+% packet loss&quot;</span><span class="p">,</span> <span class="n">result</span><span class="p">)</span>
-<span class="hll">    <span class="n">loss_rate</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">)</span>
-</span><span class="hll">
-</span>    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">loss_rate</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
+    <span class="n">loss_rate</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;rate&#39;</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">loss_rate</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">20</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">passed</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ping loss rate </span><span class="si">{loss_rate}</span><span class="s1">%&#39;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Ping loss rate </span><span class="si">{loss_rate}</span><span class="s1">%&#39;</span><span class="p">)</span>

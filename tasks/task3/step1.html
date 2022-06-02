@@ -169,7 +169,7 @@ If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
 </li>
 <li><dl class="simple">
 <dt>Repeat step 3 above for CSR in the pyATS shell:</dt><dd><ul class="simple">
-<li><p><strong>out1 = csr.execute(‘show logging | i ERROR|WARN’)</strong></p></li>
+<li><p><strong>csr_output = csr.execute(‘show logging | i ERROR|WARN’)</strong></p></li>
 </ul>
 </dd>
 </dl>
@@ -196,7 +196,7 @@ Out<span class="o">[</span><span class="m">3</span><span class="o">]</span>: <sp
 </div></blockquote>
 <p>Input into pyATS shell:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">out1</span><span class="p">)</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">csr_output</span><span class="p">)</span>
 </pre></div>
 </div>
 </div></blockquote>

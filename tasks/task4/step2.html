@@ -153,15 +153,18 @@
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
 </div>
 <p>You will see the pre-configured job <strong>Ping_from_ASA</strong> which executes <strong>task10_runtestsjob.py</strong> script you’ve used in this Scenario:</p>
-<a class="reference internal image-reference" href="../../_images/xpresso-jobs-list.png"><img alt="../../_images/xpresso-jobs-list.png" class="align-center" src="../../_images/xpresso-jobs-list.png" style="width: 75%;" /></a>
+<a class="reference internal image-reference" href="../../_images/xpresso-jobs-list-jenkins.png"><img alt="../../_images/xpresso-jobs-list-jenkins.png" class="align-center" src="../../_images/xpresso-jobs-list-jenkins.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
 <li><p>Hover the mouse over the job row and you will see <strong>Execute</strong> icon on the right. Click it:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-execute.png"><img alt="../../_images/xpresso-jobs-execute.png" class="align-left" src="../../_images/xpresso-jobs-execute.png" style="width: 15%;" /></a>
 <div class="line-block">
+<div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
@@ -202,12 +205,14 @@ shutdown
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
+<div class="line"><br /></div>
+<div class="line"><br /></div>
 </div>
 </div></blockquote>
 </li>
 <li><p>Run <strong>Ping_from_ASA</strong> job again by repeating Steps 4 - 7. This time you will notice that one of the tests is failing:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-ping-from-asa.png"><img alt="../../_images/xpresso-ping-from-asa.png" class="align-center" src="../../_images/xpresso-ping-from-asa.png" style="width: 55%;" /></a>
+<div><a class="reference internal image-reference" href="../../_images/xpresso-ping-fail-from-asa.png"><img alt="../../_images/xpresso-ping-fail-from-asa.png" class="align-center" src="../../_images/xpresso-ping-fail-from-asa.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
 <li><p>Now let’s compare job results. On the top of the page click on the <strong>Compare</strong> button and check the last job run that was successful and  has the status <strong>PASSED</strong>:</p>
@@ -225,8 +230,14 @@ shutdown
 <li><p>Hover the mouse over the failing test line <strong>ping[dest_ip=10.0.0.13]</strong>, and click <strong>Testcase Diff</strong> icon on the right to see the test result in diff format:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-4.png"><img alt="../../_images/xpresso-jobs-compare-4.png" class="align-center" src="../../_images/xpresso-jobs-compare-4.png" style="width: 75%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <p>Section diff page will open and load diff plugin:</p>
 <a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-5.png"><img alt="../../_images/xpresso-jobs-compare-5.png" class="align-center" src="../../_images/xpresso-jobs-compare-5.png" style="width: 75%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Alternatively, you can compare test results by going to the <strong>Requests</strong> page and selecting 2 requests for comparison as described below.</p>
@@ -237,6 +248,7 @@ shutdown
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-filter.png"><img alt="../../_images/xpresso-jobs-filter.png" class="align-left" src="../../_images/xpresso-jobs-filter.png" style="width: 15%;" /></a>
 <div class="line-block">
+<div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
 <div class="line"><br /></div>
