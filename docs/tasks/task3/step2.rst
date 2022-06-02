@@ -112,9 +112,9 @@ The high-level logic of the tests will be the following:
 
 #. Obtain the parsed output for **nx-osv-1**
 
-    .. code-block:: bash
+    .. code-block:: python
 
-        In [1]: pprint.pprint(out3)
+        pprint.pprint(nx_output)
 
 #. Observe the output:
 

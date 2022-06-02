@@ -91,7 +91,6 @@ The high-level logic of the tests will be the following:
     - Copy and paste the code into the pyATS console:
 
         .. code-block:: python
-            :emphasize-lines: 7
 
             csr = testbed.devices['csr1000v-1']
             nx = testbed.devices['nx-osv-1']
@@ -184,7 +183,7 @@ The high-level logic of the tests will be the following:
     To check this field, we use a regular expression, which extracts the packet loss from the ping command's output. If the loss rate is less than 20%, then the test case should pass successfully:
 
     .. code-block:: python
-        :emphasize-lines: 1, 4, 7, 10-11
+        :emphasize-lines: 1, 4
 
         nx = self.parent.parameters['testbed'].devices['nx-osv-1']
 

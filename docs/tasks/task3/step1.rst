@@ -41,14 +41,14 @@ The high-level logic of the test case will be as follows:
     .. note::
 
         The output for ASA should be empty.
-        If you don’t see any ERROR logs on the csr1000v-1 device, then:
+        If you don't see any ERROR logs on the csr1000v-1 device, then:
 
         1. Connect to CSR:
             - Launch PuTTY and connect to **csr1000v-1**. Username: ``cisco``, password: ``cisco``
         2. Generate a test ERROR message:
             - csr1000v-1# **send log 'Test ERROR message for pyATS'**
         3. Repeat step 3 above for CSR in the pyATS shell:
-            - **out1 = csr.execute('show logging | i ERROR|WARN')**
+            - **csr_output = csr.execute('show logging | i ERROR|WARN')**
 
 #. To check whether there is an empty or non-empty output, we will use the Python **len()** built-in function, which returns the length of the given string. If the collected output is empty, then **len()** of the output will be 0; otherwise, the result will be greater than 0.
 
@@ -70,7 +70,7 @@ The high-level logic of the test case will be as follows:
 
         .. code-block:: python
 
-            len(out1)
+            len(csr_output)
 
     The resulting length is greater than 0, which means the output from CSR is not empty:
 
