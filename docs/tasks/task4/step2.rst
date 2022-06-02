@@ -40,11 +40,13 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     |
     |
     |
+    |
+    |
 
     You will see the pre-configured job **Ping_from_ASA** which executes **task10_runtestsjob.py** script you've used in this Scenario:
 
 
-    .. image:: images/xpresso-jobs-list.png
+    .. image:: images/xpresso-jobs-list-jenkins.png
         :align: center
         :width: 75%
 
@@ -54,6 +56,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :align: left
         :width: 15%
 
+    |
     |
     |
     |
@@ -100,12 +103,14 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     |
     |
     |
+    |
+    |
 
 #. Run **Ping_from_ASA** job again by repeating Steps 4 - 7. This time you will notice that one of the tests is failing:
 
-    .. image:: images/xpresso-ping-from-asa.png
+    .. image:: images/xpresso-ping-fail-from-asa.png
         :align: center
-        :width: 55%
+        :width: 75%
 
 #. Now let's compare job results. On the top of the page click on the **Compare** button and check the last job run that was successful and  has the status **PASSED**:
 
@@ -130,12 +135,16 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     .. image:: images/xpresso-jobs-compare-4.png
         :align: center
         :width: 75%
+    
+    |
 
     Section diff page will open and load diff plugin:
 
     .. image:: images/xpresso-jobs-compare-5.png
         :align: center
         :width: 75%
+
+    |
 
     .. note::
         Alternatively, you can compare test results by going to the **Requests** page and selecting 2 requests for comparison as described below.
@@ -146,6 +155,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :align: left
         :width: 15%
 
+    |
     |
     |
     |

@@ -50,7 +50,7 @@ class VerifyLogging(aetest.Testcase):
 
     @aetest.test
     def error_logs(self):
-        any_device = self.parent.parameters["dev"][]
+        any_device = self.parent.parameters["dev"][0]
         any_device.log_user(enable=True)
         output = any_device.execute("show logging | include ERROR|WARN")
 
