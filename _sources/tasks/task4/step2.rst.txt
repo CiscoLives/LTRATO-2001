@@ -4,7 +4,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
 **Value Proposition:** In the last task, we will learn how to use XPRESSO dashboard to run the test job and compare the test results. To simplify the scenario, the basic configuration was already done in XPRESSO. Test Harness, Execution Engine, Testbed, and Job are pre-configured.
 
 .. note::
-    Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via RDP session to CentOS VM running XPRESSO.
+    Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via a Remote Desktop Protocol (RDP) session to CentOS VM running XPRESSO.
 
 #. Locate XPRESSO.rdp shortcut on the desktop of Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.
 
@@ -20,7 +20,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :align: center
         :width: 20%
 
-#. Inside RDP session, open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see Requests page:
+#. Inside the RDP session, open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see the Requests page:
 
     .. image:: images/xpresso-dashboard-page.png
         :align: center
@@ -31,55 +31,51 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         - Username: ``xpresso``
         - Password: ``C1sco12345``
 
-#. From the menu icons on the left, locate Jobs item and click on it:
+
+#. From the menu icons on the left, locate the Jobs item and click on it:
 
     .. image:: images/xpresso-jobs-filter.png
-        :align: left
+        :align: center
         :width: 15%
 
     |
-    |
-    |
-    |
-    |
 
-    You will see the pre-configured job **Ping_from_ASA** which executes **task10_runtestsjob.py** script you've used in this Scenario:
+    You will see the pre-configured job **Ping_from_ASA** which executes **task3step4.py** script you've used in this Scenario:
 
 
     .. image:: images/xpresso-jobs-list-jenkins.png
         :align: center
         :width: 75%
 
-#. Hover the mouse over the job row and you will see **Execute** icon on the right. Click it:
+#. Hover your mouse over the job row and you will see the **Execute** icon on the right. Click it:
 
     .. image:: images/xpresso-jobs-execute.png
-        :align: left
+        :align: center
         :width: 15%
 
     |
-    |
-    |
-    |
-    |
 
-    You will be presented with a ``You are configuring a new group job request`` page where you can customize job run settings. Leave all settings by default and click Submit button. Once done, job will be submitted for execution.
+    You will be presented with a ``You are configuring a new group job request`` page where you can customize job run settings. Leave all settings by default and click Submit button. Once done, the job will be submitted for execution.
 
-    On the bottom of the job execution page, you will see the request item, which will go through the different stages: **PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED or FAILED**:
+    At the bottom of the job execution page, you will see the ``request`` item, which will go through the different stages: **PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED, or FAILED**:
 
     .. image:: images/xpresso-jobs-request-status-1.png
         :align: center
         :width: 75%
 
-#. Click on the Request Item while job is running, and you will see how pyATS is executing every tests defined in the job file one by one in real-time:
+#. Click on the Request Item while the job is running, and you will see how pyATS is executing every test defined in the job file one by one in real-time:
 
     .. image:: images/xpresso-jobs-request-status-2.png
         :align: center
         :width: 55%
 
-    .. note::
-        If you click on Request item while job is going through **PREPARING, QUEUING, QUEUED** stages, there would be no visible results as job is not running yet. Once job transitions to RUNNING stage, the page will be updated and you will start getting test the execution results,
+    |
 
-#. Once job execution is completed, you will see the results, can check raw console output, job history with timestamps, download archive with results or compare test execution with another job run:
+    .. note::
+        If you click on the ``request`` item while the job is going through **PREPARING, QUEUING, QUEUED** stages, there would be no visible results as the job is not running yet.
+        Once the job transitions to the **RUNNING** stage, the page will be updated and you will start getting test the execution results,
+
+#. Once job execution is completed, you will see the results, can check raw console output, job history with timestamps, download archive with results, or compare test execution with another job run:
 
     .. image:: images/xpresso-request-details.png
         :align: center
@@ -94,16 +90,12 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         interface gigabitEthernet 2
         shutdown
 
-#. Go back to XPRESSO dashboard and click on Jobs menu item:
+#. Go back to the XPRESSO dashboard and click on the Jobs menu item:
 
     .. image:: images/xpresso-jobs-filter.png
-        :align: left
+        :align: center
         :width: 15%
 
-    |
-    |
-    |
-    |
     |
 
 #. Run **Ping_from_ASA** job again by repeating Steps 4 - 7. This time you will notice that one of the tests is failing:
@@ -152,12 +144,9 @@ Step 2: Run tests and compare results from XPRESSO dashboard
 #. Click on Requests menu item:
 
     .. image:: images/xpresso-jobs-filter.png
-        :align: left
+        :align: center
         :width: 15%
 
-    |
-    |
-    |
     |
 
 #. Select 2 requests - PASSED and FAILED, and click the Compare icon on the top right of the page. Compare icon will be visible only if you select exactly 2 items:
