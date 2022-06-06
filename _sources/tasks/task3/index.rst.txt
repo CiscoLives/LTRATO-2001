@@ -2,7 +2,10 @@
 Task 3: Verification
 ####################
 
-.. Next Table of Content is an example, please change the names according to your needs 
+
+.. tip::
+   The estimated time to complete this task is: **60 Minutes**.
+
 
 .. toctree::
 
