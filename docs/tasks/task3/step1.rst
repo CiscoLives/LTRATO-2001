@@ -173,19 +173,8 @@ The high-level logic of the test case will be as follows:
 
 #. Execute the test script **task3step1a.py** and check the results section.
 
-    The test case **error_log** will run only for one device. Scroll above the results section and you will see which device is related to this output.
-
-    .. image:: images/error-log.png
-        :width: 75%
-        :align: center
-    
-    |
-
-    .. TODO:: 
-
-        - find out why log_user is not working as expected
-
-    We have learned how to run a test case for a single device; now we need to get familiar with the **aetest.loop** method, which will let us repeat an elementary test case (written for one device) for every device in the testbed.
+    The test case **error_log** will run only for one device. 
+    Now we need to get familiar with the **aetest.loop** method, which will let us repeat an elementary test case (written for one device) for every device in the testbed.
 
 #. Open the file task3step1b.py.
 
