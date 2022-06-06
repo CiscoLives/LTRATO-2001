@@ -35,10 +35,6 @@ Step 1: Explore Lab Structure
 
     Check the list of files and refer to the description of each file depicted in the table below.
 
-    .. TODO::
-
-        - Update at the end of the review for the lab
-
     .. note ::
         The following files are in the LTRATO-2001 directory and will be used throughout the lab.
 

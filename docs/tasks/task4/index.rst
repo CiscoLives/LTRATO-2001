@@ -3,7 +3,9 @@ Task 4: Results
 ###############
 
 
-Follow the next steps to apply portal customizations such as CSS, Icons, Buttons, Colors, etc.
+.. tip::
+   The estimated time to complete this task is: **40 Minutes**.
+
 
 .. toctree::
 
