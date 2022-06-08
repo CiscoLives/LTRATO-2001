@@ -1,5 +1,5 @@
 Hostname,IP Address,Port/Protocol,Username,Password
-Jumphost,198.18.133.252,"RDP ",administrator,C1sco12345
+Jumphost/Remote Desktop,198.18.133.252,"RDP ",administrator,C1sco12345
 asav-1,198.18.1.202,SSH,cisco,cisco
 csr1000v-1,198.18.1.201,SSH,cisco,cisco
 nx-osv-1,198.18.1.203,SSH,cisco,cisco
