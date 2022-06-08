@@ -58,7 +58,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../tasks/task1/step3.html">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../tasks/task2/index.html">Task 2: Writting Initial Scripts</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tasks/task2/index.html">Task 2: Writing Initial Scripts</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../tasks/task2/step1.html">Step 1: Collect Show Commands</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../tasks/task2/step2.html">Step 2: Writing Test Script</a></li>
 </ul>
@@ -118,7 +118,7 @@ All lab tasks are intended to be executed from the Jumphost (a Windows 10 machin
 <div class="line"><br /></div>
 </div>
 <div class="section" id="ip-addressing-and-access-information">
-<h2>IP Addressing and Access Information<a class="headerlink" href="#ip-addressing-and-access-information" title="Permalink to this headline">¶</a></h2>
+<span id="lab-access-information"></span><h2>IP Addressing and Access Information<a class="headerlink" href="#ip-addressing-and-access-information" title="Permalink to this headline">¶</a></h2>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 20%" />
@@ -136,7 +136,7 @@ All lab tasks are intended to be executed from the Jumphost (a Windows 10 machin
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>Jumphost</p></td>
+<tr class="row-even"><td><p>Jumphost/Remote Desktop</p></td>
 <td><p>198.18.133.252</p></td>
 <td><p>RDP</p></td>
 <td><p>administrator</p></td>
@@ -243,36 +243,40 @@ Appliance</p>
 <div class="section" id="get-started">
 <h2>Get Started<a class="headerlink" href="#get-started" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic">
-<li><p>Go to <a class="reference external" href="https://dcloud.cisco.com">dCloud</a> and log in with your Cisco (CCO) credentials.</p></li>
-<li><p>Paste the Event URL into your browser and click Enter. You will be redirected to your session page.</p></li>
+<li><p>Go to <a class="reference external" href="https://dcloud.cisco.com">dCloud</a> and log in with your Cisco (CCO) credentials. Once logged in, click on the <span class="guilabel">My Hub</span> tab. Then, you will see your session page.</p></li>
 <li><p>On the session page, click <span class="guilabel">Info</span> tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to access your lab using the Cisco AnyConnect client.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/session-details.png"><img alt="../_images/session-details.png" class="align-center" src="../_images/session-details.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Cisco AnyConnect client and Host address from the previous step.</p>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">Cisco</span> <span class="pre">AnyConnect</span></code> client and copy the Host address from the previous step.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/anyconnect-01.png"><img alt="../_images/anyconnect-01.png" class="align-center" src="../_images/anyconnect-01.png" style="width: 45%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Enter the Username/Password from the previous step when the login banner appears.</p>
+<li><p>Enter the Username/Password from the previous step when the login fields appear.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/anyconnect-02.png"><img alt="../_images/anyconnect-02.png" class="align-center" src="../_images/anyconnect-02.png" style="width: 45%;" /></a>
 </div></blockquote>
 </li>
-<li><p>For best performance, connect to the workstation with Cisco AnyConnect VPN <a class="reference external" href="https://dcloud-cms.cisco.com/help/install_anyconnect_pc_mac">Show Me How</a> and the local RDP client on your laptop <a class="reference external" href="https://dcloud-cms.cisco.com/help/local_rdp_mac_windows">Show Me How</a> and use the information from the table above to connect to the workstation</p></li>
+<li><p>Accept when the login banner appears.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../_images/anyconnect-03.png"><img alt="../_images/anyconnect-03.png" class="align-center" src="../_images/anyconnect-03.png" style="width: 45%;" /></a>
+</div></blockquote>
+</li>
+<li><p>For best performance, connect to the workstation with Cisco AnyConnect VPN <a class="reference external" href="https://dcloud-cms.cisco.com/help/install_anyconnect_pc_mac">Show Me How</a> and the local RDP client on your laptop <a class="reference external" href="https://dcloud-cms.cisco.com/help/local_rdp_mac_windows">Show Me How</a> and use the information from the table above <a class="reference internal" href="#lab-access-information"><span class="std std-ref">Lab Access Information</span></a> to connect to the workstation</p></li>
 <li><p>Once inside the remote desktop connection, open the Google Chrome browser, startup page <a class="reference external" href="https://cml-controller.cml.lab/login">https://cml-controller.cml.lab/login</a> will be opened (web interface of Cisco Modeling Labs server).</p></li>
 <li><p>Press <code class="docutils literal notranslate"><span class="pre">Login</span></code> button:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/cml-01.png"><img alt="../_images/cml-01.png" class="align-center" src="../_images/cml-01.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>On the opened page, ensure the lab LTRATO-2001 is in the <code class="docutils literal notranslate"><span class="pre">ON</span></code> state:</p>
+<li><p>Ensure the lab LTRATO-2001 is in the <code class="docutils literal notranslate"><span class="pre">ON</span></code> state on the opened page. If not, turn it on on the <code class="docutils literal notranslate"><span class="pre">play</span></code> button.</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/cml-02.png"><img alt="../_images/cml-02.png" class="align-center" src="../_images/cml-02.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Click on the topology, and on the opened page, ensure the status for all devices is <code class="docutils literal notranslate"><span class="pre">green</span></code>:</p>
+<li><p>Click on the topology <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">gray</span> <span class="pre">dots</span></code>, and on the opened page, ensure the status for all devices is <code class="docutils literal notranslate"><span class="pre">green</span></code>:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../_images/cml-03.png"><img alt="../_images/cml-03.png" class="align-center" src="../_images/cml-03.png" style="width: 75%;" /></a>
 <div class="line-block">
@@ -284,10 +288,10 @@ Appliance</p>
 </div>
 </div></blockquote>
 </li>
-<li><p>On the remote desktop, double-click the <code class="docutils literal notranslate"><span class="pre">PuTTY</span></code> shortcut icon on the desktop and verify connectivity by launching the <strong>asav-1</strong>, <strong>csr100v-1</strong>, and <strong>nx-osv-1</strong> devices from the remote desktop and logging in. Username/password for all three devices: <code class="docutils literal notranslate"><span class="pre">cisco/cisco</span></code>.</p></li>
+<li><p>On the remote desktop, double-click the <code class="docutils literal notranslate"><span class="pre">PuTTY</span></code> shortcut icon on the desktop and verify connectivity by launching three sessions for the <strong>asav-1</strong>, <strong>csr100v-1</strong>, and <strong>nx-osv-1</strong> devices and logging in. Username/password for all three devices: <code class="docutils literal notranslate"><span class="pre">cisco/cisco</span></code>.</p></li>
 <li><p>If all devices are reachable and you can log in, close the PuTTY sessions and proceed with <strong>Task 1</strong>.</p></li>
 </ol>
-<p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
+<p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Yossi Meloch &lt;<a class="reference external" href="mailto:ymeloch&#37;&#52;&#48;cisco&#46;com">ymeloch<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 </div>
 
