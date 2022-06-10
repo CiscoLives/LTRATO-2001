@@ -12,6 +12,21 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 
         pyats shell --testbed-file pyats_testbed.yaml
 
+    If everything works correctly, you will see an output similar to the following:
+
+    .. code-block:: bash
+
+        Welcome to pyATS Interactive Shell
+        ==================================
+        Python 3.9.13 (main, May 24 2022, 21:28:31) 
+        [Clang 13.1.6 (clang-1316.0.21.2)]
+
+        >>> from pyats.topology.loader import load
+        >>> testbed = load('pyats_testbed.yaml')
+        -------------------------------------------------------------------------------            
+        In [1]: 
+
+
 #. Now, let's check the structure of the **testbed.devices** object.
 
     .. code-block:: python
@@ -82,7 +97,32 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 
     - End the code with ``--``
 
-#. Check the result of this code. Now each device should return the output of the **show inventory** command.
+    - On pyATS shell it would look something like this:
+
+    .. code-block:: bash
+        
+        In [1]: %cpaste
+        Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+        :from unicon.core.errors import EOF, SubCommandFailure
+        for device_name, device in testbed.devices.ite:ms():
+            print('#########################')
+            p::rint(f'#####device_name = {device_name}, device = {device}')
+            print(f'#####device_name = {device_:name}, device_object_type = {type(device)}')
+            d:evice.connect(log_stdout=False)
+            print('#####Ou:tput:')
+            try:
+                out = device.execute('show inventory')
+                print(f'{out}')
+            except S::ubCommandFailure as e:
+                if isinstance(e.__c:ause__, EOF):
+                    print('Connection closed:, try to reconnect')
+                    device.disconnect:()
+                    device.connect():
+        :--
+
+    - As a result, each device should return the output of the **show inventory** command.
+
+    |
 
     .. note::
 
@@ -102,11 +142,11 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 
 #. Exit the pyATS shell by using the **exit** command. Now we are ready to go through the final version of the script by gathering the commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).
 
-#. Open the prepared script task4_labpyats.py in Nano editor.
+#. Open the prepared script task1step1.py in Nano editor.
 
     .. code-block:: bash
 
-        nano task4_labpyats.py
+        nano task1step1.py
 
 #. Before diving into the details of the code, study the explanation of the code given below. The script **task2step1.py** has the following Python functions:
 
@@ -150,11 +190,42 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 
         -rw-r--r-- 1 cisco cisco  6.9K Nov  5 17:12 task2step1.txt
 
-#. Check the content of **task2step1.txt** file.
+#. Check the content of the **task2step1.txt** file.
     
         .. code-block:: bash
     
             cat ~/LTRATO-2001/task2step1.txt
 
+        The output should look similar to the following:
+        
+        .. code-block:: text
+
+            Name: "Chassis", DESCR: "ASAv Adaptive Security Virtual Appliance"
+            PID: ASAv              , VID: V01     , SN: 9AT6971HDTE
+            ####
+            NAME: "Chassis", DESCR: "Cisco CSR1000V Chassis"
+            PID: CSR1000V          , VID: V00  , SN: 9TZZH2O1ZRC
+
+            NAME: "module R0", DESCR: "Cisco CSR1000V Route Processor"
+            PID: CSR1000V          , VID: V00  , SN: JAB1303001C
+
+            NAME: "module F0", DESCR: "Cisco CSR1000V Embedded Services Processor"
+            PID: CSR1000V          , VID:      , SN:
+            ####
+            NAME: "Chassis",  DESCR: "Nexus9000 9000v Chassis"               
+            PID: N9K-9000v           ,  VID: V02 ,  SN: 9175PXH6Z4G          
+
+            NAME: "Slot 1",  DESCR: "Nexus 9000v Ethernet Module"           
+            PID: N9K-9000v           ,  VID: V02 ,  SN: 9175PXH6Z4G          
+
+            NAME: "Fan 1",  DESCR: "Nexus9000 9000v Chassis Fan Module"    
+            PID: N9K-9000v-FAN       ,  VID: V01 ,  SN: N/A                  
+
+            NAME: "Fan 2",  DESCR: "Nexus9000 9000v Chassis Fan Module"    
+            PID: N9K-9000v-FAN       ,  VID: V01 ,  SN: N/A                  
+
+            NAME: "Fan 3",  DESCR: "Nexus9000 9000v Chassis Fan Module"    
+            PID: N9K-9000v-FAN       ,  VID: V01 ,  SN: N/A
+            ####
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>
