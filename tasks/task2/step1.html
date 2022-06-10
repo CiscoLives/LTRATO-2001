@@ -122,6 +122,18 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
 </pre></div>
 </div>
+<p>If everything works correctly, you will see an output similar to the following:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Welcome to pyATS Interactive <span class="nv">Shell</span>
+<span class="o">==================================</span>
+Python <span class="m">3</span>.9.13 <span class="o">(</span>main, May <span class="m">24</span> <span class="m">2022</span>, <span class="m">21</span>:28:31<span class="o">)</span>
+<span class="o">[</span>Clang <span class="m">13</span>.1.6 <span class="o">(</span>clang-1316.0.21.2<span class="o">)]</span>
+
+&gt;&gt;&gt; from pyats.topology.loader import load
+&gt;&gt;&gt; <span class="nv">testbed</span> <span class="o">=</span> load<span class="o">(</span><span class="s1">&#39;pyats_testbed.yaml&#39;</span><span class="o">)</span>
+-------------------------------------------------------------------------------
+In <span class="o">[</span><span class="m">1</span><span class="o">]</span>:
+</pre></div>
+</div>
 </div></blockquote>
 </li>
 <li><p>Now, let’s check the structure of the <strong>testbed.devices</strong> object.</p>
@@ -199,12 +211,35 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 </div></blockquote>
 </li>
 <li><p>End the code with <code class="docutils literal notranslate"><span class="pre">--</span></code></p></li>
+<li><p>On pyATS shell it would look something like this:</p></li>
 </ul>
-</div></blockquote>
-</li>
-<li><p>Check the result of this code. Now each device should return the output of the <strong>show inventory</strong> command.</p>
-<blockquote>
-<div><div class="admonition note">
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>In <span class="o">[</span><span class="m">1</span><span class="o">]</span>: %cpaste
+Pasting code<span class="p">;</span> enter <span class="s1">&#39;--&#39;</span> alone on the line to stop or use Ctrl-D.
+:from unicon.core.errors import EOF, SubCommandFailure
+<span class="k">for</span> device_name, device in testbed.devices.ite:ms<span class="o">()</span>:
+    print<span class="o">(</span><span class="s1">&#39;#########################&#39;</span><span class="o">)</span>
+    p::rint<span class="o">(</span>f<span class="s1">&#39;#####device_name = {device_name}, device = {device}&#39;</span><span class="o">)</span>
+    print<span class="o">(</span>f<span class="s1">&#39;#####device_name = {device_:name}, device_object_type = {type(device)}&#39;</span><span class="o">)</span>
+    d:evice.connect<span class="o">(</span><span class="nv">log_stdout</span><span class="o">=</span>False<span class="o">)</span>
+    print<span class="o">(</span><span class="s1">&#39;#####Ou:tput:&#39;</span><span class="o">)</span>
+    try:
+        <span class="nv">out</span> <span class="o">=</span> device.execute<span class="o">(</span><span class="s1">&#39;show inventory&#39;</span><span class="o">)</span>
+        print<span class="o">(</span>f<span class="s1">&#39;{out}&#39;</span><span class="o">)</span>
+    except S::ubCommandFailure as e:
+        <span class="k">if</span> isinstance<span class="o">(</span>e.__c:ause__, EOF<span class="o">)</span>:
+            print<span class="o">(</span><span class="s1">&#39;Connection closed:, try to reconnect&#39;</span><span class="o">)</span>
+            device.disconnect:<span class="o">()</span>
+            device.connect<span class="o">()</span>:
+:--
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>As a result, each device should return the output of the <strong>show inventory</strong> command.</p></li>
+</ul>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the command.
 To address this situation, we will add the following code to reconnect to a device:</p>
@@ -222,9 +257,9 @@ To address this situation, we will add the following code to reconnect to a devi
 </div></blockquote>
 </li>
 <li><p>Exit the pyATS shell by using the <strong>exit</strong> command. Now we are ready to go through the final version of the script by gathering the commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).</p></li>
-<li><p>Open the prepared script task4_labpyats.py in Nano editor.</p>
+<li><p>Open the prepared script task1step1.py in Nano editor.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task4_labpyats.py
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task1step1.py
 </pre></div>
 </div>
 </div></blockquote>
@@ -286,9 +321,39 @@ When multiple commands are being executed, it is preferred to avoid logging the 
 </div>
 </div></blockquote>
 </li>
-<li><p>Check the content of <strong>task2step1.txt</strong> file.</p>
+<li><p>Check the content of the <strong>task2step1.txt</strong> file.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat ~/LTRATO-2001/task2step1.txt
+</pre></div>
+</div>
+<p>The output should look similar to the following:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>Name: &quot;Chassis&quot;, DESCR: &quot;ASAv Adaptive Security Virtual Appliance&quot;
+PID: ASAv              , VID: V01     , SN: 9AT6971HDTE
+####
+NAME: &quot;Chassis&quot;, DESCR: &quot;Cisco CSR1000V Chassis&quot;
+PID: CSR1000V          , VID: V00  , SN: 9TZZH2O1ZRC
+
+NAME: &quot;module R0&quot;, DESCR: &quot;Cisco CSR1000V Route Processor&quot;
+PID: CSR1000V          , VID: V00  , SN: JAB1303001C
+
+NAME: &quot;module F0&quot;, DESCR: &quot;Cisco CSR1000V Embedded Services Processor&quot;
+PID: CSR1000V          , VID:      , SN:
+####
+NAME: &quot;Chassis&quot;,  DESCR: &quot;Nexus9000 9000v Chassis&quot;
+PID: N9K-9000v           ,  VID: V02 ,  SN: 9175PXH6Z4G
+
+NAME: &quot;Slot 1&quot;,  DESCR: &quot;Nexus 9000v Ethernet Module&quot;
+PID: N9K-9000v           ,  VID: V02 ,  SN: 9175PXH6Z4G
+
+NAME: &quot;Fan 1&quot;,  DESCR: &quot;Nexus9000 9000v Chassis Fan Module&quot;
+PID: N9K-9000v-FAN       ,  VID: V01 ,  SN: N/A
+
+NAME: &quot;Fan 2&quot;,  DESCR: &quot;Nexus9000 9000v Chassis Fan Module&quot;
+PID: N9K-9000v-FAN       ,  VID: V01 ,  SN: N/A
+
+NAME: &quot;Fan 3&quot;,  DESCR: &quot;Nexus9000 9000v Chassis Fan Module&quot;
+PID: N9K-9000v-FAN       ,  VID: V01 ,  SN: N/A
+####
 </pre></div>
 </div>
 </div></blockquote>
