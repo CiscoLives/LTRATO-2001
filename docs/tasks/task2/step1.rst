@@ -104,7 +104,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
         In [1]: %cpaste
         Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
         :from unicon.core.errors import EOF, SubCommandFailure
-        for device_name, device in testbed.devices.ite:ms():
+        for device_name, device in testbed.devices.items():
             print('#########################')
             p::rint(f'#####device_name = {device_name}, device = {device}')
             print(f'#####device_name = {device_:name}, device_object_type = {type(device)}')
