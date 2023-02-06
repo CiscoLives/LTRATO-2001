@@ -2,7 +2,7 @@
 Introduction
 ############
 
-This document is intended for use by attendees of the Cisco Live 2022 who are taking Network Programmability Hands-on Lab (LTRATO-2001).
+This document is intended for use by attendees of the Cisco Live 2023 who are taking Automated Testing for Your Network Hands-on Lab (LTRATO-2001).
 
 Prerequisites
 =============
