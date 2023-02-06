@@ -2,7 +2,7 @@
 
 # Network Programability Lab (LTRATO-2001)
 
-This repository contains the required source code to build the documentation for LTRATO-2001 Cisco Live 2022 session.
+This repository contains the required source code to build the documentation for LTRATO-2001 Cisco Live 2023 session.
 
 # Lab Guide
 
