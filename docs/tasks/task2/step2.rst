@@ -66,19 +66,19 @@ Each of these sections is further broken down into smaller subsections (Python m
         class common_setup(aetest.CommonSetup):
         """Common Setup section"""
 
-        @aetest.subsection
-        def establish_connections(self, pyats_testbed):
-            device_list = []
-            # Load all devices from testbed file and try to connect to them
-            for device in pyats_testbed.devices.values():
-                LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
-                try:
-                    device.connect(log_stdout=False)
-                except errors.ConnectionError:
-                    self.failed(f"Failed to establish a connection to '{device.name}'")
-                device_list.append(device)
-            # Pass list of devices to testcases
-            self.parent.parameters.update(dev=device_list)
+            @aetest.subsection
+            def establish_connections(self, pyats_testbed):
+                device_list = []
+                # Load all devices from testbed file and try to connect to them
+                for device in pyats_testbed.devices.values():
+                    LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
+                    try:
+                        device.connect(log_stdout=False)
+                    except errors.ConnectionError:
+                        self.failed(f"Failed to establish a connection to '{device.name}'")
+                    device_list.append(device)
+                # Pass list of devices to testcases
+                self.parent.parameters.update(dev=device_list)
 
     The following code is used to load a testbed file from the filename specified in the command-line option (**--testbed** is a command line key, **dest** – specifies the name of the object that would represent the testbed file in code):
 
@@ -110,6 +110,72 @@ Each of these sections is further broken down into smaller subsections (Python m
     .. image:: images/step7-output.png
         :width: 75%
         :align: center
+
+#. In this next step, let's add a test case, that looks for interface errors and prints any interface that contains errors. The code would like something like this:
+
+    .. code-block:: python
+
+        class interface_errors(aetest.Testcase):
+            """interface_errors"""
+
+            # List of counters keys to check for errors
+            #   Model details: https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/_models/interface.pdf
+            counter_error_keys = ("in_crc_errors", "in_errors", "out_errors")
+
+            @aetest.setup
+            def setup(self, testbed):
+                """Learn and save the interface details from the testbed devices."""
+                self.learnt_interfaces = {}
+                for device_name, device in testbed.devices.items():
+                    # Only attempt to learn details on supported network operation systems
+                    if device.os in ("ios", "iosxe", "iosxr", "nxos"):
+                        LOGGER.info(f"{device_name} connected status: {device.connected}")
+                        LOGGER.info(f"Learning Interfaces for {device_name}")
+                        self.learnt_interfaces[device_name] = device.learn("interface").info
+
+            @aetest.test
+            def test(self, steps):
+                # Loop over every device with learnt interfaces
+                for device_name, interfaces in self.learnt_interfaces.items():
+                    with steps.start(
+                        f"Looking for Interface Errors on {device_name}", continue_=True
+                    ) as device_step:
+                        # Loop over every interface that was learnt
+                        for interface_name, interface in interfaces.items():
+                            with device_step.start(
+                                f"Checking Interface {interface_name}", continue_=True
+                            ) as interface_step:
+                                # Verify that this interface has "counters" (Loopbacks Lack Counters on some platforms)
+                                if "counters" in interface.keys():
+                                    # Loop over every counter to check, looking for values greater than 0
+                                    for counter in self.counter_error_keys:
+                                        # Verify that the counter is available for this device
+                                        if counter in interface["counters"].keys():
+                                            if interface["counters"][counter] > 0:
+                                                interface_step.failed(
+                                                    f'Device {device_name} Interface {interface_name} has a count of {interface["counters"][counter]} for {counter}'
+                                                )
+                                        else:
+                                            # if the counter not supported, log that it wasn't checked
+                                            LOGGER.info(
+                                                f"Device {device_name} Interface {interface_name} missing {counter}"
+                                            )
+                                else:
+                                    # If the interface has no counters, mark as skipped
+                                    interface_step.skipped(
+                                        f"Device {device_name} Interface {interface_name} missing counters"
+                                    )
+                                    
+
+#. Let's run our new test script. This test script will try to connect to all the devices in the testbed and test interfaces for errors:
+
+    .. code-block:: bash
+
+        python task2step2b.py --testbed pyats_testbed.yaml
+
+.. note::
+
+    In this last test, we have disabled the connection logs (by adding the ``log_stdout=False`` to avoid displaying all the connection logs)
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>
