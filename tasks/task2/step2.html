@@ -178,19 +178,19 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">common_setup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
 <span class="sd">&quot;&quot;&quot;Common Setup section&quot;&quot;&quot;</span>
 
-<span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
-<span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyats_testbed</span><span class="p">):</span>
-    <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="c1"># Load all devices from testbed file and try to connect to them</span>
-    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;...&quot;</span><span class="p">))</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish a connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
-        <span class="n">device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
-    <span class="c1"># Pass list of devices to testcases</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
+    <span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
+    <span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyats_testbed</span><span class="p">):</span>
+        <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="c1"># Load all devices from testbed file and try to connect to them</span>
+        <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;...&quot;</span><span class="p">))</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish a connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+            <span class="n">device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="c1"># Pass list of devices to testcases</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The following code is used to load a testbed file from the filename specified in the command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies the name of the object that would represent the testbed file in code):</p>
@@ -223,7 +223,74 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 <div><a class="reference internal image-reference" href="../../_images/step7-output.png"><img alt="../../_images/step7-output.png" class="align-center" src="../../_images/step7-output.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
+<li><p>In this next step, let’s add a test case, that looks for interface errors and prints any interface that contains errors. The code would like something like this:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">interface_errors</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">Testcase</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;interface_errors&quot;&quot;&quot;</span>
+
+    <span class="c1"># List of counters keys to check for errors</span>
+    <span class="c1">#   Model details: https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/_models/interface.pdf</span>
+    <span class="n">counter_error_keys</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;in_crc_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;in_errors&quot;</span><span class="p">,</span> <span class="s2">&quot;out_errors&quot;</span><span class="p">)</span>
+
+    <span class="nd">@aetest</span><span class="o">.</span><span class="n">setup</span>
+    <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">testbed</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Learn and save the interface details from the testbed devices.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">learnt_interfaces</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="c1"># Only attempt to learn details on supported network operation systems</span>
+            <span class="k">if</span> <span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;ios&quot;</span><span class="p">,</span> <span class="s2">&quot;iosxe&quot;</span><span class="p">,</span> <span class="s2">&quot;iosxr&quot;</span><span class="p">,</span> <span class="s2">&quot;nxos&quot;</span><span class="p">):</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{device_name}</span><span class="s2"> connected status: </span><span class="si">{device.connected}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Learning Interfaces for </span><span class="si">{device_name}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">learnt_interfaces</span><span class="p">[</span><span class="n">device_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s2">&quot;interface&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">info</span>
+
+    <span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
+    <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
+        <span class="c1"># Loop over every device with learnt interfaces</span>
+        <span class="k">for</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">interfaces</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">learnt_interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">with</span> <span class="n">steps</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Looking for Interface Errors on </span><span class="si">{device_name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">continue_</span><span class="o">=</span><span class="kc">True</span>
+            <span class="p">)</span> <span class="k">as</span> <span class="n">device_step</span><span class="p">:</span>
+                <span class="c1"># Loop over every interface that was learnt</span>
+                <span class="k">for</span> <span class="n">interface_name</span><span class="p">,</span> <span class="n">interface</span> <span class="ow">in</span> <span class="n">interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">with</span> <span class="n">device_step</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;Checking Interface </span><span class="si">{interface_name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">continue_</span><span class="o">=</span><span class="kc">True</span>
+                    <span class="p">)</span> <span class="k">as</span> <span class="n">interface_step</span><span class="p">:</span>
+                        <span class="c1"># Verify that this interface has &quot;counters&quot; (Loopbacks Lack Counters on some platforms)</span>
+                        <span class="k">if</span> <span class="s2">&quot;counters&quot;</span> <span class="ow">in</span> <span class="n">interface</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                            <span class="c1"># Loop over every counter to check, looking for values greater than 0</span>
+                            <span class="k">for</span> <span class="n">counter</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter_error_keys</span><span class="p">:</span>
+                                <span class="c1"># Verify that the counter is available for this device</span>
+                                <span class="k">if</span> <span class="n">counter</span> <span class="ow">in</span> <span class="n">interface</span><span class="p">[</span><span class="s2">&quot;counters&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                                    <span class="k">if</span> <span class="n">interface</span><span class="p">[</span><span class="s2">&quot;counters&quot;</span><span class="p">][</span><span class="n">counter</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                                        <span class="n">interface_step</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span>
+                                            <span class="sa">f</span><span class="s1">&#39;Device </span><span class="si">{device_name}</span><span class="s1"> Interface </span><span class="si">{interface_name}</span><span class="s1"> has a count of </span><span class="si">{interface[&quot;counters&quot;][counter]}</span><span class="s1"> for </span><span class="si">{counter}</span><span class="s1">&#39;</span>
+                                        <span class="p">)</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="c1"># if the counter not supported, log that it wasn&#39;t checked</span>
+                                    <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+                                        <span class="sa">f</span><span class="s2">&quot;Device </span><span class="si">{device_name}</span><span class="s2"> Interface </span><span class="si">{interface_name}</span><span class="s2"> missing </span><span class="si">{counter}</span><span class="s2">&quot;</span>
+                                    <span class="p">)</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="c1"># If the interface has no counters, mark as skipped</span>
+                            <span class="n">interface_step</span><span class="o">.</span><span class="n">skipped</span><span class="p">(</span>
+                                <span class="sa">f</span><span class="s2">&quot;Device </span><span class="si">{device_name}</span><span class="s2"> Interface </span><span class="si">{interface_name}</span><span class="s2"> missing counters&quot;</span>
+                            <span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Let’s run our new test script. This test script will try to connect to all the devices in the testbed and test interfaces for errors:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task2step2b.py --testbed pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
 </ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this last test, we have disabled the connection logs (by adding the <code class="docutils literal notranslate"><span class="pre">log_stdout=False</span></code> to avoid displaying all the connection logs)</p>
+</div>
 <p><em>Section author: Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
 
