@@ -198,6 +198,10 @@ You will be using the following pyATS methods throughout this task:
             diff.findDiff()
             print(diff)
 
+    .. note:: 
+    
+        Diff is one of Genie's additional Useful Libraries. In the next step, we will explore more useful libraries such as Dq.
+
     - PyATS Diff can compare outputs of structured data collected by the parse command.
     - Convert the **show interface** command into a Python dictionary using the parse method.
     
