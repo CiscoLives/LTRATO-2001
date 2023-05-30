@@ -234,18 +234,18 @@ Pasting code<span class="p">;</span> enter <span class="s1">&#39;--&#39;</span> 
 :from unicon.core.errors import EOF, SubCommandFailure
 <span class="k">for</span> device_name, device in testbed.devices.items<span class="o">()</span>:
     print<span class="o">(</span><span class="s1">&#39;#########################&#39;</span><span class="o">)</span>
-    p::rint<span class="o">(</span>f<span class="s1">&#39;#####device_name = {device_name}, device = {device}&#39;</span><span class="o">)</span>
+    print<span class="o">(</span>f<span class="s1">&#39;#####device_name = {device_name}, device = {device}&#39;</span><span class="o">)</span>
     print<span class="o">(</span>f<span class="s1">&#39;#####device_name = {device_:name}, device_object_type = {type(device)}&#39;</span><span class="o">)</span>
-    d:evice.connect<span class="o">(</span><span class="nv">log_stdout</span><span class="o">=</span>False<span class="o">)</span>
-    print<span class="o">(</span><span class="s1">&#39;#####Ou:tput:&#39;</span><span class="o">)</span>
+    device.connect<span class="o">(</span><span class="nv">log_stdout</span><span class="o">=</span>False<span class="o">)</span>
+    print<span class="o">(</span><span class="s1">&#39;#####Output:&#39;</span><span class="o">)</span>
     try:
         <span class="nv">out</span> <span class="o">=</span> device.execute<span class="o">(</span><span class="s1">&#39;show inventory&#39;</span><span class="o">)</span>
         print<span class="o">(</span>f<span class="s1">&#39;{out}&#39;</span><span class="o">)</span>
-    except S::ubCommandFailure as e:
-        <span class="k">if</span> isinstance<span class="o">(</span>e.__c:ause__, EOF<span class="o">)</span>:
+    except SubCommandFailure as e:
+        <span class="k">if</span> isinstance<span class="o">(</span>e.__cause__, EOF<span class="o">)</span>:
             print<span class="o">(</span><span class="s1">&#39;Connection closed:, try to reconnect&#39;</span><span class="o">)</span>
             device.disconnect:<span class="o">()</span>
-            device.connect<span class="o">()</span>:
+            device.connect<span class="o">()</span>
 :--
 </pre></div>
 </div>

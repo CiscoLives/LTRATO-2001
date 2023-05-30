@@ -106,18 +106,18 @@ Since it is required to collect outputs from all the devices in the testbed, in 
         :from unicon.core.errors import EOF, SubCommandFailure
         for device_name, device in testbed.devices.items():
             print('#########################')
-            p::rint(f'#####device_name = {device_name}, device = {device}')
+            print(f'#####device_name = {device_name}, device = {device}')
             print(f'#####device_name = {device_:name}, device_object_type = {type(device)}')
-            d:evice.connect(log_stdout=False)
-            print('#####Ou:tput:')
+            device.connect(log_stdout=False)
+            print('#####Output:')
             try:
                 out = device.execute('show inventory')
                 print(f'{out}')
-            except S::ubCommandFailure as e:
-                if isinstance(e.__c:ause__, EOF):
+            except SubCommandFailure as e:
+                if isinstance(e.__cause__, EOF):
                     print('Connection closed:, try to reconnect')
                     device.disconnect:()
-                    device.connect():
+                    device.connect()
         :--
 
     - As a result, each device should return the output of the **show inventory** command.
