@@ -65,7 +65,7 @@ Steps:
 
         validate(instance=csr_interfaces["Loopback1"], schema=schema)
 
-#. If the validation fails, an execption will be raised.
+#. If the validation fails, an exception will be raised.
 
     .. code-block:: bash
 
