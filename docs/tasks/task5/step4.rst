@@ -1,5 +1,5 @@
-Step 3: Configure the script and execute
-########################################
+Step 4: Configure another script and execute
+############################################
 
 **Value Proposition:** In this step, we will create a script and execut it, to run the desired tests against the device under test.
 
@@ -14,14 +14,8 @@ Step 3: Configure the script and execute
 
 #. Replace the ``*** Test Cases ***`` section with the following contents:
 
-    .. literalinclude:: ./reference/test_case_1.robot
+    .. literalinclude:: ./reference/test_case_2.robot
         :language: robotframework
-
-
-    .. note:: 
-        ROBOT is readable by everyone! i.e.   run "show inventory"
-
-        The above statement in plain English from the Robot Framework test case is called a ROBOT keyword. These are generic and re-usable terms. Our automation developers define and implement Robot Framework keywords in Python behind the scenes, allowing customers and engineers to focus on the breakdown of test steps for readability and usability using ROBOT. Our developers & testers work together to create more keywords that express different test automation scenarios. Customers can also add their own keyword if needed. As keyword count increases, test automation velocity increases as less time is spent re-writing the same automation (how many times have you seen the same interface flap code repeated!?)
 
 #. We now have a full ROBOT test. Select the latest “Runtime Image Version” container that has all these keyword libraries. Select cxta:23.1. Select :guilabel:`Save` to save this job file.
 
@@ -43,6 +37,6 @@ Step 3: Configure the script and execute
 
 #. Click on :guilabel:`+` to expand this keyword section.  Notice that by expanding the various keywords, you can see more detail at each step. The steps here show that the first keyword `load testbed` loaded the topology file you created earlier in this exercise. The next step connect to device "nx-osv-1" used the connection information provided to connect to the device.
 
-#. Expand Step #4 and Step #6 to view the output execution for "show ip route summary" of existing route count on the device before and after clearing routes on step #5 to make sure they are back in a good operating state. 
+#. Expand Step #4 and Step #5 to view the output execution for "identifying the loopback address" and then "ping connectivity to the loopback address" to make sure they are back in a good operating state.
 
 .. sectionauthor:: Nandakumar Arunachalam <narunach@cisco.com>, Jinrui Wang <jinrwang@cisco.com>, Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>
