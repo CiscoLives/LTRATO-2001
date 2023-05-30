@@ -10,6 +10,7 @@ Links
 - `Platforms supported by pyATS genie unicon <https://pubhub.devnetcloud.com/media/unicon/docs/user_guide/supported_platforms.html>`_
 - `Available parsers that are supported by pyATS genie <https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/#/parsers>`_
 - `pyATS Useful Libraries <https://pubhub.devnetcloud.com/media/genie-docs/docs/userguide/utils/index.html>`_
+- `Test result definitions <https://pubhub.devnetcloud.com/media/pyats/docs/results/objects.html>`_
 
 
 Examples
