@@ -9,7 +9,12 @@ The high-level logic of the test case will be as follows:
 - Collect the output of ``show logging | include ERROR|WARN``.
 - If the output contains more than 0 strings, it means pyATS found messages, and the test should fail for this device. Otherwise, the test should succeed.
 
-#. Before creating our test case, connect to ASA. Launch **PuTTY** and connect to **asav-1**.
+#. Before creating our test case, connect to ASA. Launch **PuTTY** and connect to **asav-1** (username: ``cisco``, password: ``cisco``) and enter the following commands:
+
+    .. code-block:: bash
+
+        clear logging buffer
+
 
     .. image:: images/asav-clear-logging-buffer.png
         :width: 75%
@@ -47,8 +52,17 @@ The high-level logic of the test case will be as follows:
             - Launch PuTTY and connect to **csr1000v-1**. Username: ``cisco``, password: ``cisco``
         2. Generate a test ERROR message:
             - csr1000v-1# **send log 'Test ERROR message for pyATS'**
+
+            .. code-block:: bash
+
+                send log 'Test ERROR message for pyATS'
+
         3. Repeat step 3 above for CSR in the pyATS shell:
-            - **csr_output = csr.execute('show logging | i ERROR|WARN')**
+
+            .. code-block:: bash
+
+                csr_output = csr.execute('show logging | i ERROR|WARN')
+
 
 #. To check whether there is an empty or non-empty output, we will use the Python **len()** built-in function, which returns the length of the given string. If the collected output is empty, then **len()** of the output will be 0; otherwise, the result will be greater than 0.
 
@@ -172,6 +186,10 @@ The high-level logic of the test case will be as follows:
 #. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 
 #. Execute the test script **task3step1a.py** and check the results section.
+
+    .. code-block:: bash
+
+        python task3step1a.py --testbed pyats_testbed.yaml
 
     The test case **error_log** will run only for one device. 
     Now we need to get familiar with the **aetest.loop** method, which will let us repeat an elementary test case (written for one device) for every device in the testbed.
