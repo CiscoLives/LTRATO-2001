@@ -6,7 +6,7 @@ Step 2: Add the device under test to the testbed
 
 #. Expand the left-hand navigational panel and scroll down to :guilabel:`Project Automation` and click on the :guilabel:`Devices` section.
 
-#. Click on the :guilable:`+ New Device` button to create a new device.
+#. Click on the :guilabel:`+ New Device` button to create a new device.
 
 #. Add the device to CXTM from the table of devices in the :ref:`Lab Access Information <Lab Access Information>` section. The device you are adding is ``nx-osv-1``
 
