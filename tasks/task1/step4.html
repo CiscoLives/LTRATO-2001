@@ -132,6 +132,17 @@
 <p>Another useful library is the <strong>Dq</strong>. The <strong>Dq</strong> library is used to query the data structure more conveniently.</p>
 <p>To use the <strong>Dq</strong> library, you need to follow the steps below:</p>
 <ol class="arabic">
+<li><p>Enter the following command to run the pyATS shell command from the Bash shell and specify the YAML testbed file as the parameter. This shell is where you can run the Python code.</p>
+<blockquote>
+<div><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>The interactive shell might take some time to load (approximately 20 seconds)</p>
+</div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
 <li><p>Create variables (Python objects) to call devices easily (csr - ‘csr1000v-1’ device).</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr</span> <span class="o">=</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="p">[</span><span class="s2">&quot;csr1000v-1&quot;</span><span class="p">]</span>
@@ -147,7 +158,7 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>Explore csr_output and try to find the routes for <strong>OSPF</strong>.</p>
+<li><p>Explore csr_output by typing <code class="docutils literal notranslate"><span class="pre">csr_output</span></code> and try to find the routes for <strong>OSPF</strong>.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="s1">&#39;vrf&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;default&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;address_family&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;ipv4&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;routes&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;10.0.0.4/30&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;route&#39;</span><span class="p">:</span> <span class="s1">&#39;10.0.0.4/30&#39;</span><span class="p">,</span>
 <span class="s1">&#39;active&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>

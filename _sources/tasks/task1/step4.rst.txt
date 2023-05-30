@@ -7,6 +7,16 @@ Another useful library is the **Dq**. The **Dq** library is used to query the da
 
 To use the **Dq** library, you need to follow the steps below:
 
+#. Enter the following command to run the pyATS shell command from the Bash shell and specify the YAML testbed file as the parameter. This shell is where you can run the Python code.
+
+    .. tip:: 
+        
+        The interactive shell might take some time to load (approximately 20 seconds)
+
+    .. code-block:: bash
+
+        pyats shell --testbed-file pyats_testbed.yaml
+
 #. Create variables (Python objects) to call devices easily (csr - 'csr1000v-1' device).
 
     .. code-block:: python
@@ -20,7 +30,7 @@ To use the **Dq** library, you need to follow the steps below:
         csr.connect()
         csr_output = csr.parse("show ip route")
 
-#. Explore csr_output and try to find the routes for **OSPF**.
+#. Explore csr_output by typing ``csr_output`` and try to find the routes for **OSPF**.
 
     .. code-block:: python
 
