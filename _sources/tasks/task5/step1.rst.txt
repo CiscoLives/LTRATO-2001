@@ -1,7 +1,7 @@
 Step 1: Access CXTM platform and create a new project
 #####################################################
 
-**Value Proposition:** In this last task, ...
+**Value Proposition:** In this last task we will use CXTM platform to simplify the process of creating test cases.
 
 .. todo:: Add a value proposition of the task
 
@@ -15,7 +15,7 @@ Step 1: Access CXTM platform and create a new project
             :width: 75%
             :align: center
 
-#. To start utilizing CXTM, you must create a project. Projects are comprised of test cases and automation job file, that is executed to obtain results. Click :guilabel:`Sandbox` tab on the main page or :guilabel:`Projects` in the left-hand navigational panel, and then click on :guilabel:`NEW PROJECT` button.
+#. To start utilizing CXTM, you must create a project. Projects are comprised of test cases and automation job files, that are executed to obtain results. Click :guilabel:`Sandbox` tab on the main page or :guilabel:`Projects` in the left-hand navigational panel, and then click on :guilabel:`NEW PROJECT` button.
     
         .. image:: images/cxtm-new-project.png
             :width: 75%
