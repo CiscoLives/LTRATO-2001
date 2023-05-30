@@ -1,9 +1,7 @@
 Step 1: Access CXTM platform and create a new project
 #####################################################
 
-**Value Proposition:** In this last task we will use CXTM platform to simplify the process of creating test cases.
-
-.. todo:: Add a value proposition of the task
+**Value Proposition:** In this task we will learn how to access CXTM platform, and create a new project.
 
 
 #. Open a Chrome browser and access the `CXTM platform <https://198.18.134.19>`__ using the following credentials:
