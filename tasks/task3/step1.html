@@ -136,9 +136,12 @@
 <li><p>If the output contains more than 0 strings, it means pyATS found messages, and the test should fail for this device. Otherwise, the test should succeed.</p></li>
 </ul>
 <ol class="arabic">
-<li><p>Before creating our test case, connect to ASA. Launch <strong>PuTTY</strong> and connect to <strong>asav-1</strong>.</p>
+<li><p>Before creating our test case, connect to ASA. Launch <strong>PuTTY</strong> and connect to <strong>asav-1</strong> (username: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>, password: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>) and enter the following commands:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/asav-clear-logging-buffer.png"><img alt="../../_images/asav-clear-logging-buffer.png" class="align-center" src="../../_images/asav-clear-logging-buffer.png" style="width: 75%;" /></a>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clear logging buffer
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/asav-clear-logging-buffer.png"><img alt="../../_images/asav-clear-logging-buffer.png" class="align-center" src="../../_images/asav-clear-logging-buffer.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
 <li><p>Let’s open the pyATS shell and check it out.</p>
@@ -168,7 +171,7 @@
 <p class="admonition-title">Note</p>
 <p>The output for ASA should be empty.
 If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
-<ol class="arabic simple">
+<ol class="arabic">
 <li><dl class="simple">
 <dt>Connect to CSR:</dt><dd><ul class="simple">
 <li><p>Launch PuTTY and connect to <strong>csr1000v-1</strong>. Username: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>, password: <code class="docutils literal notranslate"><span class="pre">cisco</span></code></p></li>
@@ -176,19 +179,22 @@ If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
+<li><dl>
 <dt>Generate a test ERROR message:</dt><dd><ul class="simple">
 <li><p>csr1000v-1# <strong>send log ‘Test ERROR message for pyATS’</strong></p></li>
 </ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>send log <span class="s1">&#39;Test ERROR message for pyATS&#39;</span>
+</pre></div>
+</div>
 </dd>
 </dl>
 </li>
-<li><dl class="simple">
-<dt>Repeat step 3 above for CSR in the pyATS shell:</dt><dd><ul class="simple">
-<li><p><strong>csr_output = csr.execute(‘show logging | i ERROR|WARN’)</strong></p></li>
-</ul>
-</dd>
-</dl>
+<li><p>Repeat step 3 above for CSR in the pyATS shell:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">csr_output</span> <span class="o">=</span> csr.execute<span class="o">(</span><span class="s1">&#39;show logging | i ERROR|WARN&#39;</span><span class="o">)</span>
+</pre></div>
+</div>
+</div></blockquote>
 </li>
 </ol>
 </div>
@@ -313,7 +319,10 @@ Then we can access all the devices in the class VerifyLogging, using the method 
 <li><p>Exit Nano without saving by pressing <span class="guilabel">Ctrl + X</span></p></li>
 <li><p>Execute the test script <strong>task3step1a.py</strong> and check the results section.</p>
 <blockquote>
-<div><p>The test case <strong>error_log</strong> will run only for one device.
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step1a.py --testbed pyats_testbed.yaml
+</pre></div>
+</div>
+<p>The test case <strong>error_log</strong> will run only for one device.
 Now we need to get familiar with the <strong>aetest.loop</strong> method, which will let us repeat an elementary test case (written for one device) for every device in the testbed.</p>
 </div></blockquote>
 </li>

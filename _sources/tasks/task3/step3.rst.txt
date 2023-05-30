@@ -195,6 +195,11 @@ The high-level logic of the tests will be the following:
     .. image:: images/task8_labpyats.png
         :width: 75%
         :align: center
+    
+    |
+
+    .. note::
+        For a list of definitions of test results, please go to this `link <https://pubhub.devnetcloud.com/media/pyats/docs/results/objects.html>`__
 
 |
 
