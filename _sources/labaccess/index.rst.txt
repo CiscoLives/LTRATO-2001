@@ -2,10 +2,10 @@
 Lab Access
 ##########
 
-This lab includes a CML server on which simulation of the lab network will be running. 
+This lab includes a CML server which a simulation of the lab network will be running.
 All lab tasks are intended to be executed from the Jumphost (a Windows 10 machine with WSL installed).
 
-The lab topology is shown as below:
+The lab topology is shown below:
 
 .. image:: images/lab-diagram-01.svg
     :width: 50%
@@ -19,17 +19,17 @@ IP Addressing and Access Information
 ====================================
 
 .. csv-table::
-   :file: ./reference/devices-info.csv
-   :width: 80%
-   :header-rows: 1
+    :file: ./reference/devices-info.csv
+    :width: 80%
+    :header-rows: 1
 
 Component Details
 =================
 
 .. csv-table::
-   :file: ./reference/componet-details.csv
-   :width: 80%
-   :header-rows: 1
+    :file: ./reference/component-details.csv
+    :width: 80%
+    :header-rows: 1
 
 
 Get Started

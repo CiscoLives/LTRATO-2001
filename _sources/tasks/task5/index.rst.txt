@@ -1,12 +1,14 @@
-###########
-Task 5: TBD
-###########
+######################
+Task 5: CXTM Framework
+######################
 
-.. Next Table of Content is an example, please change the names according to your needs 
+
+.. tip::
+   The estimated time to complete this task is: **30 Minutes**.
+
 
 .. toctree::
 
    step1
    step2
    step3
-   step4
