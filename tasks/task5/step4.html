@@ -129,12 +129,38 @@
              
   <div class="section" id="step-4-configure-another-script-and-execute">
 <h1>Step 4: Configure another script and execute<a class="headerlink" href="#step-4-configure-another-script-and-execute" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this step, we will create a script and execut it, to run the desired tests against the device under test.</p>
+<p><strong>Value Proposition:</strong> In this step, we will create a script and execute it, to run the desired tests against the device under test.</p>
 <ol class="arabic">
-<li><p>Expand the left-hand navigational panel and scroll down to <span class="guilabel">Test Cases</span> and click on the <span class="guilabel">Test Cases</span> sub-section.</p></li>
-<li><p>Let’s now add a new test case by clicking on the <span class="guilabel">+</span> button. A pop-up will appear, enter the information for the test case as detailed in the following image. Click on the <span class="guilabel">SUBMIT</span> button when you are done.</p></li>
-<li><p>Click on the <span class="guilabel">Open</span> link to display the test case details. A pop-up will appear, click on the <span class="guilabel">Configure Automation</span> button.</p></li>
-<li><p>The New Job File will be displayed, this screen contains an editor for ROBOT framework code execution. By default, this editor is populated with the basic ROBOT automation testing job-file. This default job-file that is loaded can be customized to your testing needs in the left-hand navigational panel.</p></li>
+<li><p>Expand the left-hand navigational panel and scroll down to <span class="guilabel">Test Cases</span> and click on the <span class="guilabel">Test Cases</span> sub-section.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-cases.png"><img alt="../../_images/cxtm-test-cases.png" class="align-center" src="../../_images/cxtm-test-cases.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Let’s now add a new test case by clicking on the <span class="guilabel">+</span> button.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-add.png"><img alt="../../_images/cxtm-test-case-add.png" class="align-center" src="../../_images/cxtm-test-case-add.png" style="width: 75%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>A pop-up will appear, enter the information for the test case as detailed in the following image. Click on the <span class="guilabel">SUBMIT</span> button when you are done.</p>
+<a class="reference internal image-reference" href="../../_images/cxtm-test-case-add-details-2.png"><img alt="../../_images/cxtm-test-case-add-details-2.png" class="align-center" src="../../_images/cxtm-test-case-add-details-2.png" style="width: 55%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Click on the <span class="guilabel">Open</span> link to display the test case details.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-open-test-case-2.png"><img alt="../../_images/cxtm-open-test-case-2.png" class="align-center" src="../../_images/cxtm-open-test-case-2.png" style="width: 75%;" /></a>
+<div class="line-block">
+<div class="line"><br /></div>
+</div>
+<p>A pop-up will appear, click on the <span class="guilabel">Configure Automation</span> button.</p>
+<a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-2.png"><img alt="../../_images/cxtm-test-case-configure-automation-2.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-2.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>The New Job File will be displayed, this screen contains an editor for ROBOT framework code execution. By default, this editor is populated with the basic ROBOT automation testing job-file. This default job-file that is loaded can be customized to your testing needs in the left-hand navigational panel.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-editor-2.png"><img alt="../../_images/cxtm-test-case-configure-automation-editor-2.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-editor-2.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
 <li><p>Replace the <code class="docutils literal notranslate"><span class="pre">***</span> <span class="pre">Test</span> <span class="pre">Cases</span> <span class="pre">***</span></code> section with the following contents:</p>
 <blockquote>
 <div><div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Test Cases ***</span><span class="p"></span>
@@ -167,8 +193,16 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>We now have a full ROBOT test. Select the latest “Runtime Image Version” container that has all these keyword libraries. Select cxta:23.1. Select <span class="guilabel">Save</span> to save this job file.</p></li>
-<li><p>We are now ready to run our first ROBOT test case! Click on the <span class="guilabel">Run</span> button in the execution section to begin the test.</p></li>
+<li><p>We now have a full ROBOT test. Select the latest “Runtime Image Version” container that has all these keyword libraries. Select <code class="docutils literal notranslate"><span class="pre">cxta:23.8</span></code>. Select <span class="guilabel">Save</span> to save this job file.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-save.png"><img alt="../../_images/cxtm-test-case-configure-automation-save.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-save.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>We are now ready to run our first ROBOT test case! Click on the <span class="guilabel">Run</span> button in the execution section to begin the test.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-run-2.png"><img alt="../../_images/cxtm-test-case-configure-automation-run-2.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-run-2.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
 <li><p>The test will now show <cite>STARTED</cite>.</p>
 <blockquote>
 <div><div class="admonition note">
@@ -177,12 +211,32 @@
 </div>
 </div></blockquote>
 </li>
-<li><p>The execution status will show <cite>COMPLETED</cite> for a successful execution. If the execution status is anything other than <cite>COMPLETED</cite> , please reach out to your session speakers.</p></li>
-<li><p>Refresh the page to see the execution details move to the <cite>Run History</cite> section.</p></li>
-<li><p>The Run History section will show all previous runs of this test case. Each test case run has a time stamp and the job result. Click the job time stamp to review the test results when the ROBOT test case is finished executing.</p></li>
-<li><p>Click on the log.html  in the artifact section to view the full audit trail of the script events and the logs associated with the execution.</p></li>
-<li><p>Click on <span class="guilabel">+</span> to expand this keyword section.  Notice that by expanding the various keywords, you can see more detail at each step. The steps here show that the first keyword <cite>load testbed</cite> loaded the topology file you created earlier in this exercise. The next step connect to device “nx-osv-1” used the connection information provided to connect to the device.</p></li>
-<li><p>Expand Step #4 and Step #5 to view the output execution for “identifying the loopback address” and then “ping connectivity to the loopback address” to make sure they are back in a good operating state.</p></li>
+<li><p>The execution status will show <cite>COMPLETED</cite> for successful execution. If the execution status is anything other than <cite>COMPLETED</cite>, please reach out to your session speakers.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-completed.png"><img alt="../../_images/cxtm-test-case-configure-automation-completed.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-completed.png" style="width: 55%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Refresh the page to see the execution details and move to the <cite>Run History</cite> section.</p></li>
+<li><p>The Run History section will show all previous runs of this test case. Each test case run has a time stamp and the job result. Click the job time stamp to review the test results when the ROBOT test case is finished executing.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-run-history.png"><img alt="../../_images/cxtm-test-case-configure-automation-run-history.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-run-history.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Click on the <code class="docutils literal notranslate"><span class="pre">log.html</span></code>  in the artifact section to view the full audit trail of the script events and the logs associated with the execution.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2.png"><img alt="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Click on <span class="guilabel">+</span> to expand this keyword section.  Notice that by expanding the various keywords, you can see more detail at each step. The steps here show that the first keyword <cite>load testbed</cite> loaded the topology file you created earlier in this exercise. The next step connects to device “nx-osv-1” using the connection information provided to connect to the device.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2-expand.png"><img alt="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2-expand.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2-expand.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Expand Step #4 and Step #5 to view the output execution for “identifying the loopback address” and then “ping connectivity to the loopback address” to make sure they are back in a good operating state.</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2-expand-2.png"><img alt="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2-expand-2.png" class="align-center" src="../../_images/cxtm-test-case-configure-automation-run-history-log-html-2-expand-2.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
 </ol>
 <p><em>Section author: Nandakumar Arunachalam &lt;<a class="reference external" href="mailto:narunach&#37;&#52;&#48;cisco&#46;com">narunach<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jinrui Wang &lt;<a class="reference external" href="mailto:jinrwang&#37;&#52;&#48;cisco&#46;com">jinrwang<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Luis Rueda &lt;<a class="reference external" href="mailto:lurueda&#37;&#52;&#48;cisco&#46;com">lurueda<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;, Jairo Leon &lt;<a class="reference external" href="mailto:jaileon&#37;&#52;&#48;cisco&#46;com">jaileon<span>&#64;</span>cisco<span>&#46;</span>com</a>&gt;</em></p>
 </div>
