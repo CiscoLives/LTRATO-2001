@@ -10,7 +10,7 @@ The pyATS test script is a file in Python code that uses the pyATS library.
 The structure of the pyATS test script is modular and straightforward.
 Each test script is written in a Python file and split into three major sections (Python classes) – see the illustration below for a graphical representation:
 
-- **Common Setup:** is where all the common configurations, prerequisites, and initializations shared between the script’s test cases should be performed.
+- **Common Setup:** is where all the common configurations, prerequisites, and initializations shared between the script's test cases should be performed.
 - **Testcase(s):** is a container/collection of smaller tests. Testcases are the workhorse of every test script, carrying out the assessments that determine the quality of the product under scrutiny. Each test case may have its Setup Section and Cleanup Section, and an arbitrary number of smaller Test Sections.
 - **Common Cleanup:** is the last section to run within each test script. Any configurations, initializations, and environmental changes that occurred during this script run should be cleaned up (removed) here.
 

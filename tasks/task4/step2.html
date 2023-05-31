@@ -135,7 +135,7 @@
 <p>Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via a Remote Desktop Protocol (RDP) session to CentOS VM running XPRESSO.</p>
 </div>
 <ol class="arabic">
-<li><p>Locate XPRESSO.rdp shortcut on the desktop of Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.</p>
+<li><p>Locate XPRESSO.rdp shortcut on the desktop of the Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>Username: <code class="docutils literal notranslate"><span class="pre">xpresso</span></code></p></li>
@@ -146,12 +146,12 @@
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>If you are using AnyConnect VPN and have Microsoft RDP client installed, you can connect directly from your PC via RDP to address XPRESSO VM (use IP address: 198.18.134.50).</p>
+<p>If you are using AnyConnect VPN and have a Microsoft RDP client installed, you can connect directly from your PC via RDP to address XPRESSO VM (use IP address: 198.18.134.50).</p>
 </div>
 <a class="reference internal image-reference" href="../../_images/login-to-xpresso_rdp.png"><img alt="../../_images/login-to-xpresso_rdp.png" class="align-center" src="../../_images/login-to-xpresso_rdp.png" style="width: 20%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Inside the RDP session, open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see the Requests page:</p>
+<li><p>Inside the RDP session, open Firefox from the desktop or the Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see the Requests page:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-dashboard-page.png"><img alt="../../_images/xpresso-dashboard-page.png" class="align-center" src="../../_images/xpresso-dashboard-page.png" style="width: 75%;" /></a>
 <p>If XPRESSO page is not opened automatically, open it directly on <a class="reference external" href="http://xpresso.dcloud-cisco.com">dCloud</a> manually and login with credentials:</p>
@@ -202,7 +202,7 @@ Once the job transitions to the <strong>RUNNING</strong> stage, the page will be
 <div><a class="reference internal image-reference" href="../../_images/xpresso-request-details.png"><img alt="../../_images/xpresso-request-details.png" class="align-center" src="../../_images/xpresso-request-details.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Let’s introduce a network failure by connecting to <strong>csr1000v-1</strong> and shutting down interface <strong>GigabitEthernet2</strong>. From Admin Workstation launch Putty, login to <strong>csr1000v-1</strong> and execute commands:</p>
+<li><p>Let’s introduce a network failure by connecting to <strong>csr1000v-1</strong> and shutting down interface <strong>GigabitEthernet2</strong>. From Admin Workstation launch Putty, login to <strong>csr1000v-1</strong>, and execute commands:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>configure terminal
 interface gigabitEthernet <span class="m">2</span>
@@ -253,7 +253,7 @@ shutdown
 </div>
 </div></blockquote>
 </li>
-<li><p>Click on Requests menu item:</p>
+<li><p>Click on the Requests menu item:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-filter.png"><img alt="../../_images/xpresso-jobs-filter.png" class="align-center" src="../../_images/xpresso-jobs-filter.png" style="width: 15%;" /></a>
 <div class="line-block">
@@ -266,7 +266,7 @@ shutdown
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-6.png"><img alt="../../_images/xpresso-jobs-compare-6.png" class="align-center" src="../../_images/xpresso-jobs-compare-6.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Select 2 results for comparison and click <strong>Compare</strong> icon. This additional step is required as Job can include several requests ran as Job Bundle:</p>
+<li><p>Select 2 results for comparison and click <strong>Compare</strong> icon. This additional step is required as Job can include several requests run as Job Bundle:</p>
 <blockquote>
 <div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-7.png"><img alt="../../_images/xpresso-jobs-compare-7.png" class="align-center" src="../../_images/xpresso-jobs-compare-7.png" style="width: 75%;" /></a>
 </div></blockquote>

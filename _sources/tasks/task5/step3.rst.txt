@@ -1,7 +1,7 @@
 Step 3: Configure the script and execute
 ########################################
 
-**Value Proposition:** In this step, we will create a script and execut it, to run the desired tests against the device under test.
+**Value Proposition:** In this step, we will create a script and execute it, to run the desired tests against the device under test.
 
 
 #. Expand the left-hand navigational panel and scroll down to :guilabel:`Test Cases` and click on the :guilabel:`Test Cases` sub-section.
@@ -62,6 +62,11 @@ Step 3: Configure the script and execute
         :width: 75%
         :align: center
 
+    |
+
+    .. tip::
+        In case you see a warning message about **Autocomplete may not work** when you select the Runtime Image Version, please ignore it and continue.
+
 #. We are now ready to run our first ROBOT test case! Click on the :guilabel:`Run` button in the execution section to begin the test.
 
     .. image:: images/cxtm-test-case-configure-automation-run.png
@@ -100,7 +105,7 @@ Step 3: Configure the script and execute
         :width: 75%
         :align: center
 
-#. Expand Step #4 and Step #6 to view the output execution for "show ip route summary" of existing route count on the device before and after clearing routes on step #5 to make sure they are back in a good operating state.
+#. Expand Step #4 and Step #6 to view the output execution for "show ip route summary" of existing route count on the device before and after clearing routes on Step #5 to make sure they are back in a good operating state.
 
     .. image:: images/cxtm-test-case-configure-automation-run-history-log-html-expand-2.png
         :width: 75%

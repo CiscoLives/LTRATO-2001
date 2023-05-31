@@ -24,7 +24,7 @@ Upon completing this lab, you will be able to:
 
 #. Create a pyATS testbed file.
 #. Understand the main capabilities and components of the pyATS suite.
-#. Write scripts that can automate testing for specific network topology.
+#. Write scripts that can automate testing for specific network topologies.
 
 
 Throughout this lab, you will work with and learn the following features and concepts:
@@ -42,6 +42,7 @@ Throughout this lab, you will work with and learn the following features and con
 11.	pyATS job file
 12.	pyATS Log Viewer
 13.	XPRESSO (pyATS Web Dashboard)
+14. CX Test Automation Manager (CXTM)
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>

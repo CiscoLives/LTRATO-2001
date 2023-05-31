@@ -74,7 +74,7 @@ Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job fil
 
         Don't close the Linux shell; otherwise, it will stop the local pyATS web server.
 
-    Click the upper line in a list to open results of the last job run:
+    Click the upper line in a list to open the results of the last job run:
 
     .. image:: images/viewer-list-of-jobs-run.png
         :width: 75%
@@ -84,7 +84,7 @@ Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job fil
 
     .. note::
 
-        Pay special attention to the result of each test, which is shown along with start time and run time of each one.
+        Pay special attention to the result of each test, which is shown along with the start time and run time of each one.
 
     .. image:: images/pyats-log-viewer-results-page.png
         :width: 75%
@@ -92,9 +92,9 @@ Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job fil
     
     |
 
-#. Click on the test **ping[dest_ip=10.0.0.17]** (see “1” on next figure). A detailed log from the execution of this test will be shown on the right side of the window (see “2”).
+#. Click on the test **ping[dest_ip=10.0.0.17]** (see “1” in the next figure). A detailed log from the execution of this test will be shown on the right side of the window (see “2”).
 
-#. Click on the **PASSED** button for the test **ping[dest_ip=10.0.0.17]** (see “3” on next figure). Ensure that the test passed message is shown (see “4”).
+#. Click on the **PASSED** button for the test **ping[dest_ip=10.0.0.17]** (see “3” in the next figure). Ensure that the test passed message is shown (see “4”).
 
     |
 

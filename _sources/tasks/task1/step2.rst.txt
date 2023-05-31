@@ -7,7 +7,7 @@ For pyATS to work with network topology, it must know the following basic inform
 
 This information is stored in the pyATS testbed file (`YAML format <https://pubhub.devnetcloud.com/media/pyats/docs/topology/schema.html>`_).
 
-The testbed YAML file for pyATS has been pre-created for this lab, and it is named pyats_testbed.yaml.
+The testbed YAML file for pyATS has been pre-created for this lab, and it is named ``pyats_testbed.yaml``.
 
 #. Change to the directory that contains the lab files:
 
@@ -22,14 +22,14 @@ The testbed YAML file for pyATS has been pre-created for this lab, and it is nam
 
         nano pyats_testbed.yaml
 
-#. 3.	The output of the command should contain the following:
+#. The output of the command should contain the following:
 
     .. literalinclude:: ./reference/pyats_testbed.yaml
         :language: yaml
     
     Now we have all the required information to start our tests with pyATS.
 
-    .. note ::
+    .. note::
         Note that username and passwords to access devices are not stored in the YAML file:
 
         .. code-block:: bash

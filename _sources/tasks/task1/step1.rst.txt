@@ -3,7 +3,7 @@ Step 1: Explore Lab Structure
 
 **Value Proposition:** Understand the lab structure and the tools used in it.
 
-#. On the remote desktop, double-click the ``Ubuntu`` shortcut.
+#. On the remote desktop, double-click the ``Ubuntu`` shortcut on the taskbar.
 #. Ubuntu will run on our RDP Jumphost on top of Windows 10. In addition, the bash Linux shell will appear.
 
     .. image:: images/ubuntu-terminal.png
