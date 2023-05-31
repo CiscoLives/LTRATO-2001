@@ -6,9 +6,9 @@ Step 4: Run PING to Verify Reachability
 The high-level logic of the tests will be the following:
 
 - Connect to each device in the testbed.
-- Find the links between nx-osv-1 and csr1000v-1.
+- Find the links between **nx-osv-1** and **csr1000v-1**.
 - Collect the IP addresses from both ends of these links.
-- Run the ping commands from nx-osv-1 for IP addresses, discovered in the previous step.
+- Run the ping commands from **nx-osv-1** for IP addresses, discovered in the previous step.
 
 #. Let's connect to the pyATS shell and check our idea:
 
@@ -82,7 +82,7 @@ The high-level logic of the tests will be the following:
 
 #. Paste the following snippet to pyATS console:
 
-    - Place the following iPython command at the beginning of code:
+    - Place the following iPython command at the beginning of the code:
 
         .. code-block:: bash
 

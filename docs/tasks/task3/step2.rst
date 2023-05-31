@@ -143,7 +143,7 @@ The high-level logic of the tests will be the following:
 
 #. Exit the pyATS shell using the **exit** command.
 
-#. Open the file task3step2.py in Nano editor:
+#. Open the file task3step2.py in **Nano** editor:
 
     .. code-block:: bash
 
@@ -201,7 +201,7 @@ The high-level logic of the tests will be the following:
 
         contract_sn = ['9AQHSSAS8AU', '9Q3YV06WJ71', '9IFUH4GPSGL']
 
-#. Open the file task3step2.py in Nano editor.
+#. Open the file task3step2.py in **Nano** editor.
 
     .. code-block:: bash
 

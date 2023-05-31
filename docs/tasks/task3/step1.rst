@@ -201,7 +201,7 @@ The high-level logic of the test case will be as follows:
         nano task3step1b.py
     
     .. note::
-        In this task we will learn how to use dynamic loops, which allow us to loop over the different testbed devices even if we do not know at coding time what the devices' names are.
+        In this task, we will learn how to use dynamic loops, which allow us to loop over the different testbed devices even if we do not know at coding time what the devices' names are.
 
         This approach is helpful if we don't want to hardcode device names inside our test case, but we want to dynamically load devices from the testbed file and run test cases across them.
 
@@ -230,7 +230,7 @@ The high-level logic of the test case will be as follows:
             aetest.loop.mark(self.error_logs, device=devices)
 
     .. note::
-        **aetest.loop.mark()** instructs method **self.error_logs** to take an argument for input variable 'device', one-by-one from the devices list and run a testcase for each device separately.
+        **aetest.loop.mark()** instructs method **self.error_logs** to take an argument for input variable 'device', one-by-one from the devices list, and run a testcase for each device separately.
 
 #. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
 

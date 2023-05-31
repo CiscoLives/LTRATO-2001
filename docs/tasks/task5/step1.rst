@@ -1,7 +1,7 @@
 Step 1: Access CXTM platform and create a new project
 #####################################################
 
-**Value Proposition:** In this task we will learn how to access CXTM platform, and create a new project.
+**Value Proposition:** In this task we will learn how to access the CXTM platform, and create a new project.
 
 
 #. Open a Chrome browser and access the `CXTM platform <https://198.18.134.19>`__ using the following credentials:
