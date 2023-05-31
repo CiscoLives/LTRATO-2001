@@ -6,7 +6,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
 .. note::
     Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via a Remote Desktop Protocol (RDP) session to CentOS VM running XPRESSO.
 
-#. Locate XPRESSO.rdp shortcut on the desktop of Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.
+#. Locate XPRESSO.rdp shortcut on the desktop of the Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.
 
     - Username: ``xpresso``
     - Password: ``C1sco12345``
@@ -14,13 +14,13 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     |
 
     .. note::
-        If you are using AnyConnect VPN and have Microsoft RDP client installed, you can connect directly from your PC via RDP to address XPRESSO VM (use IP address: 198.18.134.50).
+        If you are using AnyConnect VPN and have a Microsoft RDP client installed, you can connect directly from your PC via RDP to address XPRESSO VM (use IP address: 198.18.134.50).
 
     .. image:: images/login-to-xpresso_rdp.png
         :align: center
         :width: 20%
 
-#. Inside the RDP session, open Firefox from the desktop or Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see the Requests page:
+#. Inside the RDP session, open Firefox from the desktop or the Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see the Requests page:
 
     .. image:: images/xpresso-dashboard-page.png
         :align: center
@@ -82,7 +82,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :width: 75%
 
 
-#. Let's introduce a network failure by connecting to **csr1000v-1** and shutting down interface **GigabitEthernet2**. From Admin Workstation launch Putty, login to **csr1000v-1** and execute commands:
+#. Let's introduce a network failure by connecting to **csr1000v-1** and shutting down interface **GigabitEthernet2**. From Admin Workstation launch Putty, login to **csr1000v-1**, and execute commands:
 
     .. code-block:: bash
 
@@ -141,7 +141,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
     .. note::
         Alternatively, you can compare test results by going to the **Requests** page and selecting 2 requests for comparison as described below.
 
-#. Click on Requests menu item:
+#. Click on the Requests menu item:
 
     .. image:: images/xpresso-jobs-filter.png
         :align: center
@@ -155,7 +155,7 @@ Step 2: Run tests and compare results from XPRESSO dashboard
         :align: center
         :width: 75%
 
-#. Select 2 results for comparison and click **Compare** icon. This additional step is required as Job can include several requests ran as Job Bundle:
+#. Select 2 results for comparison and click **Compare** icon. This additional step is required as Job can include several requests run as Job Bundle:
 
     .. image:: images/xpresso-jobs-compare-7.png
         :align: center

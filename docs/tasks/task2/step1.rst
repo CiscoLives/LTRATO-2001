@@ -142,7 +142,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 
 #. Exit the pyATS shell by using the **exit** command. Now we are ready to go through the final version of the script by gathering the commands specified from all the devices in the testbed and saving them to file on Linux (proceed to the next step).
 
-#. Open the prepared script task2step1.py in Nano editor.
+#. Open the prepared script task2step1.py in **Nano** editor.
 
     .. code-block:: bash
 

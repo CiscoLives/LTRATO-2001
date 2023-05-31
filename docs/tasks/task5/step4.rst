@@ -55,6 +55,11 @@ Step 4: Configure another script and execute
         :width: 75%
         :align: center
 
+    |
+
+    .. tip::
+        In case you see a warning message about **Autocomplete may not work** when you select the Runtime Image Version, please ignore it and continue.
+
 #. We are now ready to run our first ROBOT test case! Click on the :guilabel:`Run` button in the execution section to begin the test.
 
     .. image:: images/cxtm-test-case-configure-automation-run-2.png

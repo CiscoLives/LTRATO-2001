@@ -89,7 +89,7 @@ The high-level logic of the tests will be the following:
 
 #. Exit the pyATS shell using the **exit** command.
 
-#. Open the file task3step3.py in Nano editor.
+#. Open the file task3step3.py in **Nano** editor.
 
     .. code-block:: bash
 
