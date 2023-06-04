@@ -50,7 +50,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 
     .. code-block:: python
 
-        from unicon.core.erros import EOF, SubCommandFailure
+        from unicon.core.errors import EOF, SubCommandFailure
 
         # device_name - stores hostname of a device
         # device - stores device object
