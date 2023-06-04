@@ -37,7 +37,8 @@ class MyCommonSetup(aetest.CommonSetup):
             try:
                 device.connect(log_stdout=False)
             except errors.ConnectionError:
-                self.failed(f"Failed to establish a connection to '{device.name}'")
+                self.failed(
+                    f"Failed to establish a connection to '{device.name}'")
             device_list.append(device)
         # Pass list of devices to test cases
         self.parent.parameters.update(dev=device_list)
@@ -56,7 +57,7 @@ class VerifyLogging(aetest.Testcase):
 
     @aetest.test
     def error_logs(self, device):
-        output = device.execute("show logging | include ERROR|WARN")
+        output = device.execute('show logging | include ERROR|WARN')
 
         if len(output) > 0:
             self.failed("Found ERROR in log, review logs first")

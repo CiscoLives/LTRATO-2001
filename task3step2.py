@@ -40,7 +40,8 @@ class MyCommonSetup(aetest.CommonSetup):
             try:
                 device.connect(log_stdout=False)
             except errors.ConnectionError:
-                self.failed(f"Failed to establish a connection to '{device.name}'")
+                self.failed(
+                    f"Failed to establish a connection to '{device.name}'")
             device_list.append(device)
         # Pass list of devices to test cases
         self.parent.parameters.update(dev=device_list)
@@ -73,7 +74,7 @@ class Inventory(aetest.Testcase):
 
         if device.os == "iosxe":
 
-            csr_output = device.parse("show inventory")
+            csr_output = device.parse('show inventory')
             chassis_sn = csr_output["main"]["chassis"]["CSR1000V"]["sn"]
 
             if chassis_sn not in contract_sn:
@@ -83,7 +84,7 @@ class Inventory(aetest.Testcase):
 
         elif device.os == "nxos":
 
-            nx_output = device.parse("show inventory")
+            nx_output = device.parse('show inventory')
             chassis_sn = nx_output["name"]["Chassis"]["serial_number"]
 
             if chassis_sn not in contract_sn:
@@ -93,7 +94,7 @@ class Inventory(aetest.Testcase):
 
         elif device.os == "asa":
 
-            asa_output = device.parse("show inventory")
+            asa_output = device.parse('show inventory')
             chassis_sn = asa_output["Chassis"]["sn"]
 
             if chassis_sn not in contract_sn:

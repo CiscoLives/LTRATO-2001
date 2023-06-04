@@ -165,7 +165,7 @@ The high-level logic of the test case will be as follows:
             def error_logs(self):
                 any_device = self.parent.parameters["dev"][0]
                 any_device.log_user(enable=True)
-                output = any_device.execute("show logging | include ERROR|WARN")
+                output = any_device.execute('show logging | include ERROR|WARN")
 
                 if len(output) > 0:
                     self.failed("Found messages in log that are either ERROR or WARN, review logs first")

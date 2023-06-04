@@ -32,7 +32,8 @@ class MyCommonSetup(aetest.CommonSetup):
             try:
                 device.connect(log_stdout=False)
             except errors.ConnectionError:
-                self.failed(f"Failed to establish a connection to '{device.name}'")
+                self.failed(
+                    f"Failed to establish a connection to '{device.name}'")
             device_list.append(device)
         # Pass list of devices to test cases
         self.parent.parameters.update(dev=device_list)
@@ -52,10 +53,11 @@ class VerifyLogging(aetest.Testcase):
     def error_logs(self):
         any_device = self.parent.parameters["dev"][0]
         any_device.log_user(enable=True)
-        output = any_device.execute("show logging | include ERROR|WARN")
+        output = any_device.execute('show logging | include ERROR|WARN')
 
         if len(output) > 0:
-            self.failed("Found messages in log that are either ERROR or WARN, review logs first")
+            self.failed(
+                "Found messages in log that are either ERROR or WARN, review logs first")
         else:
             pass
 
