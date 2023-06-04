@@ -35,6 +35,13 @@ Component Details
 Get Started
 ===========
 
+#. Use the following credentials to access the lab environment according to the POD assigned to you:
+
+    .. csv-table::
+        :file: ./reference/access-info.csv
+        :width: 80%
+        :header-rows: 1
+
 #. Go to `dCloud <https://dcloud.cisco.com>`__ and log in with your Cisco (CCO) credentials. Once logged in, click on the :guilabel:`My Hub` tab. Then, you will see your session page.
 #. On the session page, click :guilabel:`Info` tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to access your lab using the Cisco AnyConnect client. 
 
