@@ -58,7 +58,7 @@ Steps:
 
         csr = testbed.devices['csr1000v-1']
         csr.connect()
-        csr_interfaces = csr.parse("show interfaces")
+        csr_interfaces = csr.parse('show interfaces')
 
 #. Validate the parsed output against the schema.
 

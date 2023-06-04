@@ -28,7 +28,7 @@ To use the **Dq** library, you need to follow the steps below:
     .. code-block:: python
 
         csr.connect()
-        csr_output = csr.parse("show ip route")
+        csr_output = csr.parse('show ip route')
 
 #. Explore csr_output by typing ``csr_output`` and try to find the routes for **OSPF**.
 
