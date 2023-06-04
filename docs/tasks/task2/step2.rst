@@ -111,7 +111,7 @@ Each of these sections is further broken down into smaller subsections (Python m
         :width: 75%
         :align: center
 
-#. In this next step, let's add a test case, that looks for interface errors and prints any interface that contains errors. The code would like something like this:
+#. In this next step, let's add a test case, that looks for interface errors and prints any interface that contains errors. The code would look something like this:
 
     .. code-block:: python
 
