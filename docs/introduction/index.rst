@@ -2,7 +2,7 @@
 Introduction
 ############
 
-This document is intended for use by attendees of the Cisco Live 2023 who are taking Automated Testing for Your Network Hands-on Lab (LTRATO-2001).
+This document is intended for use by attendees of the Cisco Live 2024 who are taking Automated Testing for Your Network Hands-on Lab (LTRATO-2001).
 
 Prerequisites
 =============
@@ -18,7 +18,7 @@ Learning Objectives
 During this lab, you will get hands-on experience with pyATS, a vendor-agnostic suite of libraries for Python.
 Then, you will learn how to build your automated tests using those frameworks.
 pyATS opens a wide variety of opportunities, and soon, you will see it is not hard to start using them.
-During this lab, we will show you real-world examples that you can use to start implementing the automation of tests in your network. 
+During this lab, we will show you real-world examples that you can use to start implementing the automation of tests in your network.
 
 Upon completing this lab, you will be able to:
 
