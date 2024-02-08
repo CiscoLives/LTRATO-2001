@@ -56,7 +56,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
         # device - stores device object
         for device_name, device in testbed.devices.items():
             device.connect(log_stdout=False)
-            # device.execute() method - will used to get the output of "show inventory" command
+            # device.execute() method - will be used to get the output of "show inventory" command
             try:
                 device.execute('show inventory')
                 print('##########################\n')
