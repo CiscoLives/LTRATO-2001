@@ -1,5 +1,5 @@
-Step 3: Configure the script and execute
-########################################
+Step 3: Configure the script and execute it
+###########################################
 
 **Value Proposition:** In this step, we will create a script and execute it, to run the desired tests against the device under test.
 
@@ -33,7 +33,7 @@ Step 3: Configure the script and execute
 
     |
 
-    A pop-up will appear, click on the :guilabel:`Configure Automation` button.
+    A page will open, click on the :guilabel:`Configure Automation` button.
 
     .. image:: images/cxtm-test-case-configure-automation.png
         :width: 75%
@@ -51,7 +51,7 @@ Step 3: Configure the script and execute
         :language: robotframework
 
 
-    .. note:: 
+    .. note::
         ROBOT is readable by everyone! i.e.   run "show inventory"
 
         The above statement in plain English from the Robot Framework test case is called a ROBOT keyword. These are generic and reusable terms. Our automation developers define and implement Robot Framework keywords in Python behind the scenes, allowing customers and engineers to focus on the breakdown of test steps for readability and usability using ROBOT. Our developers & testers work together to create more keywords that express different test automation scenarios. Customers can also add their keywords if needed. As keyword count increases, test automation velocity increases as less time is spent re-writing the same automation (how many times have you seen the same interface flap code repeated!?)
@@ -75,7 +75,7 @@ Step 3: Configure the script and execute
 
 #. The test will now show `STARTED`.
 
-    .. note:: 
+    .. note::
         You can click on the Task Id link to watch the job execution in real time. This test is executed very quickly. After a minute, if your screen does not load (stays black), click the job-file name 'Verify routing information' in the link at the top of the page to get back to the testing summary page.
 
 
