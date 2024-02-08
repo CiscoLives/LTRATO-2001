@@ -35,6 +35,16 @@ Component Details
 Get Started
 ===========
 
+
+#. Use the following layout to identify your POD number.
+
+|
+
+    .. image:: images/pod-layout.svg
+        :width: 75%
+        :align: center
+|
+
 #. Use the following credentials to access the lab environment according to the POD assigned to you:
 
     .. csv-table::
