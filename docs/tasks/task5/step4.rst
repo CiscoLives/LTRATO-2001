@@ -1,5 +1,5 @@
-Step 4: Configure another script and execute
-############################################
+Step 4: Configure another script and execute it
+###############################################
 
 **Value Proposition:** In this step, we will create a script and execute it, to run the desired tests against the device under test.
 
@@ -32,7 +32,7 @@ Step 4: Configure another script and execute
 
     |
 
-    A pop-up will appear, click on the :guilabel:`Configure Automation` button.
+    A page will open, click on the :guilabel:`Configure Automation` button.
 
     .. image:: images/cxtm-test-case-configure-automation-2.png
         :width: 75%
@@ -69,8 +69,8 @@ Step 4: Configure another script and execute
 
 #. The test will now show `STARTED`.
 
-    .. note:: 
-        You can click on the Task Id link to watch the job execution in real time. This test is executed very quickly. After a minute, if your screen does not load (stays black), click the job-file name 'Verify routing information' in the link at the top of the page to get back to the testing summary page. 
+    .. note::
+        You can click on the Task Id link to watch the job execution in real time. This test is executed very quickly. After a minute, if your screen does not load (stays black), click the job-file name 'Verify routing information' in the link at the top of the page to get back to the testing summary page.
 
 
 #. The execution status will show `COMPLETED` for successful execution. If the execution status is anything other than `COMPLETED`, please reach out to your session speakers.
