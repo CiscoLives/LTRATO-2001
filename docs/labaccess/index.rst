@@ -43,6 +43,7 @@ Get Started
     .. image:: images/pod-layout.svg
         :width: 75%
         :align: center
+
 |
 
 #. Use the following credentials to access the lab environment according to the POD assigned to you:
