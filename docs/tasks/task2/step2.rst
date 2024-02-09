@@ -17,7 +17,7 @@ Each test script is written in a Python file and split into three major sections
 Each of these sections is further broken down into smaller subsections (Python methods of the class).
 
 .. note::
-    There can be only one Common Setup and only one Common in a script, whereas there might be multiple test cases in one test script.
+    There can be only one Common Setup and only one Common Cleanup in a script, whereas there might be multiple test cases in one test script.
 
 .. image:: images/test-script-structure.png
     :width: 75%
