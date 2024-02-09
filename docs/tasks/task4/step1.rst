@@ -108,7 +108,7 @@ Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job fil
 
     .. code-block:: bash
 
-        pyats logs view -latest
+        pyats logs view --latest
 
     To test this option, follow the next steps.
 
@@ -118,7 +118,7 @@ Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job fil
 
     .. code-block:: bash
 
-        pyats logs view -latest
+        pyats logs view --latest
 
     Ensure detailed results of the tests comprising the last run job are shown right away.
 
