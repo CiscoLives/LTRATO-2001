@@ -11,6 +11,7 @@ Links
 - `Available parsers that are supported by pyATS genie <https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/#/parsers>`_
 - `pyATS Useful Libraries <https://pubhub.devnetcloud.com/media/genie-docs/docs/userguide/utils/index.html>`_
 - `Test result definitions <https://pubhub.devnetcloud.com/media/pyats/docs/results/objects.html>`_
+- `CXTM additional information <https://www.cisco.com/c/dam/m/en_us/customer-experience/collateral/continuous-automation-integration-testing.pdf?dtid=osscdc000283>`_
 
 
 Examples
@@ -32,14 +33,14 @@ Steps:
 
     .. code-block:: bash
 
-        pyats shell --testbed-file pyats_testbed.yaml 
+        pyats shell --testbed-file pyats_testbed.yaml
 
 
 #. Import jsonschema python library
 
     .. code-block:: python
 
-        from jsonschema import validate 
+        from jsonschema import validate
 
 
 #. Define a schema for the configuration compliance test.
