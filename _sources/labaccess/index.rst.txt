@@ -52,8 +52,14 @@ Get Started
         :width: 80%
         :header-rows: 1
 
+    |
+
+    .. note::
+        Because we are providing you with the credentials in the previous table, please ignore steps 2 and 3 and proceed to step 4.
+
+
 #. Go to `dCloud <https://dcloud.cisco.com>`__ and log in with your Cisco (CCO) credentials. Once logged in, click on the :guilabel:`My Hub` tab. Then, you will see your session page.
-#. On the session page, click :guilabel:`Info` tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to access your lab using the Cisco AnyConnect client. 
+#. On the session page, click :guilabel:`Info` tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to access your lab using the Cisco AnyConnect client.
 
     .. image:: images/session-details.png
         :width: 75%
@@ -77,7 +83,7 @@ Get Started
         :width: 45%
         :align: center
 
-#. For best performance, connect to the workstation with Cisco AnyConnect VPN `Show Me How <https://dcloud-cms.cisco.com/help/install_anyconnect_pc_mac>`__ and the local RDP client on your laptop `Show Me How <https://dcloud-cms.cisco.com/help/local_rdp_mac_windows>`__ and use the information from the table above :ref:`Lab Access Information <Lab Access Information>` to connect to the workstation
+#. Once you are connected to Cisco AnyConnect VPN `Show Me How <https://dcloud-cms.cisco.com/help/install_anyconnect_pc_mac>`__, use the local RDP client installed on your laptop to connect to the Jumphost using the information from the table above :ref:`Lab Access Information <Lab Access Information>`.
 #. Once inside the remote desktop connection, open the Google Chrome browser, startup page https://cml-controller.cml.lab/login will be opened (web interface of Cisco Modeling Labs server).
 
 #. Press ``Login`` button:
@@ -97,7 +103,7 @@ Get Started
     .. image:: images/cml-03.png
         :width: 75%
         :align: center
-    
+
     |
 
     .. note::
