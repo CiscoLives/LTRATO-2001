@@ -185,7 +185,7 @@ In <span class="o">[</span><span class="m">1</span><span class="o">]</span>:
 <span class="c1"># device - stores device object</span>
 <span class="k">for</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="c1"># device.execute() method - will used to get the output of &quot;show inventory&quot; command</span>
+    <span class="c1"># device.execute() method - will be used to get the output of &quot;show inventory&quot; command</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;##########################</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
