@@ -1,0 +1,82 @@
+# Copyright 2022-2024, Cisco Systems, Inc.
+# All Rights Reserved.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+# EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+# OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+# NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT
+# HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
+# WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
+# OTHER DEALINGS IN THE SOFTWARE.
+
+
+[tool.poetry]
+name = "ltrato_2001"
+version = "2024.06.02"
+description = "Cisco Live LTRATO-2001"
+authors = ["Jairo Leon", "Luis Rueda"]
+readme = "README.md"
+license = "LICENSE"
+package-mode = false
+
+
+[tool.poetry.dependencies]
+python = "^3.10"
+cisco-gnmi = "*"
+daiquiri = "*"
+genie = "24.3"
+# genie.libs.clean = "24.3"
+# genie.libs.conf = "24.3"
+# genie.libs.filetransferutils = "24.3"
+# genie.libs.health = "24.3"
+# genie.libs.ops = "24.3"
+# genie.libs.parser = "24.3"
+# genie.libs.sdk = "24.3"
+# genie.telemetry = "24.3"
+# genie.trafficgen = "24.3"
+jupyterlab = "*"
+notebook = "*"
+pyats = "24.3"
+# pyats.aereport = "24.3"
+# pyats.aetest = "24.3"
+# pyats.async = "24.3"
+# pyats.connections = "24.3"
+# pyats.contrib = "24.3"
+# pyats.datastructures = "24.3"
+# pyats.easypy = "24.3"
+# pyats.kleenex = "24.3"
+# pyats.log = "24.3"
+# pyats.reporter = "24.3"
+# pyats.results = "24.3"
+# pyats.tcl = "24.3"
+# pyats.topology = "24.3"
+# pyats.utils = "24.3"
+unicon = "24.3"
+# unicon.plugins = "24.3"
+virl2-client = "*"
+
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint]
+select = [
+    "C",
+    "E4",
+    "E7",
+    "E9",
+    "F",
+    "D103",
+    "D102",
+    "D101",
+    "D200",
+    "D213",
+    "D202",
+    "D400",
+]
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

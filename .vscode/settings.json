@@ -12,5 +12,13 @@
   "grammarly.config.suggestions.PassiveVoice": false,
   "grammarly.config.suggestions.UnnecessaryEllipses": false,
   "grammarly.config.documentDomain": "general",
-
+  "python.analysis.typeCheckingMode": "basic",
+  "editor.formatOnSave": true,
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  }
 }

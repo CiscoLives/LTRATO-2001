@@ -1,24 +1,38 @@
 #!/usr/bin/env python3
+__author__ = "Jairo Leon, Luis Rueda"
+__copyright__ = """
+Copyright 2022-2024, Cisco Systems, Inc. 
+All Rights Reserved. 
 
-# To get a logger for the script
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
+OTHER DEALINGS IN THE SOFTWARE. 
+"""
+
+
+import argparse
 import logging
 import re
 
 # To filter management networks from ping test cases
 from ipaddress import IPv4Network
 
-from pyats import aetest
-from pyats.log.utils import banner
-
 # To handle errors with connections to devices
+import daiquiri
 from unicon.core import errors
 
-import argparse
+from pyats import aetest
+from pyats.log.utils import banner
 from pyats.topology import loader
 
 # Get your logger for your script
-LOGGER = logging.getLogger(__name__)
-LOGGER.level = logging.INFO
+LOGGER = daiquiri.getLogger(__name__)
+daiquiri.setup(level=logging.INFO)
 
 # Management network IP range
 mgmt_net = IPv4Network("198.18.1.0/24")
