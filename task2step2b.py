@@ -1,24 +1,40 @@
 #!/usr/bin/env python3
+__author__ = "Jairo Leon, Luis Rueda"
+__copyright__ = """
+Copyright 2022-2024, Cisco Systems, Inc. 
+All Rights Reserved. 
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES 
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND 
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT 
+HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
+WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR 
+OTHER DEALINGS IN THE SOFTWARE. 
+"""
+
 
 import argparse
 import logging
 
+import daiquiri
 from genie.testbed import load
-from pyats import aetest, topology
-from pyats.log.utils import banner
-from pyats.topology import loader
-from unicon.core import errors
 from unicon.core.errors import ConnectionError, StateMachineError, TimeoutError
 
+from pyats import aetest, topology
+
 # Get your logger for your script
-LOGGER = logging.getLogger(__name__)
-LOGGER.setLevel(logging.INFO)
+LOGGER = daiquiri.getLogger(__name__)
+daiquiri.setup(level=logging.INFO)
 
 
 class CommonSetup(aetest.CommonSetup):
+    """Common Setup Section."""
+
     @aetest.subsection
     def load_testbed(self, testbed):
-        # Convert pyATS testbed to Genie Testbed
+        """Load testbed file and assign it to testbed."""
         LOGGER.info(
             "Converting pyATS testbed to Genie Testbed to support pyATS Library features"
         )
@@ -27,9 +43,7 @@ class CommonSetup(aetest.CommonSetup):
 
     @aetest.subsection
     def connect(self, testbed):
-        """
-        establishes connection to all your testbed devices.
-        """
+        """Establishes connection to all your testbed devices."""
         # make sure testbed is provided
         assert testbed, "Testbed is not provided!"
 
@@ -43,7 +57,7 @@ class CommonSetup(aetest.CommonSetup):
 
 
 class interface_errors(aetest.Testcase):
-    """interface_errors"""
+    """interface_errors."""
 
     # List of counters keys to check for errors
     #   Model details: https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/_models/interface.pdf
@@ -62,6 +76,7 @@ class interface_errors(aetest.Testcase):
 
     @aetest.test
     def test(self, steps):
+        """Test section."""
         # Loop over every device with learnt interfaces
         for device_name, interfaces in self.learnt_interfaces.items():
             with steps.start(
