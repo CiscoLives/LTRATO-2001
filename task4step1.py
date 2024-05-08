@@ -13,10 +13,11 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE. 
 """
 
+import logging
 import os
 
 import daiquiri
-from ats.easypy import run
+from ats.easypy import run  # type: ignore
 
 from pyats.topology.loader import load
 
@@ -25,6 +26,7 @@ daiquiri.setup(level=logging.INFO)
 
 
 def main():
+    """Execute the testscript."""
     # Find the location of the script in relation to the job file
     ping_tests = os.path.join("task3step4.py")
     testbed = load("pyats_testbed.yaml")

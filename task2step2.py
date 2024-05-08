@@ -21,7 +21,7 @@ import logging
 
 # To handle errors with connections to devices
 import daiquiri
-from unicon.core import errors
+from unicon.core import errors  # type: ignore
 
 # Import of PyATS library
 from pyats import aetest
@@ -34,10 +34,11 @@ daiquiri.setup(level=logging.INFO)
 
 
 class common_setup(aetest.CommonSetup):
-    """Common Setup section"""
+    """Common Setup section."""
 
     @aetest.subsection
     def establish_connections(self, pyats_testbed):
+        """Establish connections to all devices."""
         device_list = []
         # Load all devices from testbed file and try to connect to them
         for device in pyats_testbed.devices.values():

@@ -23,7 +23,7 @@ from pyats import aetest
 from pyats.log.utils import banner
 
 # To handle erorrs in connections
-from unicon.core import errors
+from unicon.core import errors # type: ignore
 
 import argparse
 from pyats.topology import loader

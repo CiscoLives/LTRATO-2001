@@ -22,7 +22,7 @@ import logging
 import daiquiri
 
 # To handle errors with connections to devices
-from unicon.core import errors
+from unicon.core import errors  # type: ignore
 
 from pyats import aetest
 from pyats.log.utils import banner
@@ -38,18 +38,17 @@ contract_sn = ["9AQHSSAS8AU", "9Q3YV06WJ71", "9IFUH4GPSGL"]
 
 class MyCommonSetup(aetest.CommonSetup):
     """
-    CommonSetup class to prepare for test cases
-    Establishes connections to all devices in testbed
+    CommonSetup class to prepare for test cases.
+    Establishes connections to all devices in testbed.
     """
 
     @aetest.subsection
     def establish_connections(self, pyats_testbed):
         """
-        Establishes connections to all devices in testbed
-        :param testbed:
-        :return:
-        """
+        Establishes connections to all devices in testbed.
 
+        :param pyats_testbed:
+        """
         device_list = []
         for device in pyats_testbed.devices.values():
             LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
@@ -64,29 +63,21 @@ class MyCommonSetup(aetest.CommonSetup):
 
 class Inventory(aetest.Testcase):
     """
-    Inventory test case - extract Serial numbers information from devices
-    Verify that all SNs are covered by service contract (exist in contract_sn)
+    Inventory test case.
+
+    Extract Serial numbers information from devices.
+    Verify that all SNs are covered by service contract (exist in contract_sn).
     """
 
     @aetest.setup
     def setup(self):
-        """
-        Get list of all devices in testbed and
-        run inventory test case for each device
-        :return:
-        """
-
+        """Get list of all devices in testbed and run inventory test case for each device."""
         devices = self.parent.parameters["dev"]
         aetest.loop.mark(self.inventory, device=devices)
 
     @aetest.test
     def inventory(self, device):
-        """
-        Verify that all SNs are covered by
-        service contract (exist in contract_sn)
-        :return:
-        """
-
+        """Verify that all SNs are covered by service contract (exist in contract_sn)."""
         if device.os == "iosxe":
             csr_output = device.parse("show inventory")
             chassis_sn = csr_output["main"]["chassis"]["CSR1000V"]["sn"]

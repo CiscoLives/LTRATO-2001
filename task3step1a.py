@@ -21,7 +21,7 @@ import logging
 
 # To handle errors with connections to devices
 import daiquiri
-from unicon.core import errors
+from unicon.core import errors  # type: ignore
 
 from pyats import aetest
 from pyats.log.utils import banner
@@ -34,12 +34,13 @@ daiquiri.setup(level=logging.INFO)
 
 class MyCommonSetup(aetest.CommonSetup):
     """
-    CommonSetup class to prepare for test cases
-    Establishes connections to all devices in testbed
+    CommonSetup class to prepare for test cases.
+    Establishes connections to all devices in testbed.
     """
 
     @aetest.subsection
     def establish_connections(self, pyats_testbed):
+        """Establishes connections to all devices in testbed."""
         device_list = []
         # Load all devices from testbed file and try to connect to them
         for device in pyats_testbed.devices.values():
@@ -55,16 +56,20 @@ class MyCommonSetup(aetest.CommonSetup):
 
 class VerifyLogging(aetest.Testcase):
     """
-    VerifyLogging Testcase - collect show logging information from devices
+    VerifyLogging Testcase.
+
+    Collect show logging information from devices.
     Verify that all devices do not have 'ERROR|WARN' messages in logs
     """
 
     @aetest.setup
     def setup(self):
+        """Testcase Setup section."""
         pass
 
     @aetest.test
     def error_logs(self):
+        """Testcase section to check for ERROR|WARN messages in logs."""
         any_device = self.parent.parameters["dev"][0]
         any_device.log_user(enable=True)
         output = any_device.execute("show logging | include ERROR|WARN")

@@ -20,7 +20,7 @@ from os import path
 
 # To handle errors with connections to devices
 import daiquiri
-from unicon.core import errors
+from unicon.core import errors  # type: ignore
 
 from pyats.topology.loader import load
 
@@ -29,6 +29,7 @@ daiquiri.setup(level=logging.INFO)
 
 
 def write_commands_to_file(abs_filename, command_output):
+    """Write commands to file."""
     try:
         with open(abs_filename, "a+") as file_output:
             file_output.write(command_output)
@@ -41,6 +42,7 @@ def write_commands_to_file(abs_filename, command_output):
 
 
 def collect_device_commands(testbed, command_to_gather, filename):
+    """Collect device commands."""
     abs_filename = path.join(path.dirname(__file__), filename)
     log.info(f"filename: {abs_filename}")
 
@@ -63,6 +65,7 @@ def collect_device_commands(testbed, command_to_gather, filename):
 
 
 def main():
+    """Main function."""
     global log
     format = "%(asctime)s - %(filename)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=format)
