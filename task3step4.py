@@ -24,7 +24,7 @@ from ipaddress import IPv4Network
 
 # To handle errors with connections to devices
 import daiquiri
-from unicon.core import errors
+from unicon.core import errors  # type: ignore
 
 from pyats import aetest
 from pyats.log.utils import banner
@@ -40,17 +40,13 @@ mgmt_net = IPv4Network("198.18.1.0/24")
 
 class MyCommonSetup(aetest.CommonSetup):
     """
-    CommonSetup class to prepare for test cases
-    Establishes connections to all devices in testbed
+    CommonSetup class to prepare for test cases.
+    Establishes connections to all devices in testbed.
     """
 
     @aetest.subsection
     def establish_connections(self):
-        """
-        Establishes connections to all devices in testbed
-        :param testbed:
-        :return:
-        """
+        """Establishes connections to all devices in testbed."""
         pyats_testbed = self.parent.parameters.get("pyats_testbed")
         self.parent.parameters["testbed"] = pyats_testbed
         for device in pyats_testbed.devices.values():
@@ -62,19 +58,17 @@ class MyCommonSetup(aetest.CommonSetup):
 
 
 class PingTestcase(aetest.Testcase):
-    """ "
-    PingTestcase - find links between NX-OS device and CSR1000v
+    """
+    PingTestcase.
+
+    Find links between NX-OS device and CSR1000v
     Extract IP addresses from both ends of each link
     Run ping command for each extracted IP address from NX-OS and CSR1000v
     """
 
     @aetest.setup
     def setup(self):
-        """
-        Extract IP addresses from both ends of each link
-        Between NX-OS device and CSR1000v
-        """
-
+        """Extract IP addresses from both ends of each link between NX-OS device and CSR1000v."""
         # list to store all IPs from topology
         dest_ips = []
 
@@ -112,8 +106,8 @@ class PingTestcase(aetest.Testcase):
     @aetest.test
     def ping(self, dest_ip):
         """
-        Run ping command for each IP address (dest_ip) from NX-OS and CSR1000v
-        Parse collected output to generate result of test
+        Run ping command for each IP address (dest_ip) from NX-OS and CSR1000v.
+        Parse collected output to generate result of test.
 
         Sending 5, 56-bytes ICMP Echos to 10.0.0.18
         Timeout is 2 seconds, data pattern is 0xABCD
@@ -124,9 +118,7 @@ class PingTestcase(aetest.Testcase):
         --- 10.0.0.18 ping statistics ---
         5 packets transmitted, 5 packets received, 0.00% packet loss
         round-trip min/avg/max = 0.565/0.67/0.837 ms
-
         """
-
         nx = self.parent.parameters["testbed"].devices["nx-osv-1"]
 
         try:
