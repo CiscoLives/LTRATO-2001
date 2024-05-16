@@ -60,15 +60,21 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tasks</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 1: Exploring and Verification</a><ul class="current">
-<li class="toctree-l3"><a class="reference internal" href="step1.html">Step 1: Explore Lab Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step2.html">Step 2: Verify pyATS Testbed File</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step4.html">Step 4: pyATS Shell Useful Libraries</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#objectives">Objectives</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="step1.html">Step 1: Explore Lab Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="step2.html">Step 2: Verify pyATS Testbed File</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="step4.html">Step 4: pyATS Shell Useful Libraries</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writing Initial Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/index.html#objectives">Objectives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -131,9 +137,10 @@
              
   <div class="section" id="step-3-pyats-capabilities-using-the-pyats-shell">
 <h1>Step 3: pyATS Capabilities using the pyATS Shell<a class="headerlink" href="#step-3-pyats-capabilities-using-the-pyats-shell" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> We believe it is always faster to start learning about pyATS in an interactive format where you can try different pyATS functions.
-Learning in an interactive format allows you to run commands and see results immediately instead of making small changes in Python code and re-running it after every minor change.
-pyATS has an interactive shell for developing tests, and it is executed from a Bash shell in the following way:</p>
+<p><strong>Value Proposition:</strong> pyATS is a powerful automation framework that streamlines network testing and validation, enabling businesses to accelerate service delivery, reduce operational costs, and improve network reliability.
+By providing an interactive shell for developing and executing tests, pyATS empowers network engineers and developers to quickly prototype, validate, and troubleshoot network configurations and behaviors in a flexible and efficient manner.
+This interactive approach fosters a faster feedback loop, enabling rapid iteration and facilitating a more agile development process.</p>
+<p>pyATS has an interactive shell for developing tests, and it is executed from a Bash shell in the following way:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats shell --testbed-file &lt;testbed_file_name&gt;
 </pre></div>
 </div>
@@ -166,8 +173,7 @@ pyATS has an interactive shell for developing tests, and it is executed from a B
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Welcome to pyATS Interactive <span class="nv">Shell</span>
 <span class="o">==================================</span>
-Python <span class="m">3</span>.8.7 <span class="o">(</span>default, Mar <span class="m">30</span> <span class="m">2021</span>, <span class="m">10</span>:31:15<span class="o">)</span>
-<span class="o">[</span>GCC <span class="m">7</span>.4.0<span class="o">]</span>
+Python <span class="m">3</span>.10.12 <span class="o">(</span>main, Nov <span class="m">20</span> <span class="m">2023</span>, <span class="m">15</span>:14:05<span class="o">)</span> <span class="o">[</span>GCC <span class="m">11</span>.4.0<span class="o">]</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -347,6 +353,7 @@ shutdown
 <li><p>Import the PyATS <strong>Diff</strong> package and compare the previous (working) and current state (failed) to understand what has changed and then troubleshoot the problem.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">genie.utils.diff</span> <span class="kn">import</span> <span class="n">Diff</span>
+
 <span class="n">diff</span> <span class="o">=</span> <span class="n">Diff</span><span class="p">(</span><span class="n">ospf_state_before</span><span class="o">.</span><span class="n">info</span><span class="p">,</span> <span class="n">ospf_state_after</span><span class="o">.</span><span class="n">info</span><span class="p">)</span>
 <span class="n">diff</span><span class="o">.</span><span class="n">findDiff</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">diff</span><span class="p">)</span>

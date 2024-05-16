@@ -1,8 +1,10 @@
 Step 3: pyATS Capabilities using the pyATS Shell
 ################################################
 
-**Value Proposition:** We believe it is always faster to start learning about pyATS in an interactive format where you can try different pyATS functions.
-Learning in an interactive format allows you to run commands and see results immediately instead of making small changes in Python code and re-running it after every minor change.
+**Value Proposition:** pyATS is a powerful automation framework that streamlines network testing and validation, enabling businesses to accelerate service delivery, reduce operational costs, and improve network reliability. 
+By providing an interactive shell for developing and executing tests, pyATS empowers network engineers and developers to quickly prototype, validate, and troubleshoot network configurations and behaviors in a flexible and efficient manner. 
+This interactive approach fosters a faster feedback loop, enabling rapid iteration and facilitating a more agile development process.
+
 pyATS has an interactive shell for developing tests, and it is executed from a Bash shell in the following way:
 
 .. code-block:: bash
@@ -42,8 +44,7 @@ You will be using the following pyATS methods throughout this task:
 
         Welcome to pyATS Interactive Shell
         ==================================
-        Python 3.8.7 (default, Mar 30 2021, 10:31:15)
-        [GCC 7.4.0]
+        Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0]
 
 #. Check the devices included in the lab's testbed.
 
@@ -194,6 +195,7 @@ You will be using the following pyATS methods throughout this task:
         .. code-block:: python
 
             from genie.utils.diff import Diff
+            
             diff = Diff(ospf_state_before.info, ospf_state_after.info)
             diff.findDiff()
             print(diff)

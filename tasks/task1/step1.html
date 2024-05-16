@@ -60,15 +60,21 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tasks</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 1: Exploring and Verification</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 1: Explore Lab Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step2.html">Step 2: Verify pyATS Testbed File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step3.html">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step4.html">Step 4: pyATS Shell Useful Libraries</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#objectives">Objectives</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Step 1: Explore Lab Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="step2.html">Step 2: Verify pyATS Testbed File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="step3.html">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="step4.html">Step 4: pyATS Shell Useful Libraries</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task2/index.html">Task 2: Writing Initial Scripts</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task2/index.html#objectives">Objectives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../task2/step1.html">Step 1: Collect Show Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../task2/step2.html">Step 2: Writing Test Script</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -131,7 +137,7 @@
              
   <div class="section" id="step-1-explore-lab-structure">
 <h1>Step 1: Explore Lab Structure<a class="headerlink" href="#step-1-explore-lab-structure" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> Understand the lab structure and the tools used in it.</p>
+<p><strong>Value Proposition:</strong> Develop a comprehensive understanding of the lab’s virtual environment architecture, facilitating seamless integration and utilization of Python and pyATS tools, enabling streamlined automation, efficient dependency management, and project isolation for enhanced productivity and consistency across scripting workflows.</p>
 <ol class="arabic">
 <li><p>On the remote desktop, click the <code class="docutils literal notranslate"><span class="pre">Terminal</span></code> shortcut on the toolbar, once the terminal opens, on the dropdown icon, select <code class="docutils literal notranslate"><span class="pre">ubuntu</span></code>.</p></li>
 <li><p>Ubuntu will run on our RDP Jumphost on top of Windows 10. In addition, the bash Linux shell will appear.</p>
@@ -156,14 +162,14 @@ The virtual environment provides the following significant advantages over runni
 Therefore, the keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.</p>
 </div></blockquote>
 </li>
-<li><p>Make sure that you are within the <code class="docutils literal notranslate"><span class="pre">/home/cisco/LTRATO-2001</span></code> directory, which contains the necessary lab files, if not you can switch to the appropriate directory by executing the command below:</p>
+<li><p>Make sure that you are within the <code class="docutils literal notranslate"><span class="pre">/home/cisco/LTRATO-2001</span></code> directory, which contains the necessary lab files, otherwise you can switch to the appropriate directory by executing the following command:</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> ~/LTRATO-2001
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Check the lab structure (before running the command shown below, ensure that you have changed to the correct directory: <strong>~/LTRATO-2001</strong>).</p>
+<li><p>Check the directory structure.</p>
 <blockquote>
 <div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>ls -l
 </pre></div>

@@ -60,15 +60,21 @@
 </li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">Tasks</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../task1/index.html">Task 1: Exploring and Verification</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../task1/step1.html">Step 1: Explore Lab Structure</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task1/step2.html">Step 2: Verify pyATS Testbed File</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task1/step3.html">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task1/step4.html">Step 4: pyATS Shell Useful Libraries</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task1/index.html#objectives">Objectives</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../task1/step1.html">Step 1: Explore Lab Structure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../task1/step2.html">Step 2: Verify pyATS Testbed File</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../task1/step3.html">Step 3: pyATS Capabilities using the pyATS Shell</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../task1/step4.html">Step 4: pyATS Shell Useful Libraries</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 2: Writing Initial Scripts</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 1: Collect Show Commands</a></li>
-<li class="toctree-l3"><a class="reference internal" href="step2.html">Step 2: Writing Test Script</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html#objectives">Objectives</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Step 1: Collect Show Commands</a></li>
+<li class="toctree-l4"><a class="reference internal" href="step2.html">Step 2: Writing Test Script</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task3/index.html">Task 3: Verification</a><ul>
@@ -131,10 +137,9 @@
              
   <div class="section" id="step-1-collect-show-commands">
 <h1>Step 1: Collect Show Commands<a class="headerlink" href="#step-1-collect-show-commands" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In this task, we will use the knowledge we have gained from the previous task to write a script that collects the <strong>show inventory</strong> command from each device in the testbed.
-The output of this command will be saved in the file <em>task2step1.txt</em> created by the script <em>task2step1.py</em>.
-The output can be used later if you want to compare the future state of the network with the current one.
-Since it is required to collect outputs from all the devices in the testbed, in this task, we will work with the <strong>testbed.devices</strong> object and iterate over all the devices contained in this object to collect an output of the required commands from each device.</p>
+<p><strong>Value Proposition:</strong> Streamline network operations by automating comprehensive inventory data collection across your infrastructure.
+Leverage Python/pyATS to capture device outputs, enabling proactive asset management, risk mitigation, and compliance reporting.
+Upskill in automation for scalable solutions to drive operational excellence, reduce overhead costs, and accelerate digital transformation initiatives.</p>
 <ol class="arabic">
 <li><p>Let’s connect to pyATS and check parts of the code before running the final script.</p>
 <blockquote>
@@ -144,8 +149,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 <p>If everything works correctly, you will see an output similar to the following:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Welcome to pyATS Interactive <span class="nv">Shell</span>
 <span class="o">==================================</span>
-Python <span class="m">3</span>.9.13 <span class="o">(</span>main, May <span class="m">24</span> <span class="m">2022</span>, <span class="m">21</span>:28:31<span class="o">)</span>
-<span class="o">[</span>Clang <span class="m">13</span>.1.6 <span class="o">(</span>clang-1316.0.21.2<span class="o">)]</span>
+Python <span class="m">3</span>.10.12 <span class="o">(</span>main, Nov <span class="m">20</span> <span class="m">2023</span>, <span class="m">15</span>:14:05<span class="o">)</span> <span class="o">[</span>GCC <span class="m">11</span>.4.0<span class="o">]</span>
 
 &gt;&gt;&gt; from pyats.topology.loader import load
 &gt;&gt;&gt; <span class="nv">testbed</span> <span class="o">=</span> load<span class="o">(</span><span class="s1">&#39;pyats_testbed.yaml&#39;</span><span class="o">)</span>
@@ -211,6 +215,7 @@ In <span class="o">[</span><span class="m">1</span><span class="o">]</span>:
 <li><p>Copy and paste the code into the pyATS console:</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">unicon.core.errors</span> <span class="kn">import</span> <span class="n">EOF</span><span class="p">,</span> <span class="n">SubCommandFailure</span>
+
 <span class="k">for</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;#########################&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;#####device_name = </span><span class="si">{device_name}</span><span class="s1">, device = </span><span class="si">{device}</span><span class="s1">&#39;</span><span class="p">)</span>
@@ -263,6 +268,7 @@ Pasting code<span class="p">;</span> enter <span class="s1">&#39;--&#39;</span> 
 <p>If a device connection is closed or terminated unexpectedly after it has already connected to a device, there will be multiple errors generated (for example, the Python EOF exception would be invoked) at the time of executing the command.
 To address this situation, we will add the following code to reconnect to a device:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">unicon.core.errors</span> <span class="kn">import</span> <span class="n">EOF</span><span class="p">,</span> <span class="n">SubCommandFailure</span>
+
 <span class="k">try</span><span class="p">:</span>
     <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show inventory&#39;</span><span class="p">)</span>
 <span class="k">except</span> <span class="n">SubCommandFailure</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>

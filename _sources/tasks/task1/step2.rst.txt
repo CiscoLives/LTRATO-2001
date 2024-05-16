@@ -1,7 +1,7 @@
 Step 2: Verify pyATS Testbed File
 #################################
 
-**Value Proposition:** Explore pyATS testbed file used in the lab.
+**Value Proposition:** Ensure accurate network infrastructure mapping for seamless test automation and proactive issue mitigation.
 
 For pyATS to work with network topology, it must know the following basic information: management interfaces, IP addresses, connection protocol, and connections between network devices.
 
