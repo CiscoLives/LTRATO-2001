@@ -829,8 +829,7 @@ links:
     conditioning: {}
     label: asav-1-Management0/0<->mgmt3-port
 lab:
-  description:
-    The lab topology for LTRATO-2001 "Automated Testing for Your Network"(Cisco
+  description: The lab topology for LTRATO-2001 "Automated Testing for Your Network"(Cisco
     Live)
   notes: |-
     ## Import Progress
