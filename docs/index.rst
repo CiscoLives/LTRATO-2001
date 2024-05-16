@@ -2,7 +2,7 @@
 Automated Testing for Your Network (LTRATO-2001)
 ################################################
 
-.. image:: images/cl-turn-it-up.png
+.. image:: images/cl-turn-it-up-2024-lv.png
    :align: center
 
 Speakers
