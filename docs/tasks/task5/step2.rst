@@ -1,8 +1,8 @@
 Step 2: Add the device under test to the testbed
 ################################################
 
-**Value Proposition:** In this step we will learn how to add a device as a device under test (DUT).
 
+**Value Proposition:** In this crucial step, we will learn how to efficiently integrate a device as a Device Under Test (DUT) into the testbed. Ensuring proper device configuration and connectivity is critical for seamless testing, validation, and troubleshooting processes. By following industry best practices, this step facilitates streamlined operations, minimizes downtime, and enhances productivity, ultimately contributing to cost savings and improved business outcomes.
 
 #. Expand the left-hand navigational panel and scroll down to :guilabel:`Project Automation` and click on the :guilabel:`Devices` section.
 

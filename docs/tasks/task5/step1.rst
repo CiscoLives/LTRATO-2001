@@ -1,7 +1,7 @@
 Step 1: Access CXTM platform and create a new project
 #####################################################
 
-**Value Proposition:** In this task we will learn how to access the CXTM platform, and create a new project.
+**Value Proposition:** CXTM is a cloud-based test automation platform that enables businesses to streamline their software testing processes, improve quality assurance, and accelerate time-to-market. By providing a centralized environment for managing and executing automated tests, CXTM helps organizations reduce the costs associated with manual testing, increase testing coverage, and enhance the overall efficiency of their development cycles.
 
 
 #. Open a Chrome browser and access the `CXTM platform <https://198.18.134.19>`__ using the following credentials:

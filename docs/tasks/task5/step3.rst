@@ -1,8 +1,7 @@
 Step 3: Configure the script and execute it
 ###########################################
 
-**Value Proposition:** In this step, we will create a script and execute it, to run the desired tests against the device under test.
-
+**Value Proposition:** This step allows you to efficiently create and execute automated tests against network devices using a powerful and user-friendly scripting framework. By codifying tests into reusable scripts, businesses can ensure consistent network validation, reduce human error, and increase operational scalability. The scripts can verify critical network functions like routing, simplifying test maintenance and enabling comprehensive regression testing. Automated network testing helps businesses proactively identify and resolve issues before impact, improving service reliability and uptime.
 
 #. Expand the left-hand navigational panel and scroll down to :guilabel:`Test Cases` and click on the :guilabel:`Test Cases` sub-section.
 
