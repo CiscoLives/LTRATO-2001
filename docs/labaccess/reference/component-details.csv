@@ -1,7 +1,7 @@
 Hostname,Product,Operating System
-Jumphost,"Microsoft Windows 10 WSL 1 with Ubuntu 18.04","Microsoft Windows 10"
-asav-1,"Cisco Adaptive Security Virtual Appliance","ASA OS 9.14(1)"
-csr1000v-1,"Cisco Cloud Services Router 1000v","IOS-XE 17.3.1a"
-nx-osv-1,"Cisco Nexus 9000v Switch","NS-OS 9.2(4)"
+Jumphost,"Microsoft Windows 10 WSL 2 with Ubuntu","Microsoft Windows 10"
+asav-1,"Cisco Adaptive Security Virtual Appliance","ASA OS 9.18(2)"
+csr1000v-1,"Cisco Cloud Services Router 1000v","IOS-XE 17.03.06"
+nx-osv-1,"Cisco Nexus 9000v Switch","NS-OS 10.3(1)"
 xpresso,"XPRESSO (pyATS Web Dashboard)","CentOS"
 CXTM,"CX Test Automation Manager (Web Dashboard)","Ubuntu"
