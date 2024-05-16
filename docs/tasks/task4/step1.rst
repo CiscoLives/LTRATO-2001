@@ -1,7 +1,7 @@
 Step 1: Show the Results of Tests in a Browser
 ##############################################
 
-**Value Proposition:** In this last task, we will see how to show the results of the tests in a more user-friendly way in a browser. For this, the pyats run job command will be used in a Bash shell.
+**Value Proposition:** Effectively communicating test results is crucial for business decision-making and collaboration. In this task, we will learn how to present test results in a visually appealing and easily accessible manner using a web browser. By leveraging the power of the pyats run job command, you can streamline the testing process, enhance team collaboration, and make informed decisions based on comprehensive test data.
 
 When a test is executed using the **pyats run job** it adds the following advantages:
 
