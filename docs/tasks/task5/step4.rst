@@ -1,8 +1,7 @@
 Step 4: Configure another script and execute it
 ###############################################
 
-**Value Proposition:** In this step, we will create a script and execute it, to run the desired tests against the device under test.
-
+**Value Proposition:** In this step, we will automate the verification of critical network infrastructure by creating and executing a robotic testing script. This automated testing approach allows organizations to ensure network reliability, reduce downtime risks, and enable efficient operations - ultimately improving business continuity and productivity while optimizing IT resource utilization.
 
 #. Expand the left-hand navigational panel and scroll down to :guilabel:`Test Cases` and click on the :guilabel:`Test Cases` sub-section.
 
