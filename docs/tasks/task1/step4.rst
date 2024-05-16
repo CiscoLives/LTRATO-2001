@@ -1,9 +1,10 @@
 Step 4: pyATS Shell Useful Libraries
 ####################################
 
-**Value Proposition:** Explore additional pyATS libraries and learn how to use them in the pyATS shell.
-
-Another useful library is the **Dq**. The **Dq** library is used to query the data structure more conveniently.
+**Value Proposition:** Streamline your network automation workflows with pyATS libraries like Dq, designed to simplify data querying and manipulation. 
+The Dq library empowers you to efficiently extract and analyze device data using intuitive Python syntax, saving you time and effort. 
+With Dq, you can leverage advanced querying capabilities to access specific information from complex data structures with ease, enabling you to focus on developing sophisticated automation solutions. 
+Maximize your productivity and leverage the power of pyATS libraries to enhance your network automation expertise.
 
 To use the **Dq** library, you need to follow the steps below:
 

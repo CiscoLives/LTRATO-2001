@@ -1,10 +1,9 @@
 Step 1: Collect Show Commands 
 #############################
 
-**Value Proposition:** In this task, we will use the knowledge we have gained from the previous task to write a script that collects the **show inventory** command from each device in the testbed. 
-The output of this command will be saved in the file *task2step1.txt* created by the script *task2step1.py*.
-The output can be used later if you want to compare the future state of the network with the current one.
-Since it is required to collect outputs from all the devices in the testbed, in this task, we will work with the **testbed.devices** object and iterate over all the devices contained in this object to collect an output of the required commands from each device.
+**Value Proposition:** Streamline network operations by automating comprehensive inventory data collection across your infrastructure. 
+Leverage Python/pyATS to capture device outputs, enabling proactive asset management, risk mitigation, and compliance reporting. 
+Upskill in automation for scalable solutions to drive operational excellence, reduce overhead costs, and accelerate digital transformation initiatives.
 
 #. Let's connect to pyATS and check parts of the code before running the final script.
 
@@ -18,8 +17,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
 
         Welcome to pyATS Interactive Shell
         ==================================
-        Python 3.9.13 (main, May 24 2022, 21:28:31) 
-        [Clang 13.1.6 (clang-1316.0.21.2)]
+        Python 3.10.12 (main, Nov 20 2023, 15:14:05) [GCC 11.4.0]
 
         >>> from pyats.topology.loader import load
         >>> testbed = load('pyats_testbed.yaml')
@@ -80,6 +78,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
         .. code-block:: python
 
             from unicon.core.errors import EOF, SubCommandFailure
+
             for device_name, device in testbed.devices.items():
                 print('#########################')
                 print(f'#####device_name = {device_name}, device = {device}')
@@ -132,6 +131,7 @@ Since it is required to collect outputs from all the devices in the testbed, in 
         .. code-block:: python
 
             from unicon.core.errors import EOF, SubCommandFailure
+            
             try:
                 device.execute('show inventory')
             except SubCommandFailure as e:

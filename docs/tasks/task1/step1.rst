@@ -1,7 +1,7 @@
 Step 1: Explore Lab Structure
 #############################
 
-**Value Proposition:** Understand the lab structure and the tools used in it.
+**Value Proposition:** Develop a comprehensive understanding of the lab's virtual environment architecture, facilitating seamless integration and utilization of Python and pyATS tools, enabling streamlined automation, efficient dependency management, and project isolation for enhanced productivity and consistency across scripting workflows.
 
 #. On the remote desktop, click the ``Terminal`` shortcut on the toolbar, once the terminal opens, on the dropdown icon, select ``ubuntu``.
 #. Ubuntu will run on our RDP Jumphost on top of Windows 10. In addition, the bash Linux shell will appear.
@@ -24,13 +24,13 @@ Step 1: Explore Lab Structure
     Cisco recommends you run pyATS scripts from the virtual environment.
     Therefore, the keyword (pyats) at the beginning of each line indicates that you are working from a virtual environment.
 
-#. Make sure that you are within the ``/home/cisco/LTRATO-2001`` directory, which contains the necessary lab files, if not you can switch to the appropriate directory by executing the command below:
+#. Make sure that you are within the ``/home/cisco/LTRATO-2001`` directory, which contains the necessary lab files, otherwise you can switch to the appropriate directory by executing the following command:
 
     .. code-block:: bash
 
         cd ~/LTRATO-2001
 
-#. Check the lab structure (before running the command shown below, ensure that you have changed to the correct directory: **~/LTRATO-2001**).
+#. Check the directory structure.
 
     .. code-block:: bash
 

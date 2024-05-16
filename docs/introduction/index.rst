@@ -7,9 +7,16 @@ This document is intended for use by attendees of the Cisco Live 2024 who are ta
 Prerequisites
 =============
 
-- Basic Python understanding.
-- Basic understanding of how to view and make changes to configuration on Cisco devices through CLI.
-- Have Cisco AnyConnect® installed.
+- Foundational Python Proficiency:
+    * Grasp the essentials of Python programming to navigate pyATS scripts effectively.
+- Networking Knowledge:
+    * Understand the core networking concepts and protocols that underpin network testing.
+- Cisco Systems Acquaintance:
+    * Familiarize with Cisco NX-OS, including configurations and essential troubleshooting commands.
+- Command-Line Interface (CLI) Competence:
+    * Develop the skill to inspect and modify Cisco device configurations using CLI tools.
+- Cisco Secure Client®:
+    * Ensure you have Cisco AnyConnect installed on your computer to access the lab environment.
 
 
 Learning Objectives
@@ -22,10 +29,14 @@ During this lab, we will show you real-world examples that you can use to start 
 
 Upon completing this lab, you will be able to:
 
-#. Create a pyATS testbed file.
-#. Understand the main capabilities and components of the pyATS suite.
-#. Write scripts that can automate testing for specific network topologies.
-
+- Comprehend pyATS Features:
+    * Identify the primary capabilities and components of the pyATS suite.
+- Craft a Testbed File:
+    * Construct a pyATS testbed file tailored for network testing scenarios.
+- Develop Automation Scripts:
+    * Engineer scripts to automate testing across various network topologies.
+- Explore Tool Integrations:
+    * Understand how to integrate pyATS with graphical interface tools like XPRESSO and CXTM for enhanced usability.
 
 Throughout this lab, you will work with and learn the following features and concepts:
 
