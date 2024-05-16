@@ -3,9 +3,6 @@ Task 1: Exploring and Verification
 ##################################
 
 
-Objectives
-==========
-
 This task will allow you to explore the pyATS framework for network testing and automation. You will learn how to connect to network devices, collect device data, parse the raw output into structured Python data, analyze the operational state using pyATS learning functions, and compare operational states before and after network changes using pyATS diff capabilities. 
 
 Additionally, you will get hands-on experience with the interactive pyATS shell and become familiar with useful pyATS libraries like Dq for querying structured data. By the end of this task, you will have a solid understanding of pyATS core functions and how to leverage them for network automation tasks.

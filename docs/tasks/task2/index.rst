@@ -3,9 +3,6 @@ Task 2: Writing Initial Scripts
 ###############################
 
 
-Objectives
-==========
-
 In this task, you will learn how to collect device information using pyATS scripting.
 You will connect to the pyATS shell, iterate over devices in the testbed, execute the "show inventory" command, and save the output to a file.
 This practical exercise will help you understand key Python concepts like loops, exceptions, and file operations.
