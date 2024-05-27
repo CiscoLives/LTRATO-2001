@@ -6,9 +6,10 @@ Links
 
 - `GitHub repository <https://github.com/CiscoLives/LTRATO-2001>`_
 - `pyATS Page <https://developer.cisco.com/pyats/>`_
-- `Models supported by pyATS genie learn method <https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/#/models>`_
 - `Platforms supported by pyATS genie unicon <https://pubhub.devnetcloud.com/media/unicon/docs/user_guide/supported_platforms.html>`_
+- `Available models that are supported by pyATS genie <https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/#/models>`_
 - `Available parsers that are supported by pyATS genie <https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/#/parsers>`_
+- `Available APIs that are supported by pyATS genie <https://pubhub.devnetcloud.com/media/genie-feature-browser/docs/#/apis>`_
 - `pyATS Useful Libraries <https://pubhub.devnetcloud.com/media/genie-docs/docs/userguide/utils/index.html>`_
 - `Test result definitions <https://pubhub.devnetcloud.com/media/pyats/docs/results/objects.html>`_
 - `CXTM additional information <https://www.cisco.com/c/dam/m/en_us/customer-experience/collateral/continuous-automation-integration-testing.pdf?dtid=osscdc000283>`_
