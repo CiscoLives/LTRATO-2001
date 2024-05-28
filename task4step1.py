@@ -16,13 +16,11 @@ OTHER DEALINGS IN THE SOFTWARE.
 import logging
 import os
 
-import daiquiri
-from ats.easypy import run  # type: ignore
-
+from pyats.easypy import run  # type: ignore
 from pyats.topology.loader import load
 
-LOGGER = daiquiri.getLogger(__name__)
-daiquiri.setup(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
 
 
 def main():

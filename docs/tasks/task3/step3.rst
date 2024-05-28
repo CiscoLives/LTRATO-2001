@@ -109,7 +109,7 @@ The high-level logic of the tests will be the following:
                 if (device.os == 'iosxe') or (device.os == 'nxos'):
 
                     output = device.learn('routing')
-                    rib = <<replace me>>  # noqa: E999
+                    rib = {"replace": "me"}
 
 8. Then we compare the loopback routes stored in **golden_routes list** with the content of rib. If the loopback route is not found, then we force the test case to fail.
 
@@ -173,7 +173,7 @@ The high-level logic of the tests will be the following:
     .. code-block:: python
 
         # Before inserting the rib variable:
-        rib = <<replace me>>  # noqa: E999
+        rib = {"replace": "me"}
 
         # After inserting the rib variable:
         rib = output.info['vrf']['default']['address_family']['ipv4']['routes']

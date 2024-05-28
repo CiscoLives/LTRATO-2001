@@ -122,19 +122,26 @@ class PingTestcase(aetest.Testcase):
 
         try:
             result = nx.ping(dest_ip)
-        except Exception as e:
-            self.failed(f"Ping from {nx.name}->{dest_ip} failed: {e}")
+        except Exception as err:
+            self.failed(f"Ping from {nx.name}->{dest_ip} failed: {err}")
         else:
-            m = re.search(r"(?P<rate>\d+)\.\d+% packet loss", result)
-            loss_rate = m.group("rate")
+            match_obj = re.search(r"(?P<rate>\d+)\.\d+% packet loss", result)
+            if match_obj:
+                loss_rate = match_obj.group("rate")
 
-            if int(loss_rate) < 20:
-                self.passed(f"Ping loss rate {loss_rate}%")
+                # Check if loss rate is less than 20%
+                if int(loss_rate) < 20:
+                    self.passed(f"Ping loss rate {loss_rate}%")
+                # If loss rate is more than 20% fail the test
+                else:
+                    self.failed(f"Ping loss rate {loss_rate}%")
+
+            # If failed to parse pint output, mark as errored
             else:
-                self.failed(f"Ping loss rate {loss_rate}%")
+                self.errored(f"Failed to parse ping output: {result}")
 
 
-if __name__ == "__main__":  # pragma: no cover
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--testbed",
@@ -145,4 +152,4 @@ if __name__ == "__main__":  # pragma: no cover
 
     args, unknown = parser.parse_known_args()
 
-    aetest.main(**vars(args))
+    aetest.main(**vars(args))  # type: ignore

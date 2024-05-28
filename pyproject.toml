@@ -25,39 +25,16 @@ package-mode = false
 python = "^3.10"
 cisco-gnmi = "*"
 genie = "24.3"
-# genie.libs.clean = "24.3"
-# genie.libs.conf = "24.3"
-# genie.libs.filetransferutils = "24.3"
-# genie.libs.health = "24.3"
-# genie.libs.ops = "24.3"
-# genie.libs.parser = "24.3"
-# genie.libs.sdk = "24.3"
-# genie.telemetry = "24.3"
-# genie.trafficgen = "24.3"
 jupyterlab = "*"
 notebook = "*"
 pyats = "24.3"
-# pyats.aereport = "24.3"
-# pyats.aetest = "24.3"
-# pyats.async = "24.3"
-# pyats.connections = "24.3"
-# pyats.contrib = "24.3"
-# pyats.datastructures = "24.3"
-# pyats.easypy = "24.3"
-# pyats.kleenex = "24.3"
-# pyats.log = "24.3"
-# pyats.reporter = "24.3"
-# pyats.results = "24.3"
-# pyats.tcl = "24.3"
-# pyats.topology = "24.3"
-# pyats.utils = "24.3"
 unicon = "24.3"
-# unicon.plugins = "24.3"
 virl2-client = "*"
 
 
 [tool.ruff]
 target-version = "py311"
+
 
 [tool.ruff.lint]
 select = [

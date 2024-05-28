@@ -121,4 +121,4 @@ if __name__ == "__main__":
     # do the parsing
     args = parser.parse_known_args()[0]
 
-    aetest.main(testbed=args.testbed)
+    aetest.main(testbed=args.testbed)  # type: ignore
