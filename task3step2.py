@@ -115,4 +115,4 @@ if __name__ == "__main__":
 
     args, unknown = parser.parse_known_args()
 
-    aetest.main(**vars(args))
+    aetest.main(**vars(args))  # type: ignore
