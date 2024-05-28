@@ -24,7 +24,6 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.10"
 cisco-gnmi = "*"
-daiquiri = "*"
 genie = "24.3"
 # genie.libs.clean = "24.3"
 # genie.libs.conf = "24.3"

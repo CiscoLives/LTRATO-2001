@@ -20,7 +20,6 @@ import argparse
 import logging
 
 # To handle errors with connections to devices
-import daiquiri
 from unicon.core import errors  # type: ignore
 
 # Import of PyATS library
@@ -29,8 +28,8 @@ from pyats.log.utils import banner
 from pyats.topology import loader
 
 # Get your logger for your script
-LOGGER = daiquiri.getLogger(__name__)
-daiquiri.setup(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
 
 
 class common_setup(aetest.CommonSetup):

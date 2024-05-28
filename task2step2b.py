@@ -18,15 +18,14 @@ OTHER DEALINGS IN THE SOFTWARE.
 import argparse
 import logging
 
-import daiquiri
 from genie.testbed import load
 from unicon.core.errors import ConnectionError, StateMachineError, TimeoutError
 
 from pyats import aetest, topology
 
 # Get your logger for your script
-LOGGER = daiquiri.getLogger(__name__)
-daiquiri.setup(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
 
 
 class CommonSetup(aetest.CommonSetup):
@@ -116,7 +115,7 @@ if __name__ == "__main__":
         dest="testbed",
         help="testbed YAML file",
         type=topology.loader.load,
-        default=None,
+        default="pyats_testbed.yaml",
     )
 
     # do the parsing

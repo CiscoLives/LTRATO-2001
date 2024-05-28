@@ -19,8 +19,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 import argparse
 import logging
 
-import daiquiri
-
 # To handle errors with connections to devices
 from unicon.core import errors  # type: ignore
 
@@ -29,8 +27,8 @@ from pyats.log.utils import banner
 from pyats.topology import loader
 
 # Get your logger for your script
-LOGGER = daiquiri.getLogger(__name__)
-daiquiri.setup(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
 
 # SNs that has to be changed to the actual:
 contract_sn = ["9AQHSSAS8AU", "9Q3YV06WJ71", "9IFUH4GPSGL"]

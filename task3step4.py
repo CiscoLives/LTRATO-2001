@@ -23,7 +23,6 @@ import re
 from ipaddress import IPv4Network
 
 # To handle errors with connections to devices
-import daiquiri
 from unicon.core import errors  # type: ignore
 
 from pyats import aetest
@@ -31,8 +30,8 @@ from pyats.log.utils import banner
 from pyats.topology import loader
 
 # Get your logger for your script
-LOGGER = daiquiri.getLogger(__name__)
-daiquiri.setup(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
 
 # Management network IP range
 mgmt_net = IPv4Network("198.18.1.0/24")

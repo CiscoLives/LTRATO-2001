@@ -18,7 +18,6 @@ OTHER DEALINGS IN THE SOFTWARE.
 # To get a logger for the script
 import logging
 
-import daiquiri
 from pyats import aetest
 from pyats.log.utils import banner
 
@@ -29,8 +28,8 @@ import argparse
 from pyats.topology import loader
 
 # Get your logger for your script
-LOGGER = daiquiri.getLogger(__name__)
-daiquiri.setup(level=logging.INFO)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(logging.INFO)
 
 golden_routes = ["192.168.0.3/32", "192.168.0.1/32"]
 
