@@ -19,13 +19,14 @@ import logging
 from os import path
 
 # To handle errors with connections to devices
-import daiquiri
 from unicon.core import errors  # type: ignore
 
 from pyats.topology.loader import load
 
-LOGGER = daiquiri.getLogger(__name__)
-daiquiri.setup(level=logging.INFO)
+format = "%(asctime)s - %(filename)s - %(levelname)s - %(message)s"
+logging.basicConfig(level=logging.INFO, format=format)
+LOGGER = logging.getLogger(__name__)
+LOGGER.setLevel(level=logging.INFO)
 
 
 def write_commands_to_file(abs_filename, command_output):
@@ -35,7 +36,7 @@ def write_commands_to_file(abs_filename, command_output):
             file_output.write(command_output)
 
     except IOError as e:
-        log.error(
+        LOGGER.error(
             f"Unable to write output to file: {abs_filename}." f"Due to error: {e}"
         )
         exit(1)
@@ -44,34 +45,28 @@ def write_commands_to_file(abs_filename, command_output):
 def collect_device_commands(testbed, command_to_gather, filename):
     """Collect device commands."""
     abs_filename = path.join(path.dirname(__file__), filename)
-    log.info(f"filename: {abs_filename}")
+    LOGGER.info(f"filename: {abs_filename}")
 
-    log.info("Starting command collection...")
+    LOGGER.info("Starting command collection...")
 
     for device_name, device in testbed.devices.items():
         try:
             device.connect(log_stdout=False)
         except errors.ConnectionError:
-            log.error(
+            LOGGER.error(
                 f"Failed to establish a connection to: {device.name}."
                 f"Check connectivity and try again."
             )
             continue
 
         else:
-            log.info(f"Connected ok: {device_name}")
+            LOGGER.info(f"Connected ok: {device_name}")
             command_output = device.execute(command_to_gather, log_stdout=True)
             write_commands_to_file(abs_filename, command_output + "\n####\n")
 
 
 def main():
     """Main function."""
-    global log
-    format = "%(asctime)s - %(filename)s - %(levelname)s - %(message)s"
-    logging.basicConfig(level=logging.INFO, format=format)
-
-    log = logging.getLogger(__name__)
-
     testbed_filename = "pyats_testbed.yaml"
     testbed = load(testbed_filename)
 
