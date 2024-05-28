@@ -16,6 +16,7 @@ The key objectives covered in this task include:
 - Triggering network changes and comparing state differences with pyATS diff
 - Utilizing the interactive pyATS shell
 - Leveraging pyATS libraries like Dq for querying data structures
+- Leveraging pyATS APIs to query data structures
 
 .. tip::
    The estimated time to complete this task is: **50 Minutes**
@@ -26,3 +27,4 @@ The key objectives covered in this task include:
    step2
    step3
    step4
+   step5
