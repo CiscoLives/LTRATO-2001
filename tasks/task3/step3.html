@@ -233,7 +233,7 @@
         <span class="k">if</span> <span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;iosxe&#39;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">os</span> <span class="o">==</span> <span class="s1">&#39;nxos&#39;</span><span class="p">):</span>
 
 <span class="hll">            <span class="n">output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">learn</span><span class="p">(</span><span class="s1">&#39;routing&#39;</span><span class="p">)</span>
-</span>            <span class="n">rib</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="n">replace</span> <span class="n">me</span><span class="o">&gt;&gt;</span>  <span class="c1"># noqa: E999</span>
+</span>            <span class="n">rib</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;replace&quot;</span><span class="p">:</span> <span class="s2">&quot;me&quot;</span><span class="p">}</span>
 </pre></div>
 </div>
 </div></blockquote>
@@ -293,7 +293,7 @@ Eth1/4               <span class="m">10</span>.0.0.10       protocol-up/link-up/
 </pre></div>
 </div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before inserting the rib variable:</span>
-<span class="n">rib</span> <span class="o">=</span> <span class="o">&lt;&lt;</span><span class="n">replace</span> <span class="n">me</span><span class="o">&gt;&gt;</span>  <span class="c1"># noqa: E999</span>
+<span class="n">rib</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;replace&quot;</span><span class="p">:</span> <span class="s2">&quot;me&quot;</span><span class="p">}</span>
 
 <span class="c1"># After inserting the rib variable:</span>
 <span class="n">rib</span> <span class="o">=</span> <span class="n">output</span><span class="o">.</span><span class="n">info</span><span class="p">[</span><span class="s1">&#39;vrf&#39;</span><span class="p">][</span><span class="s1">&#39;default&#39;</span><span class="p">][</span><span class="s1">&#39;address_family&#39;</span><span class="p">][</span><span class="s1">&#39;ipv4&#39;</span><span class="p">][</span><span class="s1">&#39;routes&#39;</span><span class="p">]</span>
