@@ -17,13 +17,13 @@ A job file looks like the following example:
 **<test_name2>** - specifies the path to the Python file with the second list of tests (for example **task3step4.py**).
 
 
-The method **run** from the imported library **ats.easypy** instructs the system to run tests in sequence.
+The method **run** from the imported library **pyats.easypy** instructs the system to run tests in sequence.
 
 .. code-block:: python
     :emphasize-lines: 6-7, 10-11
 
     import os
-    from ats.easypy import run
+    from pyats.easypy import run
 
     def main():
         # Find the location of the script in relation to the job file
