@@ -44,12 +44,12 @@ To use the **pyATS APIs**, you need to follow the steps below:
 
 .. note::
     
-    It's much simpler to use the **APIs** to get the specific output, when they are available.
+    It's much simpler to use the **APIs** to get the specific output when they are available.
     
     Compare the output to the output of the last step in Step 4.
     The output is the same, but the method to get the output is different.
 
-    To look at all the list of available APIs, refer to the appendix section of the documentation.
+    To look at the list of available APIs, refer to the appendix section of the documentation.
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>

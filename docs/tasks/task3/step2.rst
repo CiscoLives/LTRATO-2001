@@ -1,7 +1,7 @@
 Step 2: Verify the Service Contracts Coverage
 #############################################
 
-**Value Proposition:** In this test case, we have the list of the devices' serial numbers, covered by the service contracts, and we must verify that all the devices in the testbed are covered by the service contracts. This ensures you will be able to open a TAC case if something goes wrong when the network is in production.
+**Value Proposition:** Our meticulous testing process safeguards your business operations by ensuring comprehensive coverage of all devices under active service contracts. By meticulously cross-referencing the testbed against our comprehensive database, we validate that every critical network component is backed by our unwavering support and expertise. This proactive approach empowers you with the confidence and peace of mind that should any unforeseen challenges arise in your production environment, our dedicated Technical Assistance Center (TAC) will be readily available to swiftly resolve issues, minimizing downtime and mitigating potential revenue losses.
 
 The high-level logic of the tests will be the following:
 

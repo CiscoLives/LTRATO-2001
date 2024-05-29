@@ -135,12 +135,12 @@ Each of these sections is further broken down into smaller subsections (Python m
 
             @aetest.test
             def test(self, steps):
-                # Loop over every device with learnt interfaces
+                # Loop over every device with learned interfaces
                 for device_name, interfaces in self.learnt_interfaces.items():
                     with steps.start(
                         f"Looking for Interface Errors on {device_name}", continue_=True
                     ) as device_step:
-                        # Loop over every interface that was learnt
+                        # Loop over every interface that was learned
                         for interface_name, interface in interfaces.items():
                             with device_step.start(
                                 f"Checking Interface {interface_name}", continue_=True
@@ -156,12 +156,12 @@ Each of these sections is further broken down into smaller subsections (Python m
                                                     f'Device {device_name} Interface {interface_name} has a count of {interface["counters"][counter]} for {counter}'
                                                 )
                                         else:
-                                            # if the counter not supported, log that it wasn't checked
+                                            # If the counter is not supported, log that it wasn't checked
                                             LOGGER.info(
                                                 f"Device {device_name} Interface {interface_name} missing {counter}"
                                             )
                                 else:
-                                    # If the interface has no counters, mark as skipped
+                                    # If the interface has no counters, mark it as skipped
                                     interface_step.skipped(
                                         f"Device {device_name} Interface {interface_name} missing counters"
                                     )

@@ -74,7 +74,7 @@ The high-level logic of the tests will be the following:
     Let's check the structure depicted above using our topology. We will find all the connected links between **nx-osv-1** and **csr1000v-1**.
 
     .. note::
-        We can get the value of an attribute for each object. For example, we can get a link that belongs to an interface object by calling a **link** attribute. We can also reference interfaces which belong to this link, by calling the **interfaces** attribute in step 6 (see code below).
+        We can get the value of an attribute for each object. For example, we can get a link that belongs to an interface object by calling a **link** attribute. We can also reference interfaces that belong to this link, by calling the **interfaces** attribute in step 6 (see code below).
 
     .. code-block:: bash
 
@@ -129,7 +129,7 @@ The high-level logic of the tests will be the following:
     - Get all the links between **nx-osv-1** and **csr1000v-1** (nx.find_links(csr).
     - Get interfaces for each link (**for iface in links.interfaces**), and append its IPv4 address (**iface.ipv4.ip**) into the list **dest_ips**, to use them further in ping commands.
 
-    To exclude management IP addressing space, there is a way to check whether an IP address on a link is from a management address space (if dest_ip not in mgmt_net). If an IP address is from a management IP address, it's not appended to the list dest_ips.
+    To exclude management IP addressing space, there is a way to check whether an IP address on a link is from a management address space (if dest_ip is not in mgmt_net). If an IP address is from a management IP address, it's not appended to the list dest_ips.
 
     .. note::
         Note that the IP address in the **link_iface.ipv4.ip** object is of the IPv4Address type, so we can check whether it overlaps with IPv4Network without any conversion of type (hence **if dest_ip not in mgmt_net** is used).
@@ -156,7 +156,7 @@ The high-level logic of the tests will be the following:
 
                 dest_ip = link_iface.ipv4.ip
 
-                # Check that destination IP is not from management IP range
+                # Check that the destination IP is not from the management IP range
                 if dest_ip not in mgmt_net:
                     LOGGER.info(f'{link_iface.name}:{link_iface.ipv4.ip}')
                     dest_ips.append(link_iface.ipv4.ip)
@@ -197,10 +197,10 @@ The high-level logic of the tests will be the following:
             if match_obj:
                 loss_rate = match_obj.group("rate")
 
-                # Check if loss rate is less than 20%
+                # Check if the loss rate is less than 20%
                 if int(loss_rate) < 20:
                     self.passed(f"Ping loss rate {loss_rate}%")
-                # If loss rate is more than 20% fail the test
+                # If the loss rate is more than 20% fail the test
                 else:
                     self.failed(f"Ping loss rate {loss_rate}%")
 
