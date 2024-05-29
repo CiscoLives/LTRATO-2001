@@ -260,12 +260,12 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 
     <span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
     <span class="k">def</span> <span class="nf">test</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">steps</span><span class="p">):</span>
-        <span class="c1"># Loop over every device with learnt interfaces</span>
+        <span class="c1"># Loop over every device with learned interfaces</span>
         <span class="k">for</span> <span class="n">device_name</span><span class="p">,</span> <span class="n">interfaces</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">learnt_interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="k">with</span> <span class="n">steps</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
                 <span class="sa">f</span><span class="s2">&quot;Looking for Interface Errors on </span><span class="si">{device_name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">continue_</span><span class="o">=</span><span class="kc">True</span>
             <span class="p">)</span> <span class="k">as</span> <span class="n">device_step</span><span class="p">:</span>
-                <span class="c1"># Loop over every interface that was learnt</span>
+                <span class="c1"># Loop over every interface that was learned</span>
                 <span class="k">for</span> <span class="n">interface_name</span><span class="p">,</span> <span class="n">interface</span> <span class="ow">in</span> <span class="n">interfaces</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                     <span class="k">with</span> <span class="n">device_step</span><span class="o">.</span><span class="n">start</span><span class="p">(</span>
                         <span class="sa">f</span><span class="s2">&quot;Checking Interface </span><span class="si">{interface_name}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">continue_</span><span class="o">=</span><span class="kc">True</span>
@@ -281,12 +281,12 @@ Since the banner is logged with INFO logging level, it’s required to set the l
                                             <span class="sa">f</span><span class="s1">&#39;Device </span><span class="si">{device_name}</span><span class="s1"> Interface </span><span class="si">{interface_name}</span><span class="s1"> has a count of </span><span class="si">{interface[&quot;counters&quot;][counter]}</span><span class="s1"> for </span><span class="si">{counter}</span><span class="s1">&#39;</span>
                                         <span class="p">)</span>
                                 <span class="k">else</span><span class="p">:</span>
-                                    <span class="c1"># if the counter not supported, log that it wasn&#39;t checked</span>
+                                    <span class="c1"># If the counter is not supported, log that it wasn&#39;t checked</span>
                                     <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
                                         <span class="sa">f</span><span class="s2">&quot;Device </span><span class="si">{device_name}</span><span class="s2"> Interface </span><span class="si">{interface_name}</span><span class="s2"> missing </span><span class="si">{counter}</span><span class="s2">&quot;</span>
                                     <span class="p">)</span>
                         <span class="k">else</span><span class="p">:</span>
-                            <span class="c1"># If the interface has no counters, mark as skipped</span>
+                            <span class="c1"># If the interface has no counters, mark it as skipped</span>
                             <span class="n">interface_step</span><span class="o">.</span><span class="n">skipped</span><span class="p">(</span>
                                 <span class="sa">f</span><span class="s2">&quot;Device </span><span class="si">{device_name}</span><span class="s2"> Interface </span><span class="si">{interface_name}</span><span class="s2"> missing counters&quot;</span>
                             <span class="p">)</span>

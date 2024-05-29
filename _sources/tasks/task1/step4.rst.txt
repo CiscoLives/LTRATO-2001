@@ -133,9 +133,18 @@ To use the **Dq** library, you need to follow the steps below:
 
         csr_output.q.contains('ospf').get_values('routes')
 
+#. Or get all interfaces that are configured ``up`` on the Nexus device.
+
+    .. code-block:: python
+
+        nx = testbed.devices['nx-osv-1']
+        nx.connect()
+        nx_output = nx.parse('show interface')
+        nx_output.q.contains_key_value('admin_state', 'up').reconstruct().keys()
+
 .. tip::
     
-    The **Dq** library is very useful to query the output of the device. You can find more information about the **Dq** library in the `pyATS Useful Libraries <https://pubhub.devnetcloud.com/media/genie-docs/docs/userguide/utils/index.html>`_.
+    The **Dq** library is very useful for querying the output of the device. You can find more information about the **Dq** library in the `pyATS Useful Libraries <https://pubhub.devnetcloud.com/media/genie-docs/docs/userguide/utils/index.html>`_.
 
 
 .. sectionauthor:: Luis Rueda <lurueda@cisco.com>, Jairo Leon <jaileon@cisco.com>

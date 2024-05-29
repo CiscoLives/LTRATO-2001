@@ -57,7 +57,7 @@ With XPRESSO, network administrators can execute pre-configured test jobs, monit
 
     |
 
-    You will be presented with a ``You are configuring a new group job request`` page where you can customize job run settings. Leave all settings by default and click Submit button. Once done, the job will be submitted for execution.
+    You will be presented with a ``You are configuring a new group job request`` page where you can customize job run settings. Leave all settings by default and click the Submit button. Once done, the job will be submitted for execution.
 
     At the bottom of the job execution page, you will see the ``request`` item, which will go through the different stages: **PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED, or FAILED**:
 
@@ -74,7 +74,7 @@ With XPRESSO, network administrators can execute pre-configured test jobs, monit
     |
 
     .. note::
-        If you click on the ``request`` item while the job is going through **PREPARING, QUEUING, QUEUED** stages, there would be no visible results as the job is not running yet.
+        If you click on the ``request`` item while the job is going through **PREPARING, QUEUING, QUEUED** stages, there will be no visible results as the job is not running yet.
         Once the job transitions to the **RUNNING** stage, the page will be updated and you will start getting test the execution results,
 
 #. Once job execution is completed, you will see the results, can check raw console output, job history with timestamps, download archive with results, or compare test execution with another job run:
@@ -112,13 +112,13 @@ With XPRESSO, network administrators can execute pre-configured test jobs, monit
         :align: center
         :width: 75%
 
-#. You will see the summary of comparison for both job runs and a number of passed and failed tests:
+#. You will see the summary of the comparison for both job runs and a number of passed and failed tests:
 
     .. image:: images/xpresso-jobs-compare-2.png
         :align: center
         :width: 75%
 
-    Followed by detailed test to test comparison:
+    Followed by a detailed test to test comparison:
 
     .. image:: images/xpresso-jobs-compare-3.png
         :align: center
@@ -132,7 +132,7 @@ With XPRESSO, network administrators can execute pre-configured test jobs, monit
     
     |
 
-    Section diff page will open and load diff plugin:
+    Section diff page will open and load the diff plugin:
 
     .. image:: images/xpresso-jobs-compare-5.png
         :align: center
@@ -151,7 +151,7 @@ With XPRESSO, network administrators can execute pre-configured test jobs, monit
 
     |
 
-#. Select 2 requests - PASSED and FAILED, and click the Compare icon on the top right of the page. Compare icon will be visible only if you select exactly 2 items:
+#. Select 2 requests - PASSED and FAILED, and click the Compare icon on the top right of the page. The compare icon will be visible only if you select exactly 2 items:
 
     .. image:: images/xpresso-jobs-compare-6.png
         :align: center

@@ -140,7 +140,7 @@ You will be using the following pyATS methods throughout this task:
                                 'slot': '1',
                                 'vid': 'V02'}}}
 
-    - Since the information is collected in a Python dictionary, we can call any value using its corresponding key. Lets collect the serial number of the chassis using its key.
+    - Since the information is collected in a Python dictionary, we can call any value using its corresponding key. Let's collect the serial number of the chassis using its key.
 
         .. code-block:: python
 

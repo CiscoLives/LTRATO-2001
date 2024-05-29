@@ -26,7 +26,7 @@ The method **run** from the imported library **pyats.easypy** instructs the syst
     from pyats.easypy import run
 
     def main():
-        # Find the location of the script in relation to the job file
+        # Find the location of the script concerning the job file
         <test_name1> = os.path.join('<file_with_tests1.py>')
         <test_name2> = os.path.join('<file_with_tests2.py>')
         
@@ -80,7 +80,7 @@ Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job fil
         :width: 75%
         :align: center
 
-#. Detailed results of the tests comprising the last run job would be shown.
+#. Detailed results of the tests comprising the last run job will be shown.
 
     .. note::
 

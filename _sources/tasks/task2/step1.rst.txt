@@ -41,7 +41,7 @@ Upskill in automation for scalable solutions to drive operational excellence, re
 
         As you can see from the output in the previous step, 'Device <device_name>' objects are contained as dictionary values in the object of TopologyDict class. Therefore, the device names are used as dictionary keys.
 
-#. In this task we will apply standard dictionary method: **items()** to get the **keys** (device names) and **values** (respective device objects). We will iterate over the objects using a Python for-loop.
+#. In this task we will apply the standard dictionary method: **items()** to get the **keys** (device names) and **values** (respective device objects). We will iterate over the objects using a Python for-loop.
 
     .. note::
         As seen in the following code, Python uses indentation (the spaces at the beginning of a code line) to specify code blocks. The indentation is crucial because it determines the scope of the code.
@@ -178,7 +178,7 @@ Upskill in automation for scalable solutions to drive operational excellence, re
     
             python task2step1.py
 
-#. Check that there is a new file created: collected_task4. Then, check the time in which the file was created.
+#. Check that there is a new file created: collected_task4. Then, check the time at which the file was created.
 
     .. code-block:: bash
 
