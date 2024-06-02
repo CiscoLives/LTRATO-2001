@@ -55,9 +55,9 @@ Each of these sections is further broken down into smaller subsections (Python m
     .. note::
 
         The pyATS logging banner itself does not perform logging; it only formats input messages.
-        Hence, the **log.info(banner("logging message"))** construction is used in the code for logging.
+        Hence, the **LOGGER.info(banner("logging message"))** construction is used in the code for logging.
         Since the banner is logged with INFO logging level, it's required to set the logging level up to INFO (default is WARNING):
-        **log.setLevel(logging.INFO)**
+        **LOGGER.setLevel(logging.INFO)**
 
 #. Let's look at the main contents of this example. Python class **common_setup**, which inherits from **aetest.CommonSetup** represents the major section, “Common Setup” (see the following illustration).  The Python class **common_setup** is where initializations happen. This initialization is required before executing any tests. For this reason, the code in class **common_setup** is always executed first. The following snippet of code is taken from the task2step2.py file:
 
