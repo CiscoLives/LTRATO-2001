@@ -182,9 +182,9 @@ Each test script is written in a Python file and split into three major sections
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The pyATS logging banner itself does not perform logging; it only formats input messages.
-Hence, the <strong>log.info(banner(“logging message”))</strong> construction is used in the code for logging.
+Hence, the <strong>LOGGER.info(banner(“logging message”))</strong> construction is used in the code for logging.
 Since the banner is logged with INFO logging level, it’s required to set the logging level up to INFO (default is WARNING):
-<strong>log.setLevel(logging.INFO)</strong></p>
+<strong>LOGGER.setLevel(logging.INFO)</strong></p>
 </div>
 </div></blockquote>
 </li>

@@ -256,16 +256,15 @@ Out<span class="o">[</span><span class="m">4</span><span class="o">]</span>: <sp
 
     <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
-        <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;Connecting to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;...&quot;</span><span class="p">))</span>
+        <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;...&quot;</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">errors</span><span class="o">.</span><span class="n">ConnectionError</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish a connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
         <span class="n">device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
     <span class="c1"># Pass list of devices to testcases</span>
-<span class="hll">    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
-</span></pre></div>
+    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
+</pre></div>
 </div>
 <p>Where <strong>self.parent.parameters</strong> is an attribute of class <strong>aetest</strong>, and <strong>aetest</strong> is the class from which all the test case classes and <strong>MyCommonSetup</strong> class are inherited from:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyCommonSetup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
