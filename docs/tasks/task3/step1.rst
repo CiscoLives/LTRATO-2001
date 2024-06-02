@@ -121,8 +121,7 @@ The high-level logic of the test case will be as follows:
 
                 device_list = []
                 for device in pyats_testbed.devices.values():
-                    log.info(banner(
-                        f"Connecting to device '{device.name}'..."))
+                    LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
                     try:
                         device.connect(log_stdout=False)
                     except errors.ConnectionError:
