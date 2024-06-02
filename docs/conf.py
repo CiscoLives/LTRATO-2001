@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = "LTRATO-2001"
-copyright = "Cisco Systems, Inc. 2020"
+copyright = "Cisco Systems, Inc. 2020-2024"
 author = "Luis Rueda and Jairo Leon"
 
 
