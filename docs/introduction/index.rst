@@ -8,15 +8,13 @@ Prerequisites
 =============
 
 - Foundational Python Proficiency:
-    * Grasp the essentials of Python programming to navigate pyATS scripts effectively.
+    * Essentials of Python programming is required to navigate pyATS scripts effectively.
 - Networking Knowledge:
-    * Understand the core networking concepts and protocols that underpin network testing.
+    * Understanding core networking concepts and protocols that underpin network testing.
 - Cisco Systems Acquaintance:
-    * Familiarize with Cisco NX-OS, including configurations and essential troubleshooting commands.
+    * Familiarity with Cisco NX-OS, ASA, and IOS-XE including configurations and essential troubleshooting commands.
 - Command-Line Interface (CLI) Competence:
-    * Develop the skill to inspect and modify Cisco device configurations using CLI tools.
-- Cisco Secure Client®:
-    * Ensure you have Cisco AnyConnect installed on your computer to access the lab environment.
+    * Ability to inspect and modify basic Cisco device configurations using CLI tools.
 
 
 Learning Objectives
