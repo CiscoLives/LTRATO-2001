@@ -54,7 +54,7 @@ Get Started
         :header-rows: 1
 
 
-#. Open ``Cisco AnyConnect`` client and copy the Host address or name from the previous table.
+#. Open ``Cisco Secure`` client and copy the Host address or name from the previous table.
 
     .. image:: images/anyconnect-01.png
         :width: 45%
