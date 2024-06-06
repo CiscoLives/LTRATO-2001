@@ -63,6 +63,12 @@ The high-level logic of the test case will be as follows:
 
                 csr_output = csr.execute('show logging | i ERROR|WARN')
 
+            To visualize the output, you can use the following command:
+
+            .. code-block:: bash
+
+                print(csr_output)
+
 
 #. To check whether there is an empty or non-empty output, we will use the Python **len()** built-in function, which returns the length of the given string. If the collected output is empty, then **len()** of the output will be 0; otherwise, the result will be greater than 0.
 

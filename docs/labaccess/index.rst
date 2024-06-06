@@ -53,26 +53,14 @@ Get Started
         :width: 80%
         :header-rows: 1
 
-    |
 
-    .. note::
-        Because we are providing you with the credentials in the previous table, please ignore steps 2 and 3 and proceed to step 4.
-
-
-#. Go to `dCloud <https://dcloud.cisco.com>`__ and log in with your Cisco (CCO) credentials. Once logged in, click on the :guilabel:`My Hub` tab. Then, you will see your session page.
-#. On the session page, click :guilabel:`Info` tab (1) and scroll down (2) for Anyconnect Credentials (3). You will need these credentials to access your lab using the Cisco AnyConnect client.
-
-    .. image:: images/session-details.png
-        :width: 75%
-        :align: center
-
-#. Open ``Cisco AnyConnect`` client and copy the Host address from the previous step.
+#. Open ``Cisco Secure`` client and copy the Host address or name from the previous table.
 
     .. image:: images/anyconnect-01.png
         :width: 45%
         :align: center
 
-#. Enter the Username/Password from the previous step when the login fields appear.
+#. Enter the Username/Password from the previous table when the login fields appear.
 
     .. image:: images/anyconnect-02.png
         :width: 45%
