@@ -1,4 +1,4 @@
-# Copyright 2022-2024, Cisco Systems, Inc.
+# Copyright 2022-2025, Cisco Systems, Inc.
 # All Rights Reserved.
 
 # THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
@@ -13,7 +13,7 @@
 
 [tool.poetry]
 name = "ltrato_2001"
-version = "2024.06.02"
+version = "2025.02.09"
 description = "Cisco Live LTRATO-2001"
 authors = ["Jairo Leon", "Luis Rueda"]
 readme = "README.md"
@@ -24,12 +24,10 @@ package-mode = false
 [tool.poetry.dependencies]
 python = "^3.10"
 cisco-gnmi = "*"
-genie = "24.3"
 jupyterlab = "*"
 notebook = "*"
-pyats = "24.3"
-unicon = "24.3"
 virl2-client = "*"
+pyats = { extras = ["full"], version = "^24.11" }
 
 
 [tool.ruff]

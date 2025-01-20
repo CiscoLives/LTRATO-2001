@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 __author__ = "Jairo Leon, Luis Rueda"
 __copyright__ = """
-Copyright 2022-2024, Cisco Systems, Inc. 
+Copyright 2022-2025, Cisco Systems, Inc. 
 All Rights Reserved. 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
@@ -94,7 +94,7 @@ class interface_errors(aetest.Testcase):
                                 if counter in interface["counters"].keys():
                                     if interface["counters"][counter] > 0:
                                         interface_step.failed(
-                                            f'Device {device_name} Interface {interface_name} has a count of {interface["counters"][counter]} for {counter}'
+                                            f"Device {device_name} Interface {interface_name} has a count of {interface['counters'][counter]} for {counter}"
                                         )
                                 else:
                                     # if the counter not supported, log that it wasn't checked
