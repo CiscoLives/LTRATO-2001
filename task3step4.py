@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 __author__ = "Jairo Leon, Luis Rueda"
 __copyright__ = """
-Copyright 2022-2024, Cisco Systems, Inc. 
+Copyright 2022-2025, Cisco Systems, Inc. 
 All Rights Reserved. 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
@@ -92,8 +92,7 @@ class PingTestcase(aetest.Testcase):
                     dest_ips.append(link_iface.ipv4.ip)
                 else:
                     LOGGER.info(
-                        f"Skipping link_iface {link_iface.name} "
-                        f"from management subnet"
+                        f"Skipping link_iface {link_iface.name} from management subnet"
                     )
 
         LOGGER.info(f"Collected following IP addresses: {dest_ips}")
