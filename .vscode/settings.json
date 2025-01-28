@@ -20,5 +20,8 @@
       "source.organizeImports": "explicit"
     },
     "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[robot]": {
+    "editor.formatOnSave": true
   }
 }
