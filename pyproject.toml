@@ -18,7 +18,6 @@ description = "Cisco Live LTRATO-2001"
 authors = ["Jairo Leon", "Luis Rueda"]
 readme = "README.md"
 license = "LICENSE"
-package-mode = false
 
 
 [tool.poetry.dependencies]
@@ -28,6 +27,7 @@ jupyterlab = "*"
 notebook = "*"
 virl2-client = "*"
 pyats = { extras = ["full"], version = "^24.11" }
+robotframework-tidy = "*"
 
 
 [tool.ruff]
