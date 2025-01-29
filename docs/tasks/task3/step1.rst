@@ -6,7 +6,7 @@ Step 1: Verify Log Messages
 The high-level logic of the test case will be as follows:
 
 - Connect to each device in the testbed.
-- Collect the output of ``show logging | include ERROR|WARN``.
+- Collect the output of ``show logging | include ERROR``.
 - If the output contains more than 0 strings, it means pyATS found messages, and the test should fail for this device. Otherwise, the test should succeed.
 
 #. Before creating our test case, connect to ASA. Launch **PuTTY** and connect to **asav-1** (username: ``cisco``, password: ``cisco``) and enter the following commands:
@@ -40,8 +40,8 @@ The high-level logic of the test case will be as follows:
 
     .. code-block:: python
 
-        csr_output = csr.execute('show logging | include ERROR|WARN')
-        asa_output = asa.execute('show logging | include ERROR|WARN')
+        csr_output = csr.execute('show logging | include ERROR')
+        asa_output = asa.execute('show logging | include ERROR')
 
     .. note::
 
@@ -61,7 +61,7 @@ The high-level logic of the test case will be as follows:
 
             .. code-block:: bash
 
-                csr_output = csr.execute('show logging | i ERROR|WARN')
+                csr_output = csr.execute('show logging | i ERROR')
 
             To visualize the output, you can use the following command:
 
@@ -155,7 +155,7 @@ The high-level logic of the test case will be as follows:
 #. The code in the class **VerifyLogging**, is used to implement the logic which we have already tested using pyATS shell. The logic is that if the output length is greater than zero, the output contains ERROR or WARN messages. The test should then be marked as failed.
 
     - The **device.connect(log_stdout=False)** is used in this example (see **def establish_connections**).
-    - This code (log_stdout=False) - disables all logging to a screen for the whole connection session. To make the execution of the command on a device visible **(show logging | i ERROR|WARN)** in the output of the test, the following code is used: **any_device.log_user(enable=True)**
+    - This code (log_stdout=False) - disables all logging to a screen for the whole connection session. To make the execution of the command on a device visible **(show logging | i ERROR)** in the output of the test, the following code is used: **any_device.log_user(enable=True)**
 
     |
 
@@ -170,7 +170,7 @@ The high-level logic of the test case will be as follows:
             def error_logs(self):
                 any_device = self.parent.parameters["dev"][0]
                 any_device.log_user(enable=True)
-                output = any_device.execute('show logging | include ERROR|WARN")
+                output = any_device.execute('show logging | include ERROR")
 
                 if len(output) > 0:
                     self.failed("Found messages in log that are either ERROR or WARN, review logs first")
@@ -179,7 +179,7 @@ The high-level logic of the test case will be as follows:
 
     .. note::
 
-        The Setup section of the test case is not used, Python's **pass** command is added, to keep the method as a placeholder. We will use the Setup section of the test case later when we execute the **show logging | i ERROR|WARN** command on multiple devices.
+        The Setup section of the test case is not used, Python's **pass** command is added, to keep the method as a placeholder. We will use the Setup section of the test case later when we execute the **show logging | i ERROR** command on multiple devices.
 
             .. code-block:: python
                 :emphasize-lines: 3
@@ -217,7 +217,7 @@ The high-level logic of the test case will be as follows:
 
         @aetest.test
         def error_logs(self, device):
-            output = device.execute('show logging | include ERROR|WARN')
+            output = device.execute('show logging | include ERROR')
 
             if len(output) > 0:
                 self.failed('Found ERROR in log, review logs first')
