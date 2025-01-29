@@ -76,9 +76,9 @@
 <li class="toctree-l3"><a class="reference internal" href="step4.html">Step 4: Run PING to Verify Reachability</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../task4/index.html">Task 4: Results XPRESSO</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../task4/index.html">Task 4: PyATS and Robot Framework</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../task4/step1.html">Step 1: Show the Results of Tests in a Browser</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../task4/step2.html">Step 2: Run tests and compare results from XPRESSO dashboard</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../task4/step2.html">Step 2: Run tests using Robot Framework</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task5/index.html">Task 5: CXTM Framework</a><ul>
@@ -133,7 +133,7 @@
 <p>The high-level logic of the test case will be as follows:</p>
 <ul class="simple">
 <li><p>Connect to each device in the testbed.</p></li>
-<li><p>Collect the output of <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">logging</span> <span class="pre">|</span> <span class="pre">include</span> <span class="pre">ERROR|WARN</span></code>.</p></li>
+<li><p>Collect the output of <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">logging</span> <span class="pre">|</span> <span class="pre">include</span> <span class="pre">ERROR</span></code>.</p></li>
 <li><p>If the output contains more than 0 strings, it means pyATS found messages, and the test should fail for this device. Otherwise, the test should succeed.</p></li>
 </ul>
 <ol class="arabic">
@@ -164,8 +164,8 @@
 </li>
 <li><p>Let’s verify whether there are any errors or warning messages in the logs:</p>
 <blockquote>
-<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr_output</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR|WARN&#39;</span><span class="p">)</span>
-<span class="n">asa_output</span> <span class="o">=</span> <span class="n">asa</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR|WARN&#39;</span><span class="p">)</span>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">csr_output</span> <span class="o">=</span> <span class="n">csr</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR&#39;</span><span class="p">)</span>
+<span class="n">asa_output</span> <span class="o">=</span> <span class="n">asa</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -192,7 +192,7 @@ If you don’t see any ERROR logs on the csr1000v-1 device, then:</p>
 </li>
 <li><p>Repeat step 3 above for CSR in the pyATS shell:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">csr_output</span> <span class="o">=</span> csr.execute<span class="o">(</span><span class="s1">&#39;show logging | i ERROR|WARN&#39;</span><span class="o">)</span>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">csr_output</span> <span class="o">=</span> csr.execute<span class="o">(</span><span class="s1">&#39;show logging | i ERROR&#39;</span><span class="o">)</span>
 </pre></div>
 </div>
 <p>To visualize the output, you can use the following command:</p>
@@ -286,7 +286,7 @@ Then we can access all the devices in the class VerifyLogging, using the method 
 <blockquote>
 <div><ul class="simple">
 <li><p>The <strong>device.connect(log_stdout=False)</strong> is used in this example (see <strong>def establish_connections</strong>).</p></li>
-<li><p>This code (log_stdout=False) - disables all logging to a screen for the whole connection session. To make the execution of the command on a device visible <strong>(show logging | i ERROR|WARN)</strong> in the output of the test, the following code is used: <strong>any_device.log_user(enable=True)</strong></p></li>
+<li><p>This code (log_stdout=False) - disables all logging to a screen for the whole connection session. To make the execution of the command on a device visible <strong>(show logging | i ERROR)</strong> in the output of the test, the following code is used: <strong>any_device.log_user(enable=True)</strong></p></li>
 </ul>
 <div class="line-block">
 <div class="line"><br /></div>
@@ -299,7 +299,7 @@ Then we can access all the devices in the class VerifyLogging, using the method 
     <span class="k">def</span> <span class="nf">error_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">any_device</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="p">[</span><span class="s2">&quot;dev&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
         <span class="n">any_device</span><span class="o">.</span><span class="n">log_user</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">output</span> <span class="o">=</span> <span class="n">any_device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR|WARN&quot;)</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">any_device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR&quot;)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="s2">&quot;Found messages in log that are either ERROR or WARN, review logs first&quot;</span><span class="p">)</span>
@@ -309,7 +309,7 @@ Then we can access all the devices in the class VerifyLogging, using the method 
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Setup section of the test case is not used, Python’s <strong>pass</strong> command is added, to keep the method as a placeholder. We will use the Setup section of the test case later when we execute the <strong>show logging | i ERROR|WARN</strong> command on multiple devices.</p>
+<p>The Setup section of the test case is not used, Python’s <strong>pass</strong> command is added, to keep the method as a placeholder. We will use the Setup section of the test case later when we execute the <strong>show logging | i ERROR</strong> command on multiple devices.</p>
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">setup</span>
 <span class="k">def</span> <span class="nf">setup</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -346,7 +346,7 @@ Now we need to get familiar with the <strong>aetest.loop</strong> method, which 
 <blockquote>
 <div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">test</span>
 <span class="hll"><span class="k">def</span> <span class="nf">error_logs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">device</span><span class="p">):</span>
-</span>    <span class="n">output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR|WARN&#39;</span><span class="p">)</span>
+</span>    <span class="n">output</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="s1">&#39;Found ERROR in log, review logs first&#39;</span><span class="p">)</span>

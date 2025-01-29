@@ -1,173 +1,96 @@
-Step 2: Run tests and compare results from XPRESSO dashboard
-############################################################
+Step 2: Run tests using Robot Framework
+#######################################
 
-**Value Proposition:** In today's fast-paced business environment, efficiency and agility are crucial for success. The XPRESSO dashboard empowers organizations to streamline their testing processes, enabling rapid identification and resolution of network issues. By leveraging XPRESSO's powerful capabilities, businesses can minimize downtime, enhance customer satisfaction, and maintain a competitive edge.
+**Value Proposition:** Robot Framework provides a versatile and structured approach to test automation that simplifies the creation and maintenance of device log verification tests. Its keyword-driven architecture allows teams to build reusable test components while maintaining clear test documentation, making it particularly effective for validating both expected operational states and fault scenarios in network environments.
 
-With XPRESSO, network administrators can execute pre-configured test jobs, monitor their execution status in real-time, and quickly identify potential failures or deviations from expected behavior. Furthermore, XPRESSO's advanced comparison features allow for in-depth analysis of test results, facilitating root cause analysis and informed decision-making.
+The high-level logic of the test case will be as follows:
 
-.. note::
-    Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via a Remote Desktop Protocol (RDP) session to CentOS VM running XPRESSO.
+- Connect to each device in the testbed.
+- Collect the output of ``show logging | include ERROR``.
+- If the output contains more than 0 strings, it means pyATS found messages, and the test should fail for this device. Otherwise, the test should succeed.
 
-#. Locate XPRESSO.rdp shortcut on the desktop of the Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.
-
-    - Username: ``xpresso``
-    - Password: ``C1sco12345``
-
-    |
-
-    .. note::
-        If you are using AnyConnect VPN and have a Microsoft RDP client installed, you can connect directly from your PC via RDP to address XPRESSO VM (use IP address: 198.18.134.50).
-
-    .. image:: images/login-to-xpresso_rdp.png
-        :align: center
-        :width: 20%
-
-#. Inside the RDP session, open Firefox from the desktop or the Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see the Requests page:
-
-    .. image:: images/xpresso-dashboard-page.png
-        :align: center
-        :width: 75%
-
-    If XPRESSO page is not opened automatically, open it directly on `dCloud <http://xpresso.dcloud-cisco.com>`_ manually and login with credentials:
-
-        - Username: ``xpresso``
-        - Password: ``C1sco12345``
-
-
-#. From the menu icons on the left, locate the Jobs item and click on it:
-
-    .. image:: images/xpresso-jobs-filter.png
-        :align: center
-        :width: 15%
-
-    |
-
-    You will see the pre-configured job **Ping_from_ASA** which executes **task3step4.py** script you've used in this Scenario:
-
-
-    .. image:: images/xpresso-jobs-list-jenkins.png
-        :align: center
-        :width: 75%
-
-#. Hover your mouse over the job row and you will see the **Execute** icon on the right. Click it:
-
-    .. image:: images/xpresso-jobs-execute.png
-        :align: center
-        :width: 15%
-
-    |
-
-    You will be presented with a ``You are configuring a new group job request`` page where you can customize job run settings. Leave all settings by default and click the Submit button. Once done, the job will be submitted for execution.
-
-    At the bottom of the job execution page, you will see the ``request`` item, which will go through the different stages: **PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED, or FAILED**:
-
-    .. image:: images/xpresso-jobs-request-status-1.png
-        :align: center
-        :width: 75%
-
-#. Click on the Request Item while the job is running, and you will see how pyATS is executing every test defined in the job file one by one in real-time:
-
-    .. image:: images/xpresso-jobs-request-status-2.png
-        :align: center
-        :width: 55%
-
-    |
-
-    .. note::
-        If you click on the ``request`` item while the job is going through **PREPARING, QUEUING, QUEUED** stages, there will be no visible results as the job is not running yet.
-        Once the job transitions to the **RUNNING** stage, the page will be updated and you will start getting test the execution results,
-
-#. Once job execution is completed, you will see the results, can check raw console output, job history with timestamps, download archive with results, or compare test execution with another job run:
-
-    .. image:: images/xpresso-request-details.png
-        :align: center
-        :width: 75%
-
-
-#. Let's introduce a network failure by connecting to **csr1000v-1** and shutting down interface **GigabitEthernet2**. From Admin Workstation launch Putty, login to **csr1000v-1**, and execute commands:
+#. Before creating our test case, connect to CSR. Launch **PuTTY** and connect to **csr1000v-1** (username: ``cisco``, password: ``cisco``) and enter the following commands:
 
     .. code-block:: bash
 
-        configure terminal 
-        interface gigabitEthernet 2
-        shutdown
+        clear logging
 
-#. Go back to the XPRESSO dashboard and click on the Jobs menu item:
 
-    .. image:: images/xpresso-jobs-filter.png
-        :align: center
-        :width: 15%
-
-    |
-
-#. Run **Ping_from_ASA** job again by repeating Steps 4 - 7. This time you will notice that one of the tests is failing:
-
-    .. image:: images/xpresso-ping-fail-from-asa.png
-        :align: center
+    .. image:: images/csr1000v-clear-logging-buffer.png
         :width: 75%
-
-#. Now let's compare job results. On the top of the page click on the **Compare** button and check the last job run that was successful and  has the status **PASSED**:
-
-    .. image:: images/xpresso-jobs-compare-1.png
         :align: center
+
+#. Open the file task4step1.py in Nano editor:
+
+    .. code-block:: bash
+
+        nano ltrato_2001/task4step1.py
+
+#. Identify the following classes in the file `MyCommonSetup` and `VerifyLogging`:
+
+    .. code-block:: python
+
+        class MyCommonSetup(aetest.CommonSetup):
+            # ...
+
+        class VerifyLogging(aetest.Testcase):
+            # ...
+
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
+
+#. Open the file task4step1.robot in Nano editor:
+
+    .. code-block:: bash
+
+        nano task4step1.robot
+
+#. Pay special attention to the code **Test Cases** section of the file. Those two test cases are calling the Python classes **MyCommonSetup** and **VerifyLogging** defined in the file `task4step1.py`.
+
+    .. code-block:: robotframework
+
+        *** Test Cases ***
+        Connect to All Devices and Setup Testbed
+            run testcase "ltrato_2001.task4step1.MyCommonSetup"
+
+        Verify Logs For All Devices
+            run testcase "ltrato_2001.task4step1.VerifyLogging"
+
+#. Exit Nano without saving by pressing :guilabel:`Ctrl + X`
+
+#. Execute the robot script. The **Test Cases** will run for all the devices in the testbed:
+
+    .. code-block:: bash
+
+        pyats run robot task4step1.robot --testbed-file pyats_testbed.yaml
+
+#. Check the output of the test script. The test should pass for all devices as shown below:
+
+    .. image:: images/robot-output-passed.png
         :width: 75%
-
-#. You will see the summary of the comparison for both job runs and a number of passed and failed tests:
-
-    .. image:: images/xpresso-jobs-compare-2.png
         :align: center
+
+#. connect to CSR. Launch **PuTTY** and connect to **csr1000v-1** (username: ``cisco``, password: ``cisco``) and enter the following commands:
+
+    .. code-block:: bash
+
+        send log 'Test ERROR message for pyATS'
+
+
+    .. image:: images/csr1000v-add-error-logs.png
         :width: 75%
-
-    Followed by a detailed test to test comparison:
-
-    .. image:: images/xpresso-jobs-compare-3.png
         :align: center
+
+#. Execute the robot script again. The **Test Cases** will run for all the devices in the testbed:
+
+    .. code-block:: bash
+
+        pyats run robot task4step1.robot --testbed-file pyats_testbed.yaml
+
+#. Check the output of the test script. The test should fail because the CSR device has an error log, as shown below:
+
+    .. image:: images/robot-output-failed.png
         :width: 75%
-
-#. Hover the mouse over the failing test line **ping[dest_ip=10.0.0.13]**, and click **Testcase Diff** icon on the right to see the test result in diff format:
-
-    .. image:: images/xpresso-jobs-compare-4.png
         :align: center
-        :width: 75%
-    
-    |
-
-    Section diff page will open and load the diff plugin:
-
-    .. image:: images/xpresso-jobs-compare-5.png
-        :align: center
-        :width: 75%
-
-    |
-
-    .. note::
-        Alternatively, you can compare test results by going to the **Requests** page and selecting 2 requests for comparison as described below.
-
-#. Click on the Requests menu item:
-
-    .. image:: images/xpresso-jobs-filter.png
-        :align: center
-        :width: 15%
-
-    |
-
-#. Select 2 requests - PASSED and FAILED, and click the Compare icon on the top right of the page. The compare icon will be visible only if you select exactly 2 items:
-
-    .. image:: images/xpresso-jobs-compare-6.png
-        :align: center
-        :width: 75%
-
-#. Select 2 results for comparison and click **Compare** icon. This additional step is required as Job can include several requests run as Job Bundle:
-
-    .. image:: images/xpresso-jobs-compare-7.png
-        :align: center
-        :width: 75%
-
-#. You will be brought to the results comparison page:
-
-    .. image:: images/xpresso-jobs-compare-8.png
-        :align: center
-        :width: 75%
 
 |
 

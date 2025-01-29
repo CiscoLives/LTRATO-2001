@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Step 2: Run tests and compare results from XPRESSO dashboard &mdash; LTRATO-2001  documentation</title>
+  <title>Step 2: Run tests using Robot Framework &mdash; LTRATO-2001  documentation</title>
       <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
 
   
@@ -76,9 +76,9 @@
 <li class="toctree-l3"><a class="reference internal" href="../task3/step4.html">Step 4: Run PING to Verify Reachability</a></li>
 </ul>
 </li>
-<li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 4: Results XPRESSO</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Task 4: PyATS and Robot Framework</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="step1.html">Step 1: Show the Results of Tests in a Browser</a></li>
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 2: Run tests and compare results from XPRESSO dashboard</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Step 2: Run tests using Robot Framework</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../task5/index.html">Task 5: CXTM Framework</a><ul>
@@ -116,8 +116,8 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../index.html">Tasks</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Task 4: Results XPRESSO</a></li>
-      <li class="breadcrumb-item active">Step 2: Run tests and compare results from XPRESSO dashboard</li>
+          <li class="breadcrumb-item"><a href="index.html">Task 4: PyATS and Robot Framework</a></li>
+      <li class="breadcrumb-item active">Step 2: Run tests using Robot Framework</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../../_sources/tasks/task4/step2.rst.txt" rel="nofollow"> View page source</a>
       </li>
@@ -127,154 +127,93 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <div class="section" id="step-2-run-tests-and-compare-results-from-xpresso-dashboard">
-<h1>Step 2: Run tests and compare results from XPRESSO dashboard<a class="headerlink" href="#step-2-run-tests-and-compare-results-from-xpresso-dashboard" title="Permalink to this headline">¶</a></h1>
-<p><strong>Value Proposition:</strong> In today’s fast-paced business environment, efficiency and agility are crucial for success. The XPRESSO dashboard empowers organizations to streamline their testing processes, enabling rapid identification and resolution of network issues. By leveraging XPRESSO’s powerful capabilities, businesses can minimize downtime, enhance customer satisfaction, and maintain a competitive edge.</p>
-<p>With XPRESSO, network administrators can execute pre-configured test jobs, monitor their execution status in real-time, and quickly identify potential failures or deviations from expected behavior. Furthermore, XPRESSO’s advanced comparison features allow for in-depth analysis of test results, facilitating root cause analysis and informed decision-making.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Due to security restrictions in dCloud on Jumphost, access to XPRESSO dashboard is provided via a Remote Desktop Protocol (RDP) session to CentOS VM running XPRESSO.</p>
-</div>
+  <div class="section" id="step-2-run-tests-using-robot-framework">
+<h1>Step 2: Run tests using Robot Framework<a class="headerlink" href="#step-2-run-tests-using-robot-framework" title="Permalink to this headline">¶</a></h1>
+<p><strong>Value Proposition:</strong> Robot Framework provides a versatile and structured approach to test automation that simplifies the creation and maintenance of device log verification tests. Its keyword-driven architecture allows teams to build reusable test components while maintaining clear test documentation, making it particularly effective for validating both expected operational states and fault scenarios in network environments.</p>
+<p>The high-level logic of the test case will be as follows:</p>
+<ul class="simple">
+<li><p>Connect to each device in the testbed.</p></li>
+<li><p>Collect the output of <code class="docutils literal notranslate"><span class="pre">show</span> <span class="pre">logging</span> <span class="pre">|</span> <span class="pre">include</span> <span class="pre">ERROR</span></code>.</p></li>
+<li><p>If the output contains more than 0 strings, it means pyATS found messages, and the test should fail for this device. Otherwise, the test should succeed.</p></li>
+</ul>
 <ol class="arabic">
-<li><p>Locate XPRESSO.rdp shortcut on the desktop of the Workstation, and double-click to start Remote Desktop Protocol (RDP) session to XPRESSO VM. Login with the following credentials.</p>
+<li><p>Before creating our test case, connect to CSR. Launch <strong>PuTTY</strong> and connect to <strong>csr1000v-1</strong> (username: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>, password: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>) and enter the following commands:</p>
 <blockquote>
-<div><ul class="simple">
-<li><p>Username: <code class="docutils literal notranslate"><span class="pre">xpresso</span></code></p></li>
-<li><p>Password: <code class="docutils literal notranslate"><span class="pre">C1sco12345</span></code></p></li>
-</ul>
-<div class="line-block">
-<div class="line"><br /></div>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>clear logging
+</pre></div>
 </div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you are using AnyConnect VPN and have a Microsoft RDP client installed, you can connect directly from your PC via RDP to address XPRESSO VM (use IP address: 198.18.134.50).</p>
-</div>
-<a class="reference internal image-reference" href="../../_images/login-to-xpresso_rdp.png"><img alt="../../_images/login-to-xpresso_rdp.png" class="align-center" src="../../_images/login-to-xpresso_rdp.png" style="width: 20%;" /></a>
+<a class="reference internal image-reference" href="../../_images/csr1000v-clear-logging-buffer.png"><img alt="../../_images/csr1000v-clear-logging-buffer.png" class="align-center" src="../../_images/csr1000v-clear-logging-buffer.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>Inside the RDP session, open Firefox from the desktop or the Application menu on top of the screen. You should be automatically logged into XPRESSO dashboard and see the Requests page:</p>
+<li><p>Open the file task4step1.py in Nano editor:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-dashboard-page.png"><img alt="../../_images/xpresso-dashboard-page.png" class="align-center" src="../../_images/xpresso-dashboard-page.png" style="width: 75%;" /></a>
-<p>If XPRESSO page is not opened automatically, open it directly on <a class="reference external" href="http://xpresso.dcloud-cisco.com">dCloud</a> manually and login with credentials:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>Username: <code class="docutils literal notranslate"><span class="pre">xpresso</span></code></p></li>
-<li><p>Password: <code class="docutils literal notranslate"><span class="pre">C1sco12345</span></code></p></li>
-</ul>
-</div></blockquote>
-</div></blockquote>
-</li>
-<li><p>From the menu icons on the left, locate the Jobs item and click on it:</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-filter.png"><img alt="../../_images/xpresso-jobs-filter.png" class="align-center" src="../../_images/xpresso-jobs-filter.png" style="width: 15%;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>You will see the pre-configured job <strong>Ping_from_ASA</strong> which executes <strong>task3step4.py</strong> script you’ve used in this Scenario:</p>
-<a class="reference internal image-reference" href="../../_images/xpresso-jobs-list-jenkins.png"><img alt="../../_images/xpresso-jobs-list-jenkins.png" class="align-center" src="../../_images/xpresso-jobs-list-jenkins.png" style="width: 75%;" /></a>
-</div></blockquote>
-</li>
-<li><p>Hover your mouse over the job row and you will see the <strong>Execute</strong> icon on the right. Click it:</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-execute.png"><img alt="../../_images/xpresso-jobs-execute.png" class="align-center" src="../../_images/xpresso-jobs-execute.png" style="width: 15%;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>You will be presented with a <code class="docutils literal notranslate"><span class="pre">You</span> <span class="pre">are</span> <span class="pre">configuring</span> <span class="pre">a</span> <span class="pre">new</span> <span class="pre">group</span> <span class="pre">job</span> <span class="pre">request</span></code> page where you can customize job run settings. Leave all settings by default and click the Submit button. Once done, the job will be submitted for execution.</p>
-<p>At the bottom of the job execution page, you will see the <code class="docutils literal notranslate"><span class="pre">request</span></code> item, which will go through the different stages: <strong>PREPARING, QUEUING, QUEUED, RUNNING, PASSED, ERRORED, or FAILED</strong>:</p>
-<a class="reference internal image-reference" href="../../_images/xpresso-jobs-request-status-1.png"><img alt="../../_images/xpresso-jobs-request-status-1.png" class="align-center" src="../../_images/xpresso-jobs-request-status-1.png" style="width: 75%;" /></a>
-</div></blockquote>
-</li>
-<li><p>Click on the Request Item while the job is running, and you will see how pyATS is executing every test defined in the job file one by one in real-time:</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-request-status-2.png"><img alt="../../_images/xpresso-jobs-request-status-2.png" class="align-center" src="../../_images/xpresso-jobs-request-status-2.png" style="width: 55%;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you click on the <code class="docutils literal notranslate"><span class="pre">request</span></code> item while the job is going through <strong>PREPARING, QUEUING, QUEUED</strong> stages, there will be no visible results as the job is not running yet.
-Once the job transitions to the <strong>RUNNING</strong> stage, the page will be updated and you will start getting test the execution results,</p>
-</div>
-</div></blockquote>
-</li>
-<li><p>Once job execution is completed, you will see the results, can check raw console output, job history with timestamps, download archive with results, or compare test execution with another job run:</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-request-details.png"><img alt="../../_images/xpresso-request-details.png" class="align-center" src="../../_images/xpresso-request-details.png" style="width: 75%;" /></a>
-</div></blockquote>
-</li>
-<li><p>Let’s introduce a network failure by connecting to <strong>csr1000v-1</strong> and shutting down interface <strong>GigabitEthernet2</strong>. From Admin Workstation launch Putty, login to <strong>csr1000v-1</strong>, and execute commands:</p>
-<blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>configure terminal
-interface gigabitEthernet <span class="m">2</span>
-shutdown
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano ltrato_2001/task4step1.py
 </pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Go back to the XPRESSO dashboard and click on the Jobs menu item:</p>
+<li><p>Identify the following classes in the file <cite>MyCommonSetup</cite> and <cite>VerifyLogging</cite>:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-filter.png"><img alt="../../_images/xpresso-jobs-filter.png" class="align-center" src="../../_images/xpresso-jobs-filter.png" style="width: 15%;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyCommonSetup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+
+<span class="k">class</span> <span class="nc">VerifyLogging</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">Testcase</span><span class="p">):</span>
+    <span class="c1"># ...</span>
+</pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Run <strong>Ping_from_ASA</strong> job again by repeating Steps 4 - 7. This time you will notice that one of the tests is failing:</p>
+<li><p>Exit Nano without saving by pressing <span class="guilabel">Ctrl + X</span></p></li>
+<li><p>Open the file task4step1.robot in Nano editor:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-ping-fail-from-asa.png"><img alt="../../_images/xpresso-ping-fail-from-asa.png" class="align-center" src="../../_images/xpresso-ping-fail-from-asa.png" style="width: 75%;" /></a>
-</div></blockquote>
-</li>
-<li><p>Now let’s compare job results. On the top of the page click on the <strong>Compare</strong> button and check the last job run that was successful and  has the status <strong>PASSED</strong>:</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-1.png"><img alt="../../_images/xpresso-jobs-compare-1.png" class="align-center" src="../../_images/xpresso-jobs-compare-1.png" style="width: 75%;" /></a>
-</div></blockquote>
-</li>
-<li><p>You will see the summary of the comparison for both job runs and a number of passed and failed tests:</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-2.png"><img alt="../../_images/xpresso-jobs-compare-2.png" class="align-center" src="../../_images/xpresso-jobs-compare-2.png" style="width: 75%;" /></a>
-<p>Followed by a detailed test to test comparison:</p>
-<a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-3.png"><img alt="../../_images/xpresso-jobs-compare-3.png" class="align-center" src="../../_images/xpresso-jobs-compare-3.png" style="width: 75%;" /></a>
-</div></blockquote>
-</li>
-<li><p>Hover the mouse over the failing test line <strong>ping[dest_ip=10.0.0.13]</strong>, and click <strong>Testcase Diff</strong> icon on the right to see the test result in diff format:</p>
-<blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-4.png"><img alt="../../_images/xpresso-jobs-compare-4.png" class="align-center" src="../../_images/xpresso-jobs-compare-4.png" style="width: 75%;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<p>Section diff page will open and load the diff plugin:</p>
-<a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-5.png"><img alt="../../_images/xpresso-jobs-compare-5.png" class="align-center" src="../../_images/xpresso-jobs-compare-5.png" style="width: 75%;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Alternatively, you can compare test results by going to the <strong>Requests</strong> page and selecting 2 requests for comparison as described below.</p>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>nano task4step1.robot
+</pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Click on the Requests menu item:</p>
+<li><p>Pay special attention to the code <strong>Test Cases</strong> section of the file. Those two test cases are calling the Python classes <strong>MyCommonSetup</strong> and <strong>VerifyLogging</strong> defined in the file <cite>task4step1.py</cite>.</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-filter.png"><img alt="../../_images/xpresso-jobs-filter.png" class="align-center" src="../../_images/xpresso-jobs-filter.png" style="width: 15%;" /></a>
-<div class="line-block">
-<div class="line"><br /></div>
+<div><div class="highlight-robotframework notranslate"><div class="highlight"><pre><span></span><span class="gh">*** Test Cases ***</span><span class="p"></span>
+<span class="gu">Connect to All Devices and Setup Testbed</span><span class="p"></span>
+<span class="p">    </span><span class="nf">run testcase &quot;ltrato_2001.task4step1.MyCommonSetup&quot;</span><span class="p"></span>
+
+<span class="gu">Verify Logs For All Devices</span><span class="p"></span>
+<span class="p">    </span><span class="nf">run testcase &quot;ltrato_2001.task4step1.VerifyLogging&quot;</span><span class="p"></span>
+</pre></div>
 </div>
 </div></blockquote>
 </li>
-<li><p>Select 2 requests - PASSED and FAILED, and click the Compare icon on the top right of the page. The compare icon will be visible only if you select exactly 2 items:</p>
+<li><p>Exit Nano without saving by pressing <span class="guilabel">Ctrl + X</span></p></li>
+<li><p>Execute the robot script. The <strong>Test Cases</strong> will run for all the devices in the testbed:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-6.png"><img alt="../../_images/xpresso-jobs-compare-6.png" class="align-center" src="../../_images/xpresso-jobs-compare-6.png" style="width: 75%;" /></a>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats run robot task4step1.robot --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
 </div></blockquote>
 </li>
-<li><p>Select 2 results for comparison and click <strong>Compare</strong> icon. This additional step is required as Job can include several requests run as Job Bundle:</p>
+<li><p>Check the output of the test script. The test should pass for all devices as shown below:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-7.png"><img alt="../../_images/xpresso-jobs-compare-7.png" class="align-center" src="../../_images/xpresso-jobs-compare-7.png" style="width: 75%;" /></a>
+<div><a class="reference internal image-reference" href="../../_images/robot-output-passed.png"><img alt="../../_images/robot-output-passed.png" class="align-center" src="../../_images/robot-output-passed.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
-<li><p>You will be brought to the results comparison page:</p>
+<li><p>connect to CSR. Launch <strong>PuTTY</strong> and connect to <strong>csr1000v-1</strong> (username: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>, password: <code class="docutils literal notranslate"><span class="pre">cisco</span></code>) and enter the following commands:</p>
 <blockquote>
-<div><a class="reference internal image-reference" href="../../_images/xpresso-jobs-compare-8.png"><img alt="../../_images/xpresso-jobs-compare-8.png" class="align-center" src="../../_images/xpresso-jobs-compare-8.png" style="width: 75%;" /></a>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>send log <span class="s1">&#39;Test ERROR message for pyATS&#39;</span>
+</pre></div>
+</div>
+<a class="reference internal image-reference" href="../../_images/csr1000v-add-error-logs.png"><img alt="../../_images/csr1000v-add-error-logs.png" class="align-center" src="../../_images/csr1000v-add-error-logs.png" style="width: 75%;" /></a>
+</div></blockquote>
+</li>
+<li><p>Execute the robot script again. The <strong>Test Cases</strong> will run for all the devices in the testbed:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pyats run robot task4step1.robot --testbed-file pyats_testbed.yaml
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Check the output of the test script. The test should fail because the CSR device has an error log, as shown below:</p>
+<blockquote>
+<div><a class="reference internal image-reference" href="../../_images/robot-output-failed.png"><img alt="../../_images/robot-output-failed.png" class="align-center" src="../../_images/robot-output-failed.png" style="width: 75%;" /></a>
 </div></blockquote>
 </li>
 </ol>
