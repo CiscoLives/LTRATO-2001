@@ -85,7 +85,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "--testbed",
-        dest="pyats_testbed",
+        dest="testbed",
         type=loader.load,
         default="pyats_testbed.yaml",
     )

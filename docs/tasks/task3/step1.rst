@@ -43,6 +43,13 @@ The high-level logic of the test case will be as follows:
         csr_output = csr.execute('show logging | include ERROR')
         asa_output = asa.execute('show logging | include ERROR')
 
+#. visualize the outputs:
+
+    .. code-block:: bash
+
+        print(csr_output)
+        print(asa_output)
+
     .. note::
 
         The output for ASA should be empty.
@@ -115,7 +122,7 @@ The high-level logic of the test case will be as follows:
         The method self.parent.parameters.update(dev=device_list), located at the end of the establish_connections(self,testbed) method.
 
         .. code-block:: python
-            :emphasize-lines: 19
+            :emphasize-lines: 18
 
             @aetest.subsection
             def establish_connections(self, pyats_testbed):
