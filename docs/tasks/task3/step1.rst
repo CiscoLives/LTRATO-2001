@@ -199,7 +199,7 @@ The high-level logic of the test case will be as follows:
 
 #. Execute the test script **task3step1a.py** and check the results section.
 
-    .. code-block:: bash9PIN8LZAF5S
+    .. code-block:: bash
 
         python task3step1a.py --testbed-file pyats_testbed.yaml
 
