@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 __author__ = "Jairo Leon, Luis Rueda"
 __copyright__ = """
-Copyright 2022-2024, Cisco Systems, Inc. 
+Copyright 2022-2025, Cisco Systems, Inc. 
 All Rights Reserved. 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
@@ -37,7 +37,7 @@ def write_commands_to_file(abs_filename, command_output):
 
     except IOError as e:
         LOGGER.error(
-            f"Unable to write output to file: {abs_filename}." f"Due to error: {e}"
+            f"Unable to write output to file: {abs_filename}.Due to error: {e}"
         )
         exit(1)
 

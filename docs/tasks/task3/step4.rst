@@ -214,7 +214,7 @@ The high-level logic of the tests will be the following:
 
     .. code-block:: bash
 
-        python task3step4.py --testbed pyats_testbed.yaml
+        python task3step4.py --testbed-file pyats_testbed.yaml
 
     .. image:: images/passed-test-output.png
         :width: 75%

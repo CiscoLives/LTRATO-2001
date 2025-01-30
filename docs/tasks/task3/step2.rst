@@ -185,7 +185,7 @@ The high-level logic of the tests will be the following:
 
     .. code-block:: bash
 
-        python task3step2.py --testbed pyats_testbed.yaml
+        python task3step2.py --testbed-file pyats_testbed.yaml
 
     What are the results of these testcases? All FAILED? Do you have a clue as to why? Continue reading to understand why.
 
@@ -236,7 +236,7 @@ The high-level logic of the tests will be the following:
 
     .. code-block:: bash
 
-        python task3step2.py --testbed pyats_testbed.yaml
+        python task3step2.py --testbed-file pyats_testbed.yaml
 
     Now all the testcases should succeed:
 

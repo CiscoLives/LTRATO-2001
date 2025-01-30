@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 __author__ = "Jairo Leon, Luis Rueda"
 __copyright__ = """
-Copyright 2022-2024, Cisco Systems, Inc. 
+Copyright 2022-2025, Cisco Systems, Inc. 
 All Rights Reserved. 
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
@@ -36,11 +36,11 @@ class common_setup(aetest.CommonSetup):
     """Common Setup section."""
 
     @aetest.subsection
-    def establish_connections(self, pyats_testbed):
+    def establish_connections(self, testbed):
         """Establish connections to all devices."""
         device_list = []
         # Load all devices from testbed file and try to connect to them
-        for device in pyats_testbed.devices.values():
+        for device in testbed.devices.values():
             LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
             try:
                 device.connect(log_stdout=False)
@@ -54,8 +54,8 @@ class common_setup(aetest.CommonSetup):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--testbed",
-        dest="pyats_testbed",
+        "--testbed-file",
+        dest="testbed",
         type=loader.load,
         default="pyats_testbed.yaml",
     )

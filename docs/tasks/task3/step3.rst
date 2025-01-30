@@ -190,7 +190,7 @@ The high-level logic of the tests will be the following:
 
     .. code-block:: bash
 
-        python task3step3.py --testbed pyats_testbed.yaml
+        python task3step3.py --testbed-file pyats_testbed.yaml
 
     .. image:: images/task8_labpyats.png
         :width: 75%
