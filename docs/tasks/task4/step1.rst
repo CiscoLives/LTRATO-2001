@@ -38,7 +38,7 @@ To call **pyats run job**, use the following command in a Bash shell:
 
 .. code-block:: bash
 
-    pyats run job <job-file> --testbed <testbed-file>
+    pyats run job <job-file> --testbed-file <testbed-file>
 
 Schematically, the process of a **pyats run job** can be shown as follows:
 
@@ -60,7 +60,7 @@ Let's use a **pyats job run** to execute tests from task 3 step 4. PyATS job fil
 
     .. code-block:: bash
 
-        pyats run job task4step1.py  --testbed pyats_testbed.yaml
+        pyats run job task4step1.py  --testbed-file pyats_testbed.yaml
 
 #. After the completion of the job, check the results:
 

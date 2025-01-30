@@ -67,10 +67,10 @@ Each of these sections is further broken down into smaller subsections (Python m
         """Common Setup section"""
 
             @aetest.subsection
-            def establish_connections(self, pyats_testbed):
+            def establish_connections(self, testbed):
                 device_list = []
                 # Load all devices from testbed file and try to connect to them
-                for device in pyats_testbed.devices.values():
+                for device in testbed.devices.values():
                     LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
                     try:
                         device.connect(log_stdout=False)
@@ -80,15 +80,15 @@ Each of these sections is further broken down into smaller subsections (Python m
                 # Pass list of devices to testcases
                 self.parent.parameters.update(dev=device_list)
 
-    The following code is used to load a testbed file from the filename specified in the command-line option (**--testbed** is a command line key, **dest** – specifies the name of the object that would represent the testbed file in code):
+    The following code is used to load a testbed file from the filename specified in the command-line option (**--testbed-file** is a command line key, **dest** – specifies the name of the object that would represent the testbed file in code):
 
     .. code-block:: python
 
         if __name__ == "__main__":
             parser = argparse.ArgumentParser()
             parser.add_argument(
-                "--testbed",
-                dest="pyats_testbed",
+                "--testbed-file",
+                dest="testbed",
                 type=loader.load,
                 default="pyats_testbed.yaml",
             )
@@ -103,7 +103,7 @@ Each of these sections is further broken down into smaller subsections (Python m
 
     .. code-block:: bash
 
-        python task2step2.py --testbed pyats_testbed.yaml
+        python task2step2.py --testbed-file pyats_testbed.yaml
 
 #. Upon finishing the test script, pyATS generates a report of Success/Failed testcases. The **common_setup** section is also treated as the testcase with subsection **establish_connections**. Since all the devices are reachable, the testcases should be successful (PASSED). Refer to the following diagram.
 
@@ -171,7 +171,7 @@ Each of these sections is further broken down into smaller subsections (Python m
 
     .. code-block:: bash
 
-        python task2step2b.py --testbed pyats_testbed.yaml
+        python task2step2b.py --testbed-file pyats_testbed.yaml
 
 .. note::
 
