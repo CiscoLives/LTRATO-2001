@@ -40,15 +40,15 @@ class MyCommonSetup(aetest.CommonSetup):
     """
 
     @aetest.subsection
-    def establish_connections(self, pyats_testbed):
+    def establish_connections(self, testbed):
         """
         Establishes connections to all devices in testbed.
 
-        :param pyats_testbed:
+        :param testbed:
         :return:
         """
         device_list = []
-        for device in pyats_testbed.devices.values():
+        for device in testbed.devices.values():
             LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
             try:
                 device.connect(log_stdout=False)
@@ -99,8 +99,8 @@ class Routing(aetest.Testcase):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
-        "--testbed",
-        dest="pyats_testbed",
+        "--testbed-file",
+        dest="testbed",
         type=loader.load,
         default="pyats_testbed.yaml",
     )

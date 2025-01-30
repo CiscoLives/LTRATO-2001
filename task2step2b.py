@@ -111,7 +111,7 @@ class interface_errors(aetest.Testcase):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="standalone parser")
     parser.add_argument(
-        "--testbed",
+        "--testbed-file",
         dest="testbed",
         help="testbed YAML file",
         type=topology.loader.load,
