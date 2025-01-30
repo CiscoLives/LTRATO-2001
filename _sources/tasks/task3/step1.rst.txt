@@ -43,6 +43,13 @@ The high-level logic of the test case will be as follows:
         csr_output = csr.execute('show logging | include ERROR')
         asa_output = asa.execute('show logging | include ERROR')
 
+#. visualize the outputs:
+
+    .. code-block:: bash
+
+        print(csr_output)
+        print(asa_output)
+
     .. note::
 
         The output for ASA should be empty.
@@ -115,10 +122,10 @@ The high-level logic of the test case will be as follows:
         The method self.parent.parameters.update(dev=device_list), located at the end of the establish_connections(self,testbed) method.
 
         .. code-block:: python
-            :emphasize-lines: 19
+            :emphasize-lines: 18
 
             @aetest.subsection
-            def establish_connections(self, pyats_testbed):
+            def establish_connections(self, testbed):
                 """
                 Establishes connections to all devices in testbed
                 :param testbed:
@@ -126,7 +133,7 @@ The high-level logic of the test case will be as follows:
                 """
 
                 device_list = []
-                for device in pyats_testbed.devices.values():
+                for device in testbed.devices.values():
                     LOGGER.info(banner(f"Connecting to device '{device.name}'..."))
                     try:
                         device.connect(log_stdout=False)
@@ -173,7 +180,7 @@ The high-level logic of the test case will be as follows:
                 output = any_device.execute('show logging | include ERROR")
 
                 if len(output) > 0:
-                    self.failed("Found messages in log that are either ERROR or WARN, review logs first")
+                    self.failed("Found messages in log file, review logs first")
                 else:
                     pass
 
@@ -194,7 +201,7 @@ The high-level logic of the test case will be as follows:
 
     .. code-block:: bash
 
-        python task3step1a.py --testbed pyats_testbed.yaml
+        python task3step1a.py --testbed-file pyats_testbed.yaml
 
     The test case **error_log** will run only for one device. 
     Now we need to get familiar with the **aetest.loop** method, which will let us repeat an elementary test case (written for one device) for every device in the testbed.
@@ -243,7 +250,7 @@ The high-level logic of the test case will be as follows:
 
     .. code-block:: bash
 
-        python task3step1b.py --testbed pyats_testbed.yaml
+        python task3step1b.py --testbed-file pyats_testbed.yaml
 
 #. Check the **VerifyLogging** results section. The test for **asav-1** should pass, whereas for **csr1000v-1** and **nx-osv-1** should fail because these devices have error messages in the logs.
 

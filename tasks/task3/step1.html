@@ -168,6 +168,14 @@
 <span class="n">asa_output</span> <span class="o">=</span> <span class="n">asa</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
+</div></blockquote>
+</li>
+<li><p>visualize the outputs:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>print<span class="o">(</span>csr_output<span class="o">)</span>
+print<span class="o">(</span>asa_output<span class="o">)</span>
+</pre></div>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The output for ASA should be empty.
@@ -248,7 +256,7 @@ Out<span class="o">[</span><span class="m">4</span><span class="o">]</span>: <sp
 <p>Pay special attention to the following code:</p>
 <p>The method self.parent.parameters.update(dev=device_list), located at the end of the establish_connections(self,testbed) method.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
-<span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyats_testbed</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">testbed</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Establishes connections to all devices in testbed</span>
 <span class="sd">    :param testbed:</span>
@@ -256,7 +264,7 @@ Out<span class="o">[</span><span class="m">4</span><span class="o">]</span>: <sp
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
         <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;...&quot;</span><span class="p">))</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -264,8 +272,8 @@ Out<span class="o">[</span><span class="m">4</span><span class="o">]</span>: <sp
             <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Failed to establish a connection to &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
         <span class="n">device_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
     <span class="c1"># Pass list of devices to testcases</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
-</pre></div>
+<span class="hll">    <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
+</span></pre></div>
 </div>
 <p>Where <strong>self.parent.parameters</strong> is an attribute of class <strong>aetest</strong>, and <strong>aetest</strong> is the class from which all the test case classes and <strong>MyCommonSetup</strong> class are inherited from:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyCommonSetup</span><span class="p">(</span><span class="n">aetest</span><span class="o">.</span><span class="n">CommonSetup</span><span class="p">):</span>
@@ -302,7 +310,7 @@ Then we can access all the devices in the class VerifyLogging, using the method 
         <span class="n">output</span> <span class="o">=</span> <span class="n">any_device</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="s1">&#39;show logging | include ERROR&quot;)</span>
 
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">output</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="s2">&quot;Found messages in log that are either ERROR or WARN, review logs first&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">failed</span><span class="p">(</span><span class="s2">&quot;Found messages in log file, review logs first&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">pass</span>
 </pre></div>
@@ -323,7 +331,7 @@ Then we can access all the devices in the class VerifyLogging, using the method 
 <li><p>Exit Nano without saving by pressing <span class="guilabel">Ctrl + X</span></p></li>
 <li><p>Execute the test script <strong>task3step1a.py</strong> and check the results section.</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step1a.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step1a.py --testbed-file pyats_testbed.yaml
 </pre></div>
 </div>
 <p>The test case <strong>error_log</strong> will run only for one device.
@@ -373,7 +381,7 @@ Now we need to get familiar with the <strong>aetest.loop</strong> method, which 
 <li><p>Exit Nano without saving by pressing <span class="guilabel">Ctrl + X</span></p></li>
 <li><p>Execute the test script. The test case <strong>error_logs</strong> will run for all the devices in the testbed:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step1b.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task3step1b.py --testbed-file pyats_testbed.yaml
 </pre></div>
 </div>
 </div></blockquote>

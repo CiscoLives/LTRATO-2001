@@ -191,10 +191,10 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 <span class="sd">&quot;&quot;&quot;Common Setup section&quot;&quot;&quot;</span>
 
     <span class="nd">@aetest</span><span class="o">.</span><span class="n">subsection</span>
-    <span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pyats_testbed</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">establish_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">testbed</span><span class="p">):</span>
         <span class="n">device_list</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="c1"># Load all devices from testbed file and try to connect to them</span>
-        <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">pyats_testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">device</span> <span class="ow">in</span> <span class="n">testbed</span><span class="o">.</span><span class="n">devices</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
             <span class="n">LOGGER</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">banner</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Connecting to device &#39;</span><span class="si">{device.name}</span><span class="s2">&#39;...&quot;</span><span class="p">))</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">device</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">log_stdout</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -205,12 +205,12 @@ Since the banner is logged with INFO logging level, it’s required to set the l
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">parameters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">dev</span><span class="o">=</span><span class="n">device_list</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The following code is used to load a testbed file from the filename specified in the command-line option (<strong>–testbed</strong> is a command line key, <strong>dest</strong> – specifies the name of the object that would represent the testbed file in code):</p>
+<p>The following code is used to load a testbed file from the filename specified in the command-line option (<strong>–testbed-file</strong> is a command line key, <strong>dest</strong> – specifies the name of the object that would represent the testbed file in code):</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">()</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
-        <span class="s2">&quot;--testbed&quot;</span><span class="p">,</span>
-        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;pyats_testbed&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;--testbed-file&quot;</span><span class="p">,</span>
+        <span class="n">dest</span><span class="o">=</span><span class="s2">&quot;testbed&quot;</span><span class="p">,</span>
         <span class="nb">type</span><span class="o">=</span><span class="n">loader</span><span class="o">.</span><span class="n">load</span><span class="p">,</span>
         <span class="n">default</span><span class="o">=</span><span class="s2">&quot;pyats_testbed.yaml&quot;</span><span class="p">,</span>
     <span class="p">)</span>
@@ -225,7 +225,7 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 <li><p>Exit Nano without saving by pressing <span class="guilabel">Ctrl + X</span></p></li>
 <li><p>Let’s run our first test script. This test script will try to connect to all the devices in the testbed and print the results of these attempts:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task2step2.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task2step2.py --testbed-file pyats_testbed.yaml
 </pre></div>
 </div>
 </div></blockquote>
@@ -293,7 +293,7 @@ Since the banner is logged with INFO logging level, it’s required to set the l
 </li>
 <li><p>Let’s run our new test script. This test script will try to connect to all the devices in the testbed and test interfaces for errors:</p>
 <blockquote>
-<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task2step2b.py --testbed pyats_testbed.yaml
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python task2step2b.py --testbed-file pyats_testbed.yaml
 </pre></div>
 </div>
 </div></blockquote>
