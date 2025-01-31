@@ -42,7 +42,7 @@ The high-level logic of the test case will be as follows:
 
     .. code-block:: bash
 
-        nano task4step1.robot
+        nano task4step2.robot
 
 #. Pay special attention to the code **Test Cases** section of the file. Those two test cases are calling the Python classes **MyCommonSetup** and **VerifyLogging** defined in the file `task4step1.py`.
 
@@ -84,7 +84,7 @@ The high-level logic of the test case will be as follows:
 
     .. code-block:: bash
 
-        pyats run robot task4step1.robot --testbed-file pyats_testbed.yaml
+        pyats run robot task4step2.robot --testbed-file pyats_testbed.yaml
 
 #. Check the output of the test script. The test should fail because the CSR device has an error log, as shown below:
 
