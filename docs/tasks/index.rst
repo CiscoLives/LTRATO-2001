@@ -11,7 +11,4 @@ Tasks
    task3/index
    task4/index
    task5/index
-   
-
-
-
+   task6/index

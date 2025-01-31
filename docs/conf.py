@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = "LTRATO-2001"
-copyright = "Cisco Systems, Inc. 2020-2024"
+copyright = "Cisco Systems, Inc. 2020-2025"
 author = "Luis Rueda and Jairo Leon"
 
 
@@ -65,8 +65,9 @@ html_logo = "images/cl.png"
 html_static_path = ["_static"]
 
 html_context = {
-    "display_github": False,
-    "github_user": "CiscoLive2021",
-    "github_repo": "HOLPRG-2002",
+    "display_github": True,
+    "github_host": "github.com",
+    "github_user": "CiscoLives",
+    "github_repo": "LTRATO-2001",
     "github_version": "master/docs/",
 }
