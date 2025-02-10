@@ -28,7 +28,7 @@ Suite Teardown      Run Keywords
 
 *** Test Cases ***
 Connect to All Devices and Setup Testbed
-    run testcase "ltrato_2001.task4step1.MyCommonSetup"
+    run testcase "ltrato_2001.task4step2.MyCommonSetup"
 
 Verify Logs For All Devices
-    run testcase "ltrato_2001.task4step1.VerifyLogging"
+    run testcase "ltrato_2001.task4step2.VerifyLogging"
