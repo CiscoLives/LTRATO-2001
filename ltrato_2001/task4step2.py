@@ -42,7 +42,8 @@ class MyCommonSetup(aetest.CommonSetup):
         """
         Establishes connections to all devices in testbed.
 
-        :param testbed:
+        Args:
+            testbed: The testbed containing the devices to connect to.
         """
         device_list = []
         for device in testbed.devices.values():

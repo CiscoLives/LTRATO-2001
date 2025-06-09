@@ -1,9 +1,0 @@
-Hostname,IP Address,Port/Protocol,Username,Password
-Jumphost/Remote Desktop,198.18.133.252,"RDP ",admin,C1sco12345
-cml-controller,198.18.134.1,HTTPS,guest,C1sco12345
-asav-1,198.18.1.202,SSH,cisco,cisco
-csr1000v-1,198.18.1.201,SSH,cisco,cisco
-nx-osv-1,198.18.1.203,SSH,cisco,cisco
-xpresso,198.18.134.50,SSH,cisco,C1sco12345
-xpresso,198.18.134.50,HTTPS,xpresso,C1sco12345
-cxtm,198.18.134.19,HTTPS,cisco,cisco
