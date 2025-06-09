@@ -1,4 +1,0 @@
-Function,Description
-main(),The main function (see “1” on the illustration that follows). It calls the collect_device_commands function (see “2”).
-"collect_device_commands( command_to_gather, output_filename) ",pyATS job file to run tests for the task
-"write_commands_to_file(abs_filename, command_output)",This is a supplementary function and it’s used to write the output of commands to a file (see “5”).
