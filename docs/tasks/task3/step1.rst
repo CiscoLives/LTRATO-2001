@@ -128,8 +128,9 @@ The high-level logic of the test case will be as follows:
             def establish_connections(self, testbed):
                 """
                 Establishes connections to all devices in testbed
-                :param testbed:
-                :return:
+                
+                Args:
+                    testbed: testbed object containing device information.
                 """
 
                 device_list = []

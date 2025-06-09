@@ -44,8 +44,8 @@ class MyCommonSetup(aetest.CommonSetup):
         """
         Establishes connections to all devices in testbed.
 
-        :param testbed:
-        :return:
+        Args:
+            testbed: The testbed containing the devices to connect to.
         """
         device_list = []
         for device in testbed.devices.values():
@@ -78,7 +78,7 @@ class Routing(aetest.Testcase):
         """Verify that all device have golden_routes installed in the RIB."""
         if (device.os == "iosxe") or (device.os == "nxos"):
             output = device.learn("routing")
-            rib = output.info['vrf']['default']['address_family']['ipv4']['routes']
+            rib = output.info["vrf"]["default"]["address_family"]["ipv4"]["routes"]
             for route in golden_routes:
                 if route not in rib:
                     self.failed(f"{route} is not found")
